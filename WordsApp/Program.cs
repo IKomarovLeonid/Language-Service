@@ -20,6 +20,8 @@ namespace WordsApp
             Console.WriteLine("1 -> Translate as palavras interrogativas (Russian -> Portugues)");
             Console.WriteLine("2 -> Translate os verbos (Russian -> Portugues)");
             Console.WriteLine("3 -> Translate os adjectivos (Russian -> Portugues)");
+            Console.WriteLine("4 -> Translate os preposicoes (Russian -> Portugues)");
+            Console.WriteLine("5 -> Translate os adverbious (Russian -> Portugues)");
 
             int select = Convert.ToInt32(Console.ReadLine());
 
@@ -33,6 +35,12 @@ namespace WordsApp
                     break;
                 case 3:
                     Adjectivos(name);
+                    break;
+                case 4:
+                    Preposicoes(name);
+                    break;
+                case 5:
+                    Adverbious(name);
                     break;
                 default: Console.WriteLine($"Unknown option {select}");
                     break;
@@ -69,6 +77,28 @@ namespace WordsApp
             var info = ProcessLogic(preguntas, 10);
 
             var fileName = userName.ToLowerInvariant() + "_preguntas.txt";
+            DataReader.SaveChanges(info, fileName);
+            DataReader.ReadStats(fileName);
+        }
+
+        private static void Preposicoes(string userName)
+        {
+            var preposicoes = WordsProvider.GetPreposicoes();
+
+            var info = ProcessLogic(preposicoes, 10);
+
+            var fileName = userName.ToLowerInvariant() + "_preposicoes.txt";
+            DataReader.SaveChanges(info, fileName);
+            DataReader.ReadStats(fileName);
+        }
+
+        private static void Adverbious(string userName)
+        {
+            var preposicoes = WordsProvider.GetAdverbious();
+
+            var info = ProcessLogic(preposicoes, 10);
+
+            var fileName = userName.ToLowerInvariant() + "_adverbious.txt";
             DataReader.SaveChanges(info, fileName);
             DataReader.ReadStats(fileName);
         }
