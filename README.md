@@ -14,7 +14,6 @@ This application is designed to help users enhance their vocabulary and improve 
   - [Features](#features)
   - [Contributing](#contributing)
   - [License](#license)
-  - [Acknowledgments](#acknowledgments)
 
 ## Getting Started
 
@@ -68,9 +67,3 @@ Please review our [Contributing Guidelines](CONTRIBUTING.md) for more details.
 ## License
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
-
-## Acknowledgments
-
-We would like to acknowledge the following individuals and libraries for their contributions and inspiration:
-
-- [List of contributors or libraries]
