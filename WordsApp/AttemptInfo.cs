@@ -8,14 +8,10 @@ namespace WordsApp
 {
     internal class AttemptInfo
     {
-        public string ExerciseType { get; set; }
         public int ExpectedCount { get; set; }
         public int Attempts { get; set; }
-
         public int Errors { get; set; }
-
         public double Percent { get; set; }
-
         public DateTime DateTime { get; set; }
 
         public override string ToString()
