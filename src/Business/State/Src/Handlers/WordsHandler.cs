@@ -10,15 +10,17 @@ namespace State.Src.Handlers
 {
     internal class WordsHandler : IRequestHandler<GetWordsCommand, Dictionary<string, string>>
     {
-        public WordsHandler()
-        {
+        private readonly WordsRepository wordsRepository;
 
+        public WordsHandler(WordsRepository repository)
+        {
+            this.wordsRepository = repository;
         }
 
         public async Task<Dictionary<string, string>> Handle(GetWordsCommand command, CancellationToken cancellationToken)
         {
             // TODO: language
-            return WordsRepository.GetWords(command.WordsType);
+            return wordsRepository.GetWords(command.WordsType);
         }
     }
 }

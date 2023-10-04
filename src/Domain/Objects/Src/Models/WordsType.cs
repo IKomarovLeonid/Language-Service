@@ -2,6 +2,7 @@
 {
     public enum WordsType
     {
+        All,
         Questions,
         Nouns,
         Verbs,

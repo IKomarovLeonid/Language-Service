@@ -6,6 +6,7 @@ using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json.Converters;
+using Objects.Src;
 using State.Src;
 using System;
 using System.Collections.Generic;
@@ -47,6 +48,8 @@ namespace Service
 
             var stateAssembly = AppDomain.CurrentDomain.Load(StateAssembly.Value);
             services.AddMediatR(stateAssembly);
+
+            services.AddSingleton<WordsRepository>();
 
             return services.BuildServiceProvider();
         }

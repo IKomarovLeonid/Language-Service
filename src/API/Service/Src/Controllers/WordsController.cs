@@ -21,10 +21,10 @@ namespace Service.Src.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAsync(Language from, Language to, WordsType type)
+        public async Task<WordsViewModel> GetAsync(Language from, Language to, WordsType type)
         {
             var result = await _mediator.Send(new GetWordsCommand(from, to, type));
-            return Ok(result);
+            return new WordsViewModel(result, from, to, type);
         }
 
         [HttpGet("random")]

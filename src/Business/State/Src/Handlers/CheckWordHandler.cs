@@ -8,12 +8,18 @@ namespace State.Src.Handlers
 {
     internal class CheckWordHandler : IRequestHandler<CheckWordCommand, CheckResult>
     {
+        private readonly WordsRepository _wordsRepository;
+        public CheckWordHandler(WordsRepository repository)
+        {
+            _wordsRepository = repository;
+        }
+
         public async Task<CheckResult> Handle(CheckWordCommand request, CancellationToken cancellationToken)
         {
             var fromValue = request.FromValue.ToLowerInvariant();
             var toValue = request.ToValue.ToLowerInvariant();
 
-            var words = WordsRepository.GetWords(request.Type);
+            var words = _wordsRepository.GetWords(request.Type);
             if (words.Count == 0) return CheckResult.Error($"Empty words by type '{request.Type}'");
 
             if (!words.TryGetValue(fromValue, out string value))

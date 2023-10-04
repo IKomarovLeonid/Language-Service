@@ -1,32 +1,40 @@
 ﻿using Service.Models;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Objects.Src
 {
     public class WordsRepository
     {
-        public static Dictionary<string, string> GetWords(WordsType type)
+        public Dictionary<string, string> GetWords(WordsType type)
         {
             switch (type)
             {
                 case WordsType.Verbs:
-                    return GetWerbos();
+                    return this.Werbos;
                 case WordsType.Adjectives:
-                    return GetAdjectivos();
+                    return this.Adjectivos;
                 case WordsType.Adverbs:
-                    return GetAdverbious();
+                    return this.Adverbious;
                 case WordsType.Questions:
-                    return GetPreguntas();
+                    return this.Preguntas;
                 case WordsType.Prepositions:
-                    return GetPreposicoes();
+                    return this.Preposicoes;
+                case WordsType.Nouns:
+                    return this.Nouns;
+                case WordsType.All:
+                    return this.Werbos.
+                        Concat(this.Adjectivos).
+                        Concat(this.Preguntas).
+                        Concat(this.Adverbious).
+                        Concat(this.Nouns)
+                        .Concat(this.Preposicoes).ToDictionary(kv => kv.Key, kv => kv.Value);
 
             }
             return new Dictionary<string, string>();
         }
 
-
-
-        public static Dictionary<string, string> GetWerbos() => new()
+        private Dictionary<string, string> Werbos = new Dictionary<string, string>()
         {
                 {"comer", "кушать/eсть" },
                 {"dormir", "спать" },
@@ -58,7 +66,7 @@ namespace Objects.Src
                 {"brincar", "играть" },
         };
 
-        public static Dictionary<string, string> GetAdjectivos() => new()
+        private Dictionary<string, string> Adjectivos = new Dictionary<string, string>()
         {
                 {"Alto", "Высокий" },
                 {"Bom", "Хороший" },
@@ -73,7 +81,7 @@ namespace Objects.Src
                 {"Calmo", "Спокойный" },
         };
 
-        public static Dictionary<string, string> GetPreguntas() => new()
+        private Dictionary<string, string> Preguntas = new Dictionary<string, string>()
         {
                 {"Como?", "Как?" },
                 {"O que?", "Что?" },
@@ -86,7 +94,7 @@ namespace Objects.Src
                 {"Por que?", "Почему?" },
         };
 
-        public static Dictionary<string, string> GetPreposicoes() => new()
+        private Dictionary<string, string> Preposicoes = new Dictionary<string, string>()
         {
                 {"Acima", "Над" },
                 {"Depois", "После" },
@@ -111,9 +119,9 @@ namespace Objects.Src
                 {"Com", "с" }
         };
 
-        public static Dictionary<string, string> GetAdverbious() => new()
+        private Dictionary<string, string> Adverbious = new Dictionary<string, string>()
         {
-           {"Ontem", "Вчера" },
+            {"Ontem", "Вчера" },
            {"Hoje", "Сегодня" },
            {"Amanha", "Завтра" },
            {"Agora", "В настоящее время" },
@@ -145,6 +153,28 @@ namespace Objects.Src
            {"As vezes/Ocasionalmente", "Иногда" },
            {"Raramente", "Редко" },
            {"Nunca", "Никогда" },
+        };
+
+        private Dictionary<string, string> Nouns = new Dictionary<string, string>()
+        {
+            {"Mae","Мама"},
+            {"Pae","Мама"},
+            {"o pianisto", "Пианист" },
+            {"a pianista", "Пианистка" },
+            {"Obrigado", "Спасибо" },
+            {"Amor", "Любовь" },
+            {"Felicidade", "Радость" },
+            {"Gato", "Кошка" },
+            {"Cao", "Собака" },
+            {"Adeus", "Адьос" },
+            {"Pais", "Страна" },
+            {"Livro", "Книга" },
+            {"o Carro", "Автомобиль" },
+            {"a Mesa", "Стол" },
+            {"Disculpe", "Извините" },
+            {"Entrada", "Вход" },
+            {"Saida", "Выход" },
+            {"Aberto", "Открыто" },
         };
     }
 }
