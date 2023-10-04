@@ -12,7 +12,6 @@ This application is designed to help users enhance their vocabulary and improve 
   - [Usage](#usage)
   - [Supported Languages](#supported-languages)
   - [Features](#features)
-  - [Contributing](#contributing)
   - [License](#license)
 
 ## Getting Started
@@ -53,14 +52,6 @@ Key features of the application include:
 - Grammar lessons and practice
 - Progress tracking and user profiles
 - Language selection for English and Portugues
-
-## Contributing
-
-We welcome contributions from the community to improve and expand this application. To contribute, follow these steps:
-
-1. Fork the repository.
-2. Make your changes.
-3. Create a pull request.
 
 Please review our [Contributing Guidelines](CONTRIBUTING.md) for more details.
 
