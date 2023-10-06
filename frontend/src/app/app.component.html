@@ -1,0 +1,35 @@
+<div class="center-container">
+  <div class="rows-container">
+    <div class="row">
+      <select [(ngModel)]="wordsType" (click)="onSelectClick()">
+        <option [value]="WordsType.All">All</option>
+        <option [value]="WordsType.Questions">Questions</option>
+        <option [value]="WordsType.Adjectives">Adjectives</option>
+        <option [value]="WordsType.Adverbs">Adverbs</option>
+        <option [value]="WordsType.Nouns">Nouns</option>
+        <option [value]="WordsType.Prepositions">Prepositions</option>
+        <option [value]="WordsType.Verbs">Verbs</option>
+        <!-- Add more options for other enum values as needed -->
+      </select>
+    </div>
+    <div class="row">
+      <h2 class="custom-heading">Translate Word: {{ wordToTranslate }}</h2>
+      <h2 *ngIf="!wordToTranslate">Loading...</h2>
+      <div class="answer-message" *ngIf="comparisonMessage">{{ comparisonMessage }}</div>
+    </div>
+    <div class="row">
+      <div class="input-container">
+        <input type="text" [(ngModel)]="translation" placeholder="Enter Translation" class="custom-input" (keyup.enter)="checkTranslation()">
+        <button (click)="checkTranslation()" class="custom-button">{{buttonTitle}}</button>
+      </div>
+    </div>
+    <!-- Game completion message div -->
+    <div *ngIf="gameCompleted" class="game-completion">
+      <h3>Game Completed!</h3>
+      <p>Total Attempts: {{ totalAttempts }}</p>
+      <p>Correct Answers: {{ correctAnswers }}</p>
+      <p>Percentage: {{ calculatePercentage() }}%</p>
+      <p>Date: {{ gameCompletionDate | date:'medium' }}</p>
+    </div>
+  </div>
+</div>
