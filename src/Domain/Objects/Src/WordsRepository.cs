@@ -175,6 +175,12 @@ namespace Objects.Src
             {"Entrada", "Вход" },
             {"Saida", "Выход" },
             {"Aberto", "Открыто" },
+            {"a sala de estar", "гостинная" },
+            {"na garagem", "Гараж" },
+            {"O fogão", "Плита" },
+            {"o jornal", "Журнал" },
+            {"o chão", "Пол" },
+            {"a cozinha", "Кухня" }
         };
     }
 }
