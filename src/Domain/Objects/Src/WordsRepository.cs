@@ -180,7 +180,8 @@ namespace Objects.Src
             {"O fogão", "Плита" },
             {"o jornal", "Журнал" },
             {"o chão", "Пол" },
-            {"a cozinha", "Кухня" }
+            {"a cozinha", "Кухня" },
+            {"Hall", "Гостинная" }
         };
     }
 }
