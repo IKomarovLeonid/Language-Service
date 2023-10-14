@@ -102,6 +102,7 @@ export class AppComponent implements OnInit{
 
   onSelectClick(){
     // do nothing if current type not changed
+
     this.loadWords(this.wordsType);
   }
 }
