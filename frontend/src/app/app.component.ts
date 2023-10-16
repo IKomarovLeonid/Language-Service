@@ -21,6 +21,8 @@ export class AppComponent implements OnInit{
   totalAttempts: number = 0;
   gameCompletionDate: Date | undefined;
   buttonTitle = 'Check';
+  wordsLanguageFrom = Language.Portugues;
+  wordsLanguageTo = Language.Russian;
 
   constructor(private client: ApiService) {
     this.words = [];
@@ -64,8 +66,8 @@ export class AppComponent implements OnInit{
   loadWords(type: WordsType){
     // fetch from server side
     this.client.words.get(
-      Language.Portugues,
-      Language.Russian,
+      this.wordsLanguageFrom,
+      this.wordsLanguageTo,
       type).then(response => {
         if(response.words){
           this.words = Object.keys(response.words);
@@ -104,5 +106,15 @@ export class AppComponent implements OnInit{
     // do nothing if current type not changed
 
     this.loadWords(this.wordsType);
+  }
+
+  protected readonly Language = Language;
+
+  onWordsLanguageFrom(){
+
+  }
+
+  onWordsLanguageTo(){
+
   }
 }

@@ -1,6 +1,16 @@
 <div class="center-container">
   <div class="rows-container">
     <div class="row">
+      <select [(ngModel)]="wordsLanguageFrom" (click)="onWordsLanguageFrom()">
+        <option [value]="Language.English">English</option>
+        <option [value]="Language.Portugues">Portugal</option>
+      </select>
+      <select [(ngModel)]="wordsLanguageTo" (click)="onWordsLanguageTo()">
+        <option [value]="Language.English">English</option>
+        <option [value]="Language.Portugues">Portugal</option>
+      </select>
+    </div>
+    <div class="row">
       <select [(ngModel)]="wordsType" (click)="onSelectClick()">
         <option [value]="WordsType.All">All</option>
         <option [value]="WordsType.Questions">Questions</option>
