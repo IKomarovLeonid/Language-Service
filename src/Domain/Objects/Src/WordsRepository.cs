@@ -81,6 +81,7 @@ namespace Objects.Src
                 {"Calmo", "Спокойный" },
                 {"Triste", "Грустный" },
                 {"Pobre", "Бедный" },
+                {"Autossuficiente", "Самодостаточный"}
         };
 
         private Dictionary<string, string> Preguntas = new Dictionary<string, string>()
