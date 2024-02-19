@@ -1,5 +1,8 @@
 ﻿using API.Src.Ioc;
 using Autofac.Extensions.DependencyInjection;
+using Business.Src;
+using Domain.Src;
+using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
@@ -16,7 +19,7 @@ namespace API.Src
         {
             //services.AddSingleton(t => ConfigurationReader.ReadConfig<ApplicationConfiguration>());
 
-            //services.AddDbContext<ApplicationContext>();
+            services.AddDbContext<ApplicationContext>();
 
             services.AddCors();
 
@@ -31,17 +34,15 @@ namespace API.Src
             {
                 settings.SchemaType = NJsonSchema.SchemaType.OpenApi3;
                 settings.AllowReferencesWithProperties = true;
-                settings.Title = "Tasks-Platform";
+                settings.Title = "Language-Service";
             });
 
             var builder = AutofacBuilder.Build();
 
             // mediator 
-            //var stateAssembly = AppDomain.CurrentDomain.Load(StateAssembly.Value);
-            //var queriesAssembly = AppDomain.CurrentDomain.Load(QueriesAssembly.Value);
-            //services.AddMediatR(stateAssembly, queriesAssembly);
+            var businessAssembly = AppDomain.CurrentDomain.Load(BusinessAssembly.Value);
+            services.AddMediatR(businessAssembly);
             //services.AddHostedService<HostedService>();
-
             builder.Populate(services);
             return new AutofacServiceProvider(builder.Build());
         }

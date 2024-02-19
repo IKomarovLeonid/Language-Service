@@ -3,7 +3,7 @@ using System;
 
 namespace Objects.Src
 {
-    public class WordDto
+    public class WordDto : IDto
     {
         public ulong Id { get; set; }
 
