@@ -1,4 +1,6 @@
-﻿using System;
+﻿using API.Src;
+using Microsoft.AspNetCore;
+using Microsoft.AspNetCore.Hosting;
 
 namespace API
 {
@@ -6,7 +8,12 @@ namespace API
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            CreateWebHostBuilder(args).Build().Run();
+        }
+
+        private static IWebHostBuilder CreateWebHostBuilder(string[] args)
+        {
+            return WebHost.CreateDefaultBuilder(args).UseStartup<Startup>().UseUrls("http://localhost:8080");
         }
     }
 }
