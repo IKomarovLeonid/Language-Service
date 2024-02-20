@@ -6,6 +6,7 @@ using Objects.Src.Primitives;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -44,28 +45,50 @@ namespace API.Src
         private async Task FillPredefinedDataAsync(ApplicationContext ctx)
         {
             var words = new List<WordDto>();
+            WordType wordType = WordType.Undefined;
+            WordCategory wordCategory = WordCategory.Common;
+
             using (StreamReader sr = new StreamReader("words_esp.txt"))
             {
                 string line;
 
                 while ((line = sr.ReadLine()) != null)
                 {
-                    // skip comment lines
-                    if (line.Contains("/")) continue;
+                    if (string.IsNullOrEmpty(line)) continue;
+
+                    if (line.Contains("["))
+                    {
+                        line = line.Substring(1, line.IndexOf("]") - 1);
+                        var headerData = line.Split(',');
+                        if (headerData.Length > 1)
+                        {
+                            wordCategory = headerData[1] switch
+                            {
+                                "colors" => WordCategory.Colors,
+                                "time" => WordCategory.Time,
+                                "directions" => WordCategory.Directions,
+                                _ => WordCategory.Common,
+                            };
+                        }
+                        else wordCategory = WordCategory.Common;
+
+                        wordType = headerData[0] switch
+                        {
+                            "nouns" => WordType.Noun,
+                            "prepositions" => WordType.Pronoun,
+                            "adjectives" => WordType.Adjective,
+                            "adverbs" => WordType.Adverb,
+                            _ => WordType.Undefined,
+                        };
+                        continue;
+                    }
                    
                     string[] data = line.Split(';');
                     if(data.Length < 2) { throw new Exception($"Invalid line: {line}"); }
 
                     var word = data[0];
                     var translation = data[1];
-                    var type = data[2];
-                    var wordType = WordType.Undefined;
-                    wordType = type switch
-                    {
-                        "n" => WordType.Noun,
-                        "p" => WordType.Pronoun,
-                        _ => WordType.Undefined,
-                    };
+                    
                     words.Add(new WordDto()
                     {
                         CreatedTime = DateTime.UtcNow,
@@ -74,11 +97,12 @@ namespace API.Src
                         Translation = translation,
                         LanguageFrom = LanguageType.Spanish,
                         LanguageTo = LanguageType.English,
-                        Type = wordType
+                        Type = wordType,
+                        Category = wordCategory
                     });
                 }
             }
-            
+
             ctx.Words.AddRange(words);
             await ctx.SaveChangesAsync();
         }

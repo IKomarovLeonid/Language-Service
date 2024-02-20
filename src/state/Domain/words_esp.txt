@@ -1,50 +1,192 @@
-// colors
-azul;blue;n
-verde;green;n
-rojo;red;n
-negro;black;n
-amarillo;yellow;n
-celeste;sky blue;n
-morado;purple;n
-rosado;pink;n;
-marron;brown;n
-blanco;white;n
-gris;gray;n
-plateado;silver;n
-dorado;gold;n
-naranja;orange;n
-// prepositions
-a;at;p
-ante;before;p
-bajo;under;p
-con;with;p
-contra;against,in exchange for;p
-de;of,about,from;p
-desde;since,from;p
-durante;during;p
-en;in,into,by,inside,within,at;p
-entre;between,among,amongst;p
-excepto;except;p
-hacia;about,around;p
-hasta;until;p
-mediante;by means of;p
-para;for,in order to,toward;p
-por;because of,for,by;p
-segun;according to,depending on;p
-sin;without;p
-sobre;on,over,above;p
-ademas de;as well as,besides;p
-al aldo de;beside;p
-alrededor de;around,about;p
-antes de;before;p
-delante de;before;p
-a pesar de;despite;p
-cerca de;near,close;p
-con respecto a;in respect of;p
-debajo de;under;p
-delante de;in front of;p
-dentro de;inside,into,within;p
-encima de;on top;p
-en frente a;opposite,towards;p
-fuerta de;except of,apart from;p
-junto a;next to,near;p
+[nouns,colors]
+
+azul;blue
+verde;green
+rojo;red
+negro;black
+amarillo;yellow
+celeste;sky blue
+morado;purple
+rosado;pink
+marron;brown
+blanco;white
+gris;gray
+plateado;silver
+dorado;gold
+naranja;orange
+moreno;brown-skinned
+
+[prepositions]
+
+a;at
+ante;before
+bajo;under
+con;with
+contra;against,in exchange for
+de;of,about,from
+desde;since,from
+durante;during
+en;in,into,by,inside,within,at
+entre;between,among,amongst
+excepto;except
+hacia;about,around
+hasta;until
+mediante;by means of
+para;for,in order to,toward
+por;because of,for,by
+segun;according to,depending on
+sin;without
+sobre;on,over,above
+ademas de;as well as,besides
+al aldo de;beside
+alrededor de;around,about
+antes de;before
+delante de;before
+a pesar de;despite
+cerca de;near,close
+con respecto a;in respect of
+debajo de;under
+delante de;in front of
+dentro de;inside,into,within
+encima de;on top
+en frente a;opposite,towards
+fuerta de;except of,apart from
+junto a;next to,near
+
+[nouns]
+
+el clima;the climate
+el dia;the day
+el drama;the drama
+el idioma;the language
+el mapa;the map
+el planeta;the planet
+el poema;the poem
+el problema;the problem
+el sistema;the system
+el programa;the program
+la clase;the class
+la fror;the flower
+la luz;the light
+la mujer;the woman
+la piel;the skin
+la suerte;the luck
+la alcoba;the bedroom
+la alfombra;the rug
+la cocina;the kitchen
+la collecion;the collection
+el comedon;the dining room
+el espejo;the mirror
+el estudio;the studio
+la estufa;the stove
+el gabinete;the cabinet
+el lapiz;the pencil
+la madera;the wood
+la nevera;the refrigerator
+la pared;the wall
+el patio;the yard
+la sala;the living room
+el sillon;the easy chair
+el vestibulo;the entryway
+el video;the video
+
+[adjectives]
+
+agradable;pleasant
+alegre;happy
+barato;cheap,unexpensive
+bonito;nice
+bueno;good
+caro;expensive
+cancado;tired
+debil;weak
+delgado;slender
+dificil;difficult
+estupendo;great,terrific
+excelente;excellent
+enfermo;sick
+enojado;angry
+facil;easy
+fantastico;fantastic
+feliz;happy
+feo;ugly
+flaco;thin
+fragil;fragile
+fuerte;strong
+gordo;fat
+grande;big
+guapo;handsome,beautiful
+hermoso;beautiful
+horrible;horrible
+inteligente;inteligent
+interesante;interesting
+lindo;pretty
+limpio;clean
+privado;private
+sencillo;simple
+todo;all
+fino;fine,delicato
+comodo;comfortable
+joven;young
+maravilloso;wonderful
+pequeno;small,little
+pobre;poor
+rico;rich
+simpatico;nice
+sincero;sincere
+sabrosa;delicios
+tacano;stingy
+tipico;typical
+triste;sad
+viejo;old
+
+[adverbs]
+
+aqui;here
+aca;here
+alli;there
+alla;there
+bastante;enough
+todavia;still
+
+[nouns,time]
+
+el lunes;monday
+el martes;tuesday
+el miercoles;wednesday
+el jueves;thursday
+el viernes;friday
+el sabado;saturday
+el domingo;sunday
+enero;january
+febrero;february
+marzo;march
+abril;april
+mayo;may
+junio;june
+julio;july
+agosto;august
+septiembre;september
+octubre;october
+noviembre;november
+diciember;december
+las estaciones;the seasons
+el verano;the summer
+el otono;the autumn
+el invierno;the winter
+la primavera;the spring
+
+[nouns,directions]
+
+los puntos cardinales;cardinal directions
+la izquierda;left
+la derecha;right
+detras;behind
+por delante;in front
+
+
+
+
+
+
+

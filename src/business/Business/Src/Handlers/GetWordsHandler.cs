@@ -2,7 +2,6 @@
 using Business.Src.Objects;
 using Domain.Src;
 using MediatR;
-using NJsonSchema.Validation;
 using Objects.Src;
 using System;
 using System.Linq.Expressions;
@@ -22,19 +21,7 @@ namespace Business.Src.Handlers
 
         public async Task<SelectResult<WordDto>> Handle(GetWordsCommand request, CancellationToken cancellationToken)
         {
-            Expression<Func<WordDto, bool>> expression = null;
-            if (request.Type.HasValue && request.LanguageFrom.HasValue && request.LanguageTo.HasValue)
-            {
-                expression = model =>
-                model.Type == request.Type.Value && model.LanguageFrom == request.LanguageFrom.Value &&
-                model.LanguageTo == request.LanguageTo.Value;
-            }
-            if (request.Type.HasValue)
-            {
-                expression = model =>
-                model.Type == request.Type.Value;
-            }
-            var items = await _repository.GetAllAsync(expression);
+            var items = await _repository.GetAllAsync(request.filter);
             return SelectResult<WordDto>.Fetched(items);
         }
     }

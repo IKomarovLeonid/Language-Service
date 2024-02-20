@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Domain.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20240220095127_Initialize_Db")]
+    [Migration("20240220160714_Initialize_Db")]
     partial class Initialize_Db
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,6 +24,11 @@ namespace Domain.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnName("id")
                         .HasColumnType("INTEGER");
+
+                    b.Property<string>("Category")
+                        .IsRequired()
+                        .HasColumnName("category")
+                        .HasColumnType("TEXT");
 
                     b.Property<DateTime>("CreatedTime")
                         .HasColumnName("created_utc")

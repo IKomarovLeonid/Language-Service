@@ -14,6 +14,7 @@ namespace Domain.Migrations
                     id = table.Column<ulong>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     type = table.Column<string>(nullable: false),
+                    category = table.Column<string>(nullable: false),
                     language_from = table.Column<string>(nullable: false),
                     language_to = table.Column<string>(nullable: false),
                     word = table.Column<string>(nullable: true),

@@ -9,6 +9,8 @@ namespace Objects.Src
 
         public WordType Type { get; set; }
 
+        public WordCategory Category { get; set; }
+
         public LanguageType LanguageFrom { get; set; }
 
         public LanguageType LanguageTo { get; set; }

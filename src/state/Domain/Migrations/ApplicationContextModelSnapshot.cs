@@ -23,6 +23,11 @@ namespace Domain.Migrations
                         .HasColumnName("id")
                         .HasColumnType("INTEGER");
 
+                    b.Property<string>("Category")
+                        .IsRequired()
+                        .HasColumnName("category")
+                        .HasColumnType("TEXT");
+
                     b.Property<DateTime>("CreatedTime")
                         .HasColumnName("created_utc")
                         .HasColumnType("TEXT");
