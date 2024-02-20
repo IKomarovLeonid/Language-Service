@@ -42,7 +42,7 @@ namespace API.Src
             // mediator 
             var businessAssembly = AppDomain.CurrentDomain.Load(BusinessAssembly.Value);
             services.AddMediatR(businessAssembly);
-            //services.AddHostedService<HostedService>();
+            services.AddHostedService<HostedService>();
             builder.Populate(services);
             return new AutofacServiceProvider(builder.Build());
         }

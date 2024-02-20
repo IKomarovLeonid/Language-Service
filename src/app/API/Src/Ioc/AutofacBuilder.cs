@@ -8,6 +8,8 @@ namespace API.Src.Ioc
         {
             var builder = new ContainerBuilder();
 
+            builder.RegisterModule<DomainModule>();
+
             return builder;
         }
     }

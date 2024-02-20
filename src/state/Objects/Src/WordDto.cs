@@ -13,6 +13,8 @@ namespace Objects.Src
 
         public LanguageType LanguageTo { get; set; }
 
+        public string Word { get; set; }
+
         public string Translation { get; set; }
 
         public DateTime CreatedTime { get; set; }
