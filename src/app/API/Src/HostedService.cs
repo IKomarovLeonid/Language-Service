@@ -5,6 +5,7 @@ using Objects.Src;
 using Objects.Src.Primitives;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -42,13 +43,42 @@ namespace API.Src
 
         private async Task FillPredefinedDataAsync(ApplicationContext ctx)
         {
-            var words = new List<WordDto>
+            var words = new List<WordDto>();
+            using (StreamReader sr = new StreamReader("words_esp.txt"))
             {
-                new WordDto { LanguageFrom = LanguageType.Spanish, LanguageTo = LanguageType.English, Word = "azul", Translation = "blue", Type = WordType.Noun, CreatedTime = DateTime.UtcNow, UpdatedTime = DateTime.Now },
-                new WordDto { LanguageFrom = LanguageType.Spanish, LanguageTo = LanguageType.English, Word = "verde", Translation = "green", Type = WordType.Noun, CreatedTime = DateTime.UtcNow, UpdatedTime = DateTime.Now },
-                new WordDto { LanguageFrom = LanguageType.Spanish, LanguageTo = LanguageType.English, Word = "rojo", Translation = "red", Type = WordType.Noun, CreatedTime = DateTime.UtcNow, UpdatedTime = DateTime.Now }
-            };
+                string line;
 
+                while ((line = sr.ReadLine()) != null)
+                {
+                    // skip comment lines
+                    if (line.Contains("/")) continue;
+                   
+                    string[] data = line.Split(';');
+                    if(data.Length < 2) { throw new Exception($"Invalid line: {line}"); }
+
+                    var word = data[0];
+                    var translation = data[1];
+                    var type = data[2];
+                    var wordType = WordType.Undefined;
+                    wordType = type switch
+                    {
+                        "n" => WordType.Noun,
+                        "p" => WordType.Pronoun,
+                        _ => WordType.Undefined,
+                    };
+                    words.Add(new WordDto()
+                    {
+                        CreatedTime = DateTime.UtcNow,
+                        UpdatedTime = DateTime.UtcNow,
+                        Word = word,
+                        Translation = translation,
+                        LanguageFrom = LanguageType.Spanish,
+                        LanguageTo = LanguageType.English,
+                        Type = wordType
+                    });
+                }
+            }
+            
             ctx.Words.AddRange(words);
             await ctx.SaveChangesAsync();
         }

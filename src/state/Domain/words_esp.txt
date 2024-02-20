@@ -1,0 +1,50 @@
+// colors
+azul;blue;n
+verde;green;n
+rojo;red;n
+negro;black;n
+amarillo;yellow;n
+celeste;sky blue;n
+morado;purple;n
+rosado;pink;n;
+marron;brown;n
+blanco;white;n
+gris;gray;n
+plateado;silver;n
+dorado;gold;n
+naranja;orange;n
+// prepositions
+a;at;p
+ante;before;p
+bajo;under;p
+con;with;p
+contra;against,in exchange for;p
+de;of,about,from;p
+desde;since,from;p
+durante;during;p
+en;in,into,by,inside,within,at;p
+entre;between,among,amongst;p
+excepto;except;p
+hacia;about,around;p
+hasta;until;p
+mediante;by means of;p
+para;for,in order to,toward;p
+por;because of,for,by;p
+segun;according to,depending on;p
+sin;without;p
+sobre;on,over,above;p
+ademas de;as well as,besides;p
+al aldo de;beside;p
+alrededor de;around,about;p
+antes de;before;p
+delante de;before;p
+a pesar de;despite;p
+cerca de;near,close;p
+con respecto a;in respect of;p
+debajo de;under;p
+delante de;in front of;p
+dentro de;inside,into,within;p
+encima de;on top;p
+en frente a;opposite,towards;p
+fuerta de;except of,apart from;p
+junto a;next to,near;p

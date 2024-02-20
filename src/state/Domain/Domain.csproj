@@ -17,4 +17,10 @@
     <ProjectReference Include="..\Objects\Objects.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="words_esp.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
