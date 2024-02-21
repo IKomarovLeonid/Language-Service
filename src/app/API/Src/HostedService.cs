@@ -47,6 +47,7 @@ namespace API.Src
             var words = new List<WordDto>();
             WordType wordType = WordType.Undefined;
             WordCategory wordCategory = WordCategory.Common;
+            WordLevel wordLevel = WordLevel.Undefined;
 
             using (StreamReader sr = new StreamReader("words_esp.txt"))
             {
@@ -60,17 +61,36 @@ namespace API.Src
                     {
                         line = line.Substring(1, line.IndexOf("]") - 1);
                         var headerData = line.Split(',');
-                        if (headerData.Length > 1)
+                        if(headerData.Length == 3)
+                        {
+                            wordLevel = headerData[2] switch
+                            {
+                                "a1" => WordLevel.A1,
+                                "a2" => WordLevel.A2,
+                                "b1" => WordLevel.B1,
+                                "b2" => WordLevel.B2,
+                                "c1" => WordLevel.C1,
+                                "c2" => WordLevel.C2,
+                                _ => WordLevel.Undefined,
+                            };
+                        }
+                        if (headerData.Length == 2)
                         {
                             wordCategory = headerData[1] switch
                             {
                                 "colors" => WordCategory.Colors,
                                 "time" => WordCategory.Time,
                                 "directions" => WordCategory.Directions,
+                                "character" => WordCategory.Character,
+                                "family" => WordCategory.Family,
+                                "common" => WordCategory.Common,
                                 _ => WordCategory.Common,
                             };
                         }
-                        else wordCategory = WordCategory.Common;
+                        if(headerData.Length == 1) {
+                            wordLevel = WordLevel.Undefined;
+                            wordCategory = WordCategory.Common;
+                        }
 
                         wordType = headerData[0] switch
                         {
@@ -78,6 +98,7 @@ namespace API.Src
                             "prepositions" => WordType.Pronoun,
                             "adjectives" => WordType.Adjective,
                             "adverbs" => WordType.Adverb,
+                            "verbs" => WordType.Verb,
                             _ => WordType.Undefined,
                         };
                         continue;
@@ -98,7 +119,8 @@ namespace API.Src
                         LanguageFrom = LanguageType.Spanish,
                         LanguageTo = LanguageType.English,
                         Type = wordType,
-                        Category = wordCategory
+                        Category = wordCategory,
+                        Level = wordLevel
                     });
                 }
             }

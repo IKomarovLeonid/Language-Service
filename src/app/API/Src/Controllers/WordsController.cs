@@ -15,9 +15,9 @@ namespace API.Src.Controllers
 
 
         [HttpGet]
-        public async Task<IActionResult> GetWords(WordCategory? category, WordType? type, LanguageType? from, LanguageType? to)
+        public async Task<IActionResult> GetWords(WordCategory? category, WordType? type, WordLevel? level, LanguageType? from, LanguageType? to)
         {
-            return Ok(_mediator.Send(new GetWordsCommand(category, type, from, to)));
+            return Ok(_mediator.Send(new GetWordsCommand(category, type, from, to, level)));
         }
 
         [HttpPost]

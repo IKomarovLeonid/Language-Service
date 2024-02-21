@@ -10,13 +10,13 @@ namespace Business.Src.Commands
 {
     public class GetWordsCommand : IRequest<SelectResult<WordDto>>
     {
-        public GetWordsCommand(WordCategory? category, WordType? type, LanguageType? from, LanguageType? to) {
-            BuildExpression(category, type, from, to); 
+        public GetWordsCommand(WordCategory? category, WordType? type, LanguageType? from, LanguageType? to, WordLevel? level) {
+            BuildExpression(category, type, from, to, level); 
         }
 
         public Expression<Func<WordDto, bool>> filter { get; private set; }
 
-        private void BuildExpression(WordCategory? category, WordType? type, LanguageType? from, LanguageType? to)
+        private void BuildExpression(WordCategory? category, WordType? type, LanguageType? from, LanguageType? to, WordLevel? level)
         {
             filter = x => true;
 
@@ -27,6 +27,8 @@ namespace Business.Src.Commands
             if (from.HasValue) filter = CombineExpressions(filter, dto => dto.LanguageFrom == from.Value);
 
             if (to.HasValue) filter = CombineExpressions(filter, dto => dto.LanguageTo == to.Value);
+
+            if(level.HasValue) filter = CombineExpressions(filter, dto => dto.Level == level.Value);
         }
 
         static Expression<Func<T, bool>> CombineExpressions<T>(

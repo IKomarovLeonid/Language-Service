@@ -1,4 +1,4 @@
-[nouns,colors]
+[nouns,colors,a1]
 
 azul;blue
 verde;green
@@ -16,7 +16,7 @@ dorado;gold
 naranja;orange
 moreno;brown-skinned
 
-[prepositions]
+[prepositions,a1]
 
 a;at
 ante;before
@@ -53,7 +53,7 @@ en frente a;opposite,towards
 fuerta de;except of,apart from
 junto a;next to,near
 
-[nouns]
+[nouns,a1]
 
 el clima;the climate
 el dia;the day
@@ -90,7 +90,7 @@ el sillon;the easy chair
 el vestibulo;the entryway
 el video;the video
 
-[adjectives]
+[adjectives,a1]
 
 agradable;pleasant
 alegre;happy
@@ -118,7 +118,6 @@ grande;big
 guapo;handsome,beautiful
 hermoso;beautiful
 horrible;horrible
-inteligente;inteligent
 interesante;interesting
 lindo;pretty
 limpio;clean
@@ -140,7 +139,7 @@ tipico;typical
 triste;sad
 viejo;old
 
-[adverbs]
+[adverbs,a1]
 
 aqui;here
 aca;here
@@ -149,7 +148,7 @@ alla;there
 bastante;enough
 todavia;still
 
-[nouns,time]
+[nouns,time,a1]
 
 el lunes;monday
 el martes;tuesday
@@ -176,13 +175,97 @@ el otono;the autumn
 el invierno;the winter
 la primavera;the spring
 
-[nouns,directions]
+[nouns,directions,a1]
 
 los puntos cardinales;cardinal directions
 la izquierda;left
 la derecha;right
 detras;behind
 por delante;in front
+
+[adjectives,character,a1]
+
+abierto;active,open
+cerrado;closed
+amable;kind
+distante;shy
+cortes;polite
+grosero;rude
+extrovertido;extravert
+introvertido;introvert
+fiable;relible
+frivolo;frivolous
+generoso;generous,lavish
+codicioso;greedy
+honesto;honest
+mentiroso;lier
+inteligente;intelligent
+estupido;stupid
+sensible;sensible
+frio;calm
+simpatico;cute
+antipatico;antipathetic
+trabajador;hardworking
+vago;lazy
+tranquilo;calm
+nervioso;nervious
+
+[nouns,family,a1]
+
+papa;father
+padre;father
+madre;mother
+mama;monther
+padres;parents
+hija;daughter
+hijo;son
+hermana;sister
+hermano;brother
+abuelo;grandfather
+abuela;grandmother
+
+[nouns,common,b2]
+
+el asiento;seat
+la boleteria;ticket booth
+el coche cama;sleeping car
+el coche comedor;dining car
+el inspector;conductor
+el paisaje;countryside
+el pasajero;passenger
+
+[verbs,common,b2]
+
+gestionar;to manage
+negociar;to negotiate
+presentar;to present
+comunicar;to communicate
+solicitar;to request
+proporcionar;to provide
+resolver;to resolve
+explicar;to explain
+implementar;to implement
+realizar;to make happen
+desarollar;to develop
+aumentar;to increase
+disminuir;to decrease
+analizar;to analyze
+evaluar;to evaluate
+colaborar;to colaborate
+concluir;to conclude
+invertir;to invest
+organizar;to organize
+apoyar;to support
+seleccionar;to select
+optimizar;to optimize
+mejorar;to improve
+planificar;to plan
+promover;to promote
+recomendar;to recommend
+ganar;earn,win
+dirigir;to lead
+coordinar;to coordinate
+
 
 
 

@@ -42,6 +42,11 @@ namespace Domain.Migrations
                         .HasColumnName("language_to")
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("Level")
+                        .IsRequired()
+                        .HasColumnName("level")
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("Translation")
                         .HasColumnName("translation")
                         .HasColumnType("TEXT");

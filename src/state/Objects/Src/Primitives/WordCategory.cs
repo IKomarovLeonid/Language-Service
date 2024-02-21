@@ -5,6 +5,8 @@
         Common,
         Time,
         Directions,
-        Colors
+        Colors,
+        Character,
+        Family
     }
 }

@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Domain.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20240220160714_Initialize_Db")]
+    [Migration("20240220173314_Initialize_Db")]
     partial class Initialize_Db
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -42,6 +42,11 @@ namespace Domain.Migrations
                     b.Property<string>("LanguageTo")
                         .IsRequired()
                         .HasColumnName("language_to")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Level")
+                        .IsRequired()
+                        .HasColumnName("level")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Translation")
