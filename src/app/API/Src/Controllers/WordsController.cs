@@ -15,20 +15,20 @@ namespace API.Src.Controllers
 
 
         [HttpGet]
-        public async Task<IActionResult> GetWords(WordCategory? category, WordType? type, WordLevel? level, LanguageType? from, LanguageType? to)
+        public async Task<IActionResult> GetWordsAsync(WordCategory? category, WordType? type, WordLevel? level, LanguageType? from, LanguageType? to)
         {
             return Ok(_mediator.Send(new GetWordsCommand(category, type, from, to, level)));
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddWord()
+        public async Task<IActionResult> AddWordAsync()
         {
             return Ok("word added");
         }
 
 
         [HttpPatch]
-        public async Task<IActionResult> UpdateWord()
+        public async Task<IActionResult> UpdateWordAsync()
         {
             return Ok("word updated");
         }

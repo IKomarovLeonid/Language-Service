@@ -266,9 +266,180 @@ ganar;earn,win
 dirigir;to lead
 coordinar;to coordinate
 
+[verbs,common,a2]
 
+estar;be
+andar;step,go
+dar;give,pass
+jugar;play
+regar;water
+negar;deny,reject
+empezar;start
+calentar;heat up
+aferrar;cling to
+pensar;think,feel
+recalentar;reheat
+recomendar;advice,recommend
+reventar;pop
+sentar;sit,place
+acertar;guess,get right
+soterrar;underground
+manifestar;express,manifest
+quebrar;bankrupt
+sembrar;plant
+temblar;shake
+comenzar;start,begin
+acostar;lay down
+colgar;hang
+renovar;renew
+apostar;bet
+contar;count
+mostrar;show
+poblar;populate
+probar;try,test
+recordar;remember,recall
+rodar;roll,make
+soltar;release,drop
+sonar;sound,ring
+soñar;dream,imagine
+tostar;toast
+volar;fly
+almorzar;have lunch
+sosegar;calm
 
+[verbs,common,a2]
 
+caber;fit
+haber;have
+oler;smell
+saber;know
+ser;be
+valer;cost
+ver;see,view
+deshacer;undo
+hacer;do,perform
+satisfacer;meet
+contener;contain
+detener;stop
+disponer;provide,lay out
+entretener;entertain
+exponer;expose
+imponer;force
+mantener;maintain,keep
+oponer;refuse
+poner;put,place
+posponer;postpone,put off
+proponer;propose,suggest
+reponer;replace
+retener;hold,retain
+sostener;support
+suponer;assume,suppose
+tener;need,have
+atraer;attract,draw
+caer;fall,drop
+distraer;distract
+extraer;remove,extract
+recaer;revent
+traer;bring,carry
+contraer;get,contract
+poseer;have
+leer;read
+creer;believe,think
+conmover;move
+devolver;repay,return
+volver;return,go back
+mover;move,shift
+promover;promote
+resolver;solve,resolve
+poder;be able to, can
+morder;bite
+doler;hurt,pain
+demoler;tear down
+tender;tend,extend
+querer;want,like
+malentender;misunderstand
+extender;extend,spread
+entender;undestand,see
+defender;defend
+contender;fight
+
+[verbs,common,a2]
+
+ir;go
+adherir;attach
+advertir;warn
+adquirir;acquire, buy
+diferir;differ, defer
+digerir;digest, absorb
+herir;hurt, injure
+inferir;infer, conclude
+ingerir;eat, ingest
+interferir;interfere
+preferir;prefer
+referir;refer, relate
+transferir;transfer, assign
+discernir;discern
+divertir;entertain, amuse
+sentir;feel, sense
+revertir;reverse, revert
+resentir;resent
+presentir;sense
+mentir;lie, cheat
+invertir;invest
+rugir;roar
+sumergir;immerse, dip
+surgir;arise, emerge
+transigir;compromise
+ungir;anoint
+urgir;urge, hustle
+dirigir;lead, direct
+exigir;require, demand
+infringir;infringe, break
+producir;produce, cause
+reducir;reduce, cut
+seducir;seduce, attract
+traducir;translate, interpret
+inducir;induce, provoke
+introducir;introduce, enter
+lucir;wear, shine
+perseguir;pursue, chase
+distinguir;distinguish, differentiate
+seguir;follow, continue
+ocluir;occlude
+destruir;destroy, crush
+disminuir;decrease, reduce
+distribuir;distribute, deliver
+excluir;exclude, preclude
+fluir;flow, stream
+huir;flee, escape
+incluir;include, incorporate
+influir;influence, affect
+instituir;institute
+sustituir;replace, substitute
+teñir;dye, stain
+elegir;choose, select
+regir;govern, operate
+pedir;ask, request
+derretir;melt, dissolve
+despedir;dismiss, fire
+freír;fry, cook
+gemir;groan, moan
+impedir;prevent, block
+servir;help, serve
+repetir;repeat, replicate
+rendir;render, pay
+reñir;quarrel, dispute
+medir;measure, gauge
+vestir;dress, wear
+decir;say
+predecir;predict, forecast
+venir;come
+oír;hear, listen to
+sobresalir;excel, stand out
+salir;leave, exit
+intervenir;intervene, speak
+morir;die, pass away
+dormir;sleep, rest
 
 
 
