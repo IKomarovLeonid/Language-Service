@@ -1,4 +1,4 @@
-[nouns,colors,a1]
+﻿[nouns,colors,a1]
 
 azul;blue
 verde;green
@@ -301,7 +301,7 @@ recordar;remember,recall
 rodar;roll,make
 soltar;release,drop
 sonar;sound,ring
-so�ar;dream,imagine
+soñar;dream,imagine
 tostar;toast
 volar;fly
 almorzar;have lunch
@@ -416,31 +416,46 @@ incluir;include, incorporate
 influir;influence, affect
 instituir;institute
 sustituir;replace, substitute
-te�ir;dye, stain
+teñir;dye, stain
 elegir;choose, select
 regir;govern, operate
 pedir;ask, request
 derretir;melt, dissolve
 despedir;dismiss, fire
-fre�r;fry, cook
+freír;fry, cook
 gemir;groan, moan
 impedir;prevent, block
 servir;help, serve
 repetir;repeat, replicate
 rendir;render, pay
-re�ir;quarrel, dispute
+reñir;quarrel, dispute
 medir;measure, gauge
 vestir;dress, wear
 decir;say
 predecir;predict, forecast
 venir;come
-o�r;hear, listen to
+oír;hear, listen to
 sobresalir;excel, stand out
 salir;leave, exit
 intervenir;intervene, speak
 morir;die, pass away
 dormir;sleep, rest
 
+[adjectives,common,a1]
 
+ahora;now
+hoy;today
+ayer;yesterday
+ya;yet
+anoche;the day before
+pronto;soon
+siempre;always
+nunca;никогда
+a menudo;often
+casi nunca;rarely
+promedio;average
+generalmente;usual
+absolutamente;absolut
+imposible;impossible
 
 
