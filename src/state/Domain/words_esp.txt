@@ -32,8 +32,8 @@ excepto;except
 hacia;about,around
 hasta;until
 mediante;by means of
-para;for,in order to,toward
-por;because of,for,by
+para;for
+por;because of,by
 segun;according to,depending on
 sin;without
 sobre;on,over,above
@@ -51,7 +51,7 @@ dentro de;inside,into,within
 encima de;on top
 en frente a;opposite,towards
 fuerta de;except of,apart from
-junto a;next to,near
+junto a;near
 
 [nouns,a1]
 
@@ -150,25 +150,25 @@ todavia;still
 
 [nouns,time,a1]
 
-el lunes;monday
-el martes;tuesday
-el miercoles;wednesday
-el jueves;thursday
-el viernes;friday
-el sabado;saturday
-el domingo;sunday
-enero;january
-febrero;february
-marzo;march
-abril;april
-mayo;may
-junio;june
-julio;july
-agosto;august
-septiembre;september
-octubre;october
-noviembre;november
-diciember;december
+el Lunes;monday
+el Martes;tuesday
+el Miercoles;wednesday
+el Jueves;thursday
+el Viernes;friday
+el Sabado;saturday
+el Domingo;sunday
+Enero;january
+Febrero;february
+Marzo;march
+Abril;april
+Mayo;may
+Junio;june
+Julio;july
+Agosto;august
+Septiembre;september
+Octubre;october
+Noviembre;november
+Diciember;december
 las estaciones;the seasons
 el verano;the summer
 el otono;the autumn
@@ -306,9 +306,6 @@ tostar;toast
 volar;fly
 almorzar;have lunch
 sosegar;calm
-
-[verbs,common,a2]
-
 caber;fit
 haber;have
 oler;smell
@@ -362,9 +359,6 @@ extender;extend,spread
 entender;undestand,see
 defender;defend
 contender;fight
-
-[verbs,common,a2]
-
 ir;go
 adherir;attach
 advertir;warn

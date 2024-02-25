@@ -4,6 +4,7 @@ using Microsoft.Extensions.Hosting;
 using Objects.Src;
 using Objects.Src.Primitives;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -55,13 +56,16 @@ namespace API.Src
 
                 while ((line = sr.ReadLine()) != null)
                 {
-                    if (string.IsNullOrEmpty(line)) continue;
+                    if (string.IsNullOrEmpty(line))
+                    {
+                        continue;
+                    }
 
                     if (line.Contains("["))
                     {
                         line = line.Substring(1, line.IndexOf("]") - 1);
                         var headerData = line.Split(',');
-                        if(headerData.Length == 3)
+                        if (headerData.Length == 3)
                         {
                             wordLevel = headerData[2] switch
                             {
@@ -87,7 +91,8 @@ namespace API.Src
                                 _ => WordCategory.Common,
                             };
                         }
-                        if(headerData.Length == 1) {
+                        if (headerData.Length == 1)
+                        {
                             wordLevel = WordLevel.Undefined;
                             wordCategory = WordCategory.Common;
                         }
@@ -103,13 +108,12 @@ namespace API.Src
                         };
                         continue;
                     }
-                   
                     string[] data = line.Split(';');
-                    if(data.Length < 2) { throw new Exception($"Invalid line: {line}"); }
+                    if (data.Length < 2) { throw new Exception($"Invalid line: {line}"); }
 
                     var word = data[0];
                     var translation = data[1];
-                    
+
                     words.Add(new WordDto()
                     {
                         CreatedTime = DateTime.UtcNow,
@@ -124,6 +128,8 @@ namespace API.Src
                     });
                 }
             }
+
+
 
             ctx.Words.AddRange(words);
             await ctx.SaveChangesAsync();
