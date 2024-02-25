@@ -457,5 +457,6 @@ promedio;average
 generalmente;usual
 absolutamente;absolut
 imposible;impossible
+relativamente;relative
 
 
