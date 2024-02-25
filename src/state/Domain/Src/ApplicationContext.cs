@@ -1,6 +1,6 @@
 ﻿using Domain.Src.Configuration;
 using Microsoft.EntityFrameworkCore;
-using Objects.Src;
+using Objects.Src.Dto;
 using System.Reflection;
 
 namespace Domain.Src

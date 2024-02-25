@@ -453,4 +453,20 @@ absolutamente;absolut
 imposible;impossible
 relativamente;relative
 
+[nouns,house,a1]
+
+muebles;furniture
+cuarto;room
+puerta principal;front door
+suelo;floor
+pintura de pared;wall paint
+interruptor de luz;light switch
+el refrigerador;refrigerator
+el horno;oven
+el microondas;microwave
+el lavavajillas;dishwasher
+la tostadora;toaster
+la batidora;mixer
+el bote de basura;trash bin
+
 

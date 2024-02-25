@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Objects.Src;
+using Objects.Src.Dto;
 using Objects.Src.Primitives;
 
 namespace Domain.Src.Configuration

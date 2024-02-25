@@ -1,7 +1,7 @@
 ﻿using Objects.Src.Primitives;
 using System;
 
-namespace Objects.Src
+namespace Objects.Src.Dto
 {
     public class WordDto : IDto
     {

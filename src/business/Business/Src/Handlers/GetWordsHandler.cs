@@ -2,7 +2,7 @@
 using Business.Src.Objects;
 using Domain.Src;
 using MediatR;
-using Objects.Src;
+using Objects.Src.Dto;
 using System;
 using System.Linq.Expressions;
 using System.Threading;
@@ -21,7 +21,7 @@ namespace Business.Src.Handlers
 
         public async Task<SelectResult<WordDto>> Handle(GetWordsCommand request, CancellationToken cancellationToken)
         {
-            var items = await _repository.GetAllAsync(request.filter);
+            var items = await _repository.GetAllAsync(request.Filter);
             return SelectResult<WordDto>.Fetched(items);
         }
     }

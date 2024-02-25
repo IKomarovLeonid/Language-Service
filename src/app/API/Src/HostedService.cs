@@ -1,13 +1,11 @@
 ﻿using Domain.Src;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Objects.Src;
+using Objects.Src.Dto;
 using Objects.Src.Primitives;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -88,6 +86,7 @@ namespace API.Src
                                 "character" => WordCategory.Character,
                                 "family" => WordCategory.Family,
                                 "common" => WordCategory.Common,
+                                "house" => WordCategory.House,
                                 _ => WordCategory.Common,
                             };
                         }
@@ -128,8 +127,6 @@ namespace API.Src
                     });
                 }
             }
-
-
 
             ctx.Words.AddRange(words);
             await ctx.SaveChangesAsync();

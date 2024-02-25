@@ -1,6 +1,6 @@
 ﻿using Autofac;
 using Domain.Src;
-using Objects.Src;
+using Objects.Src.Dto;
 
 namespace API.Src.Ioc
 {

@@ -7,6 +7,7 @@
         Directions,
         Colors,
         Character,
-        Family
+        Family,
+        House
     }
 }
