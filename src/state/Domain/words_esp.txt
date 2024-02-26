@@ -50,7 +50,7 @@ delante de;in front of
 dentro de;inside,into,within
 encima de;on top
 en frente a;opposite,towards
-fuerta de;except of,apart from
+fuera de;outside
 junto a;near
 
 [nouns,a1]
@@ -74,7 +74,7 @@ la suerte;the luck
 la alcoba;the bedroom
 la alfombra;the rug
 la cocina;the kitchen
-la collecion;the collection
+la colesion;the collection
 el comedon;the dining room
 el espejo;the mirror
 el estudio;the studio
@@ -82,7 +82,6 @@ la estufa;the stove
 el gabinete;the cabinet
 el lapiz;the pencil
 la madera;the wood
-la nevera;the refrigerator
 la pared;the wall
 el patio;the yard
 la sala;the living room
@@ -97,7 +96,8 @@ alegre;happy
 barato;cheap,unexpensive
 bonito;nice
 bueno;good
-caro;expensive
+caro;expensive thing
+querrido;dear human
 cancado;tired
 debil;weak
 delgado;slender
@@ -142,11 +142,11 @@ viejo;old
 [adverbs,a1]
 
 aqui;here
-aca;here
 alli;there
-alla;there
 bastante;enough
 todavia;still
+tampoco;still no
+tacano;be in mind
 
 [nouns,time,a1]
 
@@ -178,18 +178,25 @@ la primavera;the spring
 [nouns,directions,a1]
 
 los puntos cardinales;cardinal directions
+las direcciones cardinales;cardinal directions
 la izquierda;left
 la derecha;right
 detras;behind
 por delante;in front
+Norte;north
+Sur;south
+Oeste;west
+Este;east
+Noroeste;north-south
 
 [adjectives,character,a1]
 
 abierto;active,open
 cerrado;closed
 amable;kind
-distante;shy
+modesto;shy
 cortes;polite
+respetuoso;polite,courteous
 grosero;rude
 extrovertido;extravert
 introvertido;introvert
@@ -469,4 +476,21 @@ la tostadora;toaster
 la batidora;mixer
 el bote de basura;trash bin
 
+[nouns,games]
 
+tablero de ahedrez;chess board
+lado de la reyna;queen flang
+lado de la rey;king flang
+escaque blanco;white field
+escaque negro;black field
+peon;pawn
+torre;rock
+alfil;bishop
+caballo;knight
+rey;king
+reina;queen
+connexion;connection
+contacto;contact
+captura;capture
+centro;centre
+dama;piece of checkers
