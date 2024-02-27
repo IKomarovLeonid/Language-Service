@@ -120,7 +120,7 @@ namespace API.Src
                         Word = word,
                         Translation = translation,
                         LanguageFrom = LanguageType.Spanish,
-                        LanguageTo = LanguageType.English,
+                        LanguageTo = LanguageType.Russian,
                         Type = wordType,
                         Category = wordCategory,
                         Level = wordLevel

@@ -1,0 +1,17 @@
+<div>
+  <h2>Translation Component</h2>
+
+  <label>Translate word: </label>
+  <label>{{this.wordToTranslate?.word}}</label>
+
+  <br><br>
+
+  <label for="translation">Translation:</label>
+  <input id="translation" [(ngModel)]="translation">
+
+  <label>Total attempts: {{totalAnswers}} / correct: {{correctAnswers}} </label>
+  <label *ngIf="correctAnswer">ERROR: Correct answer is: {{correctAnswer}}</label>
+  <br><br>
+
+  <button (click)="makeAnswer()">Translate</button>
+</div>

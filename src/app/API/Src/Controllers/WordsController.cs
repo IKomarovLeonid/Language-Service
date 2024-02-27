@@ -1,7 +1,8 @@
-﻿using Business.Src.Commands;
+﻿using API.Src.View;
+using Business.Src.Commands;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Objects.Src.Primitives;
+using Objects.Src.Models;
 using System.Threading.Tasks;
 
 namespace API.Src.Controllers
@@ -15,9 +16,11 @@ namespace API.Src.Controllers
 
 
         [HttpGet]
-        public async Task<IActionResult> GetWordsAsync(WordCategory? category, WordType? type, WordLevel? level, LanguageType? from, LanguageType? to)
+        public async Task<ActionResult<PageViewModel<WordModel>>> GetWordsAsync()
         {
-            return Ok(_mediator.Send(new GetWordsCommand(category, type, from, to, level)));
+            var response = await _mediator.Send(new GetWordsCommand());
+
+            return PageViewModel<WordModel>.New(response.Data);
         }
 
         [HttpPost]

@@ -1,496 +1,456 @@
 ﻿[nouns,colors,a1]
 
-azul;blue
-verde;green
-rojo;red
-negro;black
-amarillo;yellow
-celeste;sky blue
-morado;purple
-rosado;pink
-marron;brown
-blanco;white
-gris;gray
-plateado;silver
-dorado;gold
-naranja;orange
-moreno;brown-skinned
+azul;синий
+verde;зелёный
+rojo;красный
+negro;чёрный
+amarillo;жёлтый
+celeste;небесно-голубой
+morado;фиолетовый
+rosado;розовый
+marron;коричневый
+blanco;белый
+gris;серый
+plateado;серебрянный
+dorado;золотой
+naranja;оранжевый
+moreno;загорелый
 
 [prepositions,a1]
 
-a;at
-ante;before
-bajo;under
-con;with
-contra;against,in exchange for
-de;of,about,from
-desde;since,from
-durante;during
-en;in,into,by,inside,within,at
-entre;between,among,amongst
-excepto;except
-hacia;about,around
-hasta;until
-mediante;by means of
-para;for
-por;because of,by
-segun;according to,depending on
-sin;without
-sobre;on,over,above
-ademas de;as well as,besides
-al aldo de;beside
-alrededor de;around,about
-antes de;before
-delante de;before
-a pesar de;despite
-cerca de;near,close
-con respecto a;in respect of
-debajo de;under
-delante de;in front of
-dentro de;inside,into,within
-encima de;on top
-en frente a;opposite,towards
-fuera de;outside
-junto a;near
+a;к
+ante;перед
+bajo;под
+con;с
+contra;против
+de;из
+desde;с тех пор,с
+durante;в течении
+en;в,на
+entre;между,среди
+excepto;исключая
+hacia;о
+hasta;до тех пор
+mediante;в значении
+para;для
+por;по
+segun;в зависимости от
+sin;без
+sobre;на
+ademas de;также как
+al aldo de;рядом с
+alrededor de;вокруг
+antes de;перед
+delante de;перед
+a pesar de;несмотря
+cerca de;близко
+con respecto a;с уважением
+debajo de;под
+delante de;спереди
+dentro de;внутри
+encima de;на вершине
+en frente a;напротив
+fuera de;снаружи
+junto a;около
 
 [nouns,a1]
 
-el clima;the climate
-el dia;the day
-el drama;the drama
-el idioma;the language
-el mapa;the map
-el planeta;the planet
-el poema;the poem
-el problema;the problem
-el sistema;the system
-el programa;the program
-la clase;the class
-la fror;the flower
-la luz;the light
-la mujer;the woman
-la piel;the skin
-la suerte;the luck
-la alcoba;the bedroom
-la alfombra;the rug
-la cocina;the kitchen
-la colesion;the collection
-el comedon;the dining room
-el espejo;the mirror
-el estudio;the studio
-la estufa;the stove
-el gabinete;the cabinet
-el lapiz;the pencil
-la madera;the wood
-la pared;the wall
-el patio;the yard
-la sala;the living room
-el sillon;the easy chair
-el vestibulo;the entryway
-el video;the video
+el clima;климат
+el dia;день
+el drama;драма
+el idioma;язык
+el mapa;карта
+el planeta;планета
+el poema;поэма
+el problema;проблема
+el sistema;система
+el programa;программа
+la clase;класс
+la fror;цветок
+la luz;свет
+la mujer;женщина
+la piel;кожа
+la suerte;везение
+la alcoba;спальня
+la alfombra;ковёр
+la cocina;кухня
+la colesion;коллекция
+el comedon;столовая
+el espejo;зеркало
+el estudio;студия
+la estufa;кирпичная печь
+el gabinete;кабинет
+el lapiz;карандаш
+la madera;дерево
+la pared;стена
+el patio;двор
+la sala;зал
+el sillon;кресло
+la silla;стул
+el vestibulo;коридор
+el video;видео
 
 [adjectives,a1]
 
-agradable;pleasant
-alegre;happy
-barato;cheap,unexpensive
-bonito;nice
-bueno;good
-caro;expensive thing
-querrido;dear human
-cancado;tired
-debil;weak
-delgado;slender
-dificil;difficult
-estupendo;great,terrific
-excelente;excellent
-enfermo;sick
-enojado;angry
-facil;easy
-fantastico;fantastic
-feliz;happy
-feo;ugly
-flaco;thin
-fragil;fragile
-fuerte;strong
-gordo;fat
-grande;big
-guapo;handsome,beautiful
-hermoso;beautiful
-horrible;horrible
-interesante;interesting
-lindo;pretty
-limpio;clean
-privado;private
-sencillo;simple
-todo;all
-fino;fine,delicato
-comodo;comfortable
-joven;young
-maravilloso;wonderful
-pequeno;small,little
-pobre;poor
-rico;rich
-simpatico;nice
-sincero;sincere
-sabrosa;delicios
-tacano;stingy
-tipico;typical
-triste;sad
-viejo;old
+agradable;приятный
+alegre;счастливый
+barato;дешёвый
+bonito;красивый
+bueno;хороший
+caro;дорогой
+querrido;дорогой человек
+cancado;уставший
+debil;слабый
+delgado;стройный
+dificil;сложный
+estupendo;великолепный
+enfermo;больной
+enojado;злой
+facil;простой
+fantastico;фантастический
+feliz;счастливый
+feo;некрасивый
+flaco;тощий
+fragil;хрупкий
+fuerte;сильный
+gordo;толстый
+grande;огромный
+guapo;красивый
+hermoso;красивый
+horrible;ужасный
+interesante;интересный
+lindo;милый
+limpio;чистый
+privado;частный
+sencillo;простой
+todo;все
+fino;деликатный
+comodo;комфортный
+joven;молодой
+maravilloso;чудесный
+pequeno;маленький
+pobre;бедный
+rico;богатый
+simpatico;красивый
+sincero;искренный
+sabrosa;вкусный
+tacaño;скупой
+tipico;типичный
+triste;грустный
+viejo;старый
 
 [adverbs,a1]
 
-aqui;here
-alli;there
-bastante;enough
-todavia;still
-tampoco;still no
-tacano;be in mind
+aqui;здесь
+alli;там
+bastante;достаточно
+todavia;тоже,ещё
+tampoco;тоже не,ещё не
+tacaño;иметь ввиду
 
 [nouns,time,a1]
 
-el Lunes;monday
-el Martes;tuesday
-el Miercoles;wednesday
-el Jueves;thursday
-el Viernes;friday
-el Sabado;saturday
-el Domingo;sunday
-Enero;january
-Febrero;february
-Marzo;march
-Abril;april
-Mayo;may
-Junio;june
-Julio;july
-Agosto;august
-Septiembre;september
-Octubre;october
-Noviembre;november
-Diciember;december
-las estaciones;the seasons
-el verano;the summer
-el otono;the autumn
-el invierno;the winter
-la primavera;the spring
+el Lunes;понедельник
+el Martes;вторник
+el Miercoles;среда
+el Jueves;четверг
+el Viernes;пятница
+el Sabado;суббота
+el Domingo;воскресенье
+Enero;январь
+Febrero;февраль
+Marzo;март
+Abril;апрель
+Mayo;май
+Junio;июнь
+Julio;июль
+Agosto;август
+Septiembre;сентябрь
+Octubre;октябрь
+Noviembre;ноябрь
+Diciember;декабрь
+las estaciones;сезоны
+el verano;лето
+el otono;осень
+el invierno;зима
+la primavera;весна
 
 [nouns,directions,a1]
 
-los puntos cardinales;cardinal directions
-las direcciones cardinales;cardinal directions
-la izquierda;left
-la derecha;right
-detras;behind
-por delante;in front
-Norte;north
-Sur;south
-Oeste;west
-Este;east
-Noroeste;north-south
+los puntos cardinales;стороны света
+las direcciones cardinales;стороны света
+la izquierda;лево
+la derecha;право
+detras;сзади
+por delante;спереди
+Norte;север
+Sur;юг
+Oeste;запад
+Este;восток
+Noroeste;северо-запад
 
 [adjectives,character,a1]
 
-abierto;active,open
-cerrado;closed
-amable;kind
-modesto;shy
-cortes;polite
-respetuoso;polite,courteous
-grosero;rude
-extrovertido;extravert
-introvertido;introvert
-fiable;relible
-frivolo;frivolous
-generoso;generous,lavish
-codicioso;greedy
-honesto;honest
-mentiroso;lier
-inteligente;intelligent
-estupido;stupid
-sensible;sensible
-frio;calm
-simpatico;cute
-antipatico;antipathetic
-trabajador;hardworking
-vago;lazy
-tranquilo;calm
-nervioso;nervious
+abierto;открытый
+cerrado;закрытый
+amable;приятный
+modesto;тихий
+cortes;вежливый
+respetuoso;вежливый
+grosero;грубый
+extrovertido;экстраверт
+introvertido;интроверт
+fiable;надёжный
+honesto;честный
+mentiroso;лживый
+inteligente;умный
+genial;гениальный
+estupido;тупой
+sensible;чувствительный
+frio;спокойный
+antipatico;не симпатичный
+trabajador;трудолюбивый
+vago;ленивый
+tranquilo;спокойный
+nervioso;нервный
 
 [nouns,family,a1]
 
-papa;father
-padre;father
-madre;mother
-mama;monther
-padres;parents
-hija;daughter
-hijo;son
-hermana;sister
-hermano;brother
-abuelo;grandfather
-abuela;grandmother
+papa;отец
+padre;отец
+madre;мать
+mama;мать
+padres;родители
+hija;дочь
+hijo;сын
+hermana;сестра
+hermano;брат
+abuelo;дедушка
+abuela;бабушка
 
 [nouns,common,b2]
 
-el asiento;seat
-la boleteria;ticket booth
-el coche cama;sleeping car
-el coche comedor;dining car
-el inspector;conductor
-el paisaje;countryside
-el pasajero;passenger
+el asiento;сиденье
+lugar;место
+la boleteria;билетерия
+el inspector;контролёр
+el pasajero;пассажир
 
 [verbs,common,b2]
 
-gestionar;to manage
-negociar;to negotiate
-presentar;to present
-comunicar;to communicate
-solicitar;to request
-proporcionar;to provide
-resolver;to resolve
-explicar;to explain
-implementar;to implement
-realizar;to make happen
-desarollar;to develop
-aumentar;to increase
-disminuir;to decrease
-analizar;to analyze
-evaluar;to evaluate
-colaborar;to colaborate
-concluir;to conclude
-invertir;to invest
-organizar;to organize
-apoyar;to support
-seleccionar;to select
-optimizar;to optimize
-mejorar;to improve
-planificar;to plan
-promover;to promote
-recomendar;to recommend
-ganar;earn,win
-dirigir;to lead
-coordinar;to coordinate
+gestionar;управлять
+negociar;переговариваться
+presentar;презентовать
+comunicar;коммуницировать
+solicitar;запрашивать
+proporcionar;продвигать
+resolver;решать
+explicar;объяснять
+implementar;выполнять
+realizar;реализовывать
+desarollar;разрабатывать
+aumentar;увеличивать
+disminuir;уменьшать
+analizar;анализировать
+evaluar;оценивать
+colaborar;взаимодействовать
+concluir;заключать
+invertir;инвестировать
+organizar;организовывать
+apoyar;поддерживать
+seleccionar;выбирать
+optimizar;оптимизировать
+mejorar;улучшать
+planificar;планировать
+promover;повышать
+recomendar;рекомендовать
+ganar;побеждать
+dirigir;возглавлять
+coordinar;координировать
 
 [verbs,common,a2]
 
-estar;be
-andar;step,go
-dar;give,pass
-jugar;play
-regar;water
-negar;deny,reject
-empezar;start
-calentar;heat up
-aferrar;cling to
-pensar;think,feel
-recalentar;reheat
-recomendar;advice,recommend
-reventar;pop
-sentar;sit,place
-acertar;guess,get right
-soterrar;underground
-manifestar;express,manifest
-quebrar;bankrupt
-sembrar;plant
-temblar;shake
-comenzar;start,begin
-acostar;lay down
-colgar;hang
-renovar;renew
-apostar;bet
-contar;count
-mostrar;show
-poblar;populate
-probar;try,test
-recordar;remember,recall
-rodar;roll,make
-soltar;release,drop
-sonar;sound,ring
-soñar;dream,imagine
-tostar;toast
-volar;fly
-almorzar;have lunch
-sosegar;calm
-caber;fit
-haber;have
-oler;smell
-saber;know
-ser;be
-valer;cost
-ver;see,view
-deshacer;undo
-hacer;do,perform
-satisfacer;meet
-contener;contain
-detener;stop
-disponer;provide,lay out
-entretener;entertain
-exponer;expose
-imponer;force
-mantener;maintain,keep
-oponer;refuse
-poner;put,place
-posponer;postpone,put off
-proponer;propose,suggest
-reponer;replace
-retener;hold,retain
-sostener;support
-suponer;assume,suppose
-tener;need,have
-atraer;attract,draw
-caer;fall,drop
-distraer;distract
-extraer;remove,extract
-recaer;revent
-traer;bring,carry
-contraer;get,contract
-poseer;have
-leer;read
-creer;believe,think
-conmover;move
-devolver;repay,return
-volver;return,go back
-mover;move,shift
-promover;promote
-resolver;solve,resolve
-poder;be able to, can
-morder;bite
-doler;hurt,pain
-demoler;tear down
-tender;tend,extend
-querer;want,like
-malentender;misunderstand
-extender;extend,spread
-entender;undestand,see
-defender;defend
-contender;fight
-ir;go
-adherir;attach
-advertir;warn
-adquirir;acquire, buy
-diferir;differ, defer
-digerir;digest, absorb
-herir;hurt, injure
-inferir;infer, conclude
-ingerir;eat, ingest
-interferir;interfere
-preferir;prefer
-referir;refer, relate
-transferir;transfer, assign
-discernir;discern
-divertir;entertain, amuse
-sentir;feel, sense
-revertir;reverse, revert
-resentir;resent
-presentir;sense
-mentir;lie, cheat
-invertir;invest
-rugir;roar
-sumergir;immerse, dip
-surgir;arise, emerge
-transigir;compromise
-ungir;anoint
-urgir;urge, hustle
-dirigir;lead, direct
-exigir;require, demand
-infringir;infringe, break
-producir;produce, cause
-reducir;reduce, cut
-seducir;seduce, attract
-traducir;translate, interpret
-inducir;induce, provoke
-introducir;introduce, enter
-lucir;wear, shine
-perseguir;pursue, chase
-distinguir;distinguish, differentiate
-seguir;follow, continue
-ocluir;occlude
-destruir;destroy, crush
-disminuir;decrease, reduce
-distribuir;distribute, deliver
-excluir;exclude, preclude
-fluir;flow, stream
-huir;flee, escape
-incluir;include, incorporate
-influir;influence, affect
-instituir;institute
-sustituir;replace, substitute
-teñir;dye, stain
-elegir;choose, select
-regir;govern, operate
-pedir;ask, request
+estar;быть
+andar;идти
+dar;давать
+jugar;играть
+negar;отклонять
+empezar;начинать
+calentar;поджигать
+pensar;думать
+reventar;взорвать
+sentar;сидеть
+acertar;догадываться
+soterrar;закопать
+manifestar;выражать
+quebrar;обанкротится
+sembrar;сеять
+temblar;трясти
+comenzar;начинать
+acostar;пригнутся
+colgar;повестить
+renovar;обновить
+apostar;поставить
+contar;посчитать
+mostrar;показать
+poblar;заселить
+probar;попытаться
+recordar;запомнить
+rodar;снимать
+soltar;высвободить
+sonar;слышать
+soñar;мечтать
+tostar;жарить
+volar;летать
+almorzar;обедать
+sosegar;успокаивать
+caber;поместить
+haber;иметь
+oler;пахнуть
+saber;знать
+ser;быть
+valer;стоить
+ver;видеть
+deshacer;отменить
+hacer;делать
+satisfacer;встретить
+contener;содержать
+detener;остановится
+disponer;поставлять
+entretener;развлекаться
+exponer;подвергать
+imponer;навязать
+mantener;поддержать
+oponer;отклонить
+poner;положить
+posponer;отложить
+proponer;предложить
+reponer;заменить
+retener;удержать
+sostener;поддерживать
+suponer;предположить
+tener;хотеть
+atraer;взаимодействовать
+caer;уронить
+distraer;беспокоить
+extraer;удалить
+traer;принести
+contraer;получить
+poseer;иметь
+leer;читать
+creer;лумать
+devolver;возвращать
+volver;возвращаться
+mover;двигаться
+poder;мочь
+morder;кусать
+doler;ранить
+tender;расширять
+querer;хотеть
+malentender;непонимать
+contender;бороться
+ir;идти
+adherir;соединять
+advertir;предупреждать
+adquirir;покупать
+herir;повреждать
+inferir;заключать
+preferir;предпочитать
+referir;относится
+transferir;применять
+sentir;чувствовать
+mentir;врать
+rugir;кричать
+exigir;требовать
+producir;создавать
+reducir;уменьшать
+seducir;соблазнять
+traducir;переводить
+inducir;провоцировать
+introducir;входить
+lucir;надевать
+perseguir;преследовать
+seguir;следовать
+destruir;разрушать
+disminuir;уменьшать
+distribuir;доставлять
+excluir;исключать
+fluir;двигать
+huir;избегать
+influir;влиять
+sustituir;заменять
+teñir;красить
+elegir;выбирать
+regir;оперировать
+pedir;спрашивать
 derretir;melt, dissolve
-despedir;dismiss, fire
-freír;fry, cook
-gemir;groan, moan
-impedir;prevent, block
-servir;help, serve
-repetir;repeat, replicate
-rendir;render, pay
-reñir;quarrel, dispute
-medir;measure, gauge
-vestir;dress, wear
-decir;say
-predecir;predict, forecast
-venir;come
-oír;hear, listen to
-sobresalir;excel, stand out
-salir;leave, exit
-intervenir;intervene, speak
-morir;die, pass away
-dormir;sleep, rest
+despedir;прощаться
+freír;жарить
+servir;помогать
+repetir;повторять
+rendir;платить
+reñir;спорить
+medir;измерять
+vestir;надевать
+decir;говорить
+predecir;предугадать
+venir;приходить
+oír;слушать
+sobresalir;отличится
+salir;выйти
+hablar;говорить
+intervenir;вмешаться
+morir;умирать
+dormir;спать
 
 [adjectives,common,a1]
 
-ahora;now
-hoy;today
-ayer;yesterday
-ya;yet
-anoche;the day before
-pronto;soon
-siempre;always
+ahora;сейчас
+hoy;сегодня
+ayer;вчера
+ya;ещё
+anoche;позавчера
+pronto;скоро
+siempre;всегда
 nunca;никогда
-a menudo;often
-casi nunca;rarely
-promedio;average
-generalmente;usual
-absolutamente;absolut
-imposible;impossible
-relativamente;relative
+a menudo;часто
+casi nunca;редко
+promedio;средне
+generalmente;обычно
+absolutamente;абсолютно
+imposible;невозможно
+relativamente;относительно
 
 [nouns,house,a1]
 
-muebles;furniture
-cuarto;room
-puerta principal;front door
-suelo;floor
-pintura de pared;wall paint
-interruptor de luz;light switch
-el refrigerador;refrigerator
-el horno;oven
-el microondas;microwave
-el lavavajillas;dishwasher
-la tostadora;toaster
-la batidora;mixer
-el bote de basura;trash bin
+muebles;фурнитура
+cuarto;комната
+puerta principal;входная дверь
+suelo;этаж
+pintura de pared;настенная картина
+interruptor de luz;переключатель света
+el refrigerador;холодильник
+el horno;печь
+el microondas;микроволновка
+el lavavajillas;посудомойка
+la tostadora;тостер
+la batidora;миксер
+el bote de basura;мусорное ведро
 
 [nouns,games]
 
-tablero de ahedrez;chess board
-lado de la reyna;queen flang
-lado de la rey;king flang
-escaque blanco;white field
-escaque negro;black field
-peon;pawn
-torre;rock
-alfil;bishop
-caballo;knight
-rey;king
-reina;queen
-connexion;connection
-contacto;contact
-captura;capture
-centro;centre
-dama;piece of checkers
+tablero de ahedrez;шахматная доска
+lado de la reyna;ферзевый фланг
+lado de la rey;королевский фланг
+escaque blanco;белая клетка
+escaque negro;чёрная клетка
+peon;пешка
+torre;ладья
+alfil;слон
+caballo;конь
+rey;король
+reina;королева
+connexion;соединение
+contacto;контакт
+captura;захват
+centro;центр

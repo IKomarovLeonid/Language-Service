@@ -8,14 +8,11 @@ namespace Business.Src.Objects
 
         public ICollection<TModel> Data { get; private init; }
 
-        public int Count;
-
         private SelectResult() { }
 
         public static SelectResult<TModel> Fetched(ICollection<TModel> data) => new SelectResult<TModel>()
         {
             Data = data,
-            Count = data.Count,
             Message = string.Empty
         };
 
