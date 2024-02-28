@@ -1,4 +1,4 @@
-﻿[nouns,colors,a1]
+﻿[nouns,colors]
 
 azul;синий
 verde;зелёный
@@ -16,7 +16,7 @@ dorado;золотой
 naranja;оранжевый
 moreno;загорелый
 
-[prepositions,a1]
+[prepositions]
 
 a;к
 ante;перед
@@ -53,7 +53,7 @@ en frente a;напротив
 fuera de;снаружи
 junto a;около
 
-[nouns,a1]
+[nouns]
 
 el clima;климат
 el dia;день
@@ -90,7 +90,7 @@ la silla;стул
 el vestibulo;коридор
 el video;видео
 
-[adjectives,a1]
+[adjectives]
 
 agradable;приятный
 alegre;счастливый
@@ -139,7 +139,7 @@ tipico;типичный
 triste;грустный
 viejo;старый
 
-[adverbs,a1]
+[adverbs]
 
 aqui;здесь
 alli;там
@@ -148,7 +148,7 @@ todavia;тоже,ещё
 tampoco;тоже не,ещё не
 tacaño;иметь ввиду
 
-[nouns,time,a1]
+[nouns,time]
 
 el Lunes;понедельник
 el Martes;вторник
@@ -175,7 +175,7 @@ el otono;осень
 el invierno;зима
 la primavera;весна
 
-[nouns,directions,a1]
+[nouns,directions]
 
 los puntos cardinales;стороны света
 las direcciones cardinales;стороны света
@@ -189,7 +189,7 @@ Oeste;запад
 Este;восток
 Noroeste;северо-запад
 
-[adjectives,character,a1]
+[adjectives,character]
 
 abierto;открытый
 cerrado;закрытый
@@ -214,7 +214,7 @@ vago;ленивый
 tranquilo;спокойный
 nervioso;нервный
 
-[nouns,family,a1]
+[nouns,family]
 
 papa;отец
 padre;отец
@@ -228,7 +228,7 @@ hermano;брат
 abuelo;дедушка
 abuela;бабушка
 
-[nouns,common,b2]
+[nouns,common]
 
 el asiento;сиденье
 lugar;место
@@ -236,7 +236,7 @@ la boleteria;билетерия
 el inspector;контролёр
 el pasajero;пассажир
 
-[verbs,common,b2]
+[verbs,common]
 
 gestionar;управлять
 negociar;переговариваться
@@ -268,7 +268,7 @@ ganar;побеждать
 dirigir;возглавлять
 coordinar;координировать
 
-[verbs,common,a2]
+[verbs,common]
 
 estar;быть
 andar;идти
@@ -403,7 +403,7 @@ intervenir;вмешаться
 morir;умирать
 dormir;спать
 
-[adjectives,common,a1]
+[adjectives,common]
 
 ahora;сейчас
 hoy;сегодня
@@ -421,7 +421,7 @@ absolutamente;абсолютно
 imposible;невозможно
 relativamente;относительно
 
-[nouns,house,a1]
+[nouns,house]
 
 muebles;фурнитура
 cuarto;комната

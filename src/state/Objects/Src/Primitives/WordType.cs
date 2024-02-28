@@ -2,7 +2,7 @@
 {
     public enum WordType
     {
-        Undefined = 0,
+        Any = 0,
         Noun, 
         Verb,
         Adjective,

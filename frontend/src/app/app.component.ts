@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {PageViewModelOfWordModel, WordModel, WordsClient} from "../shared/main.api";
+import {PageViewModelOfWordModel, WordCategory, WordModel, WordsClient} from "../shared/main.api";
 
 @Component({
   selector: 'app-root',
@@ -26,7 +26,7 @@ export class AppComponent implements OnInit{
   loadWords(){
     this.client.getWords()
       .then((data: PageViewModelOfWordModel) => {
-        this.data = data.items;
+        this.data = data.items?.filter(w => w.category === WordCategory.Colors);
         this.showWord();
       })
       .catch(error => {
@@ -62,4 +62,5 @@ export class AppComponent implements OnInit{
       this.reset();
       this.showWord();
   }
+
 }

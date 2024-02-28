@@ -2,7 +2,7 @@
 {
     public enum WordCategory
     {
-        Common,
+        Any,
         Time,
         Directions,
         Colors,

@@ -44,9 +44,8 @@ namespace API.Src
         private async Task FillPredefinedDataAsync(ApplicationContext ctx)
         {
             var words = new List<WordDto>();
-            WordType wordType = WordType.Undefined;
-            WordCategory wordCategory = WordCategory.Common;
-            WordLevel wordLevel = WordLevel.Undefined;
+            WordType wordType = WordType.Any;
+            WordCategory wordCategory = WordCategory.Any;
 
             using (StreamReader sr = new StreamReader("words_esp.txt"))
             {
@@ -63,19 +62,6 @@ namespace API.Src
                     {
                         line = line.Substring(1, line.IndexOf("]") - 1);
                         var headerData = line.Split(',');
-                        if (headerData.Length == 3)
-                        {
-                            wordLevel = headerData[2] switch
-                            {
-                                "a1" => WordLevel.A1,
-                                "a2" => WordLevel.A2,
-                                "b1" => WordLevel.B1,
-                                "b2" => WordLevel.B2,
-                                "c1" => WordLevel.C1,
-                                "c2" => WordLevel.C2,
-                                _ => WordLevel.Undefined,
-                            };
-                        }
                         if (headerData.Length == 2)
                         {
                             wordCategory = headerData[1] switch
@@ -85,15 +71,14 @@ namespace API.Src
                                 "directions" => WordCategory.Directions,
                                 "character" => WordCategory.Character,
                                 "family" => WordCategory.Family,
-                                "common" => WordCategory.Common,
+                                "common" => WordCategory.Any,
                                 "house" => WordCategory.House,
-                                _ => WordCategory.Common,
+                                _ => WordCategory.Any,
                             };
                         }
                         if (headerData.Length == 1)
                         {
-                            wordLevel = WordLevel.Undefined;
-                            wordCategory = WordCategory.Common;
+                            wordCategory = WordCategory.Any;
                         }
 
                         wordType = headerData[0] switch
@@ -103,7 +88,7 @@ namespace API.Src
                             "adjectives" => WordType.Adjective,
                             "adverbs" => WordType.Adverb,
                             "verbs" => WordType.Verb,
-                            _ => WordType.Undefined,
+                            _ => WordType.Any,
                         };
                         continue;
                     }
@@ -122,11 +107,34 @@ namespace API.Src
                         LanguageFrom = LanguageType.Spanish,
                         LanguageTo = LanguageType.Russian,
                         Type = wordType,
-                        Category = wordCategory,
-                        Level = wordLevel
+                        Category = wordCategory
                     });
                 }
             }
+
+            // triste
+            // concluir
+            // facIl
+            // alegre
+            // el patio
+            // alrededor de
+            // excepto
+            // gris
+            // sAbado
+            // sin
+            // negociar
+            // apoyar
+            // delante de
+            // cerca de
+            // plateado
+            // aconsejar
+            // la computadora
+            // el ordenador
+            // el entrenador
+            // el monitor
+            // bastante
+            // hasta
+            // desaynar
 
             ctx.Words.AddRange(words);
             await ctx.SaveChangesAsync();

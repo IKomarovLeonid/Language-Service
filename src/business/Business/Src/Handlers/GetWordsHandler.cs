@@ -28,7 +28,6 @@ namespace Business.Src.Handlers
             {
                 Id = dto.Id,
                 Category = dto.Category,
-                Level = dto.Level,  
                 LanguageFrom = dto.LanguageFrom,
                 LanguageTo = dto.LanguageTo,
                 Translation = dto.Translation,

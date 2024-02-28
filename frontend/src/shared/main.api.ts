@@ -180,7 +180,6 @@ export interface IPageViewModelOfWordModel {
 export class WordModel implements IWordModel {
   id?: number;
   type?: WordType;
-  level?: WordLevel;
   category?: WordCategory;
   languageFrom?: LanguageType;
   languageTo?: LanguageType;
@@ -202,7 +201,6 @@ export class WordModel implements IWordModel {
     if (_data) {
       this.id = _data["id"];
       this.type = _data["type"];
-      this.level = _data["level"];
       this.category = _data["category"];
       this.languageFrom = _data["languageFrom"];
       this.languageTo = _data["languageTo"];
@@ -224,7 +222,6 @@ export class WordModel implements IWordModel {
     data = typeof data === 'object' ? data : {};
     data["id"] = this.id;
     data["type"] = this.type;
-    data["level"] = this.level;
     data["category"] = this.category;
     data["languageFrom"] = this.languageFrom;
     data["languageTo"] = this.languageTo;
@@ -239,7 +236,6 @@ export class WordModel implements IWordModel {
 export interface IWordModel {
   id?: number;
   type?: WordType;
-  level?: WordLevel;
   category?: WordCategory;
   languageFrom?: LanguageType;
   languageTo?: LanguageType;
@@ -250,7 +246,7 @@ export interface IWordModel {
 }
 
 export enum WordType {
-  Undefined = "Undefined",
+  Any = "Any",
   Noun = "Noun",
   Verb = "Verb",
   Adjective = "Adjective",
@@ -260,18 +256,8 @@ export enum WordType {
   Preposition = "Preposition",
 }
 
-export enum WordLevel {
-  Undefined = "Undefined",
-  A1 = "A1",
-  A2 = "A2",
-  B1 = "B1",
-  B2 = "B2",
-  C1 = "C1",
-  C2 = "C2",
-}
-
 export enum WordCategory {
-  Common = "Common",
+  Any = "Any",
   Time = "Time",
   Directions = "Directions",
   Colors = "Colors",
@@ -282,8 +268,8 @@ export enum WordCategory {
 
 export enum LanguageType {
   Undefined = "Undefined",
-  English = "English",
   Spanish = "Spanish",
+  Russian = "Russian",
 }
 
 export interface FileResponse {

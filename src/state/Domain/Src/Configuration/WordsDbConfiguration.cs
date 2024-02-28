@@ -14,7 +14,6 @@ namespace Domain.Src.Configuration
             builder.Property(t => t.Id).HasColumnName("id");
             builder.Property(t => t.Category).IsRequired().HasColumnName("category").HasConversion(new EnumToStringConverter<WordCategory>());
             builder.Property(t => t.Type).IsRequired().HasColumnName("type").HasConversion(new EnumToStringConverter<WordType>());
-            builder.Property(t => t.Level).IsRequired().HasColumnName("level").HasConversion(new EnumToStringConverter<WordLevel>());
             builder.Property(t => t.LanguageFrom).IsRequired().HasColumnName("language_from").HasConversion(new EnumToStringConverter<LanguageType>());
             builder.Property(t => t.LanguageTo).IsRequired().HasColumnName("language_to").HasConversion(new EnumToStringConverter<LanguageType>());
             builder.Property(t => t.Word).HasColumnName("word");
