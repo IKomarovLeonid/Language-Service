@@ -1,16 +1,24 @@
-<div>
+<div class="quiz-container">
 
-  <label>Translate word: </label>
-  <label>{{this.wordToTranslate?.word}}</label>
+  <label class="quiz-label">Total words count <span class="bold">{{wordsCount}}</span></label>
+  <br><br>
+  <label class="quiz-label">Attempts: <span class="bold">{{totalAnswers}}</span> / correct: <span class="bold">{{correctAnswers}}</span></label>
+  <br><br>
+
+  <label class="quiz-label">Translate word : </label>
+  <label class="word-label">{{this.wordToTranslate?.word}}</label>
 
   <br><br>
 
-  <label for="translation">Translation:</label>
-  <input id="translation" [(ngModel)]="translation">
+  <input id="translation" class="quiz-input" [(ngModel)]="translation" (keyup.enter)="makeAnswer()" placeholder="Enter your translation and press ENTER...">
 
-  <label>Total attempts: {{totalAnswers}} / correct: {{correctAnswers}} </label>
-  <label *ngIf="correctAnswer">ERROR: Correct answer is: {{correctAnswer}}</label>
+  <label class="error-label" *ngIf="correctAnswer">ERROR: Correct answer is: <span class="bold">{{correctAnswer}}</span></label>
   <br><br>
 
-  <button (click)="makeAnswer()">Translate</button>
+  <select class="quiz-select" [(ngModel)]="selectedEnum" (change)="filterWords()">
+    <option value="" disabled>Select an option</option>
+    <option *ngFor="let value of Object.values(WordCategory)" [value]="value">{{ value }}</option>
+  </select>
+
+  <button class="quiz-button" (click)="finishAttempt()" tabindex="0">Finish</button>
 </div>
