@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Objects.Src.Primitives;
+using System;
 
 namespace Objects.Src.Models
 {
@@ -8,9 +9,13 @@ namespace Objects.Src.Models
 
         public ulong UserId { get; set; }
 
-        public ulong TotalWords { get; set; }
+        public ulong TotalAttempts { get; set; }
 
         public ulong CorrectAttempts { get; set; }
+
+        public WordType WordTypes { get; set; }
+
+        public WordCategory Category { get; set; }
 
         public double TotalSeconds { get; set; }
 

@@ -8,6 +8,7 @@
         Colors,
         Character,
         Family,
+        Food,
         House
     }
 }

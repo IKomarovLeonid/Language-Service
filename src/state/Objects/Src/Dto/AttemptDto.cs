@@ -12,7 +12,7 @@ namespace Objects.Src.Dto
 
         public string UserTranslation { get; set; }
 
-        public string ExpectedTranslation { get; set; }
+        public string ExpectedTranslations { get; set; }
 
         public bool IsCorrect { get; set; }
 

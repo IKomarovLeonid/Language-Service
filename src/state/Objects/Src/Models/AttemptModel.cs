@@ -6,7 +6,7 @@
 
         public string UserTranslation { get; set; }
 
-        public string ExpectedTranslation { get; set; }
+        public string[] ExpectedTranslations { get; set; }
 
         public double TotalSeconds { get; set; }
 

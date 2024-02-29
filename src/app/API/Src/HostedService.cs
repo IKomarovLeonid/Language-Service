@@ -73,6 +73,7 @@ namespace API.Src
                                 "family" => WordCategory.Family,
                                 "common" => WordCategory.Any,
                                 "house" => WordCategory.House,
+                                "food" => WordCategory.Food,
                                 _ => WordCategory.Any,
                             };
                         }
@@ -84,10 +85,10 @@ namespace API.Src
                         wordType = headerData[0] switch
                         {
                             "nouns" => WordType.Noun,
-                            "prepositions" => WordType.Pronoun,
                             "adjectives" => WordType.Adjective,
                             "adverbs" => WordType.Adverb,
                             "verbs" => WordType.Verb,
+                            "prepositions" => WordType.Preposition,
                             _ => WordType.Any,
                         };
                         continue;

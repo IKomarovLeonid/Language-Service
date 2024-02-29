@@ -27,7 +27,7 @@ namespace Domain.Migrations
                         .HasColumnName("created_utc")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("ExpectedTranslation")
+                    b.Property<string>("ExpectedTranslations")
                         .HasColumnName("expected_trasnlation")
                         .HasColumnType("TEXT");
 
@@ -115,6 +115,11 @@ namespace Domain.Migrations
                         .HasColumnName("id")
                         .HasColumnType("INTEGER");
 
+                    b.Property<string>("Category")
+                        .IsRequired()
+                        .HasColumnName("category")
+                        .HasColumnType("TEXT");
+
                     b.Property<ulong>("CorrectAttempts")
                         .HasColumnName("correct_answers")
                         .HasColumnType("INTEGER");
@@ -123,13 +128,13 @@ namespace Domain.Migrations
                         .HasColumnName("created_utc")
                         .HasColumnType("TEXT");
 
+                    b.Property<ulong>("TotalAttempts")
+                        .HasColumnName("total_attempts")
+                        .HasColumnType("INTEGER");
+
                     b.Property<double>("TotalSeconds")
                         .HasColumnName("attempt_time_sec")
                         .HasColumnType("REAL");
-
-                    b.Property<ulong>("TotalWords")
-                        .HasColumnName("total_words")
-                        .HasColumnType("INTEGER");
 
                     b.Property<DateTime>("UpdatedTime")
                         .HasColumnName("updated_utc")
@@ -138,6 +143,11 @@ namespace Domain.Migrations
                     b.Property<ulong>("UserId")
                         .HasColumnName("user_id")
                         .HasColumnType("INTEGER");
+
+                    b.Property<string>("WordTypes")
+                        .IsRequired()
+                        .HasColumnName("words_types")
+                        .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 

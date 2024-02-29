@@ -52,3 +52,50 @@
   border-radius: 5px;
   cursor: pointer;
 }
+
+.history-container {
+  text-align: center;
+  margin: auto;
+  padding: 20px;
+  background-color: rgba(240, 240, 240, 0.51);
+  border-radius: 10px;
+  width: 50%;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px; /* Adjust as needed */
+}
+
+/* Style for table headers */
+th {
+  background-color: #f2f2f2;
+  padding: 8px;
+  text-align: left;
+}
+
+/* Style for table rows */
+tr {
+  border-bottom: 1px solid #ddd; /* Add a bottom border between rows */
+}
+
+/* Style for the last column (buttons) */
+td:last-child {
+  text-align: center;
+}
+
+/* Style for the "Info" button */
+button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #45a049;
+}

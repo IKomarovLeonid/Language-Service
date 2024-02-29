@@ -90,6 +90,11 @@ el sillon;кресло
 la silla;стул
 el vestibulo;коридор
 el video;видео
+el asiento;сиденье
+lugar;место
+la boleteria;билетерия
+el inspector;контролёр
+el pasajero;пассажир
 
 [adjectives]
 
@@ -229,14 +234,6 @@ hermano;брат
 abuelo;дедушка
 abuela;бабушка
 
-[nouns,common]
-
-el asiento;сиденье
-lugar;место
-la boleteria;билетерия
-el inspector;контролёр
-el pasajero;пассажир
-
 [verbs,common]
 
 gestionar;управлять
@@ -249,7 +246,7 @@ resolver;решать
 explicar;объяснять
 implementar;выполнять
 realizar;реализовывать
-desarollar;разрабатывать
+desarollar;разрабатывать,развивать
 aumentar;увеличивать
 disminuir;уменьшать
 analizar;анализировать
@@ -263,7 +260,7 @@ seleccionar;выбирать
 optimizar;оптимизировать
 mejorar;улучшать
 planificar;планировать
-promover;повышать
+promover;повышать,продвигать по карьерной лестнице
 recomendar;рекомендовать
 ganar;побеждать
 dirigir;возглавлять
@@ -330,7 +327,7 @@ reponer;заменить
 retener;удержать
 sostener;поддерживать
 suponer;предположить
-tener;хотеть
+tener;иметь
 atraer;взаимодействовать
 caer;уронить
 distraer;беспокоить
@@ -347,7 +344,7 @@ moverse;двигаться
 poder;мочь
 morder;кусать
 doler;ранить,болеть
-tender;расширять
+tender;расширять,иметь тенденцию
 querer;хотеть
 malentender;непонимать
 contender;бороться
@@ -417,7 +414,7 @@ siempre;всегда
 nunca;никогда
 a menudo;часто
 casi nunca;редко
-promedio;средне
+promedio;среднее
 generalmente;обычно
 absolutamente;абсолютно
 imposible;невозможно
@@ -456,3 +453,68 @@ connexion;соединение
 contacto;контакт
 captura;захват
 centro;центр
+
+[nouns,food]
+
+bistec;бифштекс
+lomo;филе
+costillar;грудинка
+morcillo;рулька
+carne picada;говяжий фарш
+carne de vacuno;гуляш
+clueta;отбивная
+cortes de ternera;разделка телятины
+cortes de vacuno;разделка говядины
+corazOn;сердце
+higado;печень
+lengua;язык
+sesos;мозги
+riNones;почки
+pollo;курица
+pavo;индейка
+oca;гусь
+pato;утка
+huevo;яйцо
+rillettes;паштет
+salchicha;салями
+venera;морской гребешок
+calamar;кальмар
+begavante;омар
+gamba;креветка
+cigala;лангустин
+langosta marina;лангуст
+cangrejo;краб
+yogur;йогурт
+leche;молоко
+queso;сыр
+miel;мёд
+chocolate amargo;чёрный шоколад
+pan;хлеб
+cruasAn;круассан
+arroz;рис
+eneldo;укроп
+laurel;лавровый лист
+trigo;пшеница
+maiz;кукуруза
+salsa;соус
+pimienta;перец
+pimentOn;паприка
+guindilla;жгучий перец,красный перец
+banana;банан
+granada;гранат
+piNa;ананас
+toronja;грейпфрут
+limOn;лимон
+lima;лайм
+mandarina;мандарин
+naranja (cItricos);апельсин
+manzana;яблоко
+pera;груша
+cereza;черешня
+melocotOn;персик
+fresa;клубника
+moras;ежевика
+frambuesa;малина
+uva;виноград
+pepino;огурец
+tomate;томат

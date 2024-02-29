@@ -267,13 +267,16 @@ export interface IPageViewModelOfAttemptHistoryModel {
 export class AttemptHistoryModel implements IAttemptHistoryModel {
   id?: number;
   userId?: number;
-  totalWords?: number;
+  attemptsTotal?: number;
   correctAttempts?: number;
-  errors?: number;
+  errorsTotal?: number;
   totalSeconds?: number;
-  percent?: number;
+  successRate?: number;
   avgAnswerTimeSec?: number;
+  wordTypes?: WordType;
+  category?: WordCategory;
   attempts?: AttemptModel[] | undefined;
+  errors?: { [key: string]: number; } | undefined;
   createdTime?: Date;
   updatedTime?: Date;
 
@@ -290,16 +293,25 @@ export class AttemptHistoryModel implements IAttemptHistoryModel {
     if (_data) {
       this.id = _data["id"];
       this.userId = _data["userId"];
-      this.totalWords = _data["totalWords"];
+      this.attemptsTotal = _data["attemptsTotal"];
       this.correctAttempts = _data["correctAttempts"];
-      this.errors = _data["errors"];
+      this.errorsTotal = _data["errorsTotal"];
       this.totalSeconds = _data["totalSeconds"];
-      this.percent = _data["percent"];
+      this.successRate = _data["successRate"];
       this.avgAnswerTimeSec = _data["avgAnswerTimeSec"];
+      this.wordTypes = _data["wordTypes"];
+      this.category = _data["category"];
       if (Array.isArray(_data["attempts"])) {
         this.attempts = [] as any;
         for (let item of _data["attempts"])
           this.attempts!.push(AttemptModel.fromJS(item));
+      }
+      if (_data["errors"]) {
+        this.errors = {} as any;
+        for (let key in _data["errors"]) {
+          if (_data["errors"].hasOwnProperty(key))
+            (<any>this.errors)![key] = _data["errors"][key];
+        }
       }
       this.createdTime = _data["createdTime"] ? new Date(_data["createdTime"].toString()) : <any>undefined;
       this.updatedTime = _data["updatedTime"] ? new Date(_data["updatedTime"].toString()) : <any>undefined;
@@ -317,16 +329,25 @@ export class AttemptHistoryModel implements IAttemptHistoryModel {
     data = typeof data === 'object' ? data : {};
     data["id"] = this.id;
     data["userId"] = this.userId;
-    data["totalWords"] = this.totalWords;
+    data["attemptsTotal"] = this.attemptsTotal;
     data["correctAttempts"] = this.correctAttempts;
-    data["errors"] = this.errors;
+    data["errorsTotal"] = this.errorsTotal;
     data["totalSeconds"] = this.totalSeconds;
-    data["percent"] = this.percent;
+    data["successRate"] = this.successRate;
     data["avgAnswerTimeSec"] = this.avgAnswerTimeSec;
+    data["wordTypes"] = this.wordTypes;
+    data["category"] = this.category;
     if (Array.isArray(this.attempts)) {
       data["attempts"] = [];
       for (let item of this.attempts)
         data["attempts"].push(item.toJSON());
+    }
+    if (this.errors) {
+      data["errors"] = {};
+      for (let key in this.errors) {
+        if (this.errors.hasOwnProperty(key))
+          (<any>data["errors"])[key] = (<any>this.errors)[key];
+      }
     }
     data["createdTime"] = this.createdTime ? this.createdTime.toISOString() : <any>undefined;
     data["updatedTime"] = this.updatedTime ? this.updatedTime.toISOString() : <any>undefined;
@@ -337,21 +358,44 @@ export class AttemptHistoryModel implements IAttemptHistoryModel {
 export interface IAttemptHistoryModel {
   id?: number;
   userId?: number;
-  totalWords?: number;
+  attemptsTotal?: number;
   correctAttempts?: number;
-  errors?: number;
+  errorsTotal?: number;
   totalSeconds?: number;
-  percent?: number;
+  successRate?: number;
   avgAnswerTimeSec?: number;
+  wordTypes?: WordType;
+  category?: WordCategory;
   attempts?: AttemptModel[] | undefined;
+  errors?: { [key: string]: number; } | undefined;
   createdTime?: Date;
   updatedTime?: Date;
+}
+
+export enum WordType {
+  Any = "Any",
+  Noun = "Noun",
+  Verb = "Verb",
+  Adjective = "Adjective",
+  Adverb = "Adverb",
+  Preposition = "Preposition",
+}
+
+export enum WordCategory {
+  Any = "Any",
+  Time = "Time",
+  Directions = "Directions",
+  Colors = "Colors",
+  Character = "Character",
+  Family = "Family",
+  Food = "Food",
+  House = "House",
 }
 
 export class AttemptModel implements IAttemptModel {
   word?: string | undefined;
   userTranslation?: string | undefined;
-  expectedTranslation?: string | undefined;
+  expectedTranslations?: string[] | undefined;
   totalSeconds?: number;
   isCorrect?: boolean;
 
@@ -368,7 +412,11 @@ export class AttemptModel implements IAttemptModel {
     if (_data) {
       this.word = _data["word"];
       this.userTranslation = _data["userTranslation"];
-      this.expectedTranslation = _data["expectedTranslation"];
+      if (Array.isArray(_data["expectedTranslations"])) {
+        this.expectedTranslations = [] as any;
+        for (let item of _data["expectedTranslations"])
+          this.expectedTranslations!.push(item);
+      }
       this.totalSeconds = _data["totalSeconds"];
       this.isCorrect = _data["isCorrect"];
     }
@@ -385,7 +433,11 @@ export class AttemptModel implements IAttemptModel {
     data = typeof data === 'object' ? data : {};
     data["word"] = this.word;
     data["userTranslation"] = this.userTranslation;
-    data["expectedTranslation"] = this.expectedTranslation;
+    if (Array.isArray(this.expectedTranslations)) {
+      data["expectedTranslations"] = [];
+      for (let item of this.expectedTranslations)
+        data["expectedTranslations"].push(item);
+    }
     data["totalSeconds"] = this.totalSeconds;
     data["isCorrect"] = this.isCorrect;
     return data;
@@ -395,17 +447,18 @@ export class AttemptModel implements IAttemptModel {
 export interface IAttemptModel {
   word?: string | undefined;
   userTranslation?: string | undefined;
-  expectedTranslation?: string | undefined;
+  expectedTranslations?: string[] | undefined;
   totalSeconds?: number;
   isCorrect?: boolean;
 }
 
 export class CreateAttemptHistoryRequestModel implements ICreateAttemptHistoryRequestModel {
-  userId?: number;
-  totalWords?: number;
+  totalAttempts?: number;
   correctAttempts?: number;
   totalSeconds?: number;
   attempts?: AttemptModel[] | undefined;
+  wordTypes?: WordType | undefined;
+  category?: WordCategory | undefined;
 
   constructor(data?: ICreateAttemptHistoryRequestModel) {
     if (data) {
@@ -418,8 +471,7 @@ export class CreateAttemptHistoryRequestModel implements ICreateAttemptHistoryRe
 
   init(_data?: any) {
     if (_data) {
-      this.userId = _data["userId"];
-      this.totalWords = _data["totalWords"];
+      this.totalAttempts = _data["totalAttempts"];
       this.correctAttempts = _data["correctAttempts"];
       this.totalSeconds = _data["totalSeconds"];
       if (Array.isArray(_data["attempts"])) {
@@ -427,6 +479,8 @@ export class CreateAttemptHistoryRequestModel implements ICreateAttemptHistoryRe
         for (let item of _data["attempts"])
           this.attempts!.push(AttemptModel.fromJS(item));
       }
+      this.wordTypes = _data["wordTypes"];
+      this.category = _data["category"];
     }
   }
 
@@ -439,8 +493,7 @@ export class CreateAttemptHistoryRequestModel implements ICreateAttemptHistoryRe
 
   toJSON(data?: any) {
     data = typeof data === 'object' ? data : {};
-    data["userId"] = this.userId;
-    data["totalWords"] = this.totalWords;
+    data["totalAttempts"] = this.totalAttempts;
     data["correctAttempts"] = this.correctAttempts;
     data["totalSeconds"] = this.totalSeconds;
     if (Array.isArray(this.attempts)) {
@@ -448,16 +501,19 @@ export class CreateAttemptHistoryRequestModel implements ICreateAttemptHistoryRe
       for (let item of this.attempts)
         data["attempts"].push(item.toJSON());
     }
+    data["wordTypes"] = this.wordTypes;
+    data["category"] = this.category;
     return data;
   }
 }
 
 export interface ICreateAttemptHistoryRequestModel {
-  userId?: number;
-  totalWords?: number;
+  totalAttempts?: number;
   correctAttempts?: number;
   totalSeconds?: number;
   attempts?: AttemptModel[] | undefined;
+  wordTypes?: WordType | undefined;
+  category?: WordCategory | undefined;
 }
 
 export class PageViewModelOfWordModel implements IPageViewModelOfWordModel {
@@ -582,27 +638,6 @@ export interface IWordModel {
   translations?: string[] | undefined;
   createdTime?: Date;
   updatedTime?: Date;
-}
-
-export enum WordType {
-  Any = "Any",
-  Noun = "Noun",
-  Verb = "Verb",
-  Adjective = "Adjective",
-  Adverb = "Adverb",
-  Participle = "Participle",
-  Pronoun = "Pronoun",
-  Preposition = "Preposition",
-}
-
-export enum WordCategory {
-  Any = "Any",
-  Time = "Time",
-  Directions = "Directions",
-  Colors = "Colors",
-  Character = "Character",
-  Family = "Family",
-  House = "House",
 }
 
 export enum LanguageType {

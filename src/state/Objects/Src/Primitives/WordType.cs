@@ -7,8 +7,6 @@
         Verb,
         Adjective,
         Adverb,
-        Participle,
-        Pronoun,
         Preposition
     }
 }

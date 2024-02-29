@@ -6,7 +6,7 @@
   <br><br>
 
   <label class="quiz-label">Translate word : </label>
-  <label class="word-label">{{this.wordToTranslate?.word}}</label>
+  <label class="word-label">{{this.wordToTranslate?.word}} ({{this.wordToTranslate?.translations?.length}} meaning)</label>
 
   <br><br>
 
@@ -15,10 +15,39 @@
   <label class="error-label" *ngIf="correctAnswers">ERROR: Correct answer is: <span class="bold">{{correctAnswers.toString()}}</span></label>
   <br><br>
 
-  <select class="quiz-select" [(ngModel)]="selectedEnum" (change)="filterWords()">
+  <select class="quiz-select" [(ngModel)]="selectedEnumCategory" (change)="filterWords()">
     <option value="" disabled>Select an option</option>
-    <option *ngFor="let value of Object.values(WordCategory)" [value]="value">Words category: {{ value }}</option>
+    <option *ngFor="let value of Category.values(WordCategory)" [value]="value">Words category: {{ value }}</option>
+  </select>
+  <select class="quiz-select" [(ngModel)]="selectedEnumType" (change)="filterWords()">
+    <option value="" disabled>Select an option</option>
+    <option *ngFor="let value of Type.values(WordType)" [value]="value">Words type: {{ value }}</option>
   </select>
 
   <button class="quiz-button" (click)="finishAttempt()" tabindex="0">Finish</button>
+</div>
+
+<div class="history-container" *ngIf="history?.length">
+  <table>
+    <thead>
+    <th>Total Attempts</th>
+    <th>Correct</th>
+    <th>Success %</th>
+    <th>Time</th>
+    <th>Part of speech</th>
+    <th>Сategory</th>
+    <th>Details</th>
+    </thead>
+    <tbody>
+    <tr *ngFor="let attempt of history">
+      <td>{{attempt.attemptsTotal}}</td>
+      <td>{{attempt.correctAttempts}}</td>
+      <td>{{attempt.successRate?.toFixed(2)}} %</td>
+      <td>{{attempt.createdTime?.toLocaleString()}}</td>
+      <td>{{attempt.wordTypes}}</td>
+      <td>{{attempt.category}}</td>
+      <td><button>Info</button></td>
+    </tr>
+    </tbody>
+  </table>
 </div>

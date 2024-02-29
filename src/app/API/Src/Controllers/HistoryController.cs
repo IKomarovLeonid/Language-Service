@@ -31,8 +31,9 @@ namespace API.Src.Controllers
                 Attempts = request.Attempts,
                 CorrectAttempts = request.CorrectAttempts,
                 TotalSeconds = request.TotalSeconds,
-                TotalWords = request.TotalWords,
-                UserId = request.UserId
+                TotalAttempts = request.TotalAttempts,
+                WordTypes = request.WordTypes,
+                Category = request.Category
             });
 
             return response.IsSuccess ? Ok() : BadRequest(response);

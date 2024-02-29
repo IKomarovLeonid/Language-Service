@@ -4,9 +4,8 @@ using Domain.Src;
 using MediatR;
 using Objects.Src.Dto;
 using Objects.Src.Models;
+using Objects.Src.Primitives;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -27,10 +26,12 @@ namespace Business.Src.Handlers
         {
             var dto = new AttemptHistoryDto()
             {
-                TotalWords = command.TotalWords,
+                TotalAttempts = command.TotalAttempts,
                 TotalSeconds = command.TotalSeconds,
                 CorrectAttempts = command.CorrectAttempts,
-                UserId = command.UserId
+                UserId = command.UserId,
+                WordTypes = command.WordTypes.HasValue? command.WordTypes.Value : WordType.Any,
+                Category = command.Category.HasValue ? command.Category.Value : WordCategory.Any
             };
             var entity = await _histories.AddAsync(dto);
 
@@ -40,7 +41,7 @@ namespace Business.Src.Handlers
                 await _attempts.AddAsync(new AttemptDto()
                 {
                     HistoryId = entity.Id,
-                    ExpectedTranslation = attempt.ExpectedTranslation,
+                    ExpectedTranslations = string.Join(",", attempt.ExpectedTranslations),
                     Word = attempt.Word,
                     UserTranslation = attempt.UserTranslation,
                     IsCorrect = attempt.IsCorrect,

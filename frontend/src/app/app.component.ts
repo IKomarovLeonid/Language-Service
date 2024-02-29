@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {PageViewModelOfWordModel, WordCategory, WordModel, WordsClient} from "../shared/main.api";
+import {AttemptHistoryModel, AttemptModel, WordCategory, WordModel, WordType} from "../shared/main.api";
+import {ApiClient} from "../services/api.client";
 
 @Component({
   selector: 'app-root',
@@ -7,40 +8,47 @@ import {PageViewModelOfWordModel, WordCategory, WordModel, WordsClient} from "..
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit{
-  wordsClient = new WordsClient();
-  // words
   data: WordModel[] | undefined;
+  history: AttemptHistoryModel[] | undefined;
   filteredCollection: WordModel[] = [];
   wordToTranslate: WordModel | undefined;
   translation: string | undefined;
   correctAnswers: string[] | undefined;
   // selection
-  selectedEnum: WordCategory = WordCategory.Any;
+  selectedEnumCategory: WordCategory = WordCategory.Any;
+  selectedEnumType: WordType = WordType.Any;
   // statistics
   wordsCount = 0;
   correctAnswersCount = 0;
   totalAnswers = 0;
   // for attempt history
-  answers: UserAnswer[] = [];
+  answers: AttemptModel[] = [];
 
-    constructor() {
+    constructor(private client : ApiClient) {
   }
 
   ngOnInit(): void {
       this.loadWords();
+      this.loadHistory();
   }
 
-  loadWords(){
-      this.wordsClient.getWords()
-        .then((data: PageViewModelOfWordModel) => {
-          this.data = data.items;
-          this.filteredCollection = data.items!!;
-          this.wordsCount = data.items!!.length;
-          this.showWord();
-        })
-        .catch(error => {
-          alert(error);
-        });
+  async loadWords(){
+      let apiResult = await this.client.getWords();
+      if(apiResult){
+        this.data = apiResult.items!!;
+        this.filteredCollection = apiResult.items!!;
+        this.wordsCount = this.filteredCollection.length;
+        this.showWord();
+      }
+      else alert('Unable to fetch words from server');
+  }
+
+  async loadHistory(){
+    let apiResult = await this.client.getHistory();
+    if(apiResult){
+      this.history = apiResult.items!!;
+    }
+    else alert('Unable to fetch history from server');
   }
 
   showWord() : void{
@@ -89,45 +97,56 @@ export class AppComponent implements OnInit{
 
   filterWords(){
       if(this.data){
-        if(this.selectedEnum === WordCategory.Any){
+        if(this.selectedEnumCategory === WordCategory.Any && this.selectedEnumType === WordType.Any){
           this.filteredCollection = this.data;
         }
         else {
-          this.filteredCollection = this.data.filter(item => item.category === this.selectedEnum);
+          if(this.selectedEnumCategory === WordCategory.Any){
+            this.filteredCollection = this.data.filter(item => item.type === this.selectedEnumType);
+          }
+          else{
+            if(this.selectedEnumType === WordType.Any){
+              this.filteredCollection = this.data.filter(item => item.category === this.selectedEnumCategory);
+            }
+            else this.filteredCollection = this.data.filter(item =>
+              item.category === this.selectedEnumCategory &&
+              item.type === this.selectedEnumType
+            );
+          }
         }
       }
       this.wordsCount = this.filteredCollection.length;
       this.showWord();
   }
 
-  finishAttempt(){
+  async finishAttempt(){
+    await this.client.createAttempt(
+      this.answers,
+      this.correctAnswersCount, 30,
+      this.selectedEnumType,
+      this.selectedEnumCategory);
     this.reset();
     this.correctAnswersCount = 0;
     this.totalAnswers = 0;
     this.translation = undefined;
-    this.showWord();
-    console.log(this.answers);
     this.answers = [];
+    this.showWord();
+    this.loadHistory();
   }
 
   saveAttempt(word: string, expectedTranslation: string[], userAnswer: string, isCorrect : boolean){
-    const answer: UserAnswer = {
-      word: word,
-      expectTranslation: expectedTranslation,
-      userAnswer: userAnswer,
-      isCorrect: isCorrect
-    };
-    this.answers.push(answer);
+      let model = new AttemptModel();
+      model.userTranslation = userAnswer;
+      model.word = word;
+      model.expectedTranslations = expectedTranslation;
+      model.isCorrect = isCorrect;
+      model.totalSeconds = 10;
+      this.answers.push(model);
   }
 
-  protected readonly Object = Object;
+  protected readonly Category = Object;
   protected readonly WordCategory = WordCategory;
 
-}
-
-interface UserAnswer {
-  word: string;
-  expectTranslation: string[];
-  userAnswer: string;
-  isCorrect: boolean;
+  protected readonly Type = Object;
+  protected readonly WordType = WordType;
 }

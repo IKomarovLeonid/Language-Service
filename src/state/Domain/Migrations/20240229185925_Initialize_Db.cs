@@ -14,8 +14,10 @@ namespace Domain.Migrations
                     id = table.Column<ulong>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     user_id = table.Column<ulong>(nullable: false),
-                    total_words = table.Column<ulong>(nullable: false),
+                    total_attempts = table.Column<ulong>(nullable: false),
                     correct_answers = table.Column<ulong>(nullable: false),
+                    words_types = table.Column<string>(nullable: false),
+                    category = table.Column<string>(nullable: false),
                     attempt_time_sec = table.Column<double>(nullable: false),
                     created_utc = table.Column<DateTime>(nullable: false),
                     updated_utc = table.Column<DateTime>(nullable: false)

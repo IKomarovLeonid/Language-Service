@@ -36,14 +36,17 @@ namespace Business.Src.Handlers
                 {
                     Id = dto.Id,
                     TotalSeconds = dto.TotalSeconds,
-                    TotalWords = dto.TotalWords,
+                    AttemptsTotal = dto.TotalAttempts,
                     CorrectAttempts = dto.CorrectAttempts,
-                    Errors = dto.TotalWords - dto.CorrectAttempts,
-                    AvgAnswerTimeSec = dto.CorrectAttempts == 0 ? dto.TotalSeconds / (dto.TotalWords - dto.CorrectAttempts) :
+                    ErrorsTotal = dto.TotalAttempts - dto.CorrectAttempts,
+                    AvgAnswerTimeSec = dto.CorrectAttempts == 0 ? dto.TotalSeconds / (dto.TotalAttempts - dto.CorrectAttempts) :
                     dto.TotalSeconds / dto.CorrectAttempts,
-                    Percent = dto.TotalWords == 0 ? 0 :
-                    dto.CorrectAttempts / dto.TotalWords,
+                    SuccessRate = dto.TotalAttempts == 0 ? 0 :
+                    (double) dto.CorrectAttempts * 100 / dto.TotalAttempts,
                     UserId = dto.UserId,
+                    Errors = new Dictionary<string, uint>(),
+                    WordTypes = dto.WordTypes,
+                    Category = dto.Category,
                     CreatedTime = dto.CreatedTime,
                     UpdatedTime = dto.UpdatedTime
                 };
@@ -51,15 +54,24 @@ namespace Business.Src.Handlers
                 model.Attempts = attempts.Select(aDto => new AttemptModel()
                 {
                     IsCorrect = aDto.IsCorrect,
-                    ExpectedTranslation = aDto.ExpectedTranslation,
+                    ExpectedTranslations = aDto.ExpectedTranslations.Split(","),
                     TotalSeconds = aDto.TotalSeconds,
                     UserTranslation = aDto.UserTranslation,
                     Word = aDto.Word
                 }).ToArray();
                 models.Add(model);
+
+                // calculate stats
+                foreach(var attempt in model.Attempts)
+                {
+                    if (attempt.IsCorrect) continue;
+
+                    if (model.Errors.ContainsKey(attempt.Word)) model.Errors[attempt.Word]++;
+                    else model.Errors.Add(attempt.Word, 1);
+                }
             }
 
-            return SelectResult<AttemptHistoryModel>.Fetched(models);
+            return SelectResult<AttemptHistoryModel>.Fetched(models.OrderByDescending(t => t.CreatedTime).ToList());
         }
     }
 }
