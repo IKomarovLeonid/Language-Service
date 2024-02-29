@@ -8,6 +8,93 @@
 /* eslint-disable */
 // ReSharper disable InconsistentNaming
 
+export class HistoryClient {
+  private http: { fetch(url: RequestInfo, init?: RequestInit): Promise<Response> };
+  private baseUrl: string;
+  protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
+
+  constructor(baseUrl?: string, http?: { fetch(url: RequestInfo, init?: RequestInit): Promise<Response> }) {
+    this.http = http ? http : window as any;
+    this.baseUrl = baseUrl ?? "http://localhost:8080";
+  }
+
+  getAttempts(): Promise<PageViewModelOfAttemptHistoryModel> {
+    let url_ = this.baseUrl + "/api/history";
+    url_ = url_.replace(/[?&]$/, "");
+
+    let options_: RequestInit = {
+      method: "GET",
+      headers: {
+        "Accept": "application/json"
+      }
+    };
+
+    return this.http.fetch(url_, options_).then((_response: Response) => {
+      return this.processGetAttempts(_response);
+    });
+  }
+
+  protected processGetAttempts(response: Response): Promise<PageViewModelOfAttemptHistoryModel> {
+    const status = response.status;
+    let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
+    if (status === 200) {
+      return response.text().then((_responseText) => {
+        let result200: any = null;
+        let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+        result200 = PageViewModelOfAttemptHistoryModel.fromJS(resultData200);
+        return result200;
+      });
+    } else if (status !== 200 && status !== 204) {
+      return response.text().then((_responseText) => {
+        return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+      });
+    }
+    return Promise.resolve<PageViewModelOfAttemptHistoryModel>(null as any);
+  }
+
+  createAttemptHistory(request: CreateAttemptHistoryRequestModel): Promise<FileResponse> {
+    let url_ = this.baseUrl + "/api/history";
+    url_ = url_.replace(/[?&]$/, "");
+
+    const content_ = JSON.stringify(request);
+
+    let options_: RequestInit = {
+      body: content_,
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/octet-stream"
+      }
+    };
+
+    return this.http.fetch(url_, options_).then((_response: Response) => {
+      return this.processCreateAttemptHistory(_response);
+    });
+  }
+
+  protected processCreateAttemptHistory(response: Response): Promise<FileResponse> {
+    const status = response.status;
+    let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
+    if (status === 200 || status === 206) {
+      const contentDisposition = response.headers ? response.headers.get("content-disposition") : undefined;
+      let fileNameMatch = contentDisposition ? /filename\*=(?:(\\?['"])(.*?)\1|(?:[^\s]+'.*?')?([^;\n]*))/g.exec(contentDisposition) : undefined;
+      let fileName = fileNameMatch && fileNameMatch.length > 1 ? fileNameMatch[3] || fileNameMatch[2] : undefined;
+      if (fileName) {
+        fileName = decodeURIComponent(fileName);
+      } else {
+        fileNameMatch = contentDisposition ? /filename="?([^"]*?)"?(;|$)/g.exec(contentDisposition) : undefined;
+        fileName = fileNameMatch && fileNameMatch.length > 1 ? fileNameMatch[1] : undefined;
+      }
+      return response.blob().then(blob => { return { fileName: fileName, data: blob, status: status, headers: _headers }; });
+    } else if (status !== 200 && status !== 204) {
+      return response.text().then((_responseText) => {
+        return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+      });
+    }
+    return Promise.resolve<FileResponse>(null as any);
+  }
+}
+
 export class WordsClient {
   private http: { fetch(url: RequestInfo, init?: RequestInit): Promise<Response> };
   private baseUrl: string;
@@ -129,6 +216,250 @@ export class WordsClient {
   }
 }
 
+export class PageViewModelOfAttemptHistoryModel implements IPageViewModelOfAttemptHistoryModel {
+  items?: AttemptHistoryModel[] | undefined;
+  count?: number;
+
+  constructor(data?: IPageViewModelOfAttemptHistoryModel) {
+    if (data) {
+      for (var property in data) {
+        if (data.hasOwnProperty(property))
+          (<any>this)[property] = (<any>data)[property];
+      }
+    }
+  }
+
+  init(_data?: any) {
+    if (_data) {
+      if (Array.isArray(_data["items"])) {
+        this.items = [] as any;
+        for (let item of _data["items"])
+          this.items!.push(AttemptHistoryModel.fromJS(item));
+      }
+      this.count = _data["count"];
+    }
+  }
+
+  static fromJS(data: any): PageViewModelOfAttemptHistoryModel {
+    data = typeof data === 'object' ? data : {};
+    let result = new PageViewModelOfAttemptHistoryModel();
+    result.init(data);
+    return result;
+  }
+
+  toJSON(data?: any) {
+    data = typeof data === 'object' ? data : {};
+    if (Array.isArray(this.items)) {
+      data["items"] = [];
+      for (let item of this.items)
+        data["items"].push(item.toJSON());
+    }
+    data["count"] = this.count;
+    return data;
+  }
+}
+
+export interface IPageViewModelOfAttemptHistoryModel {
+  items?: AttemptHistoryModel[] | undefined;
+  count?: number;
+}
+
+export class AttemptHistoryModel implements IAttemptHistoryModel {
+  id?: number;
+  userId?: number;
+  totalWords?: number;
+  correctAttempts?: number;
+  errors?: number;
+  totalSeconds?: number;
+  percent?: number;
+  avgAnswerTimeSec?: number;
+  attempts?: AttemptModel[] | undefined;
+  createdTime?: Date;
+  updatedTime?: Date;
+
+  constructor(data?: IAttemptHistoryModel) {
+    if (data) {
+      for (var property in data) {
+        if (data.hasOwnProperty(property))
+          (<any>this)[property] = (<any>data)[property];
+      }
+    }
+  }
+
+  init(_data?: any) {
+    if (_data) {
+      this.id = _data["id"];
+      this.userId = _data["userId"];
+      this.totalWords = _data["totalWords"];
+      this.correctAttempts = _data["correctAttempts"];
+      this.errors = _data["errors"];
+      this.totalSeconds = _data["totalSeconds"];
+      this.percent = _data["percent"];
+      this.avgAnswerTimeSec = _data["avgAnswerTimeSec"];
+      if (Array.isArray(_data["attempts"])) {
+        this.attempts = [] as any;
+        for (let item of _data["attempts"])
+          this.attempts!.push(AttemptModel.fromJS(item));
+      }
+      this.createdTime = _data["createdTime"] ? new Date(_data["createdTime"].toString()) : <any>undefined;
+      this.updatedTime = _data["updatedTime"] ? new Date(_data["updatedTime"].toString()) : <any>undefined;
+    }
+  }
+
+  static fromJS(data: any): AttemptHistoryModel {
+    data = typeof data === 'object' ? data : {};
+    let result = new AttemptHistoryModel();
+    result.init(data);
+    return result;
+  }
+
+  toJSON(data?: any) {
+    data = typeof data === 'object' ? data : {};
+    data["id"] = this.id;
+    data["userId"] = this.userId;
+    data["totalWords"] = this.totalWords;
+    data["correctAttempts"] = this.correctAttempts;
+    data["errors"] = this.errors;
+    data["totalSeconds"] = this.totalSeconds;
+    data["percent"] = this.percent;
+    data["avgAnswerTimeSec"] = this.avgAnswerTimeSec;
+    if (Array.isArray(this.attempts)) {
+      data["attempts"] = [];
+      for (let item of this.attempts)
+        data["attempts"].push(item.toJSON());
+    }
+    data["createdTime"] = this.createdTime ? this.createdTime.toISOString() : <any>undefined;
+    data["updatedTime"] = this.updatedTime ? this.updatedTime.toISOString() : <any>undefined;
+    return data;
+  }
+}
+
+export interface IAttemptHistoryModel {
+  id?: number;
+  userId?: number;
+  totalWords?: number;
+  correctAttempts?: number;
+  errors?: number;
+  totalSeconds?: number;
+  percent?: number;
+  avgAnswerTimeSec?: number;
+  attempts?: AttemptModel[] | undefined;
+  createdTime?: Date;
+  updatedTime?: Date;
+}
+
+export class AttemptModel implements IAttemptModel {
+  word?: string | undefined;
+  userTranslation?: string | undefined;
+  expectedTranslation?: string | undefined;
+  totalSeconds?: number;
+  isCorrect?: boolean;
+
+  constructor(data?: IAttemptModel) {
+    if (data) {
+      for (var property in data) {
+        if (data.hasOwnProperty(property))
+          (<any>this)[property] = (<any>data)[property];
+      }
+    }
+  }
+
+  init(_data?: any) {
+    if (_data) {
+      this.word = _data["word"];
+      this.userTranslation = _data["userTranslation"];
+      this.expectedTranslation = _data["expectedTranslation"];
+      this.totalSeconds = _data["totalSeconds"];
+      this.isCorrect = _data["isCorrect"];
+    }
+  }
+
+  static fromJS(data: any): AttemptModel {
+    data = typeof data === 'object' ? data : {};
+    let result = new AttemptModel();
+    result.init(data);
+    return result;
+  }
+
+  toJSON(data?: any) {
+    data = typeof data === 'object' ? data : {};
+    data["word"] = this.word;
+    data["userTranslation"] = this.userTranslation;
+    data["expectedTranslation"] = this.expectedTranslation;
+    data["totalSeconds"] = this.totalSeconds;
+    data["isCorrect"] = this.isCorrect;
+    return data;
+  }
+}
+
+export interface IAttemptModel {
+  word?: string | undefined;
+  userTranslation?: string | undefined;
+  expectedTranslation?: string | undefined;
+  totalSeconds?: number;
+  isCorrect?: boolean;
+}
+
+export class CreateAttemptHistoryRequestModel implements ICreateAttemptHistoryRequestModel {
+  userId?: number;
+  totalWords?: number;
+  correctAttempts?: number;
+  totalSeconds?: number;
+  attempts?: AttemptModel[] | undefined;
+
+  constructor(data?: ICreateAttemptHistoryRequestModel) {
+    if (data) {
+      for (var property in data) {
+        if (data.hasOwnProperty(property))
+          (<any>this)[property] = (<any>data)[property];
+      }
+    }
+  }
+
+  init(_data?: any) {
+    if (_data) {
+      this.userId = _data["userId"];
+      this.totalWords = _data["totalWords"];
+      this.correctAttempts = _data["correctAttempts"];
+      this.totalSeconds = _data["totalSeconds"];
+      if (Array.isArray(_data["attempts"])) {
+        this.attempts = [] as any;
+        for (let item of _data["attempts"])
+          this.attempts!.push(AttemptModel.fromJS(item));
+      }
+    }
+  }
+
+  static fromJS(data: any): CreateAttemptHistoryRequestModel {
+    data = typeof data === 'object' ? data : {};
+    let result = new CreateAttemptHistoryRequestModel();
+    result.init(data);
+    return result;
+  }
+
+  toJSON(data?: any) {
+    data = typeof data === 'object' ? data : {};
+    data["userId"] = this.userId;
+    data["totalWords"] = this.totalWords;
+    data["correctAttempts"] = this.correctAttempts;
+    data["totalSeconds"] = this.totalSeconds;
+    if (Array.isArray(this.attempts)) {
+      data["attempts"] = [];
+      for (let item of this.attempts)
+        data["attempts"].push(item.toJSON());
+    }
+    return data;
+  }
+}
+
+export interface ICreateAttemptHistoryRequestModel {
+  userId?: number;
+  totalWords?: number;
+  correctAttempts?: number;
+  totalSeconds?: number;
+  attempts?: AttemptModel[] | undefined;
+}
+
 export class PageViewModelOfWordModel implements IPageViewModelOfWordModel {
   items?: WordModel[] | undefined;
   count?: number;
@@ -184,7 +515,7 @@ export class WordModel implements IWordModel {
   languageFrom?: LanguageType;
   languageTo?: LanguageType;
   word?: string | undefined;
-  translation?: string | undefined;
+  translations?: string[] | undefined;
   createdTime?: Date;
   updatedTime?: Date;
 
@@ -205,7 +536,11 @@ export class WordModel implements IWordModel {
       this.languageFrom = _data["languageFrom"];
       this.languageTo = _data["languageTo"];
       this.word = _data["word"];
-      this.translation = _data["translation"];
+      if (Array.isArray(_data["translations"])) {
+        this.translations = [] as any;
+        for (let item of _data["translations"])
+          this.translations!.push(item);
+      }
       this.createdTime = _data["createdTime"] ? new Date(_data["createdTime"].toString()) : <any>undefined;
       this.updatedTime = _data["updatedTime"] ? new Date(_data["updatedTime"].toString()) : <any>undefined;
     }
@@ -226,7 +561,11 @@ export class WordModel implements IWordModel {
     data["languageFrom"] = this.languageFrom;
     data["languageTo"] = this.languageTo;
     data["word"] = this.word;
-    data["translation"] = this.translation;
+    if (Array.isArray(this.translations)) {
+      data["translations"] = [];
+      for (let item of this.translations)
+        data["translations"].push(item);
+    }
     data["createdTime"] = this.createdTime ? this.createdTime.toISOString() : <any>undefined;
     data["updatedTime"] = this.updatedTime ? this.updatedTime.toISOString() : <any>undefined;
     return data;
@@ -240,7 +579,7 @@ export interface IWordModel {
   languageFrom?: LanguageType;
   languageTo?: LanguageType;
   word?: string | undefined;
-  translation?: string | undefined;
+  translations?: string[] | undefined;
   createdTime?: Date;
   updatedTime?: Date;
 }

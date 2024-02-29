@@ -30,7 +30,7 @@ namespace Business.Src.Handlers
                 Category = dto.Category,
                 LanguageFrom = dto.LanguageFrom,
                 LanguageTo = dto.LanguageTo,
-                Translation = dto.Translation,
+                Translations = dto.Translation.Split(","),
                 Type = dto.Type,
                 Word = dto.Word,
                 CreatedTime = dto.CreatedTime,

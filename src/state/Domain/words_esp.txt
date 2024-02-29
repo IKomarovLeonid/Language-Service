@@ -19,7 +19,7 @@ moreno;загорелый
 [prepositions]
 
 a;к
-ante;перед
+ante;перед,до,раньше
 bajo;под
 con;с
 contra;против
@@ -29,15 +29,16 @@ durante;в течении
 en;в,на
 entre;между,среди
 excepto;исключая
-hacia;о
-hasta;до тех пор
+hacia;до,к
+hasta;до
 mediante;в значении
 para;для
 por;по
 segun;в зависимости от
 sin;без
 sobre;на
-ademas de;также как
+ademas;кроме
+ademas de;также как,в дополнение к
 al aldo de;рядом с
 alrededor de;вокруг
 antes de;перед
@@ -99,7 +100,7 @@ bonito;красивый
 bueno;хороший
 caro;дорогой
 querrido;дорогой человек
-cancado;уставший
+cansado;уставший
 debil;слабый
 delgado;стройный
 dificil;сложный
@@ -169,7 +170,7 @@ Septiembre;сентябрь
 Octubre;октябрь
 Noviembre;ноябрь
 Diciember;декабрь
-las estaciones;сезоны
+la estacion;сезон
 el verano;лето
 el otono;осень
 el invierno;зима
@@ -194,7 +195,7 @@ Noroeste;северо-запад
 abierto;открытый
 cerrado;закрытый
 amable;приятный
-modesto;тихий
+modesto;тихий,скромный
 cortes;вежливый
 respetuoso;вежливый
 grosero;грубый
@@ -216,10 +217,10 @@ nervioso;нервный
 
 [nouns,family]
 
-papa;отец
+papa;папа
 padre;отец
 madre;мать
-mama;мать
+mama;мама
 padres;родители
 hija;дочь
 hijo;сын
@@ -288,7 +289,7 @@ sembrar;сеять
 temblar;трясти
 comenzar;начинать
 acostar;пригнутся
-colgar;повестить
+colgar;повестить,вешать
 renovar;обновить
 apostar;поставить
 contar;посчитать
@@ -313,11 +314,11 @@ valer;стоить
 ver;видеть
 deshacer;отменить
 hacer;делать
-satisfacer;встретить
+satisfacer;удовлетворять
 contener;содержать
 detener;остановится
 disponer;поставлять
-entretener;развлекаться
+entretener;развлекать
 exponer;подвергать
 imponer;навязать
 mantener;поддержать
@@ -336,15 +337,16 @@ distraer;беспокоить
 extraer;удалить
 traer;принести
 contraer;получить
-poseer;иметь
+poseer;владеть
 leer;читать
-creer;лумать
-devolver;возвращать
-volver;возвращаться
-mover;двигаться
+creer;думать,верить
+devolver;возвращаться
+volver;возвращать
+mover;двигать
+moverse;двигаться
 poder;мочь
 morder;кусать
-doler;ранить
+doler;ранить,болеть
 tender;расширять
 querer;хотеть
 malentender;непонимать
@@ -368,7 +370,7 @@ seducir;соблазнять
 traducir;переводить
 inducir;провоцировать
 introducir;входить
-lucir;надевать
+lucir;выпендриваться
 perseguir;преследовать
 seguir;следовать
 destruir;разрушать
@@ -383,12 +385,12 @@ teñir;красить
 elegir;выбирать
 regir;оперировать
 pedir;спрашивать
-derretir;melt, dissolve
-despedir;прощаться
+derretir;таять
+despedir;попращаться,увольнять
 freír;жарить
 servir;помогать
 repetir;повторять
-rendir;платить
+rendir;вытягиваться,растягиваться
 reñir;спорить
 medir;измерять
 vestir;надевать
@@ -409,7 +411,7 @@ ahora;сейчас
 hoy;сегодня
 ayer;вчера
 ya;ещё
-anoche;позавчера
+anoche;накануне
 pronto;скоро
 siempre;всегда
 nunca;никогда

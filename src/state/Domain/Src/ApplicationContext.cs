@@ -1,6 +1,7 @@
 ﻿using Domain.Src.Configuration;
 using Microsoft.EntityFrameworkCore;
 using Objects.Src.Dto;
+using Objects.Src.Models;
 using System.Reflection;
 
 namespace Domain.Src
@@ -25,10 +26,16 @@ namespace Domain.Src
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new WordsDbConfiguration());
+            modelBuilder.ApplyConfiguration(new AttemptHistoryDbConfiguration());
+            modelBuilder.ApplyConfiguration(new AttemptDbConfiguration());
 
             base.OnModelCreating(modelBuilder);
         }
 
         public DbSet<WordDto> Words { get; set; }
+
+        public DbSet<AttemptHistoryDto> AttemptHistories { get; set; }
+
+        public DbSet<AttemptDto> Attempts { get; set; }
     }
 }

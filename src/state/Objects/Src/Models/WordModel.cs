@@ -17,7 +17,7 @@ namespace Objects.Src.Models
 
         public string Word { get; set; }
 
-        public string Translation { get; set; }
+        public string[] Translations { get; set; }
 
         public DateTime CreatedTime { get; set; }
 

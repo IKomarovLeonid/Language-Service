@@ -13,12 +13,12 @@ export class AppComponent implements OnInit{
   filteredCollection: WordModel[] = [];
   wordToTranslate: WordModel | undefined;
   translation: string | undefined;
-  correctAnswer: string | undefined;
+  correctAnswers: string[] | undefined;
   // selection
   selectedEnum: WordCategory = WordCategory.Any;
   // statistics
   wordsCount = 0;
-  correctAnswers = 0;
+  correctAnswersCount = 0;
   totalAnswers = 0;
   // for attempt history
   answers: UserAnswer[] = [];
@@ -59,28 +59,29 @@ export class AppComponent implements OnInit{
       // handle user no input
       if(this.translation === undefined || this.translation.trim() === ''){
         this.totalAnswers ++;
-        this.correctAnswer = this.wordToTranslate?.translation;
+        this.correctAnswers = this.wordToTranslate?.translations;
         this.showWord();
         this.saveAttempt(
           this.wordToTranslate?.word!!,
-          this.correctAnswer!!, this.translation ?? 'N/A', false);
+          this.correctAnswers!!, this.translation ?? 'N/A', false);
         return;
       }
 
-      this.correctAnswer = this.wordToTranslate?.translation;
-      if(this.translation.toLowerCase() == this.correctAnswer){
-        this.correctAnswers ++;
+      this.correctAnswers = this.wordToTranslate?.translations;
+      let filtered = this.correctAnswers?.filter(w => w == this.translation?.toLowerCase())
+      if(filtered!!.length > 0){
+        this.correctAnswersCount ++;
         this.totalAnswers ++;
         this.saveAttempt(
           this.wordToTranslate?.word!!,
-          this.correctAnswer!!, this.translation, true);
-        this.correctAnswer = undefined;
+          this.correctAnswers!!, this.translation, true);
+        this.correctAnswers = undefined;
       }
       else {
         this.totalAnswers ++;
         this.saveAttempt(
           this.wordToTranslate?.word!!,
-          this.correctAnswer!!, this.translation, false);
+          this.correctAnswers!!, this.translation, false);
       }
       this.reset();
       this.showWord();
@@ -101,7 +102,7 @@ export class AppComponent implements OnInit{
 
   finishAttempt(){
     this.reset();
-    this.correctAnswers = 0;
+    this.correctAnswersCount = 0;
     this.totalAnswers = 0;
     this.translation = undefined;
     this.showWord();
@@ -109,7 +110,7 @@ export class AppComponent implements OnInit{
     this.answers = [];
   }
 
-  saveAttempt(word: string, expectedTranslation: string, userAnswer: string, isCorrect : boolean){
+  saveAttempt(word: string, expectedTranslation: string[], userAnswer: string, isCorrect : boolean){
     const answer: UserAnswer = {
       word: word,
       expectTranslation: expectedTranslation,
@@ -126,7 +127,7 @@ export class AppComponent implements OnInit{
 
 interface UserAnswer {
   word: string;
-  expectTranslation: string;
+  expectTranslation: string[];
   userAnswer: string;
   isCorrect: boolean;
 }

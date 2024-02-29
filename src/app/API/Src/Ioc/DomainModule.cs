@@ -1,6 +1,7 @@
 ﻿using Autofac;
 using Domain.Src;
 using Objects.Src.Dto;
+using Objects.Src.Models;
 
 namespace API.Src.Ioc
 {
@@ -9,6 +10,14 @@ namespace API.Src.Ioc
         protected override void Load(ContainerBuilder builder)
         {
             builder.RegisterType<Repository<WordDto>>()
+                .AsImplementedInterfaces()
+                .SingleInstance();
+
+            builder.RegisterType<Repository<AttemptHistoryDto>>()
+                .AsImplementedInterfaces()
+                .SingleInstance();
+
+            builder.RegisterType<Repository<AttemptDto>>()
                 .AsImplementedInterfaces()
                 .SingleInstance();
         }
