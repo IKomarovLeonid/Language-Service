@@ -134,6 +134,13 @@ export class AppComponent implements OnInit{
     this.loadHistory();
   }
 
+  showHistoryInfo(attempt: AttemptHistoryModel){
+    let combinedString = Object.entries(attempt.errors!!)
+      .map(([key, value]) => `${key}: ${value}`)
+      .join('\n');
+    alert(combinedString);
+  }
+
   saveAttempt(word: string, expectedTranslation: string[], userAnswer: string, isCorrect : boolean){
       let model = new AttemptModel();
       model.userTranslation = userAnswer;

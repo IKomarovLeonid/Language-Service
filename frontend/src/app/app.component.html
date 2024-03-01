@@ -46,7 +46,7 @@
       <td>{{attempt.createdTime?.toLocaleString()}}</td>
       <td>{{attempt.wordTypes}}</td>
       <td>{{attempt.category}}</td>
-      <td><button>Info</button></td>
+      <td><button (click)="showHistoryInfo(attempt)">Info</button></td>
     </tr>
     </tbody>
   </table>
