@@ -74,6 +74,8 @@ namespace API.Src
                                 "common" => WordCategory.Any,
                                 "house" => WordCategory.House,
                                 "food" => WordCategory.Food,
+                                "office" => WordCategory.Office,
+                                "human" => WordCategory.Human,
                                 _ => WordCategory.Any,
                             };
                         }

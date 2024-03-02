@@ -12,7 +12,7 @@
 
   <input id="translation" class="quiz-input" [(ngModel)]="translation" (keyup.enter)="makeAnswer()" placeholder="Enter your translation and press ENTER...">
 
-  <label class="error-label" *ngIf="correctAnswers">ERROR: Correct answer is: <span class="bold">{{correctAnswers.toString()}}</span></label>
+  <label class="error-label" *ngIf="answerMessage"><span class="bold">{{answerMessage}}</span></label>
   <br><br>
 
   <select class="quiz-select" [(ngModel)]="selectedEnumCategory" (change)="filterWords()">
@@ -24,7 +24,8 @@
     <option *ngFor="let value of Type.values(WordType)" [value]="value">Words type: {{ value }}</option>
   </select>
   <div class="quiz-toggles">
-    <input type="checkbox" [(ngModel)]="isRepeatErrors" (change)="onRepeatErrors()"> Repeat errors
+    <input type="checkbox" [(ngModel)]="isRepeatErrors"> Repeat error answers
+    <input type="checkbox" [(ngModel)]="isRepeatWords"> Allow word repetitions
   </div>
 
   <button class="quiz-button" (click)="finishAttempt()" tabindex="0">Finish</button>

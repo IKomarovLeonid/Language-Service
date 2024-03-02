@@ -465,7 +465,7 @@ carne de vacuno;гуляш
 clueta;отбивная
 cortes de ternera;разделка телятины
 cortes de vacuno;разделка говядины
-corazOn;сердце
+corazón;сердце
 higado;печень
 lengua;язык
 sesos;мозги
@@ -504,7 +504,7 @@ banana;банан
 granada;гранат
 piNa;ананас
 toronja;грейпфрут
-limOn;лимон
+limón;лимон
 lima;лайм
 mandarina;мандарин
 naranja (cItricos);апельсин
@@ -518,3 +518,44 @@ frambuesa;малина
 uva;виноград
 pepino;огурец
 tomate;томат
+
+[nouns,human]
+
+cabeza;голова
+cuello;шея
+espalda;спина
+cadera;бедро
+pierna;нога
+pie;стопа
+frente;лоб
+sien;висок
+cara;лицо
+oreja;ухо
+hombro;плечо
+meijilla;щека
+boca;рот
+mentón;подбородок
+mano;кисть
+uña;ноготь
+palma;ладонь
+dedo;палец
+ojo;глаз
+
+[nouns,office]
+teclado;клавиатура
+tecla;клавиша
+pausa;пауза
+insertar;вставить,вставка
+fin;конец,в конец
+retorno;выполнить
+cursor;курсор
+espacio;пробел
+control;контроль
+cable;кабель,шнур
+ratón;мышь
+protectora;защита
+ordenador;компьютер,ноутбук
+pantalla;экран
+altavoz;динамик
+puerto;порт
+calculadora;калькулятор

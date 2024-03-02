@@ -390,6 +390,8 @@ export enum WordCategory {
   Family = "Family",
   Food = "Food",
   House = "House",
+  Human = "Human",
+  Office = "Office",
 }
 
 export class AttemptModel implements IAttemptModel {

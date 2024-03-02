@@ -9,6 +9,8 @@
         Character,
         Family,
         Food,
-        House
+        House,
+        Human,
+        Office
     }
 }
