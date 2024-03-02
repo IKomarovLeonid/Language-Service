@@ -23,6 +23,9 @@
     <option value="" disabled>Select an option</option>
     <option *ngFor="let value of Type.values(WordType)" [value]="value">Words type: {{ value }}</option>
   </select>
+  <div class="quiz-toggles">
+    <input type="checkbox" [(ngModel)]="isRepeatErrors" (change)="onRepeatErrors()"> Repeat errors
+  </div>
 
   <button class="quiz-button" (click)="finishAttempt()" tabindex="0">Finish</button>
 </div>

@@ -23,6 +23,8 @@ export class AppComponent implements OnInit{
   totalAnswers = 0;
   // for attempt history
   answers: AttemptModel[] = [];
+  // toggles
+  isRepeatErrors = false;
 
     constructor(private client : ApiClient) {
   }
@@ -55,6 +57,9 @@ export class AppComponent implements OnInit{
     if (this.filteredCollection && this.filteredCollection.length > 0) {
       const randomIndex = Math.floor(Math.random() * this.filteredCollection.length);
       this.wordToTranslate = this.filteredCollection[randomIndex];
+      if(this.wordToTranslate.word === undefined || this.wordToTranslate.translations === undefined){
+        alert('Bad word no translations' + this.wordToTranslate);
+      }
     }
   }
 
@@ -68,7 +73,6 @@ export class AppComponent implements OnInit{
       if(this.translation === undefined || this.translation.trim() === ''){
         this.totalAnswers ++;
         this.correctAnswers = this.wordToTranslate?.translations;
-        this.showWord();
         this.saveAttempt(
           this.wordToTranslate?.word!!,
           this.correctAnswers!!, this.translation ?? 'N/A', false);
@@ -149,6 +153,11 @@ export class AppComponent implements OnInit{
       model.isCorrect = isCorrect;
       model.totalSeconds = 10;
       this.answers.push(model);
+  }
+
+  onRepeatErrors(){
+      this.isRepeatErrors = !this.isRepeatErrors;
+      console.log(this.isRepeatErrors);
   }
 
   protected readonly Category = Object;
