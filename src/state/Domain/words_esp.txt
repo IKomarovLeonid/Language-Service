@@ -147,8 +147,8 @@ viejo;старый
 
 [adverbs]
 
-aqui;здесь
-alli;там
+aquí;здесь
+allí;там
 bastante;достаточно
 todavia;тоже,ещё
 tampoco;тоже не,ещё не
@@ -469,7 +469,7 @@ corazón;сердце
 higado;печень
 lengua;язык
 sesos;мозги
-riNones;почки
+riñones;почки
 pollo;курица
 pavo;индейка
 oca;гусь
@@ -490,8 +490,8 @@ queso;сыр
 miel;мёд
 chocolate amargo;чёрный шоколад
 pan;хлеб
-cruasAn;круассан
-arroz;рис
+cruasán;круассан
+arróz;рис
 eneldo;укроп
 laurel;лавровый лист
 trigo;пшеница
@@ -507,7 +507,7 @@ toronja;грейпфрут
 limón;лимон
 lima;лайм
 mandarina;мандарин
-naranja (cItricos);апельсин
+naranja (cítricos);апельсин
 manzana;яблоко
 pera;груша
 cereza;черешня
