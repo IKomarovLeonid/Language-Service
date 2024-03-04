@@ -183,18 +183,9 @@ export class AppComponent implements OnInit{
   }
 
 
-
-
   protected readonly Category = Object;
   protected readonly WordCategory = WordCategory;
 
   protected readonly Type = Object;
   protected readonly WordType = WordType;
-}
-
-function swapItems(array: WordModel[]) {
-  for (let i = array.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [array[i], array[j]] = [array[j], array[i]];
-  }
 }

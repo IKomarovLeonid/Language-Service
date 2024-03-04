@@ -4,16 +4,12 @@
   <br><br>
   <label class="quiz-label">Attempts: <span class="bold">{{totalAnswers}}</span> / correct: <span class="bold">{{correctAnswersCount}}</span></label>
   <br><br>
-
-  <label class="quiz-label">Translate word : </label>
+  <label class="quiz-label">Translate word: </label>
   <label class="word-label">{{this.wordToTranslate?.word}} ({{this.wordToTranslate?.translations?.length}} meaning)</label>
-
-  <br><br>
 
   <input id="translation" class="quiz-input" [(ngModel)]="translation" (keyup.enter)="makeAnswer()" placeholder="Enter your translation and press ENTER...">
 
   <label class="error-label" *ngIf="answerMessage"><span class="bold">{{answerMessage}}</span></label>
-  <br><br>
 
   <select class="quiz-select" [(ngModel)]="selectedEnumCategory" (change)="filterWords()">
     <option value="" disabled>Select an option</option>

@@ -10,6 +10,7 @@
 .quiz-label {
   font-weight: bold;
   color: #333;
+
 }
 
 .word-label {
@@ -109,4 +110,11 @@ button:hover {
   border-radius: 5px;
   display: flex;
   justify-content: flex-start;
+}
+
+.numeric-input {
+  margin-left: 10px; /* Add margin for spacing */
+  padding: 5px; /* Adjust padding for styling */
+  border: 1px solid #ccc; /* Add border for styling */
+  border-radius: 3px; /* Add border radius for rounded corners */
 }
