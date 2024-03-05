@@ -440,7 +440,7 @@ el bote de basura;мусорное ведро
 
 tablero de ahedrez;шахматная доска
 lado de la reyna;ферзевый фланг
-lado de la rey;королевский фланг
+lado de el rey;королевский фланг
 escaque blanco;белая клетка
 escaque negro;чёрная клетка
 peon;пешка
