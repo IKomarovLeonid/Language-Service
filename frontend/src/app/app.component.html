@@ -5,9 +5,9 @@
   <label class="quiz-label">Attempts: <span class="bold">{{totalAnswers}}</span> / correct: <span class="bold">{{correctAnswersCount}}</span></label>
   <br><br>
   <label class="quiz-label">Translate word: </label>
-  <label class="word-label">{{this.wordToTranslate?.word}} ({{this.wordToTranslate?.translations?.length}} meaning)</label>
+  <label class="word-label">{{this.wordToTranslate}} ({{this.expectedTranslations?.length}} meaning)</label>
 
-  <input id="translation" class="quiz-input" [(ngModel)]="translation" (keyup.enter)="makeAnswer()" placeholder="Enter your translation and press ENTER...">
+  <input id="translation" class="quiz-input" [(ngModel)]="userTranslation" (keyup.enter)="makeAnswer()" placeholder="Enter your translation and press ENTER...">
 
   <label class="error-label" *ngIf="answerMessage"><span class="bold">{{answerMessage}}</span></label>
 
@@ -22,6 +22,7 @@
   <div class="quiz-toggles">
     <input type="checkbox" [(ngModel)]="isRepeatErrors"> Repeat error answers
     <input type="checkbox" [(ngModel)]="isRepeatWords"> Allow word repetitions
+    <input type="checkbox" [(ngModel)]="isLanguageReversed" (click)="onReverseLanguage()"> Reverse language
   </div>
 
   <button class="quiz-button" (click)="finishAttempt()" tabindex="0">Finish</button>

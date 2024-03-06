@@ -67,7 +67,7 @@ el problema;проблема
 el sistema;система
 el programa;программа
 la clase;класс
-la fror;цветок
+la flor;цветок
 la luz;свет
 la mujer;женщина
 la piel;кожа

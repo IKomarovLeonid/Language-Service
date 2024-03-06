@@ -11,8 +11,10 @@ export class AppComponent implements OnInit{
   data: WordModel[] | undefined;
   history: AttemptHistoryModel[] | undefined;
   filteredCollection: WordModel[] = [];
-  wordToTranslate: WordModel | undefined;
-  translation: string | undefined;
+  wordModel: WordModel | undefined;
+  userTranslation: string | undefined;
+  wordToTranslate: string | undefined;
+  expectedTranslations: string[] | undefined;
   // selection
   selectedEnumCategory: WordCategory = WordCategory.Any;
   selectedEnumType: WordType = WordType.Any;
@@ -26,6 +28,7 @@ export class AppComponent implements OnInit{
   isRepeatErrors = true;
   isRepeatWords = true;
   wordIndex = 0;
+  isLanguageReversed = false;
   // message
   answerMessage: string | undefined;
 
@@ -60,29 +63,29 @@ export class AppComponent implements OnInit{
     if (this.filteredCollection && this.filteredCollection.length > 0) {
       if(!this.isRepeatWords){
         if(this.wordIndex < this.filteredCollection.length){
-          this.wordToTranslate = this.filteredCollection[this.wordIndex];
+          this.setWordAndTranslation(this.filteredCollection, this.wordIndex);
           this.wordIndex++;
         }
         else{
           this.wordIndex = 0;
-          this.wordToTranslate = this.filteredCollection[this.wordIndex];
+          this.setWordAndTranslation(this.filteredCollection, this.wordIndex);
         }
       }
       else{
         const randomIndex = Math.floor(Math.random() * this.filteredCollection.length);
-        this.wordToTranslate = this.filteredCollection[randomIndex];
+        this.setWordAndTranslation(this.filteredCollection, randomIndex);
       }
     }
   }
 
   makeAnswer(){
       // handle user no input
-      if(this.translation === undefined || this.translation.trim() === ''){
+      if(this.userTranslation === undefined || this.userTranslation.trim() === ''){
         this.totalAnswers ++;
-        let correctAnswers = this.wordToTranslate?.translations;
+        let correctAnswers = this.expectedTranslations;
         this.saveAttempt(
-          this.wordToTranslate?.word!!,
-          correctAnswers!!, this.translation ?? 'N/A', false);
+          this.wordToTranslate!!,
+          correctAnswers!!, this.userTranslation ?? 'N/A', false);
         this.buildErrorMessage();
         if(!this.isRepeatErrors){
           this.showWord();
@@ -90,30 +93,31 @@ export class AppComponent implements OnInit{
         return;
       }
 
-      let correctAnswers = this.wordToTranslate?.translations;
-      let filtered = correctAnswers?.filter(w => w == this.translation?.toLowerCase())
+      let correctAnswers = this.expectedTranslations;
+      let filtered = correctAnswers?.filter(w => w.toLowerCase() === this.userTranslation?.toLowerCase())
       if(filtered!!.length > 0){
         this.correctAnswersCount ++;
         this.totalAnswers ++;
         this.saveAttempt(
-          this.wordToTranslate?.word!!,
-          this.wordToTranslate?.translations!!, this.translation, true);
+          this.wordToTranslate!!,
+          this.expectedTranslations!!, this.userTranslation, true);
         this.resetErrorMessage();
       }
       else {
         this.totalAnswers ++;
         this.buildErrorMessage();
         this.saveAttempt(
-          this.wordToTranslate?.word!!,
-          this.wordToTranslate?.translations!!, this.translation, false);
-        this.translation = undefined;
+          this.wordToTranslate!!,
+          this.expectedTranslations!!, this.userTranslation, false);
+        this.userTranslation = undefined;
         if(!this.isRepeatErrors){
           this.showWord();
         }
         return;
       }
       this.wordToTranslate = undefined;
-      this.translation = undefined;
+      this.userTranslation = undefined;
+      this.expectedTranslations = undefined;
       this.showWord();
   }
 
@@ -150,7 +154,7 @@ export class AppComponent implements OnInit{
     this.correctAnswersCount = 0;
     this.totalAnswers = 0;
     this.wordIndex = 0;
-    this.translation = undefined;
+    this.userTranslation = undefined;
     this.answers = [];
     this.resetErrorMessage();
     this.showWord();
@@ -175,13 +179,32 @@ export class AppComponent implements OnInit{
   }
 
   buildErrorMessage(){
-      this.answerMessage = `Error. Correct translation of ${this.wordToTranslate?.word} -> ${this.wordToTranslate?.translations}`;
+      this.answerMessage = `Error. Correct translation of ${this.wordToTranslate} -> ${this.expectedTranslations}`;
   }
 
   resetErrorMessage(){
       this.answerMessage = undefined;
   }
 
+  setWordAndTranslation(words: WordModel[], index: number){
+    this.wordModel = this.filteredCollection[index];
+    if(!this.isLanguageReversed){
+      this.wordToTranslate = this.wordModel.word;
+      this.expectedTranslations = this.wordModel.translations;
+    }
+    else{
+      this.wordToTranslate = this.wordModel.translations!![0];
+      this.expectedTranslations = [];
+      this.expectedTranslations.push(this.wordModel.word!!);
+    }
+  }
+
+  onReverseLanguage(){
+    let w = this.wordToTranslate!!;
+    this.wordToTranslate = this.expectedTranslations!![0];
+    this.expectedTranslations = [];
+    this.expectedTranslations.push(w);
+  }
 
   protected readonly Category = Object;
   protected readonly WordCategory = WordCategory;
