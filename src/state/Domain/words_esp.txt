@@ -19,35 +19,32 @@ moreno;загорелый
 [prepositions]
 
 a;к
-ante;перед,до,раньше
-bajo;под
 con;с
 contra;против
 de;из
-desde;с тех пор,с
+desde;с тех пор,с,от
 durante;в течении
 en;в,на
 entre;между,среди
 excepto;исключая
 hacia;до,к
-hasta;до
+hasta;до,до тех пор
 mediante;в значении
 para;для
 por;по
 segun;в зависимости от
 sin;без
 sobre;на
-ademas;кроме
-ademas de;также как,в дополнение к
+además;кроме
+además de;также как,в дополнение к
 al aldo de;рядом с
 alrededor de;вокруг
 antes de;перед
-delante de;перед
+delante de;перед кем-то,cпереди,напротив
 a pesar de;несмотря
 cerca de;близко
 con respecto a;с уважением
 debajo de;под
-delante de;спереди
 dentro de;внутри
 encima de;на вершине
 en frente a;напротив
@@ -63,6 +60,9 @@ el idioma;язык
 el mapa;карта
 el planeta;планета
 el poema;поэма
+el ejemplo;пример
+colegio;колледж,школа
+la cuenta;счёт,чек
 el problema;проблема
 el sistema;система
 el programa;программа
@@ -86,7 +86,7 @@ la madera;дерево
 la pared;стена
 el patio;двор
 la sala;зал
-el sillon;кресло
+el sillón;кресло
 la silla;стул
 el vestibulo;коридор
 el video;видео
@@ -95,10 +95,13 @@ lugar;место
 la boleteria;билетерия
 el inspector;контролёр
 el pasajero;пассажир
+actitud;отношение между людьми
+relación;отношение между предметами
 
 [adjectives]
 
 agradable;приятный
+bajo;низкий,сниженный
 alegre;счастливый
 barato;дешёвый
 bonito;красивый
@@ -158,7 +161,7 @@ tacaño;иметь ввиду
 
 el Lunes;понедельник
 el Martes;вторник
-el Miercoles;среда
+el Miércoles;среда
 el Jueves;четверг
 el Viernes;пятница
 el Sabado;суббота
@@ -175,11 +178,32 @@ Septiembre;сентябрь
 Octubre;октябрь
 Noviembre;ноябрь
 Diciember;декабрь
-la estacion;сезон
+la estación;сезон
 el verano;лето
 el otono;осень
 el invierno;зима
 la primavera;весна
+tiempo;время,погода
+período;период
+segundo;секунда
+minuto;минута
+hora;час
+semana;неделя
+fin;конец
+fin de semana;конец недели
+inicio;начало
+desde hace;в течении
+medio;средне
+rápido;быстро
+aceleración;ускорение
+velocidad;скорость
+frecuencia;частота
+anteayer;позавчера
+pasado mañana;послезавтра
+mes;месяц
+al instante;немедленно,мгновенно
+al principio;вначале
+
 
 [nouns,directions]
 
@@ -419,6 +443,9 @@ generalmente;обычно
 absolutamente;абсолютно
 imposible;невозможно
 relativamente;относительно
+sin embargo;тем не менее
+a pesar de que;несмотря на то что
+además;более того
 
 [nouns,house]
 
@@ -511,7 +538,7 @@ naranja (cítricos);апельсин
 manzana;яблоко
 pera;груша
 cereza;черешня
-melocotOn;персик
+melocotón;персик
 fresa;клубника
 moras;ежевика
 frambuesa;малина
@@ -542,6 +569,7 @@ dedo;палец
 ojo;глаз
 
 [nouns,office]
+
 teclado;клавиатура
 tecla;клавиша
 pausa;пауза
@@ -559,3 +587,108 @@ pantalla;экран
 altavoz;динамик
 puerto;порт
 calculadora;калькулятор
+
+[nouns,protection]
+
+seguridad;безопасность
+prevención;предупреждение,упреждение
+uniforme;форма
+termómetro;градусник,термометр
+termómetro de mercurio;ртутный градусник
+tijeras;ножницы
+peróxido;перекись
+esparadrapo;пластырь,лейкопластырь
+venda elástica;эластичный бинт
+aspirina;аспирин
+sala de espera;комната ожидания
+farmacia;аптека
+recepción;ресепшн,приёмный блок
+información;информация,стойка информации
+aseos;туалет
+pùblico;публичный
+teléfono;телефон
+despacho;кабинет
+hospital;госпиталь
+observación;наблюдение
+reanimación;реанимация
+dúcha;душевая кабина,душ
+baño;баня,ванная
+cama;кровать
+gas;газ
+tanque;резервуар
+traje;защитный костюм
+asidero;поручень
+escalera;лестница
+hacha;топор
+tapa;крышка
+base;основание предмета
+casco;каска
+bombero;пожарный
+máscara;маска,защитная маска
+testigo;сигнал
+alarma;опастность,сигнализация
+pistola;пистолет
+micrófono;микрофон
+radio;рация,радио
+coche de policia;полицейская машина
+mascarilla;маска
+bota;ботинок
+escala;шкала
+
+[questions]
+
+Dónde?;где?
+A dónde?;куда?
+De dónde?;откуда?
+A quién?;кому?
+De quién?;чей?
+Quién?;кто?
+Cuándo?;когда?
+Desde cuándo?;с какого времени?
+Hasta cuándo?;до скольки?
+Cuánto?;сколько?
+Cómo?;какой?
+Qué?;что?
+Cuál?;который?
+Por qué?;почему?
+Para qué;зачем?
+
+[pronoun]
+
+alguno;какой-нибудь,какой-то,кое-какой
+alguien;кто-нибудь,кто-то,кое-кто
+nada;ничто,ничего
+nadie;никто
+yo;я
+tú;ты
+él;он
+ella;она
+usted;он уважительно,она уважительно
+nosotros;мы
+vosotros;вы
+ellos;они уважительно
+ustedes;вы уважительно
+este;этот
+esta;эта
+esto;это
+estas;эти ж
+estos;эти м
+ese;тот
+esa;та
+eso;то
+esos;те м
+esas;те ж
+aquel;тот удалённый
+mi;моё
+mis;мои
+tu;твой
+tus;твои
+su;его
+sus;их
+nuestro;наш
+vuestro;ваш
+lo;что
+mismo;тот же,тот же самый
+si;себя
+otro;другой
+

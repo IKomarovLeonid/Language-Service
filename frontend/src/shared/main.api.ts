@@ -379,6 +379,8 @@ export enum WordType {
   Adjective = "Adjective",
   Adverb = "Adverb",
   Preposition = "Preposition",
+  Pronoun = "Pronoun",
+  Questions = "Questions",
 }
 
 export enum WordCategory {
@@ -392,6 +394,7 @@ export enum WordCategory {
   House = "House",
   Human = "Human",
   Office = "Office",
+  Protection = "Protection",
 }
 
 export class AttemptModel implements IAttemptModel {

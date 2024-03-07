@@ -76,6 +76,7 @@ namespace API.Src
                                 "food" => WordCategory.Food,
                                 "office" => WordCategory.Office,
                                 "human" => WordCategory.Human,
+                                "protection" => WordCategory.Protection,
                                 _ => WordCategory.Any,
                             };
                         }
@@ -91,6 +92,8 @@ namespace API.Src
                             "adverbs" => WordType.Adverb,
                             "verbs" => WordType.Verb,
                             "prepositions" => WordType.Preposition,
+                            "pronoun" => WordType.Pronoun,
+                            "questions" => WordType.Questions,
                             _ => WordType.Any,
                         };
                         continue;

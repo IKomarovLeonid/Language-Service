@@ -7,6 +7,8 @@
         Verb,
         Adjective,
         Adverb,
-        Preposition
+        Preposition,
+        Pronoun,
+        Questions
     }
 }

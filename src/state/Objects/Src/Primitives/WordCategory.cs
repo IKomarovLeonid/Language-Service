@@ -11,6 +11,7 @@
         Food,
         House,
         Human,
-        Office
+        Office,
+        Protection
     }
 }
