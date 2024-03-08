@@ -50,6 +50,8 @@ encima de;на вершине
 en frente a;напротив
 fuera de;снаружи
 junto a;около
+lo de siempre;как обычно
+qué pena!;как жаль
 
 [nouns]
 
