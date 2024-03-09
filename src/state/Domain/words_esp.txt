@@ -149,6 +149,10 @@ tacaño;скупой
 tipico;типичный
 triste;грустный
 viejo;старый
+tolerable;терпимый
+arrogante;высокомерный
+único;уникальный
+corte;резкий
 
 [adverbs]
 
