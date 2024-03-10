@@ -99,6 +99,7 @@ el inspector;контролёр
 el pasajero;пассажир
 actitud;отношение между людьми
 relación;отношение между предметами
+verduras;овощи
 
 [adjectives]
 
