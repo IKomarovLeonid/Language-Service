@@ -573,8 +573,7 @@ export class WordModel implements IWordModel {
   id?: number;
   type?: WordType;
   category?: WordCategory;
-  languageFrom?: LanguageType;
-  languageTo?: LanguageType;
+  language?: LanguageType;
   word?: string | undefined;
   translations?: string[] | undefined;
   createdTime?: Date;
@@ -594,8 +593,7 @@ export class WordModel implements IWordModel {
       this.id = _data["id"];
       this.type = _data["type"];
       this.category = _data["category"];
-      this.languageFrom = _data["languageFrom"];
-      this.languageTo = _data["languageTo"];
+      this.language = _data["language"];
       this.word = _data["word"];
       if (Array.isArray(_data["translations"])) {
         this.translations = [] as any;
@@ -619,8 +617,7 @@ export class WordModel implements IWordModel {
     data["id"] = this.id;
     data["type"] = this.type;
     data["category"] = this.category;
-    data["languageFrom"] = this.languageFrom;
-    data["languageTo"] = this.languageTo;
+    data["language"] = this.language;
     data["word"] = this.word;
     if (Array.isArray(this.translations)) {
       data["translations"] = [];
@@ -637,8 +634,7 @@ export interface IWordModel {
   id?: number;
   type?: WordType;
   category?: WordCategory;
-  languageFrom?: LanguageType;
-  languageTo?: LanguageType;
+  language?: LanguageType;
   word?: string | undefined;
   translations?: string[] | undefined;
   createdTime?: Date;
@@ -647,8 +643,7 @@ export interface IWordModel {
 
 export enum LanguageType {
   Undefined = "Undefined",
-  Spanish = "Spanish",
-  Russian = "Russian",
+  SpanishRussian = "SpanishRussian",
 }
 
 export interface FileResponse {

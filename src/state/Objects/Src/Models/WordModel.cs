@@ -11,9 +11,7 @@ namespace Objects.Src.Models
 
         public WordCategory Category { get; set; }
 
-        public LanguageType LanguageFrom { get; set; }
-
-        public LanguageType LanguageTo { get; set; }
+        public LanguageType Language { get; set; }  
 
         public string Word { get; set; }
 

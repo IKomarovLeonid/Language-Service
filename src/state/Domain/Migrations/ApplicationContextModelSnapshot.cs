@@ -76,14 +76,9 @@ namespace Domain.Migrations
                         .HasColumnName("created_utc")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("LanguageFrom")
+                    b.Property<string>("Language")
                         .IsRequired()
-                        .HasColumnName("language_from")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("LanguageTo")
-                        .IsRequired()
-                        .HasColumnName("language_to")
+                        .HasColumnName("language")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Translation")

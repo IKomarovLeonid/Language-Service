@@ -110,8 +110,7 @@ namespace API.Src
                         UpdatedTime = DateTime.UtcNow,
                         Word = word,
                         Translation = translation,
-                        LanguageFrom = LanguageType.Spanish,
-                        LanguageTo = LanguageType.Russian,
+                        Language = LanguageType.SpanishRussian,
                         Type = wordType,
                         Category = wordCategory
                     });
