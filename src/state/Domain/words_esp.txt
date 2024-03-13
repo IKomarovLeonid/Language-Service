@@ -102,6 +102,8 @@ el pasajero;пассажир
 actitud;отношение между людьми
 relación;отношение между предметами
 verduras;овощи
+precio;цена
+
 
 [adjectives]
 
@@ -156,6 +158,7 @@ tolerable;терпимый
 arrogante;высокомерный
 único;уникальный
 corte;резкий
+asequible;доступный
 
 [adverbs]
 
