@@ -2,7 +2,12 @@
 
   <label class="quiz-label">Total words count <span class="bold">{{wordsCount}}</span></label>
   <br><br>
-  <label class="quiz-label">Attempts: <span class="bold">{{totalAnswers}}</span> / correct: <span class="bold">{{correctAnswersCount}}</span></label>
+  <label class="quiz-label">Attempts: <span class="bold">{{totalAnswers}}</span>
+    | correct: <span class="correct-answer">{{correctAnswersCount}}</span>
+    | streak: <span [ngClass]="{ 'negative-counter': correctAnswersStreak < 0, 'positive-counter': correctAnswersStreak > 0 }">
+      {{correctAnswersStreak}}
+    </span>
+  </label>
   <br><br>
   <label class="quiz-label">Translate word: </label>
   <label class="word-label">{{this.wordToTranslate}} ({{this.expectedTranslations?.length}} meaning)</label>

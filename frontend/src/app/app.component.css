@@ -36,6 +36,14 @@
   font-weight: bold;
 }
 
+.negative-counter {
+  color: red;
+}
+
+.positive-counter {
+  color: green;
+}
+
 .quiz-select {
   padding: 10px;
   width: 100%;

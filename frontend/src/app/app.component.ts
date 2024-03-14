@@ -31,6 +31,7 @@ export class AppComponent implements OnInit{
   isLanguageReversed = false;
   // message
   answerMessage: string | undefined;
+  correctAnswersStreak = 0;
 
     constructor(private client : ApiClient) {
   }
@@ -82,6 +83,7 @@ export class AppComponent implements OnInit{
       // handle user no input
       if(this.userTranslation === undefined || this.userTranslation.trim() === ''){
         this.totalAnswers ++;
+        this.correctAnswersStreak --;
         let correctAnswers = this.expectedTranslations;
         this.saveAttempt(
           this.wordToTranslate!!,
@@ -98,6 +100,7 @@ export class AppComponent implements OnInit{
       if(filtered!!.length > 0){
         this.correctAnswersCount ++;
         this.totalAnswers ++;
+        this.correctAnswersStreak ++;
         this.saveAttempt(
           this.wordToTranslate!!,
           this.expectedTranslations!!, this.userTranslation, true);
@@ -105,6 +108,7 @@ export class AppComponent implements OnInit{
       }
       else {
         this.totalAnswers ++;
+        this.correctAnswersStreak--;
         this.buildErrorMessage();
         this.saveAttempt(
           this.wordToTranslate!!,
@@ -156,6 +160,7 @@ export class AppComponent implements OnInit{
     this.wordIndex = 0;
     this.userTranslation = undefined;
     this.answers = [];
+    this.correctAnswersStreak = 0;
     this.resetErrorMessage();
     this.showWord();
     this.loadHistory();
