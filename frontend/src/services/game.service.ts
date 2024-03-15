@@ -15,8 +15,10 @@ export class GameService{
   private isTimerEnabled = false;
   private milliseconds: number = 0;
   private timer: any;
+  private defaultTimerMsc;
 
   constructor() {
+    this.defaultTimerMsc = 10000;
   }
 
   setWords(words: WordModel[]): void {
@@ -86,8 +88,12 @@ export class GameService{
     return false;
   }
 
-  getTimerData(): number{
+  getTimerSecondsLeft(): number{
     return this.milliseconds / 1000;
+  }
+
+  getInitialSeconds(): number{
+    return this.defaultTimerMsc / 1000;
   }
 
   startTimer(): void {
@@ -117,6 +123,7 @@ export class GameService{
   }
 
   private resetTime(){
-    this.milliseconds = 10000;
+    this.milliseconds = this.defaultTimerMsc;
   }
+
 }

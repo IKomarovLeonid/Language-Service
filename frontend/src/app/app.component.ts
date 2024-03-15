@@ -139,7 +139,7 @@ export class AppComponent implements OnInit{
       model.word = word;
       model.expectedTranslations = expectedTranslation;
       model.isCorrect = isCorrect;
-      model.totalSeconds = 10;
+      model.totalSeconds = this.gameService.getInitialSeconds() - this.gameService.getTimerSecondsLeft();
       this.answers.push(model);
   }
 
@@ -194,7 +194,7 @@ export class AppComponent implements OnInit{
     this.gameService.setTimer(!this.isTimerEnabled);
   }
 
-  getTimerSeconds(): number{
-    return this.gameService.getTimerData();
+  showTimerSecondsLeft(): number{
+    return this.gameService.getTimerSecondsLeft();
   }
 }

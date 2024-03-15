@@ -11,7 +11,7 @@
   <br><br>
   <label class="quiz-label" *ngIf="wordToTranslate">Translate word: </label>
   <label class="word-label">{{this.wordToTranslate}}</label>
-  <div class="timer" *ngIf="isTimerEnabled">{{getTimerSeconds()}} seconds left</div>
+  <div class="timer" *ngIf="isTimerEnabled">{{showTimerSecondsLeft()}} seconds left</div>
   <input id="translation" class="quiz-input" [(ngModel)]="userTranslation" (keyup.enter)="makeAnswer()" placeholder="Enter your translation and press ENTER...">
 
   <label class="error-label" *ngIf="userShowMessage"><span class="bold">{{userShowMessage}}</span></label>
