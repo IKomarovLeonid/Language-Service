@@ -11,6 +11,10 @@ export class GameService{
   private correctAnswersCount = 0;
   private totalAnswers = 0;
   private answersStreak = 0;
+  // enable timer if requested
+  private isTimerEnabled = false;
+  private milliseconds: number = 0;
+  private timer: any;
 
   constructor() {
   }
@@ -72,9 +76,47 @@ export class GameService{
     if(filtered.length > 0){
       this.answersStreak ++;
       this.correctAnswersCount ++;
+      if(this.isTimerEnabled){
+        this.stopTimer();
+        this.startTimer();
+      }
       return true;
     }
     this.answersStreak--;
     return false;
+  }
+
+  getTimerData(): number{
+    return this.milliseconds / 1000;
+  }
+
+  startTimer(): void {
+    this.timer = setInterval(() => {
+      console.log(this.milliseconds);
+      if(this.milliseconds <= 0){
+        this.totalAnswers ++;
+        this.answersStreak --;
+        this.resetTime();
+      }
+      else this.milliseconds -= 1000;
+    }, 1000);
+  }
+
+  stopTimer(): void {
+    clearInterval(this.timer);
+    this.resetTime();
+  }
+
+  setTimer(isEnabled: boolean){
+    this.isTimerEnabled = isEnabled;
+    if(this.isTimerEnabled) {
+      this.resetTime();
+      this.startTimer();
+    }
+    else this.stopTimer();
+  }
+
+  private resetTime(){
+    this.milliseconds = 10000;
   }
 }

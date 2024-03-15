@@ -126,3 +126,12 @@ button:hover {
   border: 1px solid #ccc; /* Add border for styling */
   border-radius: 3px; /* Add border radius for rounded corners */
 }
+
+.timer {
+  font-weight: bold;
+  color: #333;
+  background-color: #eee;
+  padding: 10px;
+  border-radius: 5px;
+  text-align: center;
+}

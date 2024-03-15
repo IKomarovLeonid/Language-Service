@@ -22,6 +22,7 @@ export class AppComponent implements OnInit{
   // toggles
   isRepeatWords = true;
   isLanguageReversed = false;
+  isTimerEnabled = false;
   // message
   userShowMessage: string | undefined;
 
@@ -188,4 +189,12 @@ export class AppComponent implements OnInit{
 
   protected readonly Type = Object;
   protected readonly WordType = WordType;
+
+  onEnableTimer(){
+    this.gameService.setTimer(!this.isTimerEnabled);
+  }
+
+  getTimerSeconds(): number{
+    return this.gameService.getTimerData();
+  }
 }

@@ -11,6 +11,7 @@
   <br><br>
   <label class="quiz-label" *ngIf="wordToTranslate">Translate word: </label>
   <label class="word-label">{{this.wordToTranslate}}</label>
+  <div class="timer" *ngIf="isTimerEnabled">{{getTimerSeconds()}} seconds left</div>
   <input id="translation" class="quiz-input" [(ngModel)]="userTranslation" (keyup.enter)="makeAnswer()" placeholder="Enter your translation and press ENTER...">
 
   <label class="error-label" *ngIf="userShowMessage"><span class="bold">{{userShowMessage}}</span></label>
@@ -25,6 +26,7 @@
   <div class="quiz-toggles">
     <input type="checkbox" [(ngModel)]="isRepeatWords"> Allow word repetitions
     <input type="checkbox" [(ngModel)]="isLanguageReversed" (click)="onReverseLanguage()"> Reverse language
+    <input type="checkbox" [(ngModel)]="isTimerEnabled" (click)="onEnableTimer()"> Enable timer
   </div>
 
   <button class="quiz-button" (click)="finishAttempt()" tabindex="0">Finish</button>
