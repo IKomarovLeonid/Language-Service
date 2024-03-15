@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {AttemptHistoryModel, AttemptModel, WordCategory, WordModel, WordType} from "../shared/main.api";
 import {ApiClient} from "../services/api.client";
+import {GameService} from "../services/game.service";
 
 @Component({
   selector: 'app-root',
@@ -8,32 +9,23 @@ import {ApiClient} from "../services/api.client";
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit{
-  data: WordModel[] | undefined;
-  history: AttemptHistoryModel[] | undefined;
-  filteredCollection: WordModel[] = [];
-  wordModel: WordModel | undefined;
-  userTranslation: string | undefined;
+  wordsFromServer: WordModel[] | undefined;
   wordToTranslate: string | undefined;
+  userTranslation: string | undefined;
   expectedTranslations: string[] | undefined;
-  // selection
+  // filtration
   selectedEnumCategory: WordCategory = WordCategory.Any;
   selectedEnumType: WordType = WordType.Any;
-  // statistics
-  wordsCount = 0;
-  correctAnswersCount = 0;
-  totalAnswers = 0;
   // for attempt history
+  history: AttemptHistoryModel[] | undefined;
   answers: AttemptModel[] = [];
   // toggles
-  isRepeatErrors = true;
   isRepeatWords = true;
-  wordIndex = 0;
   isLanguageReversed = false;
   // message
-  answerMessage: string | undefined;
-  correctAnswersStreak = 0;
+  userShowMessage: string | undefined;
 
-    constructor(private client : ApiClient) {
+    constructor(private client : ApiClient, private gameService : GameService) {
   }
 
   ngOnInit(): void {
@@ -44,10 +36,9 @@ export class AppComponent implements OnInit{
   async loadWords(){
       let apiResult = await this.client.getWords();
       if(apiResult){
-        this.data = apiResult.items!!;
-        this.filteredCollection = apiResult.items!!;
-        this.wordsCount = this.filteredCollection.length;
-        this.showWord();
+        this.wordsFromServer = apiResult.items!!;
+        this.gameService.setWords(apiResult.items!!);
+        this.setWord();
       }
       else alert('Unable to fetch words from server');
   }
@@ -60,109 +51,77 @@ export class AppComponent implements OnInit{
     else alert('Unable to fetch history from server');
   }
 
-  showWord() : void{
-    if (this.filteredCollection && this.filteredCollection.length > 0) {
-      if(!this.isRepeatWords){
-        if(this.wordIndex < this.filteredCollection.length){
-          this.setWordAndTranslation(this.filteredCollection, this.wordIndex);
-          this.wordIndex++;
-        }
-        else{
-          this.wordIndex = 0;
-          this.setWordAndTranslation(this.filteredCollection, this.wordIndex);
-        }
-      }
-      else{
-        const randomIndex = Math.floor(Math.random() * this.filteredCollection.length);
-        this.setWordAndTranslation(this.filteredCollection, randomIndex);
-      }
-    }
-  }
-
-  makeAnswer(){
-      // handle user no input
-      if(this.userTranslation === undefined || this.userTranslation.trim() === ''){
-        this.totalAnswers ++;
-        this.correctAnswersStreak --;
-        let correctAnswers = this.expectedTranslations;
-        this.saveAttempt(
-          this.wordToTranslate!!,
-          correctAnswers!!, this.userTranslation ?? 'N/A', false);
-        this.buildErrorMessage();
-        if(!this.isRepeatErrors){
-          this.showWord();
-        }
-        return;
-      }
-
-      let correctAnswers = this.expectedTranslations;
-      let filtered = correctAnswers?.filter(w => w.toLowerCase() === this.userTranslation?.toLowerCase())
-      if(filtered!!.length > 0){
-        this.correctAnswersCount ++;
-        this.totalAnswers ++;
-        this.correctAnswersStreak ++;
-        this.saveAttempt(
-          this.wordToTranslate!!,
-          this.expectedTranslations!!, this.userTranslation, true);
-        this.resetErrorMessage();
+  setWord() : void{
+    let word = this.gameService.getRandomWord(this.isRepeatWords);
+    if(word){
+      this.resetErrorMessage();
+      if(!this.isLanguageReversed){
+        this.wordToTranslate = word.word;
+        this.expectedTranslations = word.translations!!;
       }
       else {
-        this.totalAnswers ++;
-        this.correctAnswersStreak--;
-        this.buildErrorMessage();
-        this.saveAttempt(
-          this.wordToTranslate!!,
-          this.expectedTranslations!!, this.userTranslation, false);
-        this.userTranslation = undefined;
-        if(!this.isRepeatErrors){
-          this.showWord();
-        }
-        return;
+        this.wordToTranslate = word.translations!![0];
+        this.expectedTranslations = [];
+        this.expectedTranslations.push(word.word!!);
       }
+    }
+    else {
       this.wordToTranslate = undefined;
       this.userTranslation = undefined;
       this.expectedTranslations = undefined;
-      this.showWord();
+      this.userShowMessage = 'No words by this category and language type';
+    }
+  }
+
+
+  makeAnswer(){
+      let result = this.gameService.checkAnswer(this.userTranslation, this.expectedTranslations!!)
+      this.saveAttempt(this.wordToTranslate!!, this.expectedTranslations!!,
+      this.userTranslation ?? 'N/A', result);
+      this.userTranslation = undefined;
+      if(!result){
+        this.buildErrorMessage();
+      }
+      else {
+        this.resetErrorMessage();
+        this.setWord();
+      }
   }
 
   filterWords(){
-      if(this.data){
+      if(this.wordsFromServer){
         if(this.selectedEnumCategory === WordCategory.Any && this.selectedEnumType === WordType.Any){
-          this.filteredCollection = this.data;
+          this.gameService.setWords(this.wordsFromServer);
         }
         else {
           if(this.selectedEnumCategory === WordCategory.Any){
-            this.filteredCollection = this.data.filter(item => item.type === this.selectedEnumType);
+            this.gameService.setWords(this.wordsFromServer.filter(item => item.type === this.selectedEnumType));
           }
           else{
             if(this.selectedEnumType === WordType.Any){
-              this.filteredCollection = this.data.filter(item => item.category === this.selectedEnumCategory);
+              this.gameService.setWords(this.wordsFromServer.filter(item => item.category === this.selectedEnumCategory));
             }
-            else this.filteredCollection = this.data.filter(item =>
+            else this.gameService.setWords(this.wordsFromServer.filter(item =>
               item.category === this.selectedEnumCategory &&
               item.type === this.selectedEnumType
-            );
+            ));
           }
         }
       }
-      this.wordsCount = this.filteredCollection.length;
-      this.showWord();
+      this.setWord();
   }
 
   async finishAttempt(){
     await this.client.createAttempt(
       this.answers,
-      this.correctAnswersCount, 30,
+      this.gameService.getCorrectAnswers(), 30,
       this.selectedEnumType,
       this.selectedEnumCategory);
-    this.correctAnswersCount = 0;
-    this.totalAnswers = 0;
-    this.wordIndex = 0;
+    this.gameService.finish();
     this.userTranslation = undefined;
     this.answers = [];
-    this.correctAnswersStreak = 0;
     this.resetErrorMessage();
-    this.showWord();
+    this.setWord();
     this.loadHistory();
   }
 
@@ -184,31 +143,44 @@ export class AppComponent implements OnInit{
   }
 
   buildErrorMessage(){
-      this.answerMessage = `Error. Correct translation of ${this.wordToTranslate} -> ${this.expectedTranslations}`;
+      this.userShowMessage = `Error. Correct translation of ${this.wordToTranslate} -> ${this.expectedTranslations}`;
   }
 
   resetErrorMessage(){
-      this.answerMessage = undefined;
-  }
-
-  setWordAndTranslation(words: WordModel[], index: number){
-    this.wordModel = this.filteredCollection[index];
-    if(!this.isLanguageReversed){
-      this.wordToTranslate = this.wordModel.word;
-      this.expectedTranslations = this.wordModel.translations;
-    }
-    else{
-      this.wordToTranslate = this.wordModel.translations!![0];
-      this.expectedTranslations = [];
-      this.expectedTranslations.push(this.wordModel.word!!);
-    }
+      this.userShowMessage = undefined;
   }
 
   onReverseLanguage(){
-    let w = this.wordToTranslate!!;
-    this.wordToTranslate = this.expectedTranslations!![0];
-    this.expectedTranslations = [];
-    this.expectedTranslations.push(w);
+      if(this.expectedTranslations && this.wordToTranslate){
+        if(!this.isLanguageReversed){
+          let word = this.wordToTranslate;
+          this.wordToTranslate = this.expectedTranslations[0];
+          this.expectedTranslations = [];
+          this.expectedTranslations.push(word);
+        }
+        else{
+          let word = this.expectedTranslations[0];
+          this.expectedTranslations = [];
+          this.expectedTranslations.push(this.wordToTranslate);
+          this.wordToTranslate = word;
+        }
+      }
+  }
+
+  showTotalCount(): number{
+      return this.gameService.getWordsCount();
+  }
+
+  showTotalAnswers(): number{
+    return this.gameService.getTotalAttempts();
+  }
+
+  showCorrectAnswers(): number{
+    return this.gameService.getCorrectAnswers();
+  }
+
+  showCurrentStreak(): number{
+      return this.gameService.getStreakCounter();
   }
 
   protected readonly Category = Object;
