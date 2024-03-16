@@ -117,30 +117,6 @@ namespace API.Src
                 }
             }
 
-            // triste
-            // concluir
-            // facIl
-            // alegre
-            // el patio
-            // alrededor de
-            // excepto
-            // gris
-            // sAbado
-            // sin
-            // negociar
-            // apoyar
-            // delante de
-            // cerca de
-            // plateado
-            // aconsejar
-            // la computadora
-            // el ordenador
-            // el entrenador
-            // el monitor
-            // bastante
-            // hasta
-            // desaynar
-
             ctx.Words.AddRange(words);
             await ctx.SaveChangesAsync();
         }
