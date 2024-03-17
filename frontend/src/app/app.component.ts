@@ -123,6 +123,7 @@ export class AppComponent implements OnInit{
     this.answers = [];
     this.resetErrorMessage();
     this.setWord();
+    this.gameService.resetTime();
     this.loadHistory();
   }
 

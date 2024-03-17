@@ -122,7 +122,7 @@ export class GameService{
     else this.stopTimer();
   }
 
-  private resetTime(){
+  public resetTime(){
     this.milliseconds = this.defaultTimerMsc;
   }
 
