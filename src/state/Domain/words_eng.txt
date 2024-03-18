@@ -1,0 +1,6 @@
+﻿[adjectives]
+
+narrow;узкий
+loose;разболтанный
+short-tempered;вспыльчивый
+wise;мудрый

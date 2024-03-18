@@ -3,6 +3,7 @@
     public enum LanguageType
     {
         Undefined = 0,
-        SpanishRussian
+        SpanishRussian,
+        EnglishRussian
     }
 }

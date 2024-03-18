@@ -18,6 +18,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="words_eng.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="words_esp.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

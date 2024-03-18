@@ -1,4 +1,5 @@
 ﻿using Domain.Src;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Objects.Src.Dto;
@@ -43,82 +44,101 @@ namespace API.Src
 
         private async Task FillPredefinedDataAsync(ApplicationContext ctx)
         {
+            var spanish = ReadWords("words_esp.txt", LanguageType.SpanishRussian);
+            var english = ReadWords("words_eng.txt", LanguageType.EnglishRussian);
+
+            ctx.Words.AddRange(spanish);
+            ctx.Words.AddRange(english);
+
+            await ctx.SaveChangesAsync();
+        }
+
+        private IEnumerable<WordDto> ReadWords(string fileName, LanguageType language)
+        {
             var words = new List<WordDto>();
             WordType wordType = WordType.Any;
             WordCategory wordCategory = WordCategory.Any;
 
-            using (StreamReader sr = new StreamReader("words_esp.txt"))
+            try
             {
-                string line;
-
-                while ((line = sr.ReadLine()) != null)
+                using (StreamReader sr = new StreamReader(fileName))
                 {
-                    if (string.IsNullOrEmpty(line))
-                    {
-                        continue;
-                    }
+                    string line;
 
-                    if (line.Contains("["))
+                    while ((line = sr.ReadLine()) != null)
                     {
-                        line = line.Substring(1, line.IndexOf("]") - 1);
-                        var headerData = line.Split(',');
-                        if (headerData.Length == 2)
+                        if (string.IsNullOrEmpty(line))
                         {
-                            wordCategory = headerData[1] switch
+                            continue;
+                        }
+
+                        if (line.Contains("["))
+                        {
+                            line = line.Substring(1, line.IndexOf("]") - 1);
+                            var headerData = line.Split(',');
+                            if (headerData.Length == 2)
                             {
-                                "colors" => WordCategory.Colors,
-                                "time" => WordCategory.Time,
-                                "directions" => WordCategory.Directions,
-                                "character" => WordCategory.Character,
-                                "family" => WordCategory.Family,
-                                "common" => WordCategory.Any,
-                                "house" => WordCategory.House,
-                                "food" => WordCategory.Food,
-                                "office" => WordCategory.Office,
-                                "human" => WordCategory.Human,
-                                "protection" => WordCategory.Protection,
-                                _ => WordCategory.Any,
+                                wordCategory = headerData[1] switch
+                                {
+                                    "colors" => WordCategory.Colors,
+                                    "time" => WordCategory.Time,
+                                    "directions" => WordCategory.Directions,
+                                    "character" => WordCategory.Character,
+                                    "family" => WordCategory.Family,
+                                    "common" => WordCategory.Any,
+                                    "house" => WordCategory.House,
+                                    "food" => WordCategory.Food,
+                                    "office" => WordCategory.Office,
+                                    "human" => WordCategory.Human,
+                                    "protection" => WordCategory.Protection,
+                                    _ => WordCategory.Any,
+                                };
+                            }
+                            if (headerData.Length == 1)
+                            {
+                                wordCategory = WordCategory.Any;
+                            }
+
+                            wordType = headerData[0] switch
+                            {
+                                "nouns" => WordType.Noun,
+                                "adjectives" => WordType.Adjective,
+                                "adverbs" => WordType.Adverb,
+                                "verbs" => WordType.Verb,
+                                "prepositions" => WordType.Preposition,
+                                "pronoun" => WordType.Pronoun,
+                                "questions" => WordType.Questions,
+                                _ => WordType.Any,
                             };
+                            continue;
                         }
-                        if (headerData.Length == 1)
-                        {
-                            wordCategory = WordCategory.Any;
-                        }
+                        string[] data = line.Split(';');
+                        if (data.Length < 2) { throw new Exception($"Invalid line: {line}"); }
 
-                        wordType = headerData[0] switch
+                        var word = data[0];
+                        var translation = data[1];
+
+                        words.Add(new WordDto()
                         {
-                            "nouns" => WordType.Noun,
-                            "adjectives" => WordType.Adjective,
-                            "adverbs" => WordType.Adverb,
-                            "verbs" => WordType.Verb,
-                            "prepositions" => WordType.Preposition,
-                            "pronoun" => WordType.Pronoun,
-                            "questions" => WordType.Questions,
-                            _ => WordType.Any,
-                        };
-                        continue;
+                            CreatedTime = DateTime.UtcNow,
+                            UpdatedTime = DateTime.UtcNow,
+                            Word = word,
+                            Translation = translation,
+                            Language = language,
+                            Type = wordType,
+                            Category = wordCategory
+                        });
                     }
-                    string[] data = line.Split(';');
-                    if (data.Length < 2) { throw new Exception($"Invalid line: {line}"); }
-
-                    var word = data[0];
-                    var translation = data[1];
-
-                    words.Add(new WordDto()
-                    {
-                        CreatedTime = DateTime.UtcNow,
-                        UpdatedTime = DateTime.UtcNow,
-                        Word = word,
-                        Translation = translation,
-                        Language = LanguageType.SpanishRussian,
-                        Type = wordType,
-                        Category = wordCategory
-                    });
                 }
+                Console.WriteLine($"Processed {words.Count} words from source {fileName}");
+                return words;
             }
-
-            ctx.Words.AddRange(words);
-            await ctx.SaveChangesAsync();
+            catch(Exception ex)
+            {
+                Console.WriteLine($"Failed for words from source {fileName} because of {ex.Message}");
+                return words;
+            }
+            
         }
     }
 }
