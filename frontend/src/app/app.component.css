@@ -32,6 +32,10 @@
   font-weight: bold;
 }
 
+.error-container{
+  flex: 1;
+}
+
 .bold {
   font-weight: bold;
 }
@@ -47,10 +51,16 @@
 .quiz-select {
   padding: 10px;
   width: 100%;
-  margin: 10px 0;
   box-sizing: border-box;
   border: 1px solid #ccc;
   border-radius: 5px;
+  flex: 1;
+  margin-right: 2px; /* Adjust spacing between selects */
+}
+
+.select-container {
+  display: flex;
+  align-items: center;
 }
 
 .quiz-button {
@@ -135,3 +145,4 @@ button:hover {
   border-radius: 5px;
   text-align: center;
 }
+

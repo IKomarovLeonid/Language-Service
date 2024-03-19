@@ -1,6 +1,5 @@
 ﻿using Business.Src.Objects;
 using MediatR;
-using Objects.Src.Primitives;
 using Objects.Src.Models;
 
 namespace Business.Src.Commands

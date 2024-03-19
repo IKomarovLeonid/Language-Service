@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {AttemptHistoryModel, AttemptModel, WordCategory, WordModel, WordType} from "../shared/main.api";
 import {ApiClient} from "../services/api.client";
 import {GameService} from "../services/game.service";
@@ -14,8 +14,11 @@ export class AppComponent implements OnInit{
   userTranslation: string | undefined;
   expectedTranslations: string[] | undefined;
   // filtration
-  selectedEnumCategory: WordCategory = WordCategory.Any;
-  selectedEnumType: WordType = WordType.Any;
+  @Input() selectedEnumCategory = WordCategory.Any;
+  @Input() selectedEnumType = WordType.Any;
+  @Input() enumCategoryValues: WordCategory[] = Object.values(WordCategory);
+  @Input() enumTypeValues: WordType[] = Object.values(WordType);
+
   // for attempt history
   history: AttemptHistoryModel[] | undefined;
   answers: AttemptModel[] = [];
@@ -185,12 +188,6 @@ export class AppComponent implements OnInit{
       return this.gameService.getStreakCounter();
   }
 
-  protected readonly Category = Object;
-  protected readonly WordCategory = WordCategory;
-
-  protected readonly Type = Object;
-  protected readonly WordType = WordType;
-
   onEnableTimer(){
     this.gameService.setTimer(!this.isTimerEnabled);
   }
@@ -198,4 +195,6 @@ export class AppComponent implements OnInit{
   showTimerSecondsLeft(): number{
     return this.gameService.getTimerSecondsLeft();
   }
+
+  protected readonly Object = Object;
 }

@@ -7,22 +7,28 @@
     | streak: <span [ngClass]="{ 'negative-counter': showCurrentStreak() < 0, 'positive-counter': showCurrentStreak() > 0 }">
       {{showCurrentStreak()}}
     </span>
-  </label>
+  </label>y
   <br><br>
-  <label class="quiz-label" *ngIf="wordToTranslate">Translate word: </label>
-  <label class="word-label">{{this.wordToTranslate}}</label>
-  <div class="timer" *ngIf="isTimerEnabled">{{showTimerSecondsLeft()}} seconds left</div>
-  <input id="translation" class="quiz-input" [(ngModel)]="userTranslation" (keyup.enter)="makeAnswer()" placeholder="Enter your translation and press ENTER...">
+  <div *ngIf="wordToTranslate">
+    <label class="quiz-label">Translate word: </label>
+    <label class="word-label">{{this.wordToTranslate}}</label>
+    <div class="timer" *ngIf="isTimerEnabled">{{showTimerSecondsLeft()}} seconds left</div>
+    <input id="translation" class="quiz-input" [(ngModel)]="userTranslation" (keyup.enter)="makeAnswer()" [disabled] = "showTotalCount() <= 0"  placeholder="Enter your translation and press ENTER...">
+  </div>
+  <div class="error-container" *ngIf="userShowMessage">
+    <label class="error-label"><span class="bold">{{userShowMessage}}</span></label>
+  </div>
+  <div class="select-container">
+    <select class="quiz-select" [(ngModel)]="selectedEnumCategory" (change)="filterWords()">
+      <option value="" disabled>Select an option</option>
+      <option *ngFor="let value of enumCategoryValues" [value]="value">Category: {{ value }}</option>
+    </select>
+    <select class="quiz-select" [(ngModel)]="selectedEnumType" (change)="filterWords()">
+      <option value="" disabled>Select an option</option>
+      <option *ngFor="let value of enumTypeValues" [value]="value">Type: {{ value }}</option>
+    </select>
+  </div>
 
-  <label class="error-label" *ngIf="userShowMessage"><span class="bold">{{userShowMessage}}</span></label>
-  <select class="quiz-select" [(ngModel)]="selectedEnumCategory" (change)="filterWords()">
-    <option value="" disabled>Select an option</option>
-    <option *ngFor="let value of Category.values(WordCategory)" [value]="value">Words category: {{ value }}</option>
-  </select>
-  <select class="quiz-select" [(ngModel)]="selectedEnumType" (change)="filterWords()">
-    <option value="" disabled>Select an option</option>
-    <option *ngFor="let value of Type.values(WordType)" [value]="value">Words type: {{ value }}</option>
-  </select>
   <div class="quiz-toggles">
     <input type="checkbox" [(ngModel)]="isRepeatWords"> Allow word repetitions
     <input type="checkbox" [(ngModel)]="isLanguageReversed" (click)="onReverseLanguage()"> Reverse language
@@ -55,4 +61,7 @@
     </tr>
     </tbody>
   </table>
+</div>
+<div class="history-container" *ngIf="!history?.length">
+  <label>No attempts history</label>
 </div>
