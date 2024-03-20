@@ -642,7 +642,7 @@ export interface IWordModel {
 }
 
 export enum LanguageType {
-  Undefined = "Undefined",
+  EnglishRussian = "EnglishRussian",
   SpanishRussian = "SpanishRussian",
 }
 

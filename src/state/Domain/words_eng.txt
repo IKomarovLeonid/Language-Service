@@ -4,3 +4,16 @@ narrow;узкий
 loose;разболтанный
 short-tempered;вспыльчивый
 wise;мудрый
+
+[verbs]
+
+break up;завершить
+call off;отменить
+to come up with;предложить
+go on;происходить,продолжать
+put off;откладывать
+take up;начать
+turn up;обнаружиться
+break out;сбежать
+chip in;помочь
+come apart;развалится

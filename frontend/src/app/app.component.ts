@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {AttemptHistoryModel, AttemptModel, WordCategory, WordModel, WordType} from "../shared/main.api";
+import {AttemptHistoryModel, AttemptModel, LanguageType, WordCategory, WordModel, WordType} from "../shared/main.api";
 import {ApiClient} from "../services/api.client";
 import {GameService} from "../services/game.service";
 
@@ -16,8 +16,10 @@ export class AppComponent implements OnInit{
   // filtration
   @Input() selectedEnumCategory = WordCategory.Any;
   @Input() selectedEnumType = WordType.Any;
+  @Input() enumLanguage: LanguageType = LanguageType.SpanishRussian;
   @Input() enumCategoryValues: WordCategory[] = Object.values(WordCategory);
   @Input() enumTypeValues: WordType[] = Object.values(WordType);
+  @Input() enumLanguageValues: LanguageType[] = Object.values(LanguageType);
 
   // for attempt history
   history: AttemptHistoryModel[] | undefined;
@@ -41,7 +43,7 @@ export class AppComponent implements OnInit{
       let apiResult = await this.client.getWords();
       if(apiResult){
         this.wordsFromServer = apiResult.items!!;
-        this.gameService.setWords(apiResult.items!!);
+        this.gameService.setWords(apiResult.items!!.filter(item => item.language === this.enumLanguage));
         this.setWord();
       }
       else alert('Unable to fetch words from server');
@@ -95,21 +97,14 @@ export class AppComponent implements OnInit{
   filterWords(){
       if(this.wordsFromServer){
         if(this.selectedEnumCategory === WordCategory.Any && this.selectedEnumType === WordType.Any){
-          this.gameService.setWords(this.wordsFromServer);
+          this.gameService.setWords(this.wordsFromServer.filter(item => item.language === this.enumLanguage));
         }
         else {
-          if(this.selectedEnumCategory === WordCategory.Any){
-            this.gameService.setWords(this.wordsFromServer.filter(item => item.type === this.selectedEnumType));
-          }
-          else{
-            if(this.selectedEnumType === WordType.Any){
-              this.gameService.setWords(this.wordsFromServer.filter(item => item.category === this.selectedEnumCategory));
-            }
-            else this.gameService.setWords(this.wordsFromServer.filter(item =>
+          this.gameService.setWords(this.wordsFromServer.filter(
+            item => item.type === this.selectedEnumType &&
               item.category === this.selectedEnumCategory &&
-              item.type === this.selectedEnumType
-            ));
-          }
+              item.language === this.enumLanguage
+          ));
         }
       }
       this.setWord();
@@ -196,5 +191,12 @@ export class AppComponent implements OnInit{
     return this.gameService.getTimerSecondsLeft();
   }
 
-  protected readonly Object = Object;
+  showLanguage(): string{
+      switch (this.enumLanguage){
+        case LanguageType.EnglishRussian:
+          return "English <-> Russian";
+        case LanguageType.SpanishRussian:
+          return "Spanish <-> Russian";
+      }
+  }
 }

@@ -7,7 +7,7 @@
     | streak: <span [ngClass]="{ 'negative-counter': showCurrentStreak() < 0, 'positive-counter': showCurrentStreak() > 0 }">
       {{showCurrentStreak()}}
     </span>
-  </label>y
+  </label>
   <br><br>
   <div *ngIf="wordToTranslate">
     <label class="quiz-label">Translate word: </label>
@@ -26,6 +26,10 @@
     <select class="quiz-select" [(ngModel)]="selectedEnumType" (change)="filterWords()">
       <option value="" disabled>Select an option</option>
       <option *ngFor="let value of enumTypeValues" [value]="value">Type: {{ value }}</option>
+    </select>
+    <select class="quiz-select" [(ngModel)]="enumLanguage" (change)="filterWords()">
+      <option value="" disabled>Select an option</option>
+      <option *ngFor="let value of enumLanguageValues" [value]="value">{{ showLanguage() }}</option>
     </select>
   </div>
 
