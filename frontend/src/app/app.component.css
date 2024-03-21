@@ -127,7 +127,8 @@ button:hover {
   border: 1px solid #ccc;
   border-radius: 5px;
   display: flex;
-  justify-content: flex-start;
+  flex-direction: column; /* Change to column */
+  align-items: flex-start; /* Align items to the start of the flex container */
 }
 
 .numeric-input {

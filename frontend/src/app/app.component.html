@@ -34,9 +34,15 @@
   </div>
 
   <div class="quiz-toggles">
-    <input type="checkbox" [(ngModel)]="isRepeatWords"> Allow word repetitions
-    <input type="checkbox" [(ngModel)]="isLanguageReversed" (click)="onReverseLanguage()"> Reverse language
-    <input type="checkbox" [(ngModel)]="isTimerEnabled" (click)="onEnableTimer()"> Enable timer
+    <label>
+      <input type="checkbox" [(ngModel)]="isRepeatWords"> Allow word repetitions
+    </label>
+    <label>
+      <input type="checkbox" [(ngModel)]="isLanguageReversed" (click)="onReverseLanguage()"> Reverse language
+    </label>
+    <label>
+      <input type="checkbox" [(ngModel)]="isTimerEnabled" (click)="onEnableTimer()"> Enable timer
+    </label>
   </div>
 
   <button class="quiz-button" (click)="finishAttempt()" tabindex="0">Finish</button>
