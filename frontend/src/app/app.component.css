@@ -87,24 +87,20 @@ table {
   margin-bottom: 20px; /* Adjust as needed */
 }
 
-/* Style for table headers */
 th {
   background-color: #f2f2f2;
   padding: 8px;
   text-align: left;
 }
 
-/* Style for table rows */
 tr {
-  border-bottom: 1px solid #ddd; /* Add a bottom border between rows */
+  border-bottom: 1px solid #ddd;
 }
 
-/* Style for the last column (buttons) */
 td:last-child {
   text-align: center;
 }
 
-/* Style for the "Info" button */
 button {
   background-color: #4CAF50;
   color: white;
@@ -127,15 +123,15 @@ button:hover {
   border: 1px solid #ccc;
   border-radius: 5px;
   display: flex;
-  flex-direction: column; /* Change to column */
-  align-items: flex-start; /* Align items to the start of the flex container */
+  flex-direction: column;
+  align-items: flex-start;
 }
 
 .numeric-input {
-  margin-left: 10px; /* Add margin for spacing */
-  padding: 5px; /* Adjust padding for styling */
-  border: 1px solid #ccc; /* Add border for styling */
-  border-radius: 3px; /* Add border radius for rounded corners */
+  margin-left: 10px;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
 }
 
 .timer {
