@@ -37,7 +37,7 @@ por;по
 segun;в зависимости от
 sin;без
 sobre;на
-además;кроме
+además;кроме,более того
 además de;также как,в дополнение к
 al aldo de;рядом с
 alrededor de;вокруг
@@ -103,6 +103,7 @@ actitud;отношение между людьми
 relación;отношение между предметами
 verduras;овощи
 precio;цена
+la maestra;учитель
 
 
 [adjectives]
@@ -150,7 +151,6 @@ rico;богатый
 simpatico;красивый
 sincero;искренный
 sabrosa;вкусный
-tacaño;скупой
 tipico;типичный
 triste;грустный
 viejo;старый
@@ -301,9 +301,6 @@ recomendar;рекомендовать
 ganar;побеждать
 dirigir;возглавлять
 coordinar;координировать
-
-[verbs,common]
-
 estar;быть
 andar;идти
 dar;давать
@@ -407,7 +404,6 @@ lucir;выпендриваться
 perseguir;преследовать
 seguir;следовать
 destruir;разрушать
-disminuir;уменьшать
 distribuir;доставлять
 excluir;исключать
 fluir;двигать
@@ -437,6 +433,10 @@ hablar;говорить
 intervenir;вмешаться
 morir;умирать
 dormir;спать
+saludar a;здороваться
+preguntar;спрашивать
+contestar;отвечать
+empieza;начинается
 
 [adjectives,common]
 
@@ -457,7 +457,6 @@ imposible;невозможно
 relativamente;относительно
 sin embargo;тем не менее
 a pesar de que;несмотря на то что
-además;более того
 
 [nouns,house]
 
@@ -586,7 +585,6 @@ teclado;клавиатура
 tecla;клавиша
 pausa;пауза
 insertar;вставить,вставка
-fin;конец,в конец
 retorno;выполнить
 cursor;курсор
 espacio;пробел
@@ -716,4 +714,10 @@ la cosa;вещь
 dime,por favor;скажи мне
 Que no!;а вот и нет
 Que no está bien;а вот и не хорошо,а вот и неверно
+llueve;идёт дождь
+nieva;идёт снег
+hace frio;холодно
+hace viento;ветрено
+recuerda;запомни
+
 

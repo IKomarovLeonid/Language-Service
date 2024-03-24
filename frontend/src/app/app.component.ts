@@ -201,4 +201,38 @@ export class AppComponent implements OnInit{
       if(!result) alert('Failed to delete history attempt');
       this.loadHistory();
   }
+
+  onRepeatHistory(id: number | undefined){
+      if(id){
+        let model = this.history?.filter(h => h.id === id)[0]!!;
+        let errors = model.errors;
+        if(errors){
+          let len = Object.keys(errors).length;
+          if (len <= 0) {
+            alert('No words to repeat from this history');
+            return;
+          }
+          let words = new Array<WordModel>();
+          for (const p in errors) {
+            if (errors.hasOwnProperty(p)) {
+              if(this.wordsFromServer){
+                let word = this.wordsFromServer.filter(w => w.word === p);
+                if(word.length > 0) words.push(word[0]);
+                else{
+                  let filtered = this.wordsFromServer.filter(w =>
+                    w.translations!!.filter(w =>
+                      w === p).length > 0);
+                  if(filtered.length > 0) words.push(filtered[0]);
+                }
+              }
+            }
+          }
+          this.gameService.finish();
+          this.gameService.setWords(words);
+          this.setWord();
+
+        }
+      }
+      else alert('This history has undefined id')
+  }
 }

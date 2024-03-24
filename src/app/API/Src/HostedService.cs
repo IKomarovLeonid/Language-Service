@@ -7,6 +7,7 @@ using Objects.Src.Primitives;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -49,6 +50,9 @@ namespace API.Src
 
             ctx.Words.AddRange(spanish);
             ctx.Words.AddRange(english);
+
+            PrintDuplicates(spanish);
+            PrintDuplicates(english);
 
             await ctx.SaveChangesAsync();
         }
@@ -140,6 +144,19 @@ namespace API.Src
                 return words;
             }
             
+        }
+
+        private void PrintDuplicates(IEnumerable<WordDto> words)
+        {
+            var duplicates = words
+                .GroupBy(obj => obj.Word)
+                .Where(group => group.Count() > 1) 
+                .SelectMany(group => group); 
+
+            foreach (var duplicate in duplicates)
+            {
+                Console.WriteLine($"Duplicate Word: {duplicate.Word}");
+            }
         }
     }
 }
