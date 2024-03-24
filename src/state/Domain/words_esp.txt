@@ -704,3 +704,16 @@ mismo;тот же,тот же самый
 si;себя
 otro;другой
 
+[phrases]
+
+es que;дело в том что
+la verdad es que;по правде говоря
+es verdad;это верно,верно
+estar de acuerdo;быть согласным
+la idea;мысль
+se puede;можно
+la cosa;вещь
+dime,por favor;скажи мне
+Que no!;а вот и нет
+Que no está bien;а вот и не хорошо,а вот и неверно
+

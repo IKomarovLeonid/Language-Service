@@ -9,6 +9,7 @@
         Adverb,
         Preposition,
         Pronoun,
-        Questions
+        Questions,
+        Phrases
     }
 }

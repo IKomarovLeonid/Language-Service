@@ -29,7 +29,7 @@
     </select>
     <select class="quiz-select" [(ngModel)]="enumLanguage" (change)="filterWords()">
       <option value="" disabled>Select an option</option>
-      <option *ngFor="let value of enumLanguageValues" [value]="value">{{ showLanguage() }}</option>
+      <option *ngFor="let value of enumLanguageValues" [value]="value">{{ languageTypeMapping[value] }}</option>
     </select>
   </div>
 
@@ -58,6 +58,7 @@
     <th>Part of speech</th>
     <th>Сategory</th>
     <th>Details</th>
+    <th>Actions</th>
     </thead>
     <tbody>
     <tr *ngFor="let attempt of history">
@@ -67,8 +68,8 @@
       <td>{{attempt.createdTime?.toLocaleString()}}</td>
       <td>{{attempt.wordTypes}}</td>
       <td>{{attempt.category}}</td>
-      <td><button (click)="showHistoryInfo(attempt)">Info</button></td>
-      <td><button (click)="onDeleteHistory(attempt.id)">Delete</button></td>
+      <td><button class="button-history-info" (click)="showHistoryInfo(attempt)">Info</button></td>
+      <td><button class="button-history-delete" (click)="onDeleteHistory(attempt.id)">Delete</button></td>
     </tr>
     </tbody>
   </table>

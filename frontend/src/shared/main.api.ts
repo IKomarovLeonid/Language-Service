@@ -422,6 +422,7 @@ export enum WordType {
   Preposition = "Preposition",
   Pronoun = "Pronoun",
   Questions = "Questions",
+  Phrases = "Phrases",
 }
 
 export enum WordCategory {
@@ -683,7 +684,6 @@ export interface IWordModel {
 }
 
 export enum LanguageType {
-  Undefined = "Undefined",
   SpanishRussian = "SpanishRussian",
   EnglishRussian = "EnglishRussian",
 }

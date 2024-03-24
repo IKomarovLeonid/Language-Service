@@ -31,6 +31,11 @@ export class AppComponent implements OnInit{
   // message
   userShowMessage: string | undefined;
 
+  languageTypeMapping = {
+    [LanguageType.SpanishRussian]: 'Spanish <-> Russian',
+    [LanguageType.EnglishRussian]: 'English <-> Russian',
+  };
+
     constructor(private client : ApiClient, private gameService : GameService) {
   }
 
@@ -189,17 +194,6 @@ export class AppComponent implements OnInit{
 
   showTimerSecondsLeft(): number{
     return this.gameService.getTimerSecondsLeft();
-  }
-
-  showLanguage(): string{
-      switch (this.enumLanguage){
-        case LanguageType.EnglishRussian:
-          return "English <-> Russian";
-        case LanguageType.SpanishRussian:
-          return "Spanish <-> Russian";
-      }
-
-      return "";
   }
 
   async onDeleteHistory(id: number | undefined){

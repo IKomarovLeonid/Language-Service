@@ -108,6 +108,7 @@ namespace API.Src
                                 "prepositions" => WordType.Preposition,
                                 "pronoun" => WordType.Pronoun,
                                 "questions" => WordType.Questions,
+                                "phrases" => WordType.Phrases,
                                 _ => WordType.Any,
                             };
                             continue;
