@@ -38,5 +38,12 @@ namespace API.Src.Controllers
 
             return response.IsSuccess ? Ok() : BadRequest(response);
         }
+
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> DeleteAttemptHistoryAsync(ulong id)
+        {
+            var response = await _mediator.Send(new DeleteAttemptHistoryCommand(id));
+            return response.IsSuccess ? Ok() : BadRequest(response);
+        }
     }
 }

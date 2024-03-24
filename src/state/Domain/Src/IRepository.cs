@@ -15,5 +15,7 @@ namespace Domain.Src
         Task<ICollection<TModel>> GetAllAsync(Expression<Func<TModel, bool>> query = null);
 
         Task<TModel> FindByIdAsync(ulong id);
+
+        Task DeleteAsync(ulong id);
     }
 }

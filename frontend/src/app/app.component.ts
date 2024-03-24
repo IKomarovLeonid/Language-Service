@@ -198,5 +198,13 @@ export class AppComponent implements OnInit{
         case LanguageType.SpanishRussian:
           return "Spanish <-> Russian";
       }
+
+      return "";
+  }
+
+  async onDeleteHistory(id: number | undefined){
+      let result = await this.client.deleteHistory(id!!);
+      if(!result) alert('Failed to delete history attempt');
+      this.loadHistory();
   }
 }

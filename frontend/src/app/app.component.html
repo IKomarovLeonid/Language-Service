@@ -68,6 +68,7 @@
       <td>{{attempt.wordTypes}}</td>
       <td>{{attempt.category}}</td>
       <td><button (click)="showHistoryInfo(attempt)">Info</button></td>
+      <td><button (click)="onDeleteHistory(attempt.id)">Delete</button></td>
     </tr>
     </tbody>
   </table>

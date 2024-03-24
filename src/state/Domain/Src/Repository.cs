@@ -72,5 +72,19 @@ namespace Domain.Src
 
             return await entities.FirstOrDefaultAsync(t => t.Id == id);
         }
+
+        public async Task DeleteAsync(ulong id)
+        {
+            using var scope = _factory.CreateScope();
+            await using var context = scope.ServiceProvider.GetRequiredService<ApplicationContext>();
+
+            var item = await FindByIdAsync(id);
+
+            if(item != null)
+            {
+                context.Set<TModel>().Remove(item);
+                await context.SaveChangesAsync();
+            }
+        }
     }
 }

@@ -51,4 +51,13 @@ export class ApiClient{
       return undefined;
     }
   }
+
+  async deleteHistory(id: number){
+    try{
+      return await this.history.deleteAttemptHistory(id);
+    }
+    catch{
+      return undefined;
+    }
+  }
 }
