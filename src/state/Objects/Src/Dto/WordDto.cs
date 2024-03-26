@@ -17,6 +17,8 @@ namespace Objects.Src.Dto
 
         public string Translation { get; set; }
 
+        public string Conjugation { get; set; }
+
         public DateTime CreatedTime { get; set; }
 
         public DateTime UpdatedTime { get; set; }

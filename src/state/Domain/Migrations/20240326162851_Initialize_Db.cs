@@ -57,7 +57,8 @@ namespace Domain.Migrations
                     category = table.Column<string>(nullable: false),
                     language = table.Column<string>(nullable: false),
                     word = table.Column<string>(nullable: true),
-                    translation = table.Column<string>(nullable: true),
+                    translation = table.Column<string>(nullable: false),
+                    conjugation = table.Column<string>(nullable: true),
                     created_utc = table.Column<DateTime>(nullable: false),
                     updated_utc = table.Column<DateTime>(nullable: false)
                 },

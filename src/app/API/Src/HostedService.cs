@@ -122,6 +122,7 @@ namespace API.Src
 
                         var word = data[0];
                         var translation = data[1];
+                        var conjugation = data.Length > 2 ? data[2] : null;
 
                         words.Add(new WordDto()
                         {
@@ -131,6 +132,7 @@ namespace API.Src
                             Translation = translation,
                             Language = language,
                             Type = wordType,
+                            Conjugation = conjugation,
                             Category = wordCategory
                         });
                     }

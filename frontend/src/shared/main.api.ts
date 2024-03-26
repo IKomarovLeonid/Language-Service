@@ -617,6 +617,7 @@ export class WordModel implements IWordModel {
   category?: WordCategory;
   language?: LanguageType;
   word?: string | undefined;
+  conjugation?: string | undefined;
   translations?: string[] | undefined;
   createdTime?: Date;
   updatedTime?: Date;
@@ -637,6 +638,7 @@ export class WordModel implements IWordModel {
       this.category = _data["category"];
       this.language = _data["language"];
       this.word = _data["word"];
+      this.conjugation = _data["conjugation"];
       if (Array.isArray(_data["translations"])) {
         this.translations = [] as any;
         for (let item of _data["translations"])
@@ -661,6 +663,7 @@ export class WordModel implements IWordModel {
     data["category"] = this.category;
     data["language"] = this.language;
     data["word"] = this.word;
+    data["conjugation"] = this.conjugation;
     if (Array.isArray(this.translations)) {
       data["translations"] = [];
       for (let item of this.translations)
@@ -678,6 +681,7 @@ export interface IWordModel {
   category?: WordCategory;
   language?: LanguageType;
   word?: string | undefined;
+  conjugation?: string | undefined;
   translations?: string[] | undefined;
   createdTime?: Date;
   updatedTime?: Date;

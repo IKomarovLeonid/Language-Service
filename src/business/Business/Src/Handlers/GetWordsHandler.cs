@@ -32,6 +32,7 @@ namespace Business.Src.Handlers
                 Translations = dto.Translation.Split(","),
                 Type = dto.Type,
                 Word = dto.Word,
+                Conjugation = dto.Conjugation,
                 CreatedTime = dto.CreatedTime,
                 UpdatedTime = dto.UpdatedTime,
             }).ToList());

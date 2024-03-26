@@ -72,6 +72,10 @@ namespace Domain.Migrations
                         .HasColumnName("category")
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("Conjugation")
+                        .HasColumnName("conjugation")
+                        .HasColumnType("TEXT");
+
                     b.Property<DateTime>("CreatedTime")
                         .HasColumnName("created_utc")
                         .HasColumnType("TEXT");
@@ -82,6 +86,7 @@ namespace Domain.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Translation")
+                        .IsRequired()
                         .HasColumnName("translation")
                         .HasColumnType("TEXT");
 

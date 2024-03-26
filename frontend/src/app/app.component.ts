@@ -28,6 +28,7 @@ export class AppComponent implements OnInit{
   isRepeatWords = true;
   isLanguageReversed = false;
   isTimerEnabled = false;
+  isConjugation = false;
   // message
   userShowMessage: string | undefined;
 
@@ -234,5 +235,16 @@ export class AppComponent implements OnInit{
         }
       }
       else alert('This history has undefined id')
+  }
+
+  onConjugation(){
+    if(!this.isConjugation){
+      let words = this.wordsFromServer!!.filter(w => w.conjugation != undefined);
+      this.gameService.setWords(words);
+      this.setWord();
+    }
+    else{
+      this.filterWords();
+    }
   }
 }
