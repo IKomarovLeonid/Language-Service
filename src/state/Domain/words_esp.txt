@@ -291,6 +291,7 @@ colaborar;взаимодействовать
 concluir;заключать
 invertir;инвестировать
 organizar;организовывать
+caen;падают
 apoyar;поддерживать
 seleccionar;выбирать
 optimizar;оптимизировать
@@ -439,6 +440,10 @@ saludar a;здороваться
 preguntar;спрашивать
 contestar;отвечать
 empieza;начинается
+regresar;возвращаться
+acompañar;сопровождать
+auydar;помогать
+coger;взять
 
 [adjectives,common]
 
@@ -451,6 +456,7 @@ pronto;скоро
 siempre;всегда
 nunca;никогда
 a menudo;часто
+a veses;иногда
 casi nunca;редко
 promedio;среднее
 generalmente;обычно
@@ -459,6 +465,7 @@ imposible;невозможно
 relativamente;относительно
 sin embargo;тем не менее
 a pesar de que;несмотря на то что
+cariño;дорогой
 
 [nouns,house]
 
@@ -721,5 +728,13 @@ nieva;идёт снег
 hace frio;холодно
 hace viento;ветрено
 recuerda;запомни
+suena el timbre;звенит звонок
+ahora mismo;сейчас же
+vete a casa;идти домой
+Qué rollo!;какая скука!
+Qué lástima!;какая жалость!
+Seguro;точно,верно
+Vale!;хорошо!,идёт!,согласен!
+Vaya sorpresa!;какой сюрприз!
 
 
