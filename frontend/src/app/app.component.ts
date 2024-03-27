@@ -121,11 +121,18 @@ export class AppComponent implements OnInit{
           this.gameService.setWords(this.wordsFromServer.filter(item => item.language === this.enumLanguage));
         }
         else {
-          this.gameService.setWords(this.wordsFromServer.filter(
-            item => item.type === this.selectedEnumType &&
-              item.category === this.selectedEnumCategory &&
-              item.language === this.enumLanguage
-          ));
+          if(this.selectedEnumCategory === WordCategory.Any){
+            this.gameService.setWords(this.wordsFromServer.filter(
+              item => item.type === this.selectedEnumType &&
+                item.language === this.enumLanguage
+            ));
+          }
+          else {
+            this.gameService.setWords(this.wordsFromServer.filter(
+              item => item.category === this.selectedEnumCategory &&
+                item.language === this.enumLanguage
+            ));
+          }
         }
       }
       this.setWord();
