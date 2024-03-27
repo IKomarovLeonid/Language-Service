@@ -10,9 +10,9 @@ Service for learning languages (vocabulary)
 - C#
 - TypeScript
 
-## Build
-- Clone
-- Run dotnet Build in root directory
-- Run npm buld in frontend directory
-- Copy content of dist folder from frontend directory to dotnet 'wwwroot' directory
-- Run application
+## How to Build
+- Clone solution
+- Open powershell in the solution's folder
+- Run .\build.ps1 
+- After script is done, navigate to created 'output' folder 
+- Run API.exe and navigate to url

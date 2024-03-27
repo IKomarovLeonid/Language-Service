@@ -1,8 +1,24 @@
+
+# Check if dotnet is installed
+$dotnetPath = Get-Command dotnet -ErrorAction SilentlyContinue
+if (-not $dotnetPath) {
+    Write-Host "dotnet is not installed or not found. Please install dotnet and try again."
+    break
+}
+
+# Check if npm is installed
+$npmPath = Get-Command npm -ErrorAction SilentlyContinue
+if (-not $npmPath) {
+    Write-Host "npm is not installed or not found. Please install npm and try again."
+    break
+}
+
+
 # Globals
 $currentDirectory = Get-Location
 $frontendDirectory = Join-Path -Path $currentDirectory -ChildPath "frontend"
 $solutionFileName = "Language-Service.sln"
-$dotnetBuildResultPath = "src\app\API\bin\Debug\net5.0"
+$dotnetBuildResultPath = "src\app\API\bin\Release\net5.0"
 $frontendBuildResultPath = "frontend\dist\language-Service"
 $outputFrontendRootPath = "output\wwwroot"
 
@@ -20,11 +36,14 @@ else {
     # Clear output folder every time
     Remove-Item -Path $outputFolder\* -Recurse -Force
 }
+if (-not (Test-Path $outputFrontendRootPath -PathType Container)) {
+    New-Item -Path $outputFrontendRootPath -ItemType Directory
+}
 
 # Build backend
 dotnet clean $solutionPath
 
-dotnet build $solutionPath 
+dotnet build $solutionPath /p:Configuration=Release
 
 # Build frontend
 cd $frontendDirectory
