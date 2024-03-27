@@ -338,7 +338,7 @@ sosegar;успокаивать
 caber;поместить
 haber;иметь;he,has,ha,hemos,habéis,han
 oler;пахнуть
-saber;знать;sé,sabes,sabe,sabemos,sabéis,saben
+saber;знать;sabo,sabes,sabe,sabemos,sabéis,saben
 ser;быть;soy,eres,es,somos,sois,son
 valer;стоить
 ver;видеть;veo,ves,ve,vemos,veis,ven

@@ -13,6 +13,7 @@ export class AppComponent implements OnInit{
   wordToTranslate: string | undefined;
   userTranslation: string | undefined;
   expectedTranslations: string[] | undefined;
+  conjugation: string | undefined;
   // filtration
   @Input() selectedEnumCategory = WordCategory.Any;
   @Input() selectedEnumType = WordType.Any;
@@ -70,10 +71,12 @@ export class AppComponent implements OnInit{
       if(!this.isLanguageReversed){
         this.wordToTranslate = word.word;
         this.expectedTranslations = word.translations!!;
+        this.conjugation = word.conjugation;
       }
       else {
         this.wordToTranslate = word.translations!![0];
         this.expectedTranslations = [];
+        this.conjugation = undefined;
         this.expectedTranslations.push(word.word!!);
       }
     }
@@ -81,22 +84,34 @@ export class AppComponent implements OnInit{
       this.wordToTranslate = undefined;
       this.userTranslation = undefined;
       this.expectedTranslations = undefined;
+      this.conjugation = undefined;
       this.userShowMessage = 'No words by this category and language type';
     }
   }
 
 
   makeAnswer(){
-      let result = this.gameService.checkAnswer(this.userTranslation, this.expectedTranslations!!)
-      this.saveAttempt(this.wordToTranslate!!, this.expectedTranslations!!,
-      this.userTranslation ?? 'N/A', result);
-      this.userTranslation = undefined;
-      if(!result){
-        this.buildErrorMessage();
+      console.log(this.isConjugation);
+      if(!this.isConjugation){
+        let result = this.gameService.checkAnswer(this.userTranslation, this.expectedTranslations!!)
+        this.saveAttempt(this.wordToTranslate!!, this.expectedTranslations!!,
+          this.userTranslation ?? 'N/A', result);
+        this.userTranslation = undefined;
+        if(!result){
+          this.buildErrorMessage();
+        }
+        else {
+          this.resetErrorMessage();
+          this.setWord();
+        }
       }
-      else {
-        this.resetErrorMessage();
-        this.setWord();
+      else{
+        if(this.userTranslation === this.conjugation){
+          alert('ok');
+        }
+        else{
+          alert('error: ' + this.conjugation);
+        }
       }
   }
 
@@ -246,5 +261,8 @@ export class AppComponent implements OnInit{
     else{
       this.filterWords();
     }
+  }
+
+  showConjugations(){
   }
 }
