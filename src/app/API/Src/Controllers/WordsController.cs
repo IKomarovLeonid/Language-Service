@@ -22,18 +22,5 @@ namespace API.Src.Controllers
 
             return PageViewModel<WordModel>.New(response.Data);
         }
-
-        [HttpPost]
-        public async Task<IActionResult> AddWordAsync()
-        {
-            return Ok("word added");
-        }
-
-
-        [HttpPatch]
-        public async Task<IActionResult> UpdateWordAsync()
-        {
-            return Ok("word updated");
-        }
     }
 }
