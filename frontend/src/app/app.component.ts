@@ -66,10 +66,11 @@ export class AppComponent implements OnInit{
 
   setWord() : void{
     let word = this.gameService.getRandomWord(this.isRepeatWords);
-    if(this.isConjugation){
+    if(word && this.isConjugation){
       this.setConjugation(word)
       return;
     }
+
     if(word){
       this.resetErrorMessage();
       if(!this.isLanguageReversed){
@@ -255,8 +256,6 @@ export class AppComponent implements OnInit{
     if(!this.isConjugation){
       let words = this.wordsFromServer!!.filter(w => w.conjugation != undefined);
       this.gameService.setWords(words);
-      let word = this.gameService.getRandomWord(this.isRepeatWords);
-      this.setConjugation(word);
     }
     else{
       this.filterWords();
