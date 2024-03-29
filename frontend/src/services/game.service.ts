@@ -126,4 +126,34 @@ export class GameService{
     this.milliseconds = this.defaultTimerMsc;
   }
 
+  public getAnyOfConjugation(word: WordModel) : { translate: string, expected: string } | undefined{
+    if(!word.conjugation) return undefined;
+    let items = word.conjugation.split(",");
+    if(items.length != 6) return undefined;
+    let index = Math.floor(Math.random() * items.length);
+    let con = items[index];
+    let part = '';
+    switch (index){
+      case 0:
+        part = 'yo'
+        break;
+      case 1:
+        part = 'tú'
+        break;
+      case 2:
+        part = 'él/ella'
+        break;
+      case 3:
+        part = 'nosotros'
+        break;
+      case 4:
+        part = 'vosotros'
+        break;
+      case 5:
+        part = 'ellos'
+        break;
+    }
+    let toTranslate = part + " -> " + word.word;
+    return {translate: toTranslate, expected: con};
+  }
 }

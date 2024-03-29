@@ -74,7 +74,7 @@
       <td>{{attempt.category}}</td>
       <td><button class="button-history-info" (click)="showHistoryInfo(attempt)">Info</button></td>
       <td><button class="button-history-delete" (click)="onDeleteHistory(attempt.id)">Delete</button></td>
-      <td><button class="button-history-repeat" (click)="onRepeatHistory(attempt.id)">Repeat</button></td>
+      <td><button class="button-history-repeat" (click)="onRepeatHistory(attempt.id)" [disabled]="isConjugation">Repeat</button></td>
     </tr>
     </tbody>
   </table>

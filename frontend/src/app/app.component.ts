@@ -66,12 +66,15 @@ export class AppComponent implements OnInit{
 
   setWord() : void{
     let word = this.gameService.getRandomWord(this.isRepeatWords);
+    if(this.isConjugation){
+      this.setConjugation(word)
+      return;
+    }
     if(word){
       this.resetErrorMessage();
       if(!this.isLanguageReversed){
         this.wordToTranslate = word.word;
         this.expectedTranslations = word.translations!!;
-        this.conjugation = word.conjugation;
       }
       else {
         this.wordToTranslate = word.translations!![0];
@@ -91,28 +94,17 @@ export class AppComponent implements OnInit{
 
 
   makeAnswer(){
-      console.log(this.isConjugation);
-      if(!this.isConjugation){
-        let result = this.gameService.checkAnswer(this.userTranslation, this.expectedTranslations!!)
-        this.saveAttempt(this.wordToTranslate!!, this.expectedTranslations!!,
-          this.userTranslation ?? 'N/A', result);
-        this.userTranslation = undefined;
-        if(!result){
-          this.buildErrorMessage();
-        }
-        else {
-          this.resetErrorMessage();
-          this.setWord();
-        }
-      }
-      else{
-        if(this.userTranslation === this.conjugation){
-          alert('ok');
-        }
-        else{
-          alert('error: ' + this.conjugation);
-        }
-      }
+    let result = this.gameService.checkAnswer(this.userTranslation, this.expectedTranslations!!)
+    this.saveAttempt(this.wordToTranslate!!, this.expectedTranslations!!,
+      this.userTranslation ?? 'N/A', result);
+    this.userTranslation = undefined;
+    if(!result){
+      this.buildErrorMessage();
+    }
+    else {
+      this.resetErrorMessage();
+      this.setWord();
+    }
   }
 
   filterWords(){
@@ -263,13 +255,19 @@ export class AppComponent implements OnInit{
     if(!this.isConjugation){
       let words = this.wordsFromServer!!.filter(w => w.conjugation != undefined);
       this.gameService.setWords(words);
-      this.setWord();
+      let word = this.gameService.getRandomWord(this.isRepeatWords);
+      this.setConjugation(word);
     }
     else{
       this.filterWords();
     }
   }
 
-  showConjugations(){
+  setConjugation(word: WordModel){
+    let con = this.gameService.getAnyOfConjugation(word);
+    if(con){
+      this.wordToTranslate = con.translate;
+      this.expectedTranslations = [con.expected];
+    }
   }
 }
