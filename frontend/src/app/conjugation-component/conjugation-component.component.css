@@ -1,0 +1,38 @@
+.conjugation-component {
+  display: flex;
+  flex-direction: column; /* Stack rows vertically */
+  margin-bottom: 10px;
+  padding: 10px; /* Add padding to the container */
+  box-sizing: border-box; /* Include padding and border in the width */
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px; /* Add margin between rows */
+}
+
+.conjugation-input {
+  padding: 10px;
+  width: calc(50% - 5px); /* Subtracting margin from the width */
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin: 5px;
+}
+
+.wrong-input {
+  border: 1px solid red;
+}
+
+/* REMOVE later */
+.error-label {
+  color: #d9534f;
+  font-weight: bold;
+}
+
+.error-container{
+  flex: 1;
+}

@@ -16,6 +16,8 @@ export class GameService{
   private milliseconds: number = 0;
   private timer: any;
   private defaultTimerMsc;
+  // cache word
+  private currentWord: WordModel | undefined;
 
   constructor() {
     this.defaultTimerMsc = 10000;
@@ -51,31 +53,56 @@ export class GameService{
   getRandomWord(isRepeatWords: boolean): WordModel{
     if(isRepeatWords){
       const randomIndex = Math.floor(Math.random() * this.getWordsCount());
-      return this.words[randomIndex];
+      this.currentWord = this.words[randomIndex];
+      return this.currentWord;
     }
     else{
       let len = this.getWordsCount();
       if(this.wordIndex < len){
         let word = this.words[this.wordIndex];
+        this.currentWord = word;
         this.wordIndex ++;
         return word;
       }
       else{
         this.wordIndex = 0;
-        return this.words[this.wordIndex];
+        this.currentWord = this.words[this.wordIndex];
+        return this.currentWord;
       }
     }
   }
 
-  checkAnswer(translation: string | undefined, expectedTranslations: string[]): boolean{
+  checkAnswer(translation: string | undefined, expectedTranslations: string[], isConjugation: boolean): boolean{
     this.totalAnswers ++;
     if(translation === undefined || translation.trim() === ''){
       this.answersStreak--;
       return false;
     }
     let lowerTranslation = translation.toLowerCase();
-    let filtered = expectedTranslations.filter(w => lowerTranslation === w.toLowerCase());
-    if(filtered.length > 0){
+    if(!isConjugation){
+      let filtered = expectedTranslations.filter(w => lowerTranslation === w.toLowerCase());
+      if(filtered.length > 0){
+        this.answersStreak ++;
+        this.correctAnswersCount ++;
+        if(this.isTimerEnabled){
+          this.stopTimer();
+          this.startTimer();
+        }
+        return true;
+      }
+    }
+    else {
+      let answers = translation.split(",");
+      if(answers.length != expectedTranslations.length){
+        this.answersStreak--;
+        return false;
+      }
+      for(let i = 0; i < answers.length; i++){
+        if(answers[i] != expectedTranslations[i]){
+          this.answersStreak--;
+          return false;
+        }
+      }
       this.answersStreak ++;
       this.correctAnswersCount ++;
       if(this.isTimerEnabled){
@@ -84,6 +111,7 @@ export class GameService{
       }
       return true;
     }
+
     this.answersStreak--;
     return false;
   }
@@ -126,34 +154,7 @@ export class GameService{
     this.milliseconds = this.defaultTimerMsc;
   }
 
-  public getAnyOfConjugation(word: WordModel) : { translate: string, expected: string } | undefined{
-    if(!word.conjugation) return undefined;
-    let items = word.conjugation.split(",");
-    if(items.length != 6) return undefined;
-    let index = Math.floor(Math.random() * items.length);
-    let con = items[index];
-    let part = '';
-    switch (index){
-      case 0:
-        part = 'yo'
-        break;
-      case 1:
-        part = 'tú'
-        break;
-      case 2:
-        part = 'él/ella'
-        break;
-      case 3:
-        part = 'nosotros'
-        break;
-      case 4:
-        part = 'vosotros'
-        break;
-      case 5:
-        part = 'ellos'
-        break;
-    }
-    let toTranslate = part + " -> " + word.word;
-    return {translate: toTranslate, expected: con};
+  public getCurrentWord(){
+    return this.currentWord;
   }
 }

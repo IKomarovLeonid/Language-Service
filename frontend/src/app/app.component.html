@@ -10,15 +10,17 @@
   </label>
   <br><br>
   <div *ngIf="wordToTranslate">
-    <label class="quiz-label">Translate word: </label>
+    <label class="quiz-label" *ngIf="!isConjugation">Translate word: </label>
+    <label class="quiz-label" *ngIf="isConjugation">To conjugate verb: </label>
     <label class="word-label">{{this.wordToTranslate}}</label>
     <div class="timer" *ngIf="isTimerEnabled">{{showTimerSecondsLeft()}} seconds left</div>
-    <input id="translation" class="quiz-input" [(ngModel)]="userTranslation" (keyup.enter)="makeAnswer()" [disabled] = "showTotalCount() <= 0"  placeholder="Enter your translation and press ENTER...">
+    <input id="translation" class="quiz-input" [(ngModel)]="userTranslation" (keyup.enter)="makeAnswer()" [disabled] = "showTotalCount() <= 0" *ngIf="!isConjugation"  placeholder="Enter your translation and press ENTER...">
   </div>
+  <app-conjugation-component *ngIf="isConjugation"></app-conjugation-component>
   <div class="error-container" *ngIf="userShowMessage">
     <label class="error-label"><span class="bold">{{userShowMessage}}</span></label>
   </div>
-  <div class="select-container">
+  <div class="select-container" *ngIf="!isConjugation">
     <select class="quiz-select" [(ngModel)]="selectedEnumCategory" (change)="filterWords()" [disabled]="isConjugation">
       <option value="" disabled>Select an option</option>
       <option *ngFor="let value of enumCategoryValues" [value]="value">Category: {{ value }}</option>
@@ -74,7 +76,7 @@
       <td>{{attempt.category}}</td>
       <td><button class="button-history-info" (click)="showHistoryInfo(attempt)">Info</button></td>
       <td><button class="button-history-delete" (click)="onDeleteHistory(attempt.id)">Delete</button></td>
-      <td><button class="button-history-repeat" (click)="onRepeatHistory(attempt.id)" [disabled]="isConjugation">Repeat</button></td>
+      <td><button class="button-history-repeat" (click)="onRepeatHistory(attempt.id)">Repeat</button></td>
     </tr>
     </tbody>
   </table>

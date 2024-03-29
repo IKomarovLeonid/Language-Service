@@ -66,11 +66,6 @@ export class AppComponent implements OnInit{
 
   setWord() : void{
     let word = this.gameService.getRandomWord(this.isRepeatWords);
-    if(word && this.isConjugation){
-      this.setConjugation(word)
-      return;
-    }
-
     if(word){
       this.resetErrorMessage();
       if(!this.isLanguageReversed){
@@ -80,7 +75,6 @@ export class AppComponent implements OnInit{
       else {
         this.wordToTranslate = word.translations!![0];
         this.expectedTranslations = [];
-        this.conjugation = undefined;
         this.expectedTranslations.push(word.word!!);
       }
     }
@@ -88,17 +82,17 @@ export class AppComponent implements OnInit{
       this.wordToTranslate = undefined;
       this.userTranslation = undefined;
       this.expectedTranslations = undefined;
-      this.conjugation = undefined;
       this.userShowMessage = 'No words by this category and language type';
     }
   }
 
 
   makeAnswer(){
-    let result = this.gameService.checkAnswer(this.userTranslation, this.expectedTranslations!!)
+    let result = this.gameService.checkAnswer(this.userTranslation, this.expectedTranslations!!, this.isConjugation)
     this.saveAttempt(this.wordToTranslate!!, this.expectedTranslations!!,
       this.userTranslation ?? 'N/A', result);
-    this.userTranslation = undefined;
+    if(!this.isConjugation) this.userTranslation = undefined;
+    else if(result) this.userTranslation = undefined;
     if(!result){
       this.buildErrorMessage();
     }
@@ -256,17 +250,10 @@ export class AppComponent implements OnInit{
     if(!this.isConjugation){
       let words = this.wordsFromServer!!.filter(w => w.conjugation != undefined);
       this.gameService.setWords(words);
+      this.setWord();
     }
     else{
       this.filterWords();
-    }
-  }
-
-  setConjugation(word: WordModel){
-    let con = this.gameService.getAnyOfConjugation(word);
-    if(con){
-      this.wordToTranslate = con.translate;
-      this.expectedTranslations = [con.expected];
     }
   }
 }
