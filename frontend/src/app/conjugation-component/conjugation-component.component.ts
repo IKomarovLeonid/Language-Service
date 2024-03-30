@@ -1,12 +1,14 @@
-import { Component } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {GameService} from "../../services/game.service";
+import {WordModel} from "../../shared/main.api";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-conjugation-component',
   templateUrl: './conjugation-component.component.html',
   styleUrls: ['./conjugation-component.component.css']
 })
-export class ConjugationComponentComponent {
+export class ConjugationComponentComponent implements OnDestroy{
 
   yo: string | undefined;
   tu: string | undefined;
@@ -17,25 +19,27 @@ export class ConjugationComponentComponent {
 
   message: string | undefined;
 
+  word: WordModel | null | undefined;
+  private dataSubscription: Subscription;
+
   wrongItems: boolean[];
   constructor(private service: GameService) {
     this.wrongItems = [false, false, false, false, false, false];
+    this.dataSubscription = this.service.dataVariable$.subscribe(value => {
+      this.word = value;
+      // Do something with the updated value
+    });
   }
 
   makeAnswer(){
-    let word = this.service.getCurrentWord();
-    console.log(this.yo, this.tu, this.nosotros, this.vosotros, this.ustedes, this.el);
     this.message = undefined;
     if (this.yo === undefined || this.tu === undefined || this.el === undefined ||
       this.nosotros === undefined || this.vosotros === undefined || this.ustedes === undefined) {
       this.message = "Error: At least one input field is not filled";
     }
-    console.log(word);
-    console.log(word?.conjugation);
-    console.log(word?.conjugation != undefined);
-    if(word?.conjugation != undefined){
-      let expected = word?.conjugation?.split(",");
-      if(expected?.length != 6) this.message = 'Not expected conjugation for word: ' + word?.word + ' got: ' + word?.conjugation;
+    if(this.word?.conjugation != undefined){
+      let expected = this.word?.conjugation?.split(",");
+      if(expected?.length != 6) this.message = 'Not expected conjugation for word: ' + this.word?.word + ' got: ' + this.word?.conjugation;
       let correct = 0;
       if(this.yo === expected[0]) {
         this.setWrongFlag(0, false);
@@ -68,10 +72,17 @@ export class ConjugationComponentComponent {
       }
       else this.setWrongFlag(5, true);
       this.message = `Correct answers: ${correct}`;
+      if(correct === 6) {
+        this.service.registerSuccess();
+      }
     }
   }
 
   private setWrongFlag(index: number, flag: boolean){
     this.wrongItems[index] = flag;
+  }
+
+  ngOnDestroy() {
+    this.dataSubscription.unsubscribe();
   }
 }

@@ -1,11 +1,14 @@
 import {Injectable} from "@angular/core";
-import {WordModel} from "../shared/main.api";
+import {LanguageType, WordCategory, WordModel, WordType} from "../shared/main.api";
+import {ApiClient} from "./api.client";
+import {BehaviorSubject} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
 })
 export class GameService{
   private words: WordModel[] = [];
+  private filteredWords: WordModel[] = [];
   private wordIndex = 0;
   // stats
   private correctAnswersCount = 0;
@@ -15,12 +18,29 @@ export class GameService{
   private isTimerEnabled = false;
   private milliseconds: number = 0;
   private timer: any;
-  private defaultTimerMsc;
+  private readonly defaultTimerMsc = 10000;
   // cache word
-  private currentWord: WordModel | undefined;
+  private _currentWord = new BehaviorSubject<WordModel | null>(null);
+  private languageType = LanguageType.SpanishRussian;
 
-  constructor() {
-    this.defaultTimerMsc = 10000;
+  // conjugation
+  private isConjugation = false;
+  private isLanguageReversed = false;
+
+  constructor(private client : ApiClient) {
+    console.log('loading ctor...');
+    this.loadWords();
+    console.log('loading ctor... done');
+  }
+
+  async loadWords(){
+    let apiResult = await this.client.getWords();
+    if(apiResult){
+      this.words = apiResult.items!!;
+      this.filteredWords = apiResult.items!!.filter(w => w.language === this.languageType);
+      this.setAnyWord();
+    }
+    else alert('Unable to fetch words from server');
   }
 
   setWords(words: WordModel[]): void {
@@ -35,7 +55,7 @@ export class GameService{
   }
 
   getWordsCount() : number{
-    return this.words.length;
+    return this.filteredWords.length;
   }
 
   getTotalAttempts(): number{
@@ -50,24 +70,23 @@ export class GameService{
     return this.answersStreak;
   }
 
-  getRandomWord(isRepeatWords: boolean): WordModel{
+  getRandomWord(isRepeatWords: boolean) {
     if(isRepeatWords){
       const randomIndex = Math.floor(Math.random() * this.getWordsCount());
-      this.currentWord = this.words[randomIndex];
-      return this.currentWord;
+      let word = this.words[randomIndex];
+      this.updateDataVariable(word);
     }
     else{
       let len = this.getWordsCount();
       if(this.wordIndex < len){
         let word = this.words[this.wordIndex];
-        this.currentWord = word;
+        this.updateDataVariable(word);
         this.wordIndex ++;
-        return word;
       }
       else{
         this.wordIndex = 0;
-        this.currentWord = this.words[this.wordIndex];
-        return this.currentWord;
+        let word = this.words[this.wordIndex];
+        this.updateDataVariable(word);
       }
     }
   }
@@ -82,12 +101,7 @@ export class GameService{
     if(!isConjugation){
       let filtered = expectedTranslations.filter(w => lowerTranslation === w.toLowerCase());
       if(filtered.length > 0){
-        this.answersStreak ++;
-        this.correctAnswersCount ++;
-        if(this.isTimerEnabled){
-          this.stopTimer();
-          this.startTimer();
-        }
+        this.registerSuccess();
         return true;
       }
     }
@@ -103,12 +117,7 @@ export class GameService{
           return false;
         }
       }
-      this.answersStreak ++;
-      this.correctAnswersCount ++;
-      if(this.isTimerEnabled){
-        this.stopTimer();
-        this.startTimer();
-      }
+      this.registerSuccess();
       return true;
     }
 
@@ -154,7 +163,100 @@ export class GameService{
     this.milliseconds = this.defaultTimerMsc;
   }
 
-  public getCurrentWord(){
-    return this.currentWord;
+  public registerSuccess(){
+    this.answersStreak ++;
+    this.correctAnswersCount ++;
+    if(this.isTimerEnabled){
+      this.stopTimer();
+      this.startTimer();
+    }
   }
+
+  public getConjugation(){
+    return this.isConjugation;
+  }
+
+  public setConjugation(isConjugation : boolean){
+    this.isConjugation = isConjugation;
+    this.filterWords(WordCategory.Any, WordType.Any);
+    this.setAnyWord();
+  }
+
+  get dataVariable$() {
+    return this._currentWord.asObservable();
+  }
+
+  updateDataVariable(value: WordModel) {
+    this._currentWord.next(value);
+  }
+
+  public validateAnswer(userAnswer: string): boolean{
+    this.totalAnswers ++;
+    if(userAnswer === undefined || userAnswer.trim() === ''){
+      this.answersStreak--;
+      return false;
+    }
+    let word = this._currentWord;
+    let lowerTranslation = userAnswer.toLowerCase();
+    // if set
+    if(word){
+      // classic
+      if(!this.isConjugation){
+        // word -> one of translations from word.translations
+        if(!this.isLanguageReversed){
+          let filtered = word.value?.translations?.filter(w => lowerTranslation === w.toLowerCase());
+          if(filtered && filtered.length > 0){
+            this.registerSuccess();
+            return true;
+          }
+          this.answersStreak--;
+          return false;
+        }
+        // word.word === translations
+        else {
+          if(word.value?.word === lowerTranslation){
+            this.registerSuccess();
+            return true;
+          }
+          else {
+            this.answersStreak--;
+            return false;
+          }
+        }
+      }
+      // verbs -> conjugation
+      else{
+        return true;
+      }
+    }
+    else return false;
+  }
+
+  public setAnyWord(){
+    const randomIndex = Math.floor(Math.random() * this.getWordsCount());
+    let word = this.filteredWords[randomIndex];
+    this.updateDataVariable(word);
+  }
+
+  public filterWords(category: WordCategory, type: WordType){
+    if(this.words){
+      if(this.isConjugation){
+        this.filteredWords = this.words.filter(w => w.conjugation);
+      }
+      else{
+        let byLanguage = this.words.filter(w => w.language === this.languageType);
+        if(category === WordCategory.Any && type === WordType.Any){
+          this.filteredWords = byLanguage;
+          return;
+        }
+        if(category === WordCategory.Any){
+          this.filteredWords = byLanguage.filter( item => item.type === type);
+        }
+        else{
+          this.filteredWords = byLanguage.filter( item => item.category === category);
+        }
+      }
+    }
+  }
+
 }

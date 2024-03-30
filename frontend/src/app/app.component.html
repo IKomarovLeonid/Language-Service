@@ -1,5 +1,4 @@
 <div class="quiz-container">
-
   <label class="quiz-label">Total words: <span class="bold">{{showTotalCount()}}</span></label>
   <br><br>
   <label class="quiz-label">Attempts: <span class="bold">{{showTotalAnswers()}}</span>
@@ -9,13 +8,8 @@
     </span>
   </label>
   <br><br>
-  <div *ngIf="wordToTranslate">
-    <label class="quiz-label" *ngIf="!isConjugation">Translate word: </label>
-    <label class="quiz-label" *ngIf="isConjugation">To conjugate verb: </label>
-    <label class="word-label">{{this.wordToTranslate}}</label>
-    <div class="timer" *ngIf="isTimerEnabled">{{showTimerSecondsLeft()}} seconds left</div>
-    <input id="translation" class="quiz-input" [(ngModel)]="userTranslation" (keyup.enter)="makeAnswer()" [disabled] = "showTotalCount() <= 0" *ngIf="!isConjugation"  placeholder="Enter your translation and press ENTER...">
-  </div>
+  <app-word-info-component></app-word-info-component>
+  <input id="translation" class="quiz-input" [(ngModel)]="userTranslation" (keyup.enter)="makeAnswer()" [disabled] = "showTotalCount() <= 0" *ngIf="!isConjugation"  placeholder="Enter your translation and press ENTER...">
   <app-conjugation-component *ngIf="isConjugation"></app-conjugation-component>
   <div class="error-container" *ngIf="userShowMessage">
     <label class="error-label"><span class="bold">{{userShowMessage}}</span></label>

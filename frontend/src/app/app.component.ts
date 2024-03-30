@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {AttemptHistoryModel, AttemptModel, LanguageType, WordCategory, WordModel, WordType} from "../shared/main.api";
 import {ApiClient} from "../services/api.client";
 import {GameService} from "../services/game.service";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-root',
@@ -32,6 +33,8 @@ export class AppComponent implements OnInit{
   isConjugation = false;
   // message
   userShowMessage: string | undefined;
+  word: WordModel | null | undefined;
+  private dataSubscription: Subscription;
 
   languageTypeMapping = {
     [LanguageType.SpanishRussian]: 'Spanish <-> Russian',
@@ -39,21 +42,13 @@ export class AppComponent implements OnInit{
   };
 
     constructor(private client : ApiClient, private gameService : GameService) {
+      this.dataSubscription = this.gameService.dataVariable$.subscribe(value => {
+        this.word = value;
+      });
   }
 
   ngOnInit(): void {
-      this.loadWords();
       this.loadHistory();
-  }
-
-  async loadWords(){
-      let apiResult = await this.client.getWords();
-      if(apiResult){
-        this.wordsFromServer = apiResult.items!!;
-        this.gameService.setWords(apiResult.items!!.filter(item => item.language === this.enumLanguage));
-        this.setWord();
-      }
-      else alert('Unable to fetch words from server');
   }
 
   async loadHistory(){
@@ -65,26 +60,9 @@ export class AppComponent implements OnInit{
   }
 
   setWord() : void{
-    let word = this.gameService.getRandomWord(this.isRepeatWords);
-    if(word){
-      this.resetErrorMessage();
-      if(!this.isLanguageReversed){
-        this.wordToTranslate = word.word;
-        this.expectedTranslations = word.translations!!;
-      }
-      else {
-        this.wordToTranslate = word.translations!![0];
-        this.expectedTranslations = [];
-        this.expectedTranslations.push(word.word!!);
-      }
-    }
-    else {
-      this.wordToTranslate = undefined;
-      this.userTranslation = undefined;
-      this.expectedTranslations = undefined;
-      this.userShowMessage = 'No words by this category and language type';
-    }
+    this.gameService.getRandomWord(this.isRepeatWords);
   }
+
 
 
   makeAnswer(){
@@ -102,28 +80,7 @@ export class AppComponent implements OnInit{
     }
   }
 
-  filterWords(){
-      if(this.wordsFromServer){
-        if(this.selectedEnumCategory === WordCategory.Any && this.selectedEnumType === WordType.Any){
-          this.gameService.setWords(this.wordsFromServer.filter(item => item.language === this.enumLanguage));
-        }
-        else {
-          if(this.selectedEnumCategory === WordCategory.Any){
-            this.gameService.setWords(this.wordsFromServer.filter(
-              item => item.type === this.selectedEnumType &&
-                item.language === this.enumLanguage
-            ));
-          }
-          else {
-            this.gameService.setWords(this.wordsFromServer.filter(
-              item => item.category === this.selectedEnumCategory &&
-                item.language === this.enumLanguage
-            ));
-          }
-        }
-      }
-      this.setWord();
-  }
+
 
   async finishAttempt(){
     await this.client.createAttempt(
@@ -248,12 +205,17 @@ export class AppComponent implements OnInit{
 
   onConjugation(){
     if(!this.isConjugation){
-      let words = this.wordsFromServer!!.filter(w => w.conjugation != undefined);
-      this.gameService.setWords(words);
-      this.setWord();
+      this.gameService.setConjugation(true);
     }
     else{
-      this.filterWords();
+      this.gameService.setConjugation(false);
     }
+    this.filterWords();
+    this.gameService.setAnyWord();
+  }
+
+  filterWords(){
+      this.gameService.filterWords(this.selectedEnumCategory, this.selectedEnumType);
+      this.gameService.setAnyWord();
   }
 }
