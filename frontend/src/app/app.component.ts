@@ -21,7 +21,6 @@ export class AppComponent implements OnInit, OnDestroy{
 
   // for attempt history
   history: AttemptHistoryModel[] | undefined;
-  answers: AttemptModel[] = [];
   // toggles
   isRepeatWords = true;
   isTimerEnabled = false;
@@ -62,8 +61,6 @@ export class AppComponent implements OnInit, OnDestroy{
   makeAnswer(){
     let result = this.gameService.validateAnswer(this.userTranslation!!);
     let word = this.word;
-    this.saveAttempt(word?.word!!, word?.translations!!,
-      this.userTranslation ?? 'N/A', result);
     if(result) {
       this.userShowMessage = undefined;
       this.gameService.setAnyWord();
@@ -79,14 +76,14 @@ export class AppComponent implements OnInit, OnDestroy{
 
 
   async finishAttempt(){
+      let attempts = this.gameService.getUserAnswers();
     await this.client.createAttempt(
-      this.answers,
+      attempts,
       this.gameService.getCorrectAnswers(), 30,
       this.selectedEnumType,
       this.selectedEnumCategory);
     this.gameService.finish();
     this.userTranslation = undefined;
-    this.answers = [];
     this.userShowMessage = undefined;
     this.gameService.setAnyWord();
     this.gameService.resetTime();
@@ -98,16 +95,6 @@ export class AppComponent implements OnInit, OnDestroy{
       .map(([key, value]) => `'${key}' errors was '${value}' times`)
       .join('\n');
     alert(combinedString);
-  }
-
-  saveAttempt(word: string, expectedTranslation: string[], userAnswer: string, isCorrect : boolean){
-      let model = new AttemptModel();
-      model.userTranslation = userAnswer;
-      model.word = word;
-      model.expectedTranslations = expectedTranslation;
-      model.isCorrect = isCorrect;
-      model.totalSeconds = this.gameService.getInitialSeconds() - this.gameService.getTimerSecondsLeft();
-      this.answers.push(model);
   }
 
   onReverseLanguage(){

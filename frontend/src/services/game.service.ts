@@ -1,5 +1,5 @@
 import {Injectable} from "@angular/core";
-import {LanguageType, WordCategory, WordModel, WordType} from "../shared/main.api";
+import {AttemptModel, LanguageType, WordCategory, WordModel, WordType} from "../shared/main.api";
 import {ApiClient} from "./api.client";
 import {BehaviorSubject} from "rxjs";
 
@@ -27,6 +27,9 @@ export class GameService{
   private isConjugation = false;
   private _isLanguageReversed = new BehaviorSubject<boolean>(false);
 
+  // answers -> for history
+  answers: AttemptModel[] = [];
+
   constructor(private client : ApiClient) {
     this.loadWords();
   }
@@ -42,9 +45,14 @@ export class GameService{
   }
 
   finish(){
+    this.answers = [];
     this.correctAnswersCount = 0;
     this.totalAnswers = 0;
     this.answersStreak = 0;
+  }
+
+  getUserAnswers(){
+    return this.answers;
   }
 
   getWordsCount() : number{
@@ -57,6 +65,17 @@ export class GameService{
 
   getCorrectAnswers(): number{
     return this.correctAnswersCount;
+  }
+
+  private saveAttempt(word: string, expectedTranslation: string[], userAnswer: string, isCorrect : boolean){
+    let model = new AttemptModel();
+    model.userTranslation = userAnswer;
+    model.word = word;
+    model.expectedTranslations = expectedTranslation;
+    model.isCorrect = isCorrect;
+    // model.totalSeconds = this.gameService.getInitialSeconds() - this.gameService.getTimerSecondsLeft();
+    model.totalSeconds = 0;
+    this.answers.push(model);
   }
 
   getStreakCounter(): number{
@@ -143,19 +162,25 @@ export class GameService{
           let filtered = word.value?.translations?.filter(w => lowerTranslation === w.toLowerCase());
           if(filtered && filtered.length > 0){
             this.registerSuccess();
+            this.saveAttempt(word.value?.word!!, word.value?.translations!!, lowerTranslation, true);
             return true;
           }
           this.registerFailure();
+          this.saveAttempt(word.value?.word!!, word.value?.translations!!, lowerTranslation, false);
           return false;
         }
         // word.word === translations
         else {
           if(word.value?.word === lowerTranslation){
             this.registerSuccess();
+            let expected: string[] = [word.value?.word];
+            this.saveAttempt(word.value?.translations!! [0], expected, lowerTranslation, true);
             return true;
           }
           else {
             this.registerFailure();
+            let expected: string[] = [word.value?.word!!];
+            this.saveAttempt(word.value?.translations!! [0]!!, expected, lowerTranslation, false);
             return false;
           }
         }
