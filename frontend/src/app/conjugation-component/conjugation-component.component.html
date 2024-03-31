@@ -1,7 +1,4 @@
 <div class="conjugation-component">
-  <div class="error-container" *ngIf="message">
-    <label class="error-label"><span class="bold">{{message}}</span></label>
-  </div>
   <div class="row">
     <input type="text" class="conjugation-input" placeholder="Yo"
            [(ngModel)]="yo" (keyup.enter)="makeAnswer()" [ngClass]="{ 'wrong-input': wrongItems[0] }">
@@ -17,5 +14,8 @@
            [(ngModel)]="vosotros" (keyup.enter)="makeAnswer()" [ngClass]="{ 'wrong-input': wrongItems[4] }">
     <input type="text" class="conjugation-input" placeholder="Ellos/Ellas/Ustedes"
            [(ngModel)]="ustedes" (keyup.enter)="makeAnswer()" [ngClass]="{ 'wrong-input': wrongItems[5] }">
+  </div>
+  <div class="error-container" *ngIf="message">
+    <label class="error-label"><span class="bold">{{message}}</span></label>
   </div>
 </div>

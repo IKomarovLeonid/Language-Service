@@ -73,7 +73,10 @@ export class ConjugationComponentComponent implements OnDestroy{
       else this.setWrongFlag(5, true);
       this.message = `Correct answers: ${correct}`;
       if(correct === 6) {
+        this.message = undefined;
         this.service.registerSuccess();
+        this.service.setAnyWord();
+        this.yo = this.tu = this.nosotros = this.el = this.vosotros = this.ustedes = undefined;
       }
     }
   }

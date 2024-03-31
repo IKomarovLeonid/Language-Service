@@ -25,12 +25,10 @@ export class GameService{
 
   // conjugation
   private isConjugation = false;
-  private isLanguageReversed = false;
+  private _isLanguageReversed = new BehaviorSubject<boolean>(false);
 
   constructor(private client : ApiClient) {
-    console.log('loading ctor...');
     this.loadWords();
-    console.log('loading ctor... done');
   }
 
   async loadWords(){
@@ -41,11 +39,6 @@ export class GameService{
       this.setAnyWord();
     }
     else alert('Unable to fetch words from server');
-  }
-
-  setWords(words: WordModel[]): void {
-    this.words = words;
-    this.wordIndex = 0;
   }
 
   finish(){
@@ -68,61 +61,6 @@ export class GameService{
 
   getStreakCounter(): number{
     return this.answersStreak;
-  }
-
-  getRandomWord(isRepeatWords: boolean) {
-    if(isRepeatWords){
-      const randomIndex = Math.floor(Math.random() * this.getWordsCount());
-      let word = this.words[randomIndex];
-      this.updateDataVariable(word);
-    }
-    else{
-      let len = this.getWordsCount();
-      if(this.wordIndex < len){
-        let word = this.words[this.wordIndex];
-        this.updateDataVariable(word);
-        this.wordIndex ++;
-      }
-      else{
-        this.wordIndex = 0;
-        let word = this.words[this.wordIndex];
-        this.updateDataVariable(word);
-      }
-    }
-  }
-
-  checkAnswer(translation: string | undefined, expectedTranslations: string[], isConjugation: boolean): boolean{
-    this.totalAnswers ++;
-    if(translation === undefined || translation.trim() === ''){
-      this.answersStreak--;
-      return false;
-    }
-    let lowerTranslation = translation.toLowerCase();
-    if(!isConjugation){
-      let filtered = expectedTranslations.filter(w => lowerTranslation === w.toLowerCase());
-      if(filtered.length > 0){
-        this.registerSuccess();
-        return true;
-      }
-    }
-    else {
-      let answers = translation.split(",");
-      if(answers.length != expectedTranslations.length){
-        this.answersStreak--;
-        return false;
-      }
-      for(let i = 0; i < answers.length; i++){
-        if(answers[i] != expectedTranslations[i]){
-          this.answersStreak--;
-          return false;
-        }
-      }
-      this.registerSuccess();
-      return true;
-    }
-
-    this.answersStreak--;
-    return false;
   }
 
   getTimerSecondsLeft(): number{
@@ -164,6 +102,7 @@ export class GameService{
   }
 
   public registerSuccess(){
+    this.totalAnswers ++;
     this.answersStreak ++;
     this.correctAnswersCount ++;
     if(this.isTimerEnabled){
@@ -172,28 +111,25 @@ export class GameService{
     }
   }
 
+  public registerFailure(){
+    this.totalAnswers ++;
+    this.answersStreak --;
+  }
+
   public getConjugation(){
     return this.isConjugation;
   }
 
   public setConjugation(isConjugation : boolean){
+    this._isLanguageReversed.next(false);
     this.isConjugation = isConjugation;
     this.filterWords(WordCategory.Any, WordType.Any);
     this.setAnyWord();
   }
 
-  get dataVariable$() {
-    return this._currentWord.asObservable();
-  }
-
-  updateDataVariable(value: WordModel) {
-    this._currentWord.next(value);
-  }
-
   public validateAnswer(userAnswer: string): boolean{
-    this.totalAnswers ++;
     if(userAnswer === undefined || userAnswer.trim() === ''){
-      this.answersStreak--;
+      this.registerFailure();
       return false;
     }
     let word = this._currentWord;
@@ -203,13 +139,13 @@ export class GameService{
       // classic
       if(!this.isConjugation){
         // word -> one of translations from word.translations
-        if(!this.isLanguageReversed){
+        if(!this._isLanguageReversed.value){
           let filtered = word.value?.translations?.filter(w => lowerTranslation === w.toLowerCase());
           if(filtered && filtered.length > 0){
             this.registerSuccess();
             return true;
           }
-          this.answersStreak--;
+          this.registerFailure();
           return false;
         }
         // word.word === translations
@@ -219,15 +155,12 @@ export class GameService{
             return true;
           }
           else {
-            this.answersStreak--;
+            this.registerFailure();
             return false;
           }
         }
       }
-      // verbs -> conjugation
-      else{
-        return true;
-      }
+      else return false;
     }
     else return false;
   }
@@ -235,7 +168,11 @@ export class GameService{
   public setAnyWord(){
     const randomIndex = Math.floor(Math.random() * this.getWordsCount());
     let word = this.filteredWords[randomIndex];
-    this.updateDataVariable(word);
+    this._currentWord.next(word);
+  }
+
+  public setLanguageReversed(isReversed: boolean){
+    this._isLanguageReversed.next(isReversed);
   }
 
   public filterWords(category: WordCategory, type: WordType){
@@ -257,6 +194,14 @@ export class GameService{
         }
       }
     }
+  }
+
+  get dataVariable$() {
+    return this._currentWord.asObservable();
+  }
+
+  get isLanguageReversed$(){
+    return this._isLanguageReversed.asObservable();
   }
 
 }

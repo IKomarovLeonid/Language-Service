@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {AttemptHistoryModel, AttemptModel, LanguageType, WordCategory, WordModel, WordType} from "../shared/main.api";
 import {ApiClient} from "../services/api.client";
 import {GameService} from "../services/game.service";
@@ -9,12 +9,8 @@ import {Subscription} from "rxjs";
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit{
-  wordsFromServer: WordModel[] | undefined;
-  wordToTranslate: string | undefined;
+export class AppComponent implements OnInit, OnDestroy{
   userTranslation: string | undefined;
-  expectedTranslations: string[] | undefined;
-  conjugation: string | undefined;
   // filtration
   @Input() selectedEnumCategory = WordCategory.Any;
   @Input() selectedEnumType = WordType.Any;
@@ -28,9 +24,9 @@ export class AppComponent implements OnInit{
   answers: AttemptModel[] = [];
   // toggles
   isRepeatWords = true;
-  isLanguageReversed = false;
   isTimerEnabled = false;
   isConjugation = false;
+  isLanguageReversed = false;
   // message
   userShowMessage: string | undefined;
   word: WordModel | null | undefined;
@@ -51,6 +47,10 @@ export class AppComponent implements OnInit{
       this.loadHistory();
   }
 
+  ngOnDestroy() {
+    this.dataSubscription.unsubscribe();
+  }
+
   async loadHistory(){
     let apiResult = await this.client.getHistory();
     if(apiResult){
@@ -59,25 +59,21 @@ export class AppComponent implements OnInit{
     else alert('Unable to fetch history from server');
   }
 
-  setWord() : void{
-    this.gameService.getRandomWord(this.isRepeatWords);
-  }
-
-
-
   makeAnswer(){
-    let result = this.gameService.checkAnswer(this.userTranslation, this.expectedTranslations!!, this.isConjugation)
-    this.saveAttempt(this.wordToTranslate!!, this.expectedTranslations!!,
+    let result = this.gameService.validateAnswer(this.userTranslation!!);
+    let word = this.word;
+    this.saveAttempt(word?.word!!, word?.translations!!,
       this.userTranslation ?? 'N/A', result);
-    if(!this.isConjugation) this.userTranslation = undefined;
-    else if(result) this.userTranslation = undefined;
-    if(!result){
-      this.buildErrorMessage();
+    if(result) {
+      this.userShowMessage = undefined;
+      this.gameService.setAnyWord();
     }
-    else {
-      this.resetErrorMessage();
-      this.setWord();
+    else{
+      this.userShowMessage = !this.isLanguageReversed ?
+        `Error. Correct translation of '${word?.word}' -> '${word?.translations}'`:
+        `Error. Correct translation of '${word?.translations!![0]}' -> '${word?.word}'`
     }
+    this.userTranslation = undefined;
   }
 
 
@@ -91,8 +87,8 @@ export class AppComponent implements OnInit{
     this.gameService.finish();
     this.userTranslation = undefined;
     this.answers = [];
-    this.resetErrorMessage();
-    this.setWord();
+    this.userShowMessage = undefined;
+    this.gameService.setAnyWord();
     this.gameService.resetTime();
     this.loadHistory();
   }
@@ -114,29 +110,13 @@ export class AppComponent implements OnInit{
       this.answers.push(model);
   }
 
-  buildErrorMessage(){
-      this.userShowMessage = `Error. Correct translation of ${this.wordToTranslate} -> ${this.expectedTranslations}`;
-  }
-
-  resetErrorMessage(){
-      this.userShowMessage = undefined;
-  }
-
   onReverseLanguage(){
-      if(this.expectedTranslations && this.wordToTranslate){
-        if(!this.isLanguageReversed){
-          let word = this.wordToTranslate;
-          this.wordToTranslate = this.expectedTranslations[0];
-          this.expectedTranslations = [];
-          this.expectedTranslations.push(word);
-        }
-        else{
-          let word = this.expectedTranslations[0];
-          this.expectedTranslations = [];
-          this.expectedTranslations.push(this.wordToTranslate);
-          this.wordToTranslate = word;
-        }
-      }
+    if(!this.isLanguageReversed){
+      this.gameService.setLanguageReversed(true);
+    }
+    else{
+      this.gameService.setLanguageReversed(false);
+    }
   }
 
   showTotalCount(): number{
@@ -170,6 +150,7 @@ export class AppComponent implements OnInit{
   }
 
   onRepeatHistory(id: number | undefined){
+      /*
       if(id){
         let model = this.history?.filter(h => h.id === id)[0]!!;
         let errors = model.errors;
@@ -196,11 +177,13 @@ export class AppComponent implements OnInit{
           }
           this.gameService.finish();
           this.gameService.setWords(words);
-          this.setWord();
+          this.gameService.setAnyWord();
 
         }
       }
       else alert('This history has undefined id')
+
+       */
   }
 
   onConjugation(){

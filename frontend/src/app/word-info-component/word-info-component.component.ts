@@ -12,9 +12,14 @@ export class WordInfoComponentComponent implements OnDestroy{
 
   word: WordModel | null | undefined;
   private dataSubscription: Subscription;
+  private isReversedSubscription: Subscription;
+  isReversed: boolean | undefined;
   constructor(private gameService: GameService) {
     this.dataSubscription = this.gameService.dataVariable$.subscribe(value => {
       this.word = value;
+    });
+    this.isReversedSubscription = this.gameService.isLanguageReversed$.subscribe(value => {
+      this.isReversed = value;
     });
   }
 
@@ -24,5 +29,7 @@ export class WordInfoComponentComponent implements OnDestroy{
 
   ngOnDestroy() {
     this.dataSubscription.unsubscribe();
+    this.isReversedSubscription.unsubscribe();
   }
+
 }
