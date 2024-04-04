@@ -54,6 +54,7 @@ fuera de;снаружи
 junto a;около
 lo de siempre;как обычно
 qué pena!;как жаль
+No comprendo;не понимаю
 
 [nouns]
 
