@@ -1,5 +1,5 @@
 import {Injectable} from "@angular/core";
-import {AttemptModel, LanguageType, WordCategory, WordModel, WordType} from "../shared/main.api";
+import {AttemptHistoryModel, AttemptModel, LanguageType, WordCategory, WordModel, WordType} from "../shared/main.api";
 import {ApiClient} from "./api.client";
 import {BehaviorSubject} from "rxjs";
 
@@ -227,6 +227,34 @@ export class GameService{
 
   get isLanguageReversed$(){
     return this._isLanguageReversed.asObservable();
+  }
+
+  public setRetryWords(historyAttempt: AttemptHistoryModel){
+    let errors = historyAttempt.errors;
+    if(errors) {
+      let len = Object.keys(errors).length;
+      if (len <= 0) {
+        alert('No words to repeat from this history');
+        return;
+      }
+      let words = new Array<WordModel>();
+      for (const p in errors) {
+        if (errors.hasOwnProperty(p)) {
+          if (this.words) {
+            let word = this.words.filter(w => w.word === p);
+            if (word.length > 0) words.push(word[0]);
+            else {
+              let filtered = this.words.filter(w =>
+                w.translations!!.filter(w =>
+                  w === p).length > 0);
+              if (filtered.length > 0) words.push(filtered[0]);
+            }
+          }
+          this.finish();
+          this.filteredWords = words;
+        }
+      }
+    }
   }
 
 }
