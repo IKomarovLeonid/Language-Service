@@ -16,6 +16,6 @@
            [(ngModel)]="ustedes" (keyup.enter)="makeAnswer()" [ngClass]="{ 'wrong-input': wrongItems[5] }">
   </div>
   <div class="error-container" *ngIf="message">
-    <label class="error-label"><span class="bold">{{message}}</span></label>
+    <label class="error-label"><span class="bold">Correct answers: {{correctAnswers}}</span></label>
   </div>
 </div>

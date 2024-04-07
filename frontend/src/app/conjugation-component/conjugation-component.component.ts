@@ -18,6 +18,7 @@ export class ConjugationComponentComponent implements OnDestroy{
   ustedes: string | undefined;
 
   message: string | undefined;
+  correctAnswers: string | undefined;
 
   word: WordModel | null | undefined;
   private dataSubscription: Subscription;
@@ -33,6 +34,7 @@ export class ConjugationComponentComponent implements OnDestroy{
 
   makeAnswer(){
     this.message = undefined;
+    this.correctAnswers = undefined;
     if (this.yo === undefined || this.tu === undefined || this.el === undefined ||
       this.nosotros === undefined || this.vosotros === undefined || this.ustedes === undefined) {
       this.message = "Error: At least one input field is not filled";
@@ -77,6 +79,10 @@ export class ConjugationComponentComponent implements OnDestroy{
         this.service.registerSuccess();
         this.service.setAnyWord();
         this.yo = this.tu = this.nosotros = this.el = this.vosotros = this.ustedes = undefined;
+      }
+      else{
+        this.service.registerFailure();
+        this.correctAnswers = expected.toString();
       }
     }
   }
