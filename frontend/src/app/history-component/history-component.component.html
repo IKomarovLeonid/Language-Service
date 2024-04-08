@@ -1,0 +1,31 @@
+<div class="history-container" *ngIf="hasItems()">
+  <table>
+    <thead>
+    <th>Total Attempts</th>
+    <th>Correct</th>
+    <th>Success %</th>
+    <th>Time</th>
+    <th>Type</th>
+    <th>Category</th>
+    <th>Details</th>
+    <th>Actions</th>
+    <th>Repeat</th>
+    </thead>
+    <tbody>
+    <tr *ngFor="let attempt of history">
+      <td>{{attempt.attemptsTotal}}</td>
+      <td>{{attempt.correctAttempts}}</td>
+      <td>{{attempt.successRate?.toFixed(2)}} %</td>
+      <td>{{attempt.createdTime?.toLocaleString()}}</td>
+      <td>{{attempt.wordTypes}}</td>
+      <td>{{attempt.category}}</td>
+      <td><button class="button-history-info" (click)="showHistoryInfo(attempt)">Info</button></td>
+      <td><button class="button-history-delete" (click)="onDeleteHistory(attempt.id)">Delete</button></td>
+      <td><button class="button-history-repeat" (click)="onRepeatHistory(attempt.id)">Repeat</button></td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+<div class="history-container" *ngIf="!hasItems()">
+  <label>No attempts history</label>
+</div>

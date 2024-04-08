@@ -21,7 +21,6 @@ export class GameService{
   private readonly defaultTimerMsc = 10000;
   // cache word
   private _currentWord = new BehaviorSubject<WordModel | null>(null);
-  private languageType = LanguageType.SpanishRussian;
 
   // conjugation
   private isConjugation = false;
@@ -40,7 +39,7 @@ export class GameService{
     let apiResult = await this.client.getWords();
     if(apiResult){
       this.words = apiResult.items!!;
-      this.filteredWords = apiResult.items!!.filter(w => w.language === this.languageType);
+      this.filteredWords = apiResult.items!!.filter(w => w.language === LanguageType.SpanishRussian);
       this.setAnyWord();
     }
     else alert('Unable to fetch words from server');
@@ -144,7 +143,7 @@ export class GameService{
   public setConjugation(isConjugation : boolean){
     this._isLanguageReversed.next(false);
     this.isConjugation = isConjugation;
-    this.filterWords(WordCategory.Any, WordType.Any);
+    this.filterWords(WordCategory.Any, WordType.Any, LanguageType.SpanishRussian);
     this.setAnyWord();
   }
 
@@ -212,13 +211,13 @@ export class GameService{
     this._isLanguageReversed.next(isReversed);
   }
 
-  public filterWords(category: WordCategory, type: WordType){
+  public filterWords(category: WordCategory, type: WordType, language: LanguageType){
     if(this.words){
       if(this.isConjugation){
         this.filteredWords = this.words.filter(w => w.conjugation);
       }
       else{
-        let byLanguage = this.words.filter(w => w.language === this.languageType);
+        let byLanguage = this.words.filter(w => w.language === language);
         if(category === WordCategory.Any && type === WordType.Any){
           this.filteredWords = byLanguage;
           return;
@@ -227,7 +226,11 @@ export class GameService{
           this.filteredWords = byLanguage.filter( item => item.type === type);
         }
         else{
-          this.filteredWords = byLanguage.filter( item => item.category === category);
+          if(type === WordType.Any){
+            this.filteredWords = byLanguage.filter( item => item.category === category);
+          }
+          else this.filteredWords = byLanguage.filter( item =>
+            item.category === category && item.type === type);
         }
       }
     }

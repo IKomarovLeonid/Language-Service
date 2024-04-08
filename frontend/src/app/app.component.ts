@@ -1,5 +1,5 @@
-import {Component, Input, OnDestroy, OnInit} from '@angular/core';
-import {AttemptHistoryModel, AttemptModel, LanguageType, WordCategory, WordModel, WordType} from "../shared/main.api";
+import {Component, Input, OnDestroy} from '@angular/core';
+import {LanguageType, WordCategory, WordModel, WordType} from "../shared/main.api";
 import {ApiClient} from "../services/api.client";
 import {GameService} from "../services/game.service";
 import {Subscription} from "rxjs";
@@ -9,23 +9,16 @@ import {Subscription} from "rxjs";
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit, OnDestroy{
+export class AppComponent implements OnDestroy{
   userTranslation: string | undefined;
   // filtration
   @Input() selectedEnumCategory = WordCategory.Any;
   @Input() selectedEnumType = WordType.Any;
-  @Input() enumLanguage: LanguageType = LanguageType.SpanishRussian;
+  @Input() selectedEnumLanguage: LanguageType = LanguageType.SpanishRussian;
   @Input() enumCategoryValues: WordCategory[] = Object.values(WordCategory);
   @Input() enumTypeValues: WordType[] = Object.values(WordType);
   @Input() enumLanguageValues: LanguageType[] = Object.values(LanguageType);
 
-  // for attempt history
-  history: AttemptHistoryModel[] | undefined;
-  // toggles
-  isRepeatWords = true;
-  isTimerEnabled = false;
-  isConjugation = false;
-  isLanguageReversed = false;
   // message
   userShowMessage: string | undefined;
   word: WordModel | null | undefined;
@@ -42,38 +35,22 @@ export class AppComponent implements OnInit, OnDestroy{
       });
   }
 
-  ngOnInit(): void {
-      this.loadHistory();
-  }
-
   ngOnDestroy() {
     this.dataSubscription.unsubscribe();
-  }
-
-  async loadHistory(){
-    let apiResult = await this.client.getHistory();
-    if(apiResult){
-      this.history = apiResult.items!!;
-    }
-    else alert('Unable to fetch history from server');
   }
 
   makeAnswer(){
     let result = this.gameService.validateAnswer(this.userTranslation!!);
     let word = this.word;
     if(result) {
-      this.userShowMessage = undefined;
+      this.resetMessage();
       this.gameService.setAnyWord();
     }
     else{
-      this.userShowMessage = !this.isLanguageReversed ?
-        `Error. Correct translation of '${word?.word}' -> '${word?.translations}'`:
-        `Error. Correct translation of '${word?.translations!![0]}' -> '${word?.word}'`
+      this.userShowMessage = `Error. Correct translation of '${word?.word}' -> '${word?.translations}'`;
     }
     this.userTranslation = undefined;
   }
-
-
 
   async finishAttempt(){
       let attempts = this.gameService.getUserAnswers();
@@ -84,26 +61,9 @@ export class AppComponent implements OnInit, OnDestroy{
       this.selectedEnumCategory);
     this.gameService.finish();
     this.userTranslation = undefined;
-    this.userShowMessage = undefined;
+    this.resetMessage();
     this.gameService.setAnyWord();
     this.gameService.resetTime();
-    this.loadHistory();
-  }
-
-  showHistoryInfo(attempt: AttemptHistoryModel){
-    let combinedString = Object.entries(attempt.errors!!)
-      .map(([key, value]) => `'${key}' errors was '${value}' times`)
-      .join('\n');
-    alert(combinedString);
-  }
-
-  onReverseLanguage(){
-    if(!this.isLanguageReversed){
-      this.gameService.setLanguageReversed(true);
-    }
-    else{
-      this.gameService.setLanguageReversed(false);
-    }
   }
 
   showTotalCount(): number{
@@ -122,53 +82,23 @@ export class AppComponent implements OnInit, OnDestroy{
       return this.gameService.getStreakCounter();
   }
 
-  onEnableTimer(){
-    this.gameService.setTimer(!this.isTimerEnabled);
-  }
-
   showTimerSecondsLeft(): number{
     return this.gameService.getTimerSecondsLeft();
   }
 
-  async onDeleteHistory(id: number | undefined){
-      let result = await this.client.deleteHistory(id!!);
-      if(!result) alert('Failed to delete history attempt');
-      this.loadHistory();
-  }
-
-  onRepeatHistory(id: number | undefined){
-      if(id){
-        let model = this.history?.filter(h => h.id === id)[0]!!;
-        this.gameService.setRetryWords(model);
-        this.gameService.setAnyWord();
-      }
-      else alert('This history has undefined id')
-  }
-
-  onConjugation(){
-    if(!this.isConjugation){
-      this.gameService.setConjugation(true);
-    }
-    else{
-      this.gameService.setConjugation(false);
-    }
-    this.filterWords();
-    this.gameService.setAnyWord();
-  }
-
   filterWords(){
-      this.gameService.filterWords(this.selectedEnumCategory, this.selectedEnumType);
+      this.resetMessage();
+      this.gameService.filterWords(this.selectedEnumCategory, this.selectedEnumType, this.selectedEnumLanguage);
       this.gameService.setAnyWord();
+      if(this.gameService.getWordsCount() === 0) this.userShowMessage = 'No words found';
   }
 
-  onRepeatWords(){
-    if(!this.isRepeatWords){
-      this.gameService.setRepeatWords(true);
-    }
-    else{
-      this.gameService.setRepeatWords(false);
-    }
-    this.filterWords();
-    this.gameService.setAnyWord();
+  public isConjugation(){
+      return this.gameService.getConjugation();
   }
+
+  private resetMessage(){
+      this.userShowMessage = undefined;
+  }
+
 }

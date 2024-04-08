@@ -61,35 +61,6 @@
   cursor: pointer;
 }
 
-.history-container {
-  text-align: center;
-  margin: auto;
-  padding: 20px;
-  background-color: rgba(240, 240, 240, 0.51);
-  border-radius: 10px;
-  width: 50%;
-}
-
-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-bottom: 20px; /* Adjust as needed */
-}
-
-th {
-  background-color: #f2f2f2;
-  padding: 8px;
-  text-align: left;
-}
-
-tr {
-  border-bottom: 1px solid #ddd;
-}
-
-td:last-child {
-  text-align: center;
-}
-
 button {
   color: white;
   padding: 8px 12px;
@@ -97,30 +68,6 @@ button {
   border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.3s;
-}
-
-.button-history-info{
-  background-color: #4CAF50;
-}
-
-.button-history-delete {
-  background-color: red;
-}
-
-.button-history-repeat {
-  background-color: deepskyblue;
-}
-
-.quiz-toggles {
-  padding: 10px;
-  width: 100%;
-  margin: 10px 0;
-  box-sizing: border-box;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
 }
 
 .numeric-input {

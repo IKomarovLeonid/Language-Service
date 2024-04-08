@@ -27,6 +27,10 @@ export class WordInfoComponentComponent implements OnDestroy{
     return this.gameService.getConjugation();
   }
 
+  public hasWords(){
+    return this.gameService.getWordsCount() > 0;
+  }
+
   ngOnDestroy() {
     this.dataSubscription.unsubscribe();
     this.isReversedSubscription.unsubscribe();
