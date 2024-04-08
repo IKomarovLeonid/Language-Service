@@ -30,6 +30,8 @@ export class GameService{
   // answers -> for history
   answers: AttemptModel[] = [];
 
+  isRepeatWords = true;
+
   constructor(private client : ApiClient) {
     this.loadWords();
   }
@@ -191,9 +193,19 @@ export class GameService{
   }
 
   public setAnyWord(){
-    const randomIndex = Math.floor(Math.random() * this.getWordsCount());
-    let word = this.filteredWords[randomIndex];
-    this._currentWord.next(word);
+    if(this.isRepeatWords){
+      const randomIndex = Math.floor(Math.random() * this.getWordsCount());
+      let word = this.filteredWords[randomIndex];
+      this._currentWord.next(word);
+    }
+    else{
+      if(this.wordIndex > this.getWordsCount() - 1){
+        this.wordIndex = 0;
+      }
+      let word = this.filteredWords[this.wordIndex];
+      this._currentWord.next(word);
+      this.wordIndex ++;
+    }
   }
 
   public setLanguageReversed(isReversed: boolean){
@@ -257,4 +269,8 @@ export class GameService{
     }
   }
 
+  public setRepeatWords(isRepeat: boolean){
+    this.isRepeatWords = isRepeat;
+    this.wordIndex = 0;
+  }
 }

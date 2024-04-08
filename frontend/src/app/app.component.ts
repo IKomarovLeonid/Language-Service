@@ -160,4 +160,15 @@ export class AppComponent implements OnInit, OnDestroy{
       this.gameService.filterWords(this.selectedEnumCategory, this.selectedEnumType);
       this.gameService.setAnyWord();
   }
+
+  onRepeatWords(){
+    if(!this.isRepeatWords){
+      this.gameService.setRepeatWords(true);
+    }
+    else{
+      this.gameService.setRepeatWords(false);
+    }
+    this.filterWords();
+    this.gameService.setAnyWord();
+  }
 }
