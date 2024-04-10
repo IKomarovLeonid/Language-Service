@@ -54,16 +54,19 @@ export class AppComponent implements OnDestroy{
 
   async finishAttempt(){
       let attempts = this.gameService.getUserAnswers();
-    await this.client.createAttempt(
-      attempts,
-      this.gameService.getCorrectAnswers(), 30,
-      this.selectedEnumType,
-      this.selectedEnumCategory);
-    this.gameService.finish();
-    this.userTranslation = undefined;
-    this.resetMessage();
-    this.gameService.setAnyWord();
-    this.gameService.resetTime();
+      if(attempts.length < 1) alert('No attempts. Please make at least one answer');
+      else{
+        await this.client.createAttempt(
+          attempts,
+          this.gameService.getCorrectAnswers(), 30,
+          this.selectedEnumType,
+          this.selectedEnumCategory);
+        this.gameService.finish();
+        this.userTranslation = undefined;
+        this.resetMessage();
+        this.gameService.setAnyWord();
+        this.gameService.resetTime();
+      }
   }
 
   showTotalCount(): number{
