@@ -27,6 +27,10 @@ export class WordInfoComponentComponent implements OnDestroy{
     return this.gameService.getConjugation();
   }
 
+  public isTimerSet(){
+    return this.gameService.isTimerSet();
+  }
+
   public hasWords(){
     return this.gameService.getWordsCount() > 0;
   }
@@ -36,4 +40,8 @@ export class WordInfoComponentComponent implements OnDestroy{
     this.isReversedSubscription.unsubscribe();
   }
 
+
+  showTimerSecondsLeft(): number{
+    return this.gameService.getTimerSecondsLeft();
+  }
 }

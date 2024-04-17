@@ -85,10 +85,6 @@ export class AppComponent implements OnDestroy{
       return this.gameService.getStreakCounter();
   }
 
-  showTimerSecondsLeft(): number{
-    return this.gameService.getTimerSecondsLeft();
-  }
-
   filterWords(){
       this.resetMessage();
       this.gameService.filterWords(this.selectedEnumCategory, this.selectedEnumType, this.selectedEnumLanguage);

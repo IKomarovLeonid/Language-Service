@@ -6,7 +6,7 @@
     <input type="checkbox" [(ngModel)]="isLanguageReversed" (click)="onReverseLanguage()" [disabled]="isConjugation"> Reverse language
   </label>
   <label>
-    <input type="checkbox" [(ngModel)]="isTimerEnabled" (click)="onEnableTimer()"> Enable timer
+    <input type="checkbox" [(ngModel)]="isTimerEnabled" [disabled]="isConjugation" (click)="onEnableTimer()"> Enable timer
   </label>
   <label>
     <input type="checkbox" [(ngModel)]="isConjugation" (click)="onConjugation()"> Conjugation

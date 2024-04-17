@@ -3,5 +3,5 @@
   <label class="quiz-label" *ngIf="isConjugation()">To conjugate verb: </label>
   <label class="word-label" *ngIf="this.word && !isReversed">{{this.word.word}}</label>
   <label class="word-label" *ngIf="this.word && isReversed">{{this.word.translations!![0]}}</label>
-  <!-- <div class="timer" *ngIf="isTimerEnabled">{{showTimerSecondsLeft()}} seconds left</div> -->
+  <div class="timer" *ngIf="isTimerSet()">{{showTimerSecondsLeft()}} seconds left</div>
 </div>

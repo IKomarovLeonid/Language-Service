@@ -28,7 +28,6 @@ export class GameService{
 
   // answers -> for history
   answers: AttemptModel[] = [];
-
   isRepeatWords = true;
 
   constructor(private client : ApiClient) {
@@ -275,5 +274,9 @@ export class GameService{
   public setRepeatWords(isRepeat: boolean){
     this.isRepeatWords = isRepeat;
     this.wordIndex = 0;
+  }
+
+  public isTimerSet(): boolean{
+    return this.isTimerEnabled;
   }
 }

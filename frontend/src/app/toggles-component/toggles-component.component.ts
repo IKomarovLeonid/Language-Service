@@ -29,6 +29,8 @@ export class TogglesComponentComponent {
 
   onConjugation(){
     if(!this.isConjugation){
+      this.gameService.stopTimer();
+      this.gameService.setTimer(false);
       this.gameService.setConjugation(true);
     }
     else{
@@ -48,7 +50,7 @@ export class TogglesComponentComponent {
   }
 
   onEnableTimer(){
-    if(!this.isRepeatWords){
+    if(!this.isTimerEnabled){
       this.gameService.setTimer(true);
     }
     else{
