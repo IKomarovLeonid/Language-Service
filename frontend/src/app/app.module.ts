@@ -7,6 +7,7 @@ import { ConjugationComponentComponent } from './conjugation-component/conjugati
 import { WordInfoComponentComponent } from './word-info-component/word-info-component.component';
 import { TogglesComponentComponent } from './toggles-component/toggles-component.component';
 import { HistoryComponentComponent } from './history-component/history-component.component';
+import { FilterComponentComponent } from './filter-component/filter-component.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -14,7 +15,8 @@ import { HistoryComponentComponent } from './history-component/history-component
     WordInfoComponentComponent,
     WordInfoComponentComponent,
     TogglesComponentComponent,
-    HistoryComponentComponent
+    HistoryComponentComponent,
+    FilterComponentComponent
   ],
   imports: [
     BrowserModule,

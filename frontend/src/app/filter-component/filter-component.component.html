@@ -1,0 +1,14 @@
+<div class="select-container" *ngIf="!isConjugation()">
+  <select class="quiz-select" [(ngModel)]="selectedEnumCategory" (change)="filterWords()">
+    <option value="" disabled>Select an option</option>
+    <option *ngFor="let value of enumCategoryValues" [value]="value">Category: {{ value }}</option>
+  </select>
+  <select class="quiz-select" [(ngModel)]="selectedEnumType" (change)="filterWords()">
+    <option value="" disabled>Select an option</option>
+    <option *ngFor="let value of enumTypeValues" [value]="value">Type: {{ value }}</option>
+  </select>
+  <select class="quiz-select" [(ngModel)]="selectedEnumLanguage" (change)="filterWords()">
+    <option value="" disabled>Select an option</option>
+    <option *ngFor="let value of enumLanguageValues" [value]="value">{{ languageTypeMapping[value] }}</option>
+  </select>
+</div>

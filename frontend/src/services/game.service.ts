@@ -30,6 +30,10 @@ export class GameService{
   answers: AttemptModel[] = [];
   isRepeatWords = true;
 
+  // filter
+  type: WordType = WordType.Any;
+  category: WordCategory= WordCategory.Any;
+
   constructor(private client : ApiClient) {
     this.loadWords();
   }
@@ -212,6 +216,8 @@ export class GameService{
 
   public filterWords(category: WordCategory, type: WordType, language: LanguageType){
     if(this.words){
+      this.type = type;
+      this.category = category;
       if(this.isConjugation){
         this.filteredWords = this.words.filter(w => w.conjugation);
       }
@@ -278,5 +284,13 @@ export class GameService{
 
   public isTimerSet(): boolean{
     return this.isTimerEnabled;
+  }
+
+  public getCurrentWordType(){
+    return this.type
+  }
+
+  public getCurrentWordCategory(){
+    return this.category
   }
 }

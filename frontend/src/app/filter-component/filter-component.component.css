@@ -1,0 +1,14 @@
+.select-container {
+  display: flex;
+  align-items: center;
+}
+
+.quiz-select {
+  padding: 10px;
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  flex: 1;
+  margin-right: 2px; /* Adjust spacing between selects */
+}

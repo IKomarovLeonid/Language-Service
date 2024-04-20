@@ -14,20 +14,7 @@
   <div class="error-container" *ngIf="userShowMessage">
     <label class="error-label"><span class="bold">{{userShowMessage}}</span></label>
   </div>
-  <div class="select-container" *ngIf="!isConjugation()">
-    <select class="quiz-select" [(ngModel)]="selectedEnumCategory" (change)="filterWords()">
-      <option value="" disabled>Select an option</option>
-      <option *ngFor="let value of enumCategoryValues" [value]="value">Category: {{ value }}</option>
-    </select>
-    <select class="quiz-select" [(ngModel)]="selectedEnumType" (change)="filterWords()">
-      <option value="" disabled>Select an option</option>
-      <option *ngFor="let value of enumTypeValues" [value]="value">Type: {{ value }}</option>
-    </select>
-    <select class="quiz-select" [(ngModel)]="selectedEnumLanguage" (change)="filterWords()">
-      <option value="" disabled>Select an option</option>
-      <option *ngFor="let value of enumLanguageValues" [value]="value">{{ languageTypeMapping[value] }}</option>
-    </select>
-  </div>
+  <app-filter-component></app-filter-component>
   <app-toggles-component></app-toggles-component>
   <button class="quiz-button" (click)="finishAttempt()" tabindex="0">Finish</button>
 </div>

@@ -1,5 +1,5 @@
-import {Component, Input, OnDestroy} from '@angular/core';
-import {LanguageType, WordCategory, WordModel, WordType} from "../shared/main.api";
+import {Component, OnDestroy} from '@angular/core';
+import {WordModel} from "../shared/main.api";
 import {ApiClient} from "../services/api.client";
 import {GameService} from "../services/game.service";
 import {Subscription} from "rxjs";
@@ -10,24 +10,13 @@ import {Subscription} from "rxjs";
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnDestroy{
+  // word
   userTranslation: string | undefined;
-  // filtration
-  @Input() selectedEnumCategory = WordCategory.Any;
-  @Input() selectedEnumType = WordType.Any;
-  @Input() selectedEnumLanguage: LanguageType = LanguageType.SpanishRussian;
-  @Input() enumCategoryValues: WordCategory[] = Object.values(WordCategory);
-  @Input() enumTypeValues: WordType[] = Object.values(WordType);
-  @Input() enumLanguageValues: LanguageType[] = Object.values(LanguageType);
-
-  // message
-  userShowMessage: string | undefined;
   word: WordModel | null | undefined;
   private dataSubscription: Subscription;
 
-  languageTypeMapping = {
-    [LanguageType.SpanishRussian]: 'Spanish <-> Russian',
-    [LanguageType.EnglishRussian]: 'English <-> Russian',
-  };
+  // for user
+  userShowMessage: string | undefined;
 
     constructor(private client : ApiClient, private gameService : GameService) {
       this.dataSubscription = this.gameService.dataVariable$.subscribe(value => {
@@ -59,8 +48,8 @@ export class AppComponent implements OnDestroy{
         await this.client.createAttempt(
           attempts,
           this.gameService.getCorrectAnswers(), 30,
-          this.selectedEnumType,
-          this.selectedEnumCategory);
+          this.gameService.getCurrentWordType(),
+          this.gameService.getCurrentWordCategory());
         this.gameService.finish();
         this.userTranslation = undefined;
         this.resetMessage();
@@ -83,13 +72,6 @@ export class AppComponent implements OnDestroy{
 
   showCurrentStreak(): number{
       return this.gameService.getStreakCounter();
-  }
-
-  filterWords(){
-      this.resetMessage();
-      this.gameService.filterWords(this.selectedEnumCategory, this.selectedEnumType, this.selectedEnumLanguage);
-      this.gameService.setAnyWord();
-      if(this.gameService.getWordsCount() === 0) this.userShowMessage = 'No words found';
   }
 
   public isConjugation(){
