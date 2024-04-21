@@ -32,7 +32,7 @@ export class AppComponent implements OnDestroy{
     let result = this.gameService.validateAnswer(this.userTranslation!!);
     let word = this.word;
     if(result) {
-      this.resetMessage();
+      this.userShowMessage = undefined;
       this.gameService.setAnyWord();
     }
     else{
@@ -52,7 +52,7 @@ export class AppComponent implements OnDestroy{
           this.gameService.getCurrentWordCategory());
         this.gameService.finish();
         this.userTranslation = undefined;
-        this.resetMessage();
+        this.userShowMessage = undefined;
         this.gameService.setAnyWord();
         this.gameService.resetTime();
       }
@@ -76,10 +76,6 @@ export class AppComponent implements OnDestroy{
 
   public isConjugation(){
       return this.gameService.getConjugation();
-  }
-
-  private resetMessage(){
-      this.userShowMessage = undefined;
   }
 
 }
