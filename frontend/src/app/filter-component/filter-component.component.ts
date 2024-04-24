@@ -29,7 +29,7 @@ export class FilterComponentComponent {
   filterWords(){
     this.gameService.filterWords(this.selectedEnumCategory, this.selectedEnumType, this.selectedEnumLanguage);
     if(this.gameService.getWordsCount() === 0) {
-      alert(`No words of this filters '${this.selectedEnumType}' and type '${this.selectedEnumCategory}'`);
+      alert(`No words of '${this.selectedEnumType}' and type '${this.selectedEnumCategory}'`);
       this.selectedEnumType = WordType.Any;
       this.selectedEnumCategory = WordCategory.Any;
       this.gameService.filterWords(this.selectedEnumCategory, this.selectedEnumType, this.selectedEnumLanguage);
