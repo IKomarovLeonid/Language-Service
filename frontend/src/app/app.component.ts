@@ -3,6 +3,7 @@ import {WordModel} from "../shared/main.api";
 import {ApiClient} from "../services/api.client";
 import {GameService} from "../services/game.service";
 import {Subscription} from "rxjs";
+import {HistoryService} from "../services/history.service";
 
 @Component({
   selector: 'app-root',
@@ -18,7 +19,7 @@ export class AppComponent implements OnDestroy{
   // for user
   userShowMessage: string | undefined;
 
-    constructor(private client : ApiClient, private gameService : GameService) {
+    constructor(private gameService : GameService, private service: HistoryService) {
       this.dataSubscription = this.gameService.dataVariable$.subscribe(value => {
         this.word = value;
       });
@@ -45,16 +46,17 @@ export class AppComponent implements OnDestroy{
       let attempts = this.gameService.getUserAnswers();
       if(attempts.length < 1) alert('No attempts. Please make at least one answer');
       else{
-        await this.client.createAttempt(
+        await this.service.createHistory(
           attempts,
-          this.gameService.getCorrectAnswers(), 30,
           this.gameService.getCurrentWordType(),
-          this.gameService.getCurrentWordCategory());
+          this.gameService.getCurrentWordCategory(),
+          this.gameService.getCorrectAnswers());
         this.gameService.finish();
         this.userTranslation = undefined;
         this.userShowMessage = undefined;
         this.gameService.setAnyWord();
         this.gameService.resetTime();
+        await this.service.loadHistory();
       }
   }
 

@@ -1,31 +1,43 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {GameService} from "../../services/game.service";
-import {ApiClient} from "../../services/api.client";
-import {AttemptHistoryModel} from "../../shared/main.api";
+import {AttemptHistoryModel, WordModel} from "../../shared/main.api";
+import {HistoryService} from "../../services/history.service";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-history-component',
   templateUrl: './history-component.component.html',
   styleUrls: ['./history-component.component.css']
 })
-export class HistoryComponentComponent implements OnInit{
+export class HistoryComponentComponent implements OnInit, OnDestroy{
 
-  history: AttemptHistoryModel[] | undefined;
+  history: AttemptHistoryModel[] | null | undefined;
+  private dataSubscription: Subscription;
 
-  constructor(private gameService: GameService, private client: ApiClient) {
+  constructor(private service: HistoryService, private gameService: GameService) {
+    this.dataSubscription = this.service.historyData$.subscribe(value => {
+      this.history = value;
+    });
+  }
+  ngOnInit(): void {
+    this.service.loadHistory();
+  }
+  ngOnDestroy() {
+    this.dataSubscription.unsubscribe();
   }
 
-  async onDeleteHistory(id: number | undefined){
-    let result = await this.client.deleteHistory(id!!);
-    if(!result) alert('Failed to delete history attempt');
-    this.loadHistory();
+  onDeleteHistory(id: number | undefined){
+    this.service.deleteHistory(id!!);
   }
 
   onRepeatHistory(id: number | undefined){
     if(id){
-      let model = this.history?.filter(h => h.id === id)[0]!!;
-      this.gameService.setRetryWords(model);
-      this.gameService.setAnyWord();
+      let model = this.service.getModel(id);
+      if(model){
+        this.gameService.setRetryWords(model);
+        this.gameService.setAnyWord();
+      }
+      else  alert(`Unknown history ${id}`);
     }
     else alert('This history has undefined id')
   }
@@ -35,18 +47,6 @@ export class HistoryComponentComponent implements OnInit{
       .map(([key, value]) => `'${key}' errors was '${value}' times`)
       .join('\n');
     alert(combinedString);
-  }
-
-  ngOnInit(): void {
-    this.loadHistory();
-  }
-
-  private async loadHistory(){
-    let apiResult = await this.client.getHistory();
-    if(apiResult){
-      this.history = apiResult.items!!;
-    }
-    else alert('Unable to fetch history from server');
   }
 
   public hasItems(){
