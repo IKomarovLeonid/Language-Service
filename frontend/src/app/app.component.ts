@@ -56,7 +56,7 @@ export class AppComponent implements OnDestroy{
         this.userShowMessage = undefined;
         this.gameService.setAnyWord();
         this.gameService.resetTime();
-        await this.service.loadHistory();
+        this.service.loadHistory();
       }
   }
 
