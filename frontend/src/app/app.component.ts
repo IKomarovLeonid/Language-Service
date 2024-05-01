@@ -65,7 +65,7 @@ export class AppComponent implements OnDestroy{
   }
 
   showTotalAnswers(): number{
-    return this.gameService.getTotalAttempts();
+    return this.gameService.getAttempts();
   }
 
   showCorrectAnswers(): number{

@@ -63,7 +63,7 @@ export class GameService{
     return this.filteredWords.length;
   }
 
-  getTotalAttempts(): number{
+  getAttempts(): number{
     return this.totalAnswers;
   }
 
