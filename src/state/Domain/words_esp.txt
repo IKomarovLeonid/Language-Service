@@ -737,5 +737,7 @@ Qué lástima!;какая жалость!
 Seguro;точно,верно
 Vale!;хорошо!,идёт!,согласен!
 Vaya sorpresa!;какой сюрприз!
+¿Me puedes repetir eso?;повторите пожалуйста?
+No entiendo;я не понимаю
 
 
