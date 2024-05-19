@@ -1,6 +1,5 @@
 import {Component, OnDestroy} from '@angular/core';
 import {WordModel} from "../shared/main.api";
-import {ApiClient} from "../services/api.client";
 import {GameService} from "../services/game.service";
 import {Subscription} from "rxjs";
 import {HistoryService} from "../services/history.service";

@@ -1,6 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {GameService} from "../../services/game.service";
-import {AttemptHistoryModel, WordModel} from "../../shared/main.api";
+import {AttemptHistoryModel} from "../../shared/main.api";
 import {HistoryService} from "../../services/history.service";
 import {Subscription} from "rxjs";
 
