@@ -23,6 +23,7 @@ export class ApiClient{
       return await this.words.getWords();
     }
     catch{
+      alert('Api error getting words');
       return undefined;
     }
   }
@@ -32,6 +33,7 @@ export class ApiClient{
       return await this.history.getAttempts();
     }
     catch{
+      alert('Api error getting history');
       return undefined;
     }
   }
@@ -57,6 +59,7 @@ export class ApiClient{
       return await this.history.deleteAttemptHistory(id);
     }
     catch{
+      alert('Api error removing history');
       return undefined;
     }
   }
