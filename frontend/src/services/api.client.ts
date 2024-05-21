@@ -50,6 +50,7 @@ export class ApiClient{
       this.history.createAttemptHistory(request);
     }
     catch{
+      alert('Api error creating history');
       return undefined;
     }
   }
