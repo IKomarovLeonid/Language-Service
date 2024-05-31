@@ -41,7 +41,7 @@ export class ConjugationComponentComponent implements OnDestroy{
     }
     if(this.word?.conjugation != undefined){
       let expected = this.word?.conjugation?.split(",");
-      if(expected?.length != 6) this.message = 'Not expected conjugation for word: ' + this.word?.word + ' got: ' + this.word?.conjugation;
+      if(expected?.length != 6) this.message = 'No conjugations for word: ' + this.word?.word + ' got: ' + this.word?.conjugation;
       let correct = 0;
       if(this.yo === expected[0]) {
         this.setWrongFlag(0, false);
