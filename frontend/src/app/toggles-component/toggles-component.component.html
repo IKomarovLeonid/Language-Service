@@ -1,6 +1,6 @@
 <div class="quiz-toggles">
   <label>
-    <input type="checkbox" [(ngModel)]="isRepeatWords" (click)="onRepeatWords()"> Allow word repetitions
+    <input type="checkbox" [(ngModel)]="isRepeatWords" (click)="onRepeatWords()" [disabled]="isConjugation"> Allow word repetitions
   </label>
   <label>
     <input type="checkbox" [(ngModel)]="isLanguageReversed" (click)="onReverseLanguage()" [disabled]="isConjugation"> Reverse language
