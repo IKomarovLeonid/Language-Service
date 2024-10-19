@@ -2,6 +2,6 @@
 {
     internal class ApplicationConfiguration
     {
-        public string BaseUrl { get; set; } = "http://localhost:8080";
+        public string BaseUrl { get; set; }
     }
 }

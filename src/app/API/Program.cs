@@ -18,18 +18,7 @@ namespace API
 
         static ApplicationConfiguration ReadConfiguration()
         {
-            string settingsFile = "appsettings.json";
-
-            if (!File.Exists(settingsFile))
-            {
-                var data = new ApplicationConfiguration();
-                File.WriteAllText(settingsFile, JsonConvert.SerializeObject(data));
-                return data;
-            }
-            else
-            {
-                return JsonConvert.DeserializeObject<ApplicationConfiguration>(File.ReadAllText(settingsFile));
-            }
+            return JsonConvert.DeserializeObject<ApplicationConfiguration>(File.ReadAllText("appsettings.json"));
         }
 
         private static IWebHostBuilder CreateWebHostBuilder(string url)
