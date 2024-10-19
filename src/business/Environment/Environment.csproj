@@ -4,6 +4,12 @@
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="Src\**" />
+    <EmbeddedResource Remove="Src\**" />
+    <None Remove="Src\**" />
+  </ItemGroup>
+
 	<ItemGroup>
 		<PackageReference Include="Autofac" Version="6.3.0" />
 		<PackageReference Include="Autofac.Extensions.DependencyInjection" Version="7.2.0" />
@@ -18,9 +24,5 @@
 		<PackageReference Include="MediatR" Version="10.0.1" />
 		<PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="10.0.1" />
 	</ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Src\" />
-  </ItemGroup>
 
 </Project>
