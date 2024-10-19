@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using Domain;
 using Domain.Src;
 using Objects.Src.Dto;
 using Objects.Src.Models;

@@ -10,6 +10,7 @@ using Microsoft.Extensions.FileProviders;
 using Newtonsoft.Json.Converters;
 using System;
 using System.IO;
+using Domain;
 
 namespace API.Src
 {
@@ -32,8 +33,8 @@ namespace API.Src
 
             services.AddSwaggerDocument(settings =>
             {
-                settings.SchemaType = NJsonSchema.SchemaType.OpenApi3;
-                settings.AllowReferencesWithProperties = true;
+                settings.SchemaSettings.SchemaType = NJsonSchema.SchemaType.OpenApi3;
+                settings.SchemaSettings.AllowReferencesWithProperties = true;
                 settings.Title = "Language-Service";
             });
 
@@ -55,7 +56,7 @@ namespace API.Src
 
             app.UseMvcWithDefaultRoute();
 
-            app.UseOpenApi().UseSwaggerUi3();
+            app.UseOpenApi().UseSwaggerUi();
 
             var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot");
 

@@ -1,13 +1,14 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
-using System;
-using Objects.Src;
-using Microsoft.Extensions.DependencyInjection;
+using Domain.Src;
 using Microsoft.EntityFrameworkCore;
-using System.Linq;
+using Microsoft.Extensions.DependencyInjection;
+using Objects.Src;
 
-namespace Domain.Src
+namespace Domain
 {
     public class Repository<TModel> : IRepository<TModel> where TModel : class, IDto
     {

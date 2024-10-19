@@ -1,10 +1,10 @@
-﻿using Domain.Src.Configuration;
+﻿using System.Reflection;
+using Domain.Src.Configuration;
 using Microsoft.EntityFrameworkCore;
 using Objects.Src.Dto;
 using Objects.Src.Models;
-using System.Reflection;
 
-namespace Domain.Src
+namespace Domain
 {
     public class ApplicationContext : DbContext
     {
