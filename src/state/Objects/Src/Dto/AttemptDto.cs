@@ -1,6 +1,7 @@
 ﻿using System;
+using Objects.Src;
 
-namespace Objects.Src.Dto
+namespace Objects.Dto
 {
     public class AttemptDto : IDto
     {

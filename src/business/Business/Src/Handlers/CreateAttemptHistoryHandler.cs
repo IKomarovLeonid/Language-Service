@@ -8,6 +8,7 @@ using Objects.Src.Primitives;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Objects.Dto;
 
 namespace Business.Src.Handlers
 {

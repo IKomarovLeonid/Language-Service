@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Objects.Dto;
 using Objects.Src.Dto;
 
 namespace Domain.Src.Configuration
