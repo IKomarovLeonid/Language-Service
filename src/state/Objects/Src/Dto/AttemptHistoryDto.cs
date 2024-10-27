@@ -1,7 +1,8 @@
-﻿using Objects.Src.Primitives;
-using System;
+﻿using System;
+using Objects.Src;
+using Objects.Src.Primitives;
 
-namespace Objects.Src.Models
+namespace Objects.Dto
 {
     public class AttemptHistoryDto : IDto
     {
