@@ -18,10 +18,6 @@ namespace API.Src.Ioc
             builder.RegisterType<Repository<AttemptHistoryDto>>()
                 .AsImplementedInterfaces()
                 .SingleInstance();
-
-            builder.RegisterType<Repository<AttemptDto>>()
-                .AsImplementedInterfaces()
-                .SingleInstance();
         }
     }
 }

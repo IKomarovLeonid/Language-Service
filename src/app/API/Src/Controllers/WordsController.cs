@@ -16,9 +16,9 @@ namespace API.Src.Controllers
 
 
         [HttpGet]
-        public async Task<ActionResult<PageViewModel<WordModel>>> GetWordsAsync()
+        public async Task<ActionResult<PageViewModel<WordModel>>> GetWordsAsync(string queryBy)
         {
-            var response = await _mediator.Send(new GetWordsCommand());
+            var response = await _mediator.Send(new GetWordsCommand(queryBy));
 
             return PageViewModel<WordModel>.New(response.Data);
         }

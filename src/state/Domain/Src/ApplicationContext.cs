@@ -28,7 +28,6 @@ namespace Domain
         {
             modelBuilder.ApplyConfiguration(new WordsDbConfiguration());
             modelBuilder.ApplyConfiguration(new AttemptHistoryDbConfiguration());
-            modelBuilder.ApplyConfiguration(new AttemptDbConfiguration());
 
             base.OnModelCreating(modelBuilder);
         }
@@ -36,7 +35,5 @@ namespace Domain
         public DbSet<WordDto> Words { get; set; }
 
         public DbSet<AttemptHistoryDto> AttemptHistories { get; set; }
-
-        public DbSet<AttemptDto> Attempts { get; set; }
     }
 }

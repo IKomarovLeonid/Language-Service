@@ -6,6 +6,10 @@ namespace Business.Src.Commands
 {
     public class GetWordsCommand : IRequest<SelectResult<WordModel>>
     {
-        public GetWordsCommand() {}
+        public readonly string FilterBy;
+
+        public GetWordsCommand(string filterBy) {
+            FilterBy = filterBy;
+        }
     }
 }

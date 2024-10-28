@@ -1,6 +1,4 @@
-﻿using Domain.Src;
-using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Objects.Src.Dto;
 using Objects.Src.Primitives;
@@ -131,10 +129,7 @@ namespace API.Src
                             UpdatedTime = DateTime.UtcNow,
                             Word = word,
                             Translation = translation,
-                            Language = language,
-                            Type = wordType,
                             Conjugation = conjugation,
-                            Category = wordCategory
                         });
                     }
                 }

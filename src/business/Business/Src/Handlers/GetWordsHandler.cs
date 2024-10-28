@@ -22,16 +22,16 @@ namespace Business.Src.Handlers
 
         public async Task<SelectResult<WordModel>> Handle(GetWordsCommand request, CancellationToken cancellationToken)
         {
-            var items = await _repository.GetAllAsync();
+            var items = request.FilterBy == null ?
+                await _repository.GetAllAsync() :
+                await _repository.GetAllAsync(t => t.Attributes.Contains(request.FilterBy));
 
             return SelectResult<WordModel>.Fetched(items.Select(dto => new WordModel()
             {
                 Id = dto.Id,
-                Category = dto.Category,
-                Language = dto.Language,
                 Translations = dto.Translation.Split(","),
-                Type = dto.Type,
                 Word = dto.Word,
+                Attributes = dto.Attributes,
                 Conjugation = dto.Conjugation,
                 CreatedTime = dto.CreatedTime,
                 UpdatedTime = dto.UpdatedTime,

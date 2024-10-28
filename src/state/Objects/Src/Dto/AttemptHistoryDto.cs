@@ -1,6 +1,5 @@
 ﻿using System;
 using Objects.Src;
-using Objects.Src.Primitives;
 
 namespace Objects.Dto
 {
@@ -14,11 +13,7 @@ namespace Objects.Dto
 
         public ulong CorrectAttempts { get; set; }
 
-        public WordType WordTypes { get; set; }
-
-        public WordCategory Category { get; set; }
-
-        public double TotalSeconds { get; set; }
+        public string WordsErrors { get; set; }
 
         public DateTime CreatedTime { get; set; }
 

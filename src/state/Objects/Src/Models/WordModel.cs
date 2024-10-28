@@ -7,11 +7,7 @@ namespace Objects.Src.Models
     {
         public ulong Id { get; set; }
 
-        public WordType Type { get; set; }
-
-        public WordCategory Category { get; set; }
-
-        public LanguageType Language { get; set; }  
+        public string Attributes { get; set; }
 
         public string Word { get; set; }
 

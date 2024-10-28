@@ -17,12 +17,10 @@ namespace Business.Src.Handlers
     internal class GetAttemptsHistoryHandler : IRequestHandler<GetAttemptsHistoryCommand, SelectResult<AttemptHistoryModel>>
     {
         private readonly IRepository<AttemptHistoryDto> _histories;
-        private readonly IRepository<AttemptDto> _attempts;
 
-        public GetAttemptsHistoryHandler(IRepository<AttemptHistoryDto> histories, IRepository<AttemptDto> attempts)
+        public GetAttemptsHistoryHandler(IRepository<AttemptHistoryDto> histories)
         {
             _histories = histories;
-            _attempts = attempts;
         }
 
 
@@ -36,31 +34,16 @@ namespace Business.Src.Handlers
                 var model = new AttemptHistoryModel()
                 {
                     Id = dto.Id,
-                    TotalSeconds = dto.TotalSeconds,
                     AttemptsTotal = dto.TotalAttempts,
                     CorrectAttempts = dto.CorrectAttempts,
                     ErrorsTotal = dto.TotalAttempts - dto.CorrectAttempts,
-                    AvgAnswerTimeSec = dto.CorrectAttempts == 0 ? dto.TotalSeconds / (dto.TotalAttempts - dto.CorrectAttempts) :
-                    dto.TotalSeconds / dto.CorrectAttempts,
                     SuccessRate = dto.TotalAttempts == 0 ? 0 :
                     (double) dto.CorrectAttempts * 100 / dto.TotalAttempts,
                     UserId = dto.UserId,
                     Errors = new Dictionary<string, uint>(),
-                    WordTypes = dto.WordTypes,
-                    Category = dto.Category,
                     CreatedTime = dto.CreatedTime,
                     UpdatedTime = dto.UpdatedTime
                 };
-                var attempts = await _attempts.GetAllAsync(a => a.HistoryId == dto.Id);
-                model.Attempts = attempts.Select(aDto => new AttemptModel()
-                {
-                    IsCorrect = aDto.IsCorrect,
-                    ExpectedTranslations = aDto.ExpectedTranslations.Split(","),
-                    TotalSeconds = aDto.TotalSeconds,
-                    UserTranslation = aDto.UserTranslation,
-                    Word = aDto.Word
-                }).ToArray();
-                models.Add(model);
 
                 // calculate stats
                 foreach(var attempt in model.Attempts)
