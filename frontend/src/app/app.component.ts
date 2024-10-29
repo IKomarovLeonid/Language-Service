@@ -42,21 +42,14 @@ export class AppComponent implements OnDestroy{
   }
 
   async finishAttempt(){
-      let attempts = this.gameService.getUserAnswers();
-      if(attempts.length < 1) alert('No attempts. Please make at least one answer');
-      else{
-        await this.service.createHistory(
-          attempts,
-          this.gameService.getCurrentWordType(),
-          this.gameService.getCurrentWordCategory(),
-          this.gameService.getCorrectAnswers());
-        this.gameService.finish();
-        this.userTranslation = undefined;
-        this.userShowMessage = undefined;
-        this.gameService.setAnyWord();
-        this.gameService.resetTime();
-        this.service.loadHistory();
-      }
+    await this.service.createHistory(
+      1);
+    this.gameService.finish();
+    this.userTranslation = undefined;
+    this.userShowMessage = undefined;
+    this.gameService.setAnyWord();
+    this.gameService.resetTime();
+    this.service.loadHistory();
   }
 
   showTotalCount(): number{

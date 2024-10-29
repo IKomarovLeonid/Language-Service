@@ -1,5 +1,5 @@
 import {Injectable} from "@angular/core";
-import {AttemptHistoryModel, AttemptModel, LanguageType, WordCategory, WordModel, WordType} from "../shared/main.api";
+import {WordLanguageType, WordModel} from "../shared/main.api";
 import {ApiClient} from "./api.client";
 import {BehaviorSubject} from "rxjs";
 
@@ -27,12 +27,7 @@ export class GameService{
   private _isLanguageReversed = new BehaviorSubject<boolean>(false);
 
   // answers -> for history
-  answers: AttemptModel[] = [];
   isRepeatWords = true;
-
-  // filter
-  type: WordType = WordType.Any;
-  category: WordCategory= WordCategory.Any;
 
   constructor(private client : ApiClient) {
     this.loadWords();
@@ -42,21 +37,19 @@ export class GameService{
     let apiResult = await this.client.getWords();
     if(apiResult){
       this.words = apiResult.items!!;
-      this.filteredWords = apiResult.items!!.filter(w => w.language === LanguageType.SpanishRussian);
+      this.filteredWords = apiResult.items!!.filter(w => w.languageType === WordLanguageType.SpanishRussian);
       this.setAnyWord();
     }
     else alert('Unable to fetch words from server');
   }
 
   finish(){
-    this.answers = [];
     this.correctAnswersCount = 0;
     this.totalAnswers = 0;
     this.answersStreak = 0;
   }
 
   getUserAnswers(){
-    return this.answers;
   }
 
   getWordsCount() : number{
@@ -71,27 +64,12 @@ export class GameService{
     return this.correctAnswersCount;
   }
 
-  private saveAttempt(word: string, expectedTranslation: string[], userAnswer: string, isCorrect : boolean){
-    let model = new AttemptModel();
-    model.userTranslation = userAnswer;
-    model.word = word;
-    model.expectedTranslations = expectedTranslation;
-    model.isCorrect = isCorrect;
-    // model.totalSeconds = this.gameService.getInitialSeconds() - this.gameService.getTimerSecondsLeft();
-    model.totalSeconds = 0;
-    this.answers.push(model);
-  }
-
   getStreakCounter(): number{
     return this.answersStreak;
   }
 
   getTimerSecondsLeft(): number{
     return this.milliseconds / 1000;
-  }
-
-  getInitialSeconds(): number{
-    return this.defaultTimerMsc / 1000;
   }
 
   startTimer(): void {
@@ -146,7 +124,6 @@ export class GameService{
   public setConjugation(isConjugation : boolean){
     this._isLanguageReversed.next(false);
     this.isConjugation = isConjugation;
-    this.filterWords(WordCategory.Any, WordType.Any, LanguageType.SpanishRussian);
     this.setAnyWord();
   }
 
@@ -166,11 +143,9 @@ export class GameService{
           let filtered = word.value?.translations?.filter(w => lowerTranslation === w.toLowerCase());
           if(filtered && filtered.length > 0){
             this.registerSuccess();
-            this.saveAttempt(word.value?.word!!, word.value?.translations!!, lowerTranslation, true);
             return true;
           }
           this.registerFailure();
-          this.saveAttempt(word.value?.word!!, word.value?.translations!!, lowerTranslation, false);
           return false;
         }
         // word.word === translations
@@ -178,13 +153,11 @@ export class GameService{
           if(word.value?.word === lowerTranslation){
             this.registerSuccess();
             let expected: string[] = [word.value?.word];
-            this.saveAttempt(word.value?.translations!! [0], expected, lowerTranslation, true);
             return true;
           }
           else {
             this.registerFailure();
             let expected: string[] = [word.value?.word!!];
-            this.saveAttempt(word.value?.translations!! [0]!!, expected, lowerTranslation, false);
             return false;
           }
         }
@@ -214,31 +187,8 @@ export class GameService{
     this._isLanguageReversed.next(isReversed);
   }
 
-  public filterWords(category: WordCategory, type: WordType, language: LanguageType){
-    if(this.words){
-      this.type = type;
-      this.category = category;
-      if(this.isConjugation){
-        this.filteredWords = this.words.filter(w => w.conjugation);
-      }
-      else{
-        let byLanguage = this.words.filter(w => w.language === language);
-        if(category === WordCategory.Any && type === WordType.Any){
-          this.filteredWords = byLanguage;
-          return;
-        }
-        if(category === WordCategory.Any){
-          this.filteredWords = byLanguage.filter( item => item.type === type);
-        }
-        else{
-          if(type === WordType.Any){
-            this.filteredWords = byLanguage.filter( item => item.category === category);
-          }
-          else this.filteredWords = byLanguage.filter( item =>
-            item.category === category && item.type === type);
-        }
-      }
-    }
+  public filterWords(filterBy: string){
+
   }
 
   get dataVariable$() {
@@ -249,34 +199,6 @@ export class GameService{
     return this._isLanguageReversed.asObservable();
   }
 
-  public setRetryWords(historyAttempt: AttemptHistoryModel){
-    let errors = historyAttempt.errors;
-    if(errors) {
-      let len = Object.keys(errors).length;
-      if (len <= 0) {
-        alert('No words to repeat from this history');
-        return;
-      }
-      let words = new Array<WordModel>();
-      for (const p in errors) {
-        if (errors.hasOwnProperty(p)) {
-          if (this.words) {
-            let word = this.words.filter(w => w.word === p);
-            if (word.length > 0) words.push(word[0]);
-            else {
-              let filtered = this.words.filter(w =>
-                w.translations!!.filter(w =>
-                  w === p).length > 0);
-              if (filtered.length > 0) words.push(filtered[0]);
-            }
-          }
-          this.finish();
-          this.filteredWords = words;
-        }
-      }
-    }
-  }
-
   public setRepeatWords(isRepeat: boolean){
     this.isRepeatWords = isRepeat;
     this.wordIndex = 0;
@@ -284,13 +206,5 @@ export class GameService{
 
   public isTimerSet(): boolean{
     return this.isTimerEnabled;
-  }
-
-  public getCurrentWordType(){
-    return this.type
-  }
-
-  public getCurrentWordCategory(){
-    return this.category
   }
 }

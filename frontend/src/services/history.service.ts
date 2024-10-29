@@ -1,5 +1,5 @@
 import {ApiClient} from "./api.client";
-import {AttemptHistoryModel, AttemptModel, WordCategory, WordType} from "../shared/main.api";
+import {AttemptHistoryModel} from "../shared/main.api";
 import {Injectable} from "@angular/core";
 import {BehaviorSubject} from "rxjs";
 
@@ -35,12 +35,9 @@ export class HistoryService{
     return this.history.asObservable();
   }
 
-  public async createHistory(attempts: AttemptModel[], wordType: WordType, wordCategory: WordCategory, correctAnswers: number){
+  public async createHistory(correctAnswers: number){
     await this.client.createAttempt(
-      attempts,
-      correctAnswers, 30,
-      wordType,
-      wordCategory);
+      correctAnswers);
     await this.loadHistory();
   }
 }

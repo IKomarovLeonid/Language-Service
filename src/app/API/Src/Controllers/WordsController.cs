@@ -1,11 +1,13 @@
-﻿using API.Src.View;
+﻿using System.Threading.Tasks;
+using API.View;
+using Business.Commands;
 using Business.Src.Commands;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Objects.Models;
 using Objects.Src.Models;
-using System.Threading.Tasks;
 
-namespace API.Src.Controllers
+namespace API.Controllers
 {
     [ApiController, Route("api/words")]
     public class WordsController : ControllerBase
@@ -13,7 +15,6 @@ namespace API.Src.Controllers
         private readonly IMediator _mediator;
 
         public WordsController(IMediator mediator) { _mediator = mediator; }
-
 
         [HttpGet]
         public async Task<ActionResult<PageViewModel<WordModel>>> GetWordsAsync(string queryBy)

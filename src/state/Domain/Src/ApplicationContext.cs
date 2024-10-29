@@ -1,5 +1,5 @@
 ﻿using System.Reflection;
-using Domain.Src.Configuration;
+using Domain.Configuration;
 using Microsoft.EntityFrameworkCore;
 using Objects.Dto;
 using Objects.Src.Dto;

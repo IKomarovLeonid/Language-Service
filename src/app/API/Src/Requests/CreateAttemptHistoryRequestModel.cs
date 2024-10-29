@@ -1,7 +1,4 @@
-﻿using Objects.Src.Models;
-using Objects.Src.Primitives;
-
-namespace API.Src.Requests
+﻿namespace API.Requests
 {
     public class CreateAttemptHistoryRequestModel
     {
@@ -9,12 +6,10 @@ namespace API.Src.Requests
 
         public ulong CorrectAttempts { get; set; }
 
-        public double TotalSeconds { get; set; }
+        public ulong UserId { get; set; }
 
-        public AttemptModel[] Attempts { get; set; }
+        public string WordErrors { get; set; }
 
-        public WordType? WordTypes { get; set; }
-
-        public WordCategory? Category { get; set; }
+        public string AttemptAttributes { get; set; }
     }
 }

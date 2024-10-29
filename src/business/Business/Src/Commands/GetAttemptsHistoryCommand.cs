@@ -2,7 +2,7 @@
 using MediatR;
 using Objects.Src.Models;
 
-namespace Business.Src.Commands
+namespace Business.Commands
 {
     public class GetAttemptsHistoryCommand : IRequest<SelectResult<AttemptHistoryModel>>
     {

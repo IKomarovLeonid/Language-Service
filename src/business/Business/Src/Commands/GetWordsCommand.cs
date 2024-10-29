@@ -1,8 +1,8 @@
 ﻿using Business.Src.Objects;
 using MediatR;
-using Objects.Src.Models;
+using Objects.Models;
 
-namespace Business.Src.Commands
+namespace Business.Commands
 {
     public class GetWordsCommand : IRequest<SelectResult<WordModel>>
     {

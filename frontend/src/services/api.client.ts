@@ -1,11 +1,8 @@
 import {Injectable} from "@angular/core";
 import {
-  AttemptModel,
   CreateAttemptHistoryRequestModel,
   HistoryClient,
-  WordCategory,
   WordsClient,
-  WordType
 } from "../shared/main.api";
 
 @Injectable({"providedIn": 'root'})
@@ -20,7 +17,7 @@ export class ApiClient{
 
   async getWords(){
     try{
-      return await this.words.getWords();
+      return await this.words.getWords(null);
     }
     catch{
       alert('Api error getting words');
@@ -38,15 +35,10 @@ export class ApiClient{
     }
   }
 
-  async createAttempt(attempts: AttemptModel[], correctAnswers: number, totalSeconds: number, types: WordType, category: WordCategory){
+  async createAttempt(correctAnswers: number){
     try{
       var request = new CreateAttemptHistoryRequestModel();
-      request.attempts = attempts;
       request.correctAttempts = correctAnswers;
-      request.totalAttempts = attempts.length;
-      request.totalSeconds = totalSeconds;
-      request.category = category;
-      request.wordTypes = types
       this.history.createAttemptHistory(request);
     }
     catch{

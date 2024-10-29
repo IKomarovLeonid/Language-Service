@@ -1,5 +1,4 @@
-﻿using Objects.Src.Primitives;
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 namespace Objects.Src.Models
@@ -17,6 +16,8 @@ namespace Objects.Src.Models
         public ulong ErrorsTotal { get; set; }
 
         public double SuccessRate { get; set; }
+
+        public string AttemptAttributes { get; set; }
 
         public string WordErrors { get; set; }
 

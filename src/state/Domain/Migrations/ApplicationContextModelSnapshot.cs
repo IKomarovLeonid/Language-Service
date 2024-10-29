@@ -23,6 +23,10 @@ namespace Domain.Migrations
                         .HasColumnName("id")
                         .HasColumnType("INTEGER");
 
+                    b.Property<string>("AttemptAttributes")
+                        .HasColumnName("attributes")
+                        .HasColumnType("TEXT");
+
                     b.Property<ulong>("CorrectAttempts")
                         .HasColumnName("correct_answers")
                         .HasColumnType("INTEGER");
@@ -52,7 +56,7 @@ namespace Domain.Migrations
                     b.ToTable("AttemptHistories");
                 });
 
-            modelBuilder.Entity("Objects.Src.Dto.WordDto", b =>
+            modelBuilder.Entity("Objects.Dto.WordDto", b =>
                 {
                     b.Property<ulong>("Id")
                         .ValueGeneratedOnAdd()
@@ -69,6 +73,11 @@ namespace Domain.Migrations
 
                     b.Property<DateTime>("CreatedTime")
                         .HasColumnName("created_utc")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("LanguageType")
+                        .IsRequired()
+                        .HasColumnName("language_type")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Translation")

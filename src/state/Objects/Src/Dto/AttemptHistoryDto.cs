@@ -15,6 +15,8 @@ namespace Objects.Dto
 
         public string WordsErrors { get; set; }
 
+        public string AttemptAttributes { get; set; }
+
         public DateTime CreatedTime { get; set; }
 
         public DateTime UpdatedTime { get; set; }

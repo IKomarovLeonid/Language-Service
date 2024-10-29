@@ -1,15 +1,14 @@
-﻿using Business.Src.Commands;
+﻿using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
+using Business.Commands;
 using Business.Src.Objects;
 using Domain.Src;
 using MediatR;
-using Objects.Src.Dto;
-using Objects.Src.Models;
-using System;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
+using Objects.Dto;
+using Objects.Models;
 
-namespace Business.Src.Handlers
+namespace Business.Handlers
 {
     internal class GetWordsHandler : IRequestHandler<GetWordsCommand, SelectResult<WordModel>>
     {
@@ -32,6 +31,7 @@ namespace Business.Src.Handlers
                 Translations = dto.Translation.Split(","),
                 Word = dto.Word,
                 Attributes = dto.Attributes,
+                LanguageType = dto.LanguageType,
                 Conjugation = dto.Conjugation,
                 CreatedTime = dto.CreatedTime,
                 UpdatedTime = dto.UpdatedTime,

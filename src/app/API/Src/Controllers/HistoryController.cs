@@ -1,12 +1,13 @@
-﻿using API.Src.Requests;
-using API.Src.View;
+﻿using System.Threading.Tasks;
+using API.Requests;
+using API.View;
+using Business.Commands;
 using Business.Src.Commands;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Objects.Src.Models;
-using System.Threading.Tasks;
 
-namespace API.Src.Controllers
+namespace API.Controllers
 {
     [ApiController, Route("api/history")]
     public class HistoryController : ControllerBase
@@ -28,12 +29,11 @@ namespace API.Src.Controllers
         {
             var response = await _mediator.Send(new CreateAttemptHistoryCommand()
             {
-                Attempts = request.Attempts,
+                UserId = request.UserId,
                 CorrectAttempts = request.CorrectAttempts,
-                TotalSeconds = request.TotalSeconds,
                 TotalAttempts = request.TotalAttempts,
-                WordTypes = request.WordTypes,
-                Category = request.Category
+                WordErrors = request.WordErrors,
+                AttemptAttributes = request.AttemptAttributes
             });
 
             return response.IsSuccess ? Ok() : BadRequest(response);

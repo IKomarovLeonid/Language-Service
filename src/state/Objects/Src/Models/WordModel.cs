@@ -1,7 +1,6 @@
-﻿using Objects.Src.Primitives;
-using System;
+﻿using System;
 
-namespace Objects.Src.Models
+namespace Objects.Models
 {
     public class WordModel
     {
@@ -14,6 +13,8 @@ namespace Objects.Src.Models
         public string Conjugation { get; set; }
 
         public string[] Translations { get; set; }
+
+        public WordLanguageType LanguageType { get; set; }
 
         public DateTime CreatedTime { get; set; }
 

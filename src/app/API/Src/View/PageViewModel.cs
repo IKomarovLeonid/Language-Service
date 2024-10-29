@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
-namespace API.Src.View
+namespace API.View
 {
     public class PageViewModel<TModel>
     {

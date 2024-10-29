@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Domain.Migrations
 {
-    public partial class Inititalize_Db : Migration
+    public partial class Initialize_Db : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -17,6 +17,7 @@ namespace Domain.Migrations
                     total_attempts = table.Column<ulong>(nullable: false),
                     correct_answers = table.Column<ulong>(nullable: false),
                     words_errors = table.Column<string>(nullable: true),
+                    attributes = table.Column<string>(nullable: true),
                     created_utc = table.Column<DateTime>(nullable: false),
                     updated_utc = table.Column<DateTime>(nullable: false)
                 },
@@ -35,6 +36,7 @@ namespace Domain.Migrations
                     word = table.Column<string>(nullable: true),
                     translation = table.Column<string>(nullable: false),
                     conjugation = table.Column<string>(nullable: true),
+                    language_type = table.Column<string>(nullable: false),
                     created_utc = table.Column<DateTime>(nullable: false),
                     updated_utc = table.Column<DateTime>(nullable: false)
                 },

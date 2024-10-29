@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Business.Commands;
 using Objects.Dto;
 
 namespace Business.Src.Handlers
@@ -40,6 +41,7 @@ namespace Business.Src.Handlers
                     (double) dto.CorrectAttempts * 100 / dto.TotalAttempts,
                     UserId = dto.UserId,
                     WordErrors = dto.WordsErrors,
+                    AttemptAttributes = dto.AttemptAttributes,
                     CreatedTime = dto.CreatedTime,
                     UpdatedTime = dto.UpdatedTime
                 };

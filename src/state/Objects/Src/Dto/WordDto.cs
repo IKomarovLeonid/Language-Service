@@ -1,7 +1,7 @@
-﻿using Objects.Src.Primitives;
-using System;
+﻿using System;
+using Objects.Src;
 
-namespace Objects.Src.Dto
+namespace Objects.Dto
 {
     public class WordDto : IDto
     {
@@ -14,6 +14,8 @@ namespace Objects.Src.Dto
         public string Translation { get; set; }
 
         public string Conjugation { get; set; }
+
+        public WordLanguageType LanguageType { get; set; }
 
         public DateTime CreatedTime { get; set; }
 

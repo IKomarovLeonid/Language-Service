@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Domain.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20241028192709_Inititalize_Db")]
-    partial class Inititalize_Db
+    [Migration("20241029142707_Initialize_Db")]
+    partial class Initialize_Db
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -24,6 +24,10 @@ namespace Domain.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnName("id")
                         .HasColumnType("INTEGER");
+
+                    b.Property<string>("AttemptAttributes")
+                        .HasColumnName("attributes")
+                        .HasColumnType("TEXT");
 
                     b.Property<ulong>("CorrectAttempts")
                         .HasColumnName("correct_answers")
@@ -54,7 +58,7 @@ namespace Domain.Migrations
                     b.ToTable("AttemptHistories");
                 });
 
-            modelBuilder.Entity("Objects.Src.Dto.WordDto", b =>
+            modelBuilder.Entity("Objects.Dto.WordDto", b =>
                 {
                     b.Property<ulong>("Id")
                         .ValueGeneratedOnAdd()
@@ -71,6 +75,11 @@ namespace Domain.Migrations
 
                     b.Property<DateTime>("CreatedTime")
                         .HasColumnName("created_utc")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("LanguageType")
+                        .IsRequired()
+                        .HasColumnName("language_type")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Translation")

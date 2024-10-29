@@ -1,16 +1,17 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Objects.Src.Dto;
-using Objects.Src.Primitives;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Domain;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using Objects;
+using Objects.Dto;
+using Objects.Src.Dto;
 
-namespace API.Src
+namespace API
 {
     internal class HostedService : IHostedService
     {
@@ -44,8 +45,8 @@ namespace API.Src
 
         private async Task FillPredefinedDataAsync(ApplicationContext ctx)
         {
-            var spanish = ReadWords("words_esp.txt", LanguageType.SpanishRussian).ToList();
-            var english = ReadWords("words_eng.txt", LanguageType.EnglishRussian).ToList();
+            var spanish = ReadWords("words_esp.txt", WordLanguageType.SpanishRussian).ToList();
+            var english = ReadWords("words_eng.txt", WordLanguageType.EnglishRussian).ToList();
 
             ctx.Words.AddRange(spanish);
             ctx.Words.AddRange(english);
@@ -56,7 +57,7 @@ namespace API.Src
             await ctx.SaveChangesAsync();
         }
 
-        private IEnumerable<WordDto> ReadWords(string fileName, LanguageType language)
+        private IEnumerable<WordDto> ReadWords(string fileName, WordLanguageType type)
         {
             var words = new List<WordDto>();
             string attributes = null;
@@ -79,7 +80,7 @@ namespace API.Src
                             attributes = line.Substring(1, line.IndexOf("]") - 1);
                             continue;
                         }
-                        string[] data = line.Split(';');
+                        var data = line.Split(';');
                         if (data.Length < 2) { throw new Exception($"Invalid line: {line}"); }
 
                         var word = data[0];
@@ -91,6 +92,7 @@ namespace API.Src
                             CreatedTime = DateTime.UtcNow,
                             UpdatedTime = DateTime.UtcNow,
                             Word = word,
+                            LanguageType = type,
                             Attributes = attributes,
                             Translation = translation,
                             Conjugation = conjugation,

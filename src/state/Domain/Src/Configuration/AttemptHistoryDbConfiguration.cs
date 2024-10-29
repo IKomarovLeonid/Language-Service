@@ -1,11 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Objects.Dto;
-using Objects.Src.Models;
-using Objects.Src.Primitives;
 
-namespace Domain.Src.Configuration
+namespace Domain.Configuration
 {
     internal class AttemptHistoryDbConfiguration : IEntityTypeConfiguration<AttemptHistoryDto>
     {
@@ -16,6 +13,7 @@ namespace Domain.Src.Configuration
             builder.Property(t => t.UserId).IsRequired().HasColumnName("user_id");
             builder.Property(t => t.TotalAttempts).IsRequired().HasColumnName("total_attempts");
             builder.Property(t => t.WordsErrors).HasColumnName("words_errors");
+            builder.Property(t => t.AttemptAttributes).HasColumnName("attributes");
             builder.Property(t => t.CorrectAttempts).IsRequired().HasColumnName("correct_answers");
             builder.Property(t => t.CreatedTime).IsRequired().HasColumnName("created_utc");
             builder.Property(t => t.UpdatedTime).IsRequired().HasColumnName("updated_utc");

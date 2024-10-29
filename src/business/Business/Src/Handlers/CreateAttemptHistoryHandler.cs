@@ -1,14 +1,12 @@
-﻿using Business.Src.Commands;
+﻿using System.Threading;
+using System.Threading.Tasks;
+using Business.Commands;
 using Business.Src.Objects;
 using Domain.Src;
 using MediatR;
-using Objects.Src.Primitives;
-using System;
-using System.Threading;
-using System.Threading.Tasks;
 using Objects.Dto;
 
-namespace Business.Src.Handlers
+namespace Business.Handlers
 {
     internal class CreateAttemptHistoryHandler : IRequestHandler<CreateAttemptHistoryCommand, StateResult>
     {
@@ -26,7 +24,8 @@ namespace Business.Src.Handlers
                 TotalAttempts = command.TotalAttempts,
                 CorrectAttempts = command.CorrectAttempts,
                 UserId = command.UserId,
-                WordsErrors = string.Empty
+                WordsErrors = command.WordErrors,
+                AttemptAttributes = command.AttemptAttributes
             };
             var entity = await _histories.AddAsync(dto);
 
