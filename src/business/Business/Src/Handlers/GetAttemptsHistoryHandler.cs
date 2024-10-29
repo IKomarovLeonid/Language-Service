@@ -23,7 +23,6 @@ namespace Business.Src.Handlers
             _histories = histories;
         }
 
-
         public async Task<SelectResult<AttemptHistoryModel>> Handle(GetAttemptsHistoryCommand request, CancellationToken cancellationToken)
         {
             var items = await _histories.GetAllAsync();
@@ -40,19 +39,10 @@ namespace Business.Src.Handlers
                     SuccessRate = dto.TotalAttempts == 0 ? 0 :
                     (double) dto.CorrectAttempts * 100 / dto.TotalAttempts,
                     UserId = dto.UserId,
-                    Errors = new Dictionary<string, uint>(),
+                    WordErrors = dto.WordsErrors,
                     CreatedTime = dto.CreatedTime,
                     UpdatedTime = dto.UpdatedTime
                 };
-
-                // calculate stats
-                foreach(var attempt in model.Attempts)
-                {
-                    if (attempt.IsCorrect) continue;
-
-                    if (model.Errors.ContainsKey(attempt.Word)) model.Errors[attempt.Word]++;
-                    else model.Errors.Add(attempt.Word, 1);
-                }
             }
 
             return SelectResult<AttemptHistoryModel>.Fetched(models.OrderByDescending(t => t.CreatedTime).ToList());

@@ -16,19 +16,9 @@ namespace Objects.Src.Models
 
         public ulong ErrorsTotal { get; set; }
 
-        public double TotalSeconds { get; set; }
-
         public double SuccessRate { get; set; }
 
-        public double AvgAnswerTimeSec { get; set; }
-
-        public WordType WordTypes { get; set; }
-
-        public WordCategory Category { get; set; }
-
-        public AttemptModel[] Attempts { get; set; }
-
-        public Dictionary<string, uint> Errors { get; set; } 
+        public string WordErrors { get; set; }
 
         public DateTime CreatedTime { get; set; }
 

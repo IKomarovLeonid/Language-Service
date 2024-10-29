@@ -44,8 +44,8 @@ namespace API.Src
 
         private async Task FillPredefinedDataAsync(ApplicationContext ctx)
         {
-            var spanish = ReadWords("words_esp.txt", LanguageType.SpanishRussian);
-            var english = ReadWords("words_eng.txt", LanguageType.EnglishRussian);
+            var spanish = ReadWords("words_esp.txt", LanguageType.SpanishRussian).ToList();
+            var english = ReadWords("words_eng.txt", LanguageType.EnglishRussian).ToList();
 
             ctx.Words.AddRange(spanish);
             ctx.Words.AddRange(english);
@@ -59,8 +59,7 @@ namespace API.Src
         private IEnumerable<WordDto> ReadWords(string fileName, LanguageType language)
         {
             var words = new List<WordDto>();
-            WordType wordType = WordType.Any;
-            WordCategory wordCategory = WordCategory.Any;
+            string attributes = null;
 
             try
             {
@@ -77,43 +76,7 @@ namespace API.Src
 
                         if (line.Contains("["))
                         {
-                            line = line.Substring(1, line.IndexOf("]") - 1);
-                            var headerData = line.Split(',');
-                            if (headerData.Length == 2)
-                            {
-                                wordCategory = headerData[1] switch
-                                {
-                                    "colors" => WordCategory.Colors,
-                                    "time" => WordCategory.Time,
-                                    "directions" => WordCategory.Directions,
-                                    "character" => WordCategory.Character,
-                                    "family" => WordCategory.Family,
-                                    "common" => WordCategory.Any,
-                                    "house" => WordCategory.House,
-                                    "food" => WordCategory.Food,
-                                    "office" => WordCategory.Office,
-                                    "human" => WordCategory.Human,
-                                    "protection" => WordCategory.Protection,
-                                    _ => WordCategory.Any,
-                                };
-                            }
-                            if (headerData.Length == 1)
-                            {
-                                wordCategory = WordCategory.Any;
-                            }
-
-                            wordType = headerData[0] switch
-                            {
-                                "nouns" => WordType.Noun,
-                                "adjectives" => WordType.Adjective,
-                                "adverbs" => WordType.Adverb,
-                                "verbs" => WordType.Verb,
-                                "prepositions" => WordType.Preposition,
-                                "pronoun" => WordType.Pronoun,
-                                "questions" => WordType.Questions,
-                                "phrases" => WordType.Phrases,
-                                _ => WordType.Any,
-                            };
+                            attributes = line.Substring(1, line.IndexOf("]") - 1);
                             continue;
                         }
                         string[] data = line.Split(';');
@@ -128,6 +91,7 @@ namespace API.Src
                             CreatedTime = DateTime.UtcNow,
                             UpdatedTime = DateTime.UtcNow,
                             Word = word,
+                            Attributes = attributes,
                             Translation = translation,
                             Conjugation = conjugation,
                         });
