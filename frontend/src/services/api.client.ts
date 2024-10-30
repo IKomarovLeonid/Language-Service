@@ -35,10 +35,13 @@ export class ApiClient{
     }
   }
 
-  async createAttempt(correctAnswers: number){
+  async createAttempt(totalAttempts: number, correctAnswers: number, errors: string){
     try{
-      var request = new CreateAttemptHistoryRequestModel();
+      let request = new CreateAttemptHistoryRequestModel();
       request.correctAttempts = correctAnswers;
+      request.totalAttempts = totalAttempts;
+      request.userId = 1;
+      request.wordErrors = errors;
       this.history.createAttemptHistory(request);
     }
     catch{

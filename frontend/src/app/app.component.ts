@@ -43,7 +43,10 @@ export class AppComponent implements OnDestroy{
 
   async finishAttempt(){
     await this.service.createHistory(
-      1);
+      this.gameService.getCorrectAnswers(),
+      this.gameService.getAttempts(),
+      this.gameService.getWordsErrors()
+    );
     this.gameService.finish();
     this.userTranslation = undefined;
     this.userShowMessage = undefined;

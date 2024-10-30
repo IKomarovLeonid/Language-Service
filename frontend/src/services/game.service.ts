@@ -1,4 +1,4 @@
-import {Injectable} from "@angular/core";
+import {Injectable, OnInit} from "@angular/core";
 import {WordLanguageType, WordModel} from "../shared/main.api";
 import {ApiClient} from "./api.client";
 import {BehaviorSubject} from "rxjs";
@@ -29,6 +29,8 @@ export class GameService{
   // answers -> for history
   isRepeatWords = true;
 
+  wordErrors = "";
+
   constructor(private client : ApiClient) {
     this.loadWords();
   }
@@ -47,9 +49,6 @@ export class GameService{
     this.correctAnswersCount = 0;
     this.totalAnswers = 0;
     this.answersStreak = 0;
-  }
-
-  getUserAnswers(){
   }
 
   getWordsCount() : number{
@@ -113,6 +112,7 @@ export class GameService{
   }
 
   public registerFailure(){
+    this.wordErrors += this._currentWord.getValue()?.word;
     this.totalAnswers ++;
     this.answersStreak --;
   }
@@ -188,7 +188,10 @@ export class GameService{
   }
 
   public filterWords(filterBy: string){
-
+    if(filterBy === undefined) return;
+    let by = filterBy.toLowerCase();
+    this.filteredWords = this.words.filter(w => w.attributes?.includes(by));
+    this.setAnyWord();
   }
 
   get dataVariable$() {
@@ -206,5 +209,9 @@ export class GameService{
 
   public isTimerSet(): boolean{
     return this.isTimerEnabled;
+  }
+
+  public getWordsErrors(){
+    return this.wordErrors;
   }
 }

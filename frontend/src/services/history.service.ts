@@ -14,6 +14,7 @@ export class HistoryService{
   public async loadHistory(){
     let apiResult = await this.client.getHistory();
     if(apiResult){
+      console.log(apiResult.items!!)
       this.history.next(apiResult.items!!);
     }
     else alert('Unable to fetch history from server');
@@ -35,9 +36,8 @@ export class HistoryService{
     return this.history.asObservable();
   }
 
-  public async createHistory(correctAnswers: number){
-    await this.client.createAttempt(
-      correctAnswers);
+  public async createHistory(totalAttempts: number, correctAnswers: number, errors: string){
+    await this.client.createAttempt(totalAttempts, correctAnswers, errors);
     await this.loadHistory();
   }
 }

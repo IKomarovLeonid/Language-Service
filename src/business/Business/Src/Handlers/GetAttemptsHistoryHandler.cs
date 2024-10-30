@@ -45,6 +45,7 @@ namespace Business.Src.Handlers
                     CreatedTime = dto.CreatedTime,
                     UpdatedTime = dto.UpdatedTime
                 };
+                models.Add(model);
             }
 
             return SelectResult<AttemptHistoryModel>.Fetched(models.OrderByDescending(t => t.CreatedTime).ToList());
