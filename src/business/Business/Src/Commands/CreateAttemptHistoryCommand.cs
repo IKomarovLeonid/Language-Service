@@ -6,8 +6,6 @@ namespace Business.Commands
 {
     public class CreateAttemptHistoryCommand : IRequest<StateResult>
     {
-        public ulong UserId { get; set; }
-
         public ulong TotalAttempts { get; set; }
 
         public ulong CorrectAttempts { get; set; }

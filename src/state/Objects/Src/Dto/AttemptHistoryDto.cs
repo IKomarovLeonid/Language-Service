@@ -7,8 +7,6 @@ namespace Objects.Dto
     {
         public ulong Id { get; set; }
 
-        public ulong UserId { get; set; }
-
         public ulong TotalAttempts { get; set; }
 
         public ulong CorrectAttempts { get; set; }

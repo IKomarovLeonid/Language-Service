@@ -29,7 +29,6 @@ namespace API.Controllers
         {
             var response = await _mediator.Send(new CreateAttemptHistoryCommand()
             {
-                UserId = request.UserId,
                 CorrectAttempts = request.CorrectAttempts,
                 TotalAttempts = request.TotalAttempts,
                 WordErrors = request.WordErrors,

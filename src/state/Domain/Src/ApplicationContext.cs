@@ -2,7 +2,6 @@
 using Domain.Configuration;
 using Microsoft.EntityFrameworkCore;
 using Objects.Dto;
-using Objects.Src.Dto;
 using Objects.Src.Models;
 
 namespace Domain

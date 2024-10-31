@@ -23,7 +23,6 @@ namespace Business.Handlers
             {
                 TotalAttempts = command.TotalAttempts,
                 CorrectAttempts = command.CorrectAttempts,
-                UserId = command.UserId,
                 WordsErrors = command.WordErrors,
                 AttemptAttributes = command.AttemptAttributes
             };

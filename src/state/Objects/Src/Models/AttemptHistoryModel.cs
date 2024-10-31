@@ -7,8 +7,6 @@ namespace Objects.Src.Models
     {
         public ulong Id { get; set; }
 
-        public ulong UserId { get; set; }
-
         public ulong AttemptsTotal { get; set; }
 
         public ulong CorrectAttempts { get; set; }

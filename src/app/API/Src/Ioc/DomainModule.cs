@@ -2,7 +2,6 @@
 using Domain;
 using Domain.Src;
 using Objects.Dto;
-using Objects.Src.Dto;
 using Objects.Src.Models;
 
 namespace API.Src.Ioc

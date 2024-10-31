@@ -3,7 +3,6 @@ using Business.Src.Objects;
 using Domain.Src;
 using MediatR;
 using Objects.Src;
-using Objects.Src.Dto;
 using Objects.Src.Models;
 using System.Collections.Generic;
 using System.Linq;
@@ -39,7 +38,6 @@ namespace Business.Src.Handlers
                     ErrorsTotal = dto.TotalAttempts - dto.CorrectAttempts,
                     SuccessRate = dto.TotalAttempts == 0 ? 0 :
                     (double) dto.CorrectAttempts * 100 / dto.TotalAttempts,
-                    UserId = dto.UserId,
                     WordErrors = dto.WordsErrors,
                     AttemptAttributes = dto.AttemptAttributes,
                     CreatedTime = dto.CreatedTime,

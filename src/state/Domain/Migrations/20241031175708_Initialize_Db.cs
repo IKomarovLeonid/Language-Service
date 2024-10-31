@@ -13,7 +13,6 @@ namespace Domain.Migrations
                 {
                     id = table.Column<ulong>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    user_id = table.Column<ulong>(nullable: false),
                     total_attempts = table.Column<ulong>(nullable: false),
                     correct_answers = table.Column<ulong>(nullable: false),
                     words_errors = table.Column<string>(nullable: true),

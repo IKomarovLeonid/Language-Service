@@ -10,7 +10,6 @@ namespace Domain.Configuration
         {
             builder.HasKey(t => t.Id);
             builder.Property(t => t.Id).HasColumnName("id");
-            builder.Property(t => t.UserId).IsRequired().HasColumnName("user_id");
             builder.Property(t => t.TotalAttempts).IsRequired().HasColumnName("total_attempts");
             builder.Property(t => t.WordsErrors).HasColumnName("words_errors");
             builder.Property(t => t.AttemptAttributes).HasColumnName("attributes");

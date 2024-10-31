@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Domain.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20241029142707_Initialize_Db")]
+    [Migration("20241031175708_Initialize_Db")]
     partial class Initialize_Db
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -44,10 +44,6 @@ namespace Domain.Migrations
                     b.Property<DateTime>("UpdatedTime")
                         .HasColumnName("updated_utc")
                         .HasColumnType("TEXT");
-
-                    b.Property<ulong>("UserId")
-                        .HasColumnName("user_id")
-                        .HasColumnType("INTEGER");
 
                     b.Property<string>("WordsErrors")
                         .HasColumnName("words_errors")

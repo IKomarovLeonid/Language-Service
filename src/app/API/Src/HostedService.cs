@@ -9,7 +9,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Objects;
 using Objects.Dto;
-using Objects.Src.Dto;
 
 namespace API
 {

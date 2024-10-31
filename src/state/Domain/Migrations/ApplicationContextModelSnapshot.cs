@@ -43,10 +43,6 @@ namespace Domain.Migrations
                         .HasColumnName("updated_utc")
                         .HasColumnType("TEXT");
 
-                    b.Property<ulong>("UserId")
-                        .HasColumnName("user_id")
-                        .HasColumnType("INTEGER");
-
                     b.Property<string>("WordsErrors")
                         .HasColumnName("words_errors")
                         .HasColumnType("TEXT");
