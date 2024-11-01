@@ -187,11 +187,13 @@ export class GameService{
     this._isLanguageReversed.next(isReversed);
   }
 
-  public filterWords(filterBy: string){
-    if(filterBy === undefined) return;
+  public filterWords(filterBy: string| undefined){
+    if(filterBy === undefined) {
+      this.filteredWords = this.words.filter(w => w.languageType === WordLanguageType.SpanishRussian);
+      return;
+    }
     let by = filterBy.toLowerCase();
     this.filteredWords = this.words.filter(w => w.attributes?.includes(by));
-    this.setAnyWord();
   }
 
   get dataVariable$() {

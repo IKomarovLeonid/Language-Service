@@ -12,10 +12,14 @@ export class FilterComponentComponent {
   // filtration
   @Input() selectedEnumLanguage: WordLanguageType = WordLanguageType.SpanishRussian;
 
+  public filterBy: string | undefined;
+
   constructor(private gameService: GameService) {
+    this.filterBy = undefined;
   }
 
   filterWords(){
+    this.gameService.filterWords(this.filterBy)
     this.gameService.setAnyWord();
   }
 
