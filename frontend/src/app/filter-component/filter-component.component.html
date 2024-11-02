@@ -1,3 +1,8 @@
-<div class="select-container" *ngIf="!isConjugation()">
-  
+<div class="tag-container" *ngIf="!isConjugation()">
+    <span *ngFor="let item of showAllowedFilters()"
+          class="filter-tag"
+          [class.selected]="selectedTags.has(item)"
+          (click)="toggleTagSelection(item)">
+    {{ item }}
+  </span>
 </div>

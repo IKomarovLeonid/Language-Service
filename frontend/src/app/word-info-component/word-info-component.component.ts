@@ -10,6 +10,8 @@ import {Subscription} from "rxjs";
 })
 export class WordInfoComponentComponent implements OnDestroy{
 
+  itemsArray: string[] = [];
+
   word: WordModel | null | undefined;
   private dataSubscription: Subscription;
   private isReversedSubscription: Subscription;
@@ -17,6 +19,11 @@ export class WordInfoComponentComponent implements OnDestroy{
   constructor(private gameService: GameService) {
     this.dataSubscription = this.gameService.dataVariable$.subscribe(value => {
       this.word = value;
+      if (this.word?.attributes) {
+        this.itemsArray = this.word?.attributes.split(',').map(item => item.trim());
+      } else {
+        this.itemsArray = [];
+      }
     });
     this.isReversedSubscription = this.gameService.isLanguageReversed$.subscribe(value => {
       this.isReversed = value;
@@ -38,6 +45,7 @@ export class WordInfoComponentComponent implements OnDestroy{
   ngOnDestroy() {
     this.dataSubscription.unsubscribe();
     this.isReversedSubscription.unsubscribe();
+    this.itemsArray = [];
   }
 
 

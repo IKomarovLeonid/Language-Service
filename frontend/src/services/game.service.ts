@@ -9,6 +9,7 @@ import {BehaviorSubject} from "rxjs";
 export class GameService{
   private words: WordModel[] = [];
   private filteredWords: WordModel[] = [];
+  private allowedFilters: Set<string> = new Set<string>();
   private wordIndex = 0;
   // stats
   private correctAnswersCount = 0;
@@ -36,9 +37,16 @@ export class GameService{
   }
 
   async loadWords(){
+    this.allowedFilters.clear();
     let apiResult = await this.client.getWords();
     if(apiResult){
       this.words = apiResult.items!!;
+      for (let i = 0; i < this.words.length; i++) {
+        let attribute = this.words[i].attributes;
+        if(attribute){
+          attribute.split(',').map(item => item.trim()).forEach(item => this.allowedFilters.add(item));
+        }
+      }
       this.filteredWords = apiResult.items!!.filter(w => w.languageType === WordLanguageType.SpanishRussian);
       this.setAnyWord();
     }
@@ -168,6 +176,10 @@ export class GameService{
   }
 
   public setAnyWord(){
+    if(this.filteredWords.length == 0){
+      this._currentWord.next(null);
+      return;
+    }
     if(this.isRepeatWords){
       const randomIndex = Math.floor(Math.random() * this.getWordsCount());
       let word = this.filteredWords[randomIndex];
@@ -187,13 +199,20 @@ export class GameService{
     this._isLanguageReversed.next(isReversed);
   }
 
-  public filterWords(filterBy: string| undefined){
-    if(filterBy === undefined) {
+  public filterWords(filters: string[]| undefined){
+    if(filters === undefined || filters.length < 1) {
       this.filteredWords = this.words.filter(w => w.languageType === WordLanguageType.SpanishRussian);
       return;
     }
-    let by = filterBy.toLowerCase();
-    this.filteredWords = this.words.filter(w => w.attributes?.includes(by));
+    this.filteredWords = this.words.filter(item => {
+      if (!item.attributes) {
+        return false;
+      }
+
+      const attributeSet = new Set(item.attributes.split(',').map(attr => attr.trim()));
+
+      return filters.every(filter => attributeSet.has(filter));
+    });
   }
 
   get dataVariable$() {
@@ -215,5 +234,9 @@ export class GameService{
 
   public getWordsErrors(){
     return this.wordErrors;
+  }
+
+  public getAllowedFilters(): string[] {
+    return Array.from(this.allowedFilters);
   }
 }

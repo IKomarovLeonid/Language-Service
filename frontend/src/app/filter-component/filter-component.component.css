@@ -12,3 +12,32 @@
   flex: 1;
   margin-right: 2px; /* Adjust spacing between selects */
 }
+
+/* Container with fixed size and overflow */
+.tag-container {
+  overflow-y: auto;           /* Scroll vertically if content overflows */
+  overflow-x: hidden;         /* Hide any horizontal overflow */
+  border: 1px solid #ddd;     /* Optional: border for container */
+  padding: 0.5em;
+  display: inline-flex;       /* Display items inline, wrapping only when no space is left */
+  flex-wrap: wrap;
+  align-content: flex-start;  /* Start tags from the top of the container */
+  gap: 0.5em;
+}
+
+/* Tag styling for each element */
+.filter-tag {
+  padding: 0.4em 0.8em;
+  background-color: #e0f7fa;
+  border: 1px solid #00acc1;
+  border-radius: 15px;
+  color: #007c91;
+  font-size: 0.9em;
+  text-align: center;
+  white-space: nowrap;     /* Prevent text wrapping within tags */
+}
+
+.filter-tag.selected {
+  background-color: #007c91;  /* Change background for selected tags */
+  color: #ffffff;              /* Change text color for selected tags */
+}
