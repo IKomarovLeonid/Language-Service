@@ -22,11 +22,9 @@ export class GameService{
   private readonly defaultTimerMsc = 10000;
   // cache word
   private _currentWord = new BehaviorSubject<WordModel | null>(null);
-
   // conjugation
   private isConjugation = false;
   private _isLanguageReversed = new BehaviorSubject<boolean>(false);
-
   // answers -> for history
   isRepeatWords = true;
 
@@ -160,12 +158,10 @@ export class GameService{
         else {
           if(word.value?.word === lowerTranslation){
             this.registerSuccess();
-            let expected: string[] = [word.value?.word];
             return true;
           }
           else {
             this.registerFailure();
-            let expected: string[] = [word.value?.word!!];
             return false;
           }
         }
