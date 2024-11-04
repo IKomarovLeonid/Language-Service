@@ -9,12 +9,12 @@
   </label>
   <br><br>
   <app-word-info-component></app-word-info-component>
-  <input id="translation" class="quiz-input" [(ngModel)]="userTranslation" (keyup.enter)="makeAnswer()" [disabled] = "showTotalCount() <= 0" *ngIf="!isConjugation()"  placeholder="Enter your translation and press ENTER...">
   <app-conjugation-component *ngIf="isConjugation()"></app-conjugation-component>
   <div class="error-container" *ngIf="userShowMessage">
     <label class="error-label"><span class="bold">{{userShowMessage}}</span></label>
   </div>
   <app-filter-component></app-filter-component>
+  <input id="translation" class="quiz-input" [(ngModel)]="userTranslation" (keyup.enter)="makeAnswer()" [disabled] = "showTotalCount() <= 0" *ngIf="!isConjugation()"  placeholder="Enter your translation and press ENTER...">
   <app-toggles-component></app-toggles-component>
   <button class="quiz-button" (click)="finishAttempt()" tabindex="0">Finish</button>
 </div>

@@ -1,6 +1,6 @@
-<div *ngIf="hasWords()">
-  <label class="quiz-label" *ngIf="!isConjugation()">Translate word: </label>
-  <label class="quiz-label" *ngIf="isConjugation()">To conjugate verb: </label>
+<div>
+  <label class="quiz-label" *ngIf="!isConjugation() && this.word">Translate word: </label>
+  <label class="quiz-label" *ngIf="isConjugation() && this.word">To conjugate verb: </label>
   <label class="word-label" *ngIf="this.word && !isReversed">{{this.word.word}}</label>
   <label class="word-label" *ngIf="this.word && isReversed">{{this.word.translations!![0]}}</label>
   <label class="word-label" *ngIf="!this.word">No words fetched</label>

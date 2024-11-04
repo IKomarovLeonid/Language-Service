@@ -16,7 +16,7 @@ export class FilterComponentComponent {
   constructor(private gameService: GameService) {
   }
 
-  filterWords(){
+  private filterWords(){
     this.gameService.filterWords(this.getSelectedFilters())
     this.gameService.setAnyWord();
   }
@@ -35,11 +35,20 @@ export class FilterComponentComponent {
     } else {
       this.selectedTags.add(tag);  // Select tag
     }
-    this.gameService.filterWords(this.getSelectedFilters());
-    this.gameService.setAnyWord();
+    this.filterWords();
   }
 
   private getSelectedFilters(): string[]{
     return Array.from(this.selectedTags);
+  }
+
+  resetFilters(){
+    if(!this.hasFilters()) return;
+    this.selectedTags.clear();
+    this.filterWords();
+  }
+
+  hasFilters(){
+    return this.selectedTags.size > 0;
   }
 }

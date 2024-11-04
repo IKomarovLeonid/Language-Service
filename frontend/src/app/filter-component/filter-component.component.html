@@ -5,4 +5,7 @@
           (click)="toggleTagSelection(item)">
     {{ item }}
   </span>
+  <span *ngIf="hasFilters()" class="filter-tag-reset"
+        (click)="resetFilters()"> Reset filters
+     </span>
 </div>
