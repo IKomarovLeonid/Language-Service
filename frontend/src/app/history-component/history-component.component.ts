@@ -44,7 +44,6 @@ export class HistoryComponentComponent implements OnInit, OnDestroy{
 
   showHistoryInfo(attempt: AttemptHistoryModel){
     if(attempt.wordErrors){
-      console.log(attempt.wordErrors);
       let errors = attempt.wordErrors.split(",");
       alert("Errors was: " + errors.join("\n"));
     }

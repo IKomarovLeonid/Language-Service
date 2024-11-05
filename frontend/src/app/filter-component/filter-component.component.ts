@@ -17,7 +17,7 @@ export class FilterComponentComponent {
   }
 
   private filterWords(){
-    this.gameService.filterWords(this.getSelectedFilters())
+    this.gameService.filterWords(this.getSelectedFilters(), WordLanguageType.SpanishRussian)
     this.gameService.setAnyWord();
   }
 

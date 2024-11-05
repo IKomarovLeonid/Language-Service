@@ -120,7 +120,7 @@ export class GameService{
   public registerFailure(){
     this.wordErrors += this._currentWord.getValue()?.word + ",";
     this.totalAnswers ++;
-    this.answersStreak --;
+    this.answersStreak = 0;
   }
 
   public getConjugation(){
@@ -130,6 +130,11 @@ export class GameService{
   public setConjugation(isConjugation : boolean){
     this._isLanguageReversed.next(false);
     this.isConjugation = isConjugation;
+    if(this.isConjugation){
+      this.filteredWords = this.words.filter(w => w.conjugation);
+    } else {
+      this.filteredWords = this.words.filter(w => w.languageType === WordLanguageType.SpanishRussian);
+    }
     this.setAnyWord();
   }
 
@@ -195,12 +200,13 @@ export class GameService{
     this._isLanguageReversed.next(isReversed);
   }
 
-  public filterWords(filters: string[]| undefined){
+  public filterWords(filters: string[]| undefined, language: WordLanguageType){
     if(filters === undefined || filters.length < 1) {
-      this.filteredWords = this.words.filter(w => w.languageType === WordLanguageType.SpanishRussian);
+      this.filteredWords = this.words.filter(w => w.languageType === language);
       return;
     }
-    this.filteredWords = this.words.filter(item => {
+    let byLanguage = this.words.filter(w => w.languageType === language);
+    this.filteredWords = byLanguage.filter(item => {
       if (!item.attributes) {
         return false;
       }
