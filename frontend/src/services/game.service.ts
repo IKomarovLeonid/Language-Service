@@ -118,7 +118,7 @@ export class GameService{
   }
 
   public registerFailure(){
-    this.wordErrors += this._currentWord.getValue()?.word;
+    this.wordErrors += this._currentWord.getValue()?.word + ",";
     this.totalAnswers ++;
     this.answersStreak --;
   }
@@ -234,5 +234,18 @@ export class GameService{
 
   public getAllowedFilters(): string[] {
     return Array.from(this.allowedFilters);
+  }
+
+  public repeatWords(words: string| undefined){
+    if(!words) {
+      return;
+    }
+    let errors = new Set(words.split(',').map(attr => attr.trim()));
+    this.filteredWords = this.words.filter(item => {
+      if (!item.word) {
+        return false;
+      }
+      return errors.has(item.word);
+    });
   }
 }

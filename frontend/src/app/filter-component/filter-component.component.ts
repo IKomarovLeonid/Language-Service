@@ -31,9 +31,9 @@ export class FilterComponentComponent {
 
   toggleTagSelection(tag: string): void {
     if (this.selectedTags.has(tag)) {
-      this.selectedTags.delete(tag);  // Deselect tag
+      this.selectedTags.delete(tag);
     } else {
-      this.selectedTags.add(tag);  // Select tag
+      this.selectedTags.add(tag);
     }
     this.filterWords();
   }

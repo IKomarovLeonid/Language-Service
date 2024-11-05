@@ -34,6 +34,7 @@ export class HistoryComponentComponent implements OnInit, OnDestroy{
     if(id){
       let model = this.service.getModel(id);
       if(model){
+        this.gameService.repeatWords(model.wordErrors);
         this.gameService.setAnyWord();
       }
       else  alert(`Unknown history ${id}`);
@@ -42,10 +43,14 @@ export class HistoryComponentComponent implements OnInit, OnDestroy{
   }
 
   showHistoryInfo(attempt: AttemptHistoryModel){
-    let combinedString = Object.entries(attempt.wordErrors!!)
-      .map(([key, value]) => `'${key}' errors was '${value}' times`)
-      .join('\n');
-    alert(combinedString);
+    if(attempt.wordErrors){
+      console.log(attempt.wordErrors);
+      let errors = attempt.wordErrors.split(",");
+      alert("Errors was: " + errors.join("\n"));
+    }
+    else {
+      alert("This attempt has no word errors")
+    }
   }
 
   public hasItems(){

@@ -28,7 +28,6 @@ export class ConjugationComponentComponent implements OnDestroy{
     this.wrongItems = [false, false, false, false, false, false];
     this.dataSubscription = this.service.dataVariable$.subscribe(value => {
       this.word = value;
-      // Do something with the updated value
     });
   }
 
