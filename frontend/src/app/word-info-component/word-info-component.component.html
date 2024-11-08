@@ -1,8 +1,8 @@
-<div>
+<div class = "word-container">
   <label class="quiz-label" *ngIf="!isConjugation() && this.word">Translate word: </label>
   <label class="quiz-label" *ngIf="isConjugation() && this.word">To conjugate verb: </label>
   <label class="word-label" *ngIf="this.word && !isReversed">{{this.word.word}}</label>
   <label class="word-label" *ngIf="this.word && isReversed">{{this.word.translations!![0]}}</label>
   <label class="word-label" *ngIf="!this.word">No words fetched</label>
-  <div class="timer" *ngIf="isTimerSet()">{{showTimerSecondsLeft()}} seconds left</div>
+  <label class="timer" *ngIf="isTimerSet()">{{showTimerSecondsLeft()}} seconds left</label>
 </div>

@@ -31,3 +31,12 @@
   text-align: center;
 }
 
+.word-container {
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 0.5em;
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  gap: 0.5em;
+}
