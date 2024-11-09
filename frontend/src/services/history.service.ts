@@ -14,7 +14,6 @@ export class HistoryService{
   public async loadHistory(){
     let apiResult = await this.client.getHistory();
     if(apiResult){
-      console.log(apiResult.items!!)
       this.history.next(apiResult.items!!);
     }
     else alert('Unable to fetch history from server');

@@ -13,7 +13,7 @@
       <td>{{attempt.correctAttempts}}</td>
       <td>{{attempt.successRate?.toFixed(2)}} %</td>
       <td>{{attempt.createdTime?.toLocaleString()}}</td>
-      <td><button class="button-history-delete" (click)="onDeleteHistory(attempt.id)">Delete</button></td>
+      <td><button class="button-history-delete" (click)="onDeleteHistory(attempt.id)">X</button></td>
       <td><button class="button-history-repeat" (click)="onRepeatHistory(attempt.id)">Repeat</button></td>
     </tr>
     </tbody>

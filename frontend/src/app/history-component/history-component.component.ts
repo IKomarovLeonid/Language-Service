@@ -28,6 +28,7 @@ export class HistoryComponentComponent implements OnInit, OnDestroy{
 
   onDeleteHistory(id: number | undefined){
     this.service.deleteHistory(id!!);
+    this.service.loadHistory();
   }
 
   onRepeatHistory(id: number | undefined){
@@ -40,16 +41,6 @@ export class HistoryComponentComponent implements OnInit, OnDestroy{
       else  alert(`Unknown history ${id}`);
     }
     else alert('This history has undefined id')
-  }
-
-  showHistoryInfo(attempt: AttemptHistoryModel){
-    if(attempt.wordErrors){
-      let errors = attempt.wordErrors.split(",");
-      alert("Errors was: " + errors.join("\n"));
-    }
-    else {
-      alert("This attempt has no word errors")
-    }
   }
 
   public hasItems(){
