@@ -4,5 +4,5 @@
   <label class="word-label" *ngIf="this.word && !isReversed">{{this.word.word}}</label>
   <label class="word-label" *ngIf="this.word && isReversed">{{this.word.translations!![0]}}</label>
   <label class="word-label" *ngIf="!this.word">No words fetched</label>
-  <label class="timer" *ngIf="isTimerSet()">{{showTimerSecondsLeft()}} seconds left</label>
+  <label class="word-timer" *ngIf="isTimerSet()">({{showTimerSecondsLeft()}})</label>
 </div>
