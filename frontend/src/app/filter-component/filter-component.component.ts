@@ -12,6 +12,7 @@ export class FilterComponentComponent {
   // filtration
   @Input() selectedEnumLanguage: WordLanguageType = WordLanguageType.SpanishRussian;
   selectedTags: Set<string> = new Set<string>();
+  selectedLanguage: WordLanguageType = WordLanguageType.SpanishRussian;
 
   constructor(private gameService: GameService) {
   }
@@ -29,6 +30,10 @@ export class FilterComponentComponent {
     return this.gameService.getAllowedFilters();
   }
 
+  showAllowedLanguages(){
+    return this.gameService.getAllowedLanguages();
+  }
+
   toggleTagSelection(tag: string): void {
     if (this.selectedTags.has(tag)) {
       this.selectedTags.delete(tag);
@@ -36,6 +41,10 @@ export class FilterComponentComponent {
       this.selectedTags.add(tag);
     }
     this.filterWords();
+  }
+
+  toggleLanguageSelection(tag: WordLanguageType){
+    this.selectedLanguage = tag;
   }
 
   private getSelectedFilters(): string[]{

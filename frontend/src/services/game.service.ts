@@ -10,6 +10,7 @@ export class GameService{
   private words: WordModel[] = [];
   private filteredWords: WordModel[] = [];
   private allowedFilters: Set<string> = new Set<string>();
+  private allowedLanguages: Set<WordLanguageType> = new Set<WordLanguageType>();
   private wordIndex = 0;
   // stats
   private correctAnswersCount = 0;
@@ -41,8 +42,12 @@ export class GameService{
       this.words = apiResult.items!!;
       for (let i = 0; i < this.words.length; i++) {
         let attribute = this.words[i].attributes;
+        let language = this.words[i].languageType;
         if(attribute){
           attribute.split(',').map(item => item.trim()).forEach(item => this.allowedFilters.add(item));
+        }
+        if(language){
+          this.allowedLanguages.add(language);
         }
       }
       this.filteredWords = apiResult.items!!.filter(w => w.languageType === WordLanguageType.SpanishRussian);
@@ -253,5 +258,9 @@ export class GameService{
       }
       return errors.has(item.word);
     });
+  }
+
+  public getAllowedLanguages(){
+    return Array.from(this.allowedLanguages);
   }
 }
