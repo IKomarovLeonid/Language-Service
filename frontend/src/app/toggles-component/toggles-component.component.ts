@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {GameService} from "../../services/game.service";
+import {WordLanguageType} from "../../shared/main.api";
 
 @Component({
   selector: 'app-toggles-component',
@@ -13,6 +14,7 @@ export class TogglesComponentComponent {
   isTimerEnabled = false;
   isConjugation = false;
   isLanguageReversed = false;
+  isRandom = false;
 
   constructor(private gameService: GameService) {
   }
@@ -56,5 +58,9 @@ export class TogglesComponentComponent {
     else{
       this.gameService.setTimer(false);
     }
+  }
+
+  onRandomGame(){
+    alert('implement')
   }
 }
