@@ -2,6 +2,7 @@ import {Injectable, OnInit} from "@angular/core";
 import {WordLanguageType, WordModel} from "../shared/main.api";
 import {ApiClient} from "./api.client";
 import {BehaviorSubject} from "rxjs";
+import {GameStats} from "../app/objects/game.stats";
 
 @Injectable({
   providedIn: 'root'
@@ -13,12 +14,9 @@ export class GameService{
   private allowedLanguages: Set<WordLanguageType> = new Set<WordLanguageType>();
   private wordIndex = 0;
   // stats
-  private correctAnswersCount = 0;
-  private totalAnswers = 0;
-  private answersStreak = 0;
+  private statistics: GameStats = new GameStats();
   // enable timer if requested
   private isTimerEnabled = false;
-  private milliseconds: number = 0;
   private timer: any;
   private readonly defaultTimerMsc = 10000;
   // cache word
@@ -57,36 +55,17 @@ export class GameService{
   }
 
   finish(){
-    this.correctAnswersCount = 0;
-    this.totalAnswers = 0;
-    this.answersStreak = 0;
+    this.statistics.reset();
   }
 
   getWordsCount() : number{
     return this.filteredWords.length;
   }
 
-  getAttempts(): number{
-    return this.totalAnswers;
-  }
-
-  getCorrectAnswers(): number{
-    return this.correctAnswersCount;
-  }
-
-  getStreakCounter(): number{
-    return this.answersStreak;
-  }
-
-  getTimerSecondsLeft(): number{
-    return this.milliseconds / 1000;
-  }
-
   startTimer(): void {
     this.timer = setInterval(() => {
-      console.log(this.milliseconds);
-      if(this.milliseconds <= 0){
-        this.totalAnswers ++;
+      if(this.statistics.getTimerSecondsLeft() <= 0){
+        this.statistics.incrementCorrect();
         this.answersStreak --;
         this.resetTime();
       }
