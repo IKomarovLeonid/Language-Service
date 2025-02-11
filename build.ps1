@@ -18,7 +18,7 @@ if (-not $npmPath) {
 $currentDirectory = Get-Location
 $frontendDirectory = Join-Path -Path $currentDirectory -ChildPath "frontend"
 $solutionFileName = "Language-Service.sln"
-$dotnetBuildResultPath = "src\app\API\bin\Release\net5.0"
+$dotnetBuildResultPath = "src\app\API\bin\Release\net6.0"
 $frontendBuildResultPath = "frontend\dist\language-Service"
 $outputFrontendRootPath = "output\wwwroot"
 
