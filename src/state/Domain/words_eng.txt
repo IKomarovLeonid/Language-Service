@@ -1,19 +1,19 @@
 ﻿[adjectives]
 
-narrow;узкий
 loose;разболтанный
+narrow;узкий
 short-tempered;вспыльчивый
 wise;мудрый
 
 [verbs]
 
+break out;сбежать
 break up;завершить
 call off;отменить
-to come up with;предложить
+chip in;помочь
+come apart;развалится
 go on;происходить,продолжать
 put off;откладывать
 take up;начать
+to come up with;предложить
 turn up;обнаружиться
-break out;сбежать
-chip in;помочь
-come apart;развалится

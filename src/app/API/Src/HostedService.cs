@@ -44,8 +44,8 @@ namespace API
 
         private async Task FillPredefinedDataAsync(ApplicationContext ctx)
         {
-            var spanish = ReadWords("words_esp.txt", WordLanguageType.SpanishRussian).ToList();
             var english = ReadWords("words_eng.txt", WordLanguageType.EnglishRussian).ToList();
+            var spanish = ReadWords("words_esp.txt", WordLanguageType.SpanishRussian).ToList();
 
             ctx.Words.AddRange(spanish);
             ctx.Words.AddRange(english);
@@ -54,12 +54,16 @@ namespace API
             PrintDuplicates(english);
 
             await ctx.SaveChangesAsync();
+
         }
 
         private IEnumerable<WordDto> ReadWords(string fileName, WordLanguageType type)
         {
             var words = new List<WordDto>();
             string attributes = null;
+
+            var categories = new Dictionary<string, List<string>>();
+            string currentCategory = null;
 
             try
             {
@@ -77,8 +81,20 @@ namespace API
                         if (line.Contains("["))
                         {
                             attributes = line.Substring(1, line.IndexOf("]") - 1);
+                            currentCategory = line.Trim();
                             continue;
                         }
+                        if (currentCategory != null)
+                        {
+                            if (categories.ContainsKey(currentCategory)) {
+                                categories[currentCategory].Add(line);
+                            }
+                            else
+                            {
+                                 categories.Add(currentCategory, new List<string>() { line });
+                            }
+                        }
+
                         var data = line.Split(';');
                         if (data.Length < 2) { throw new Exception($"Invalid line: {line}"); }
 
@@ -99,6 +115,29 @@ namespace API
                     }
                 }
                 Console.WriteLine($"Processed {words.Count} words from source {fileName}");
+
+                var name = "sort_" + fileName;
+                using (StreamWriter writer = new StreamWriter(name))
+                {
+                    foreach (var category in categories)
+                    {
+                        writer.WriteLine(category.Key);
+
+                        var sortedWords = category.Value
+                            .OrderBy(item => item.Split(';')[0])
+                            .ToList();
+
+                        foreach (var word in sortedWords)
+                        {
+                            writer.WriteLine(word);
+                        }
+
+                        writer.WriteLine();
+                    }
+                }
+
+                Console.WriteLine($"New sorted file has been created {name}");
+
                 return words;
             }
             catch(Exception ex)
