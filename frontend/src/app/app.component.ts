@@ -3,6 +3,7 @@ import {WordModel} from "../shared/main.api";
 import {GameService} from "../services/game.service";
 import {Subscription} from "rxjs";
 import {HistoryService} from "../services/history.service";
+import {GameStats} from "./game.stats";
 
 @Component({
   selector: 'app-root',
@@ -18,7 +19,7 @@ export class AppComponent implements OnDestroy{
   // for user
   userShowMessage: string | undefined;
 
-    constructor(private gameService : GameService, private service: HistoryService) {
+    constructor(private gameService : GameService, private service: HistoryService, private statistics: GameStats) {
       this.dataSubscription = this.gameService.dataVariable$.subscribe(value => {
         this.word = value;
       });
@@ -42,12 +43,12 @@ export class AppComponent implements OnDestroy{
   }
 
   async finishAttempt(){
-      let answers = this.gameService.getAttempts();
+      let answers = this.statistics.getAttempts();
       if(answers == 0){
         alert('No attempts has been made yet');
         return;
       }
-      let correct = this.gameService.getCorrectAnswers();
+      let correct = this.statistics.getCorrectAnswers();
     await this.service.createHistory(
       answers,
       correct,
@@ -66,15 +67,15 @@ export class AppComponent implements OnDestroy{
   }
 
   showTotalAnswers(): number{
-    return this.gameService.getAttempts();
+    return this.statistics.getAttempts();
   }
 
   showCorrectAnswers(): number{
-    return this.gameService.getCorrectAnswers();
+    return this.statistics.getCorrectAnswers();
   }
 
   showCurrentStreak(): number{
-      return this.gameService.getStreakCounter();
+      return this.statistics.getStreakCounter();
   }
 
   public isConjugation(){

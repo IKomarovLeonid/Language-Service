@@ -2,6 +2,7 @@ import {Component, OnDestroy} from '@angular/core';
 import {GameService} from "../../services/game.service";
 import {WordModel} from "../../shared/main.api";
 import {Subscription} from "rxjs";
+import {GameStats} from "../game.stats";
 
 @Component({
   selector: 'app-word-info-component',
@@ -16,7 +17,7 @@ export class WordInfoComponentComponent implements OnDestroy{
   private dataSubscription: Subscription;
   private isReversedSubscription: Subscription;
   isReversed: boolean | undefined;
-  constructor(private gameService: GameService) {
+  constructor(private gameService: GameService, private statistics: GameStats) {
     this.dataSubscription = this.gameService.dataVariable$.subscribe(value => {
       this.word = value;
       if (this.word?.attributes) {
@@ -50,6 +51,6 @@ export class WordInfoComponentComponent implements OnDestroy{
 
 
   showTimerSecondsLeft(): number{
-    return this.gameService.getTimerSecondsLeft();
+    return this.statistics.getTimerSecondsLeft();
   }
 }

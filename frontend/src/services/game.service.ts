@@ -2,7 +2,7 @@ import {Injectable, OnInit} from "@angular/core";
 import {WordLanguageType, WordModel} from "../shared/main.api";
 import {ApiClient} from "./api.client";
 import {BehaviorSubject} from "rxjs";
-import {GameStats} from "../app/objects/game.stats";
+import {GameStats} from "../app/game.stats";
 
 @Injectable({
   providedIn: 'root'
@@ -13,8 +13,6 @@ export class GameService{
   private allowedFilters: Set<string> = new Set<string>();
   private allowedLanguages: Set<WordLanguageType> = new Set<WordLanguageType>();
   private wordIndex = 0;
-  // stats
-  private statistics: GameStats = new GameStats();
   // enable timer if requested
   private isTimerEnabled = false;
   private timer: any;
@@ -29,7 +27,7 @@ export class GameService{
 
   wordErrors = "";
 
-  constructor(private client : ApiClient) {
+  constructor(private client : ApiClient, private statistics: GameStats) {
     this.loadWords();
   }
 
@@ -66,10 +64,10 @@ export class GameService{
     this.timer = setInterval(() => {
       if(this.statistics.getTimerSecondsLeft() <= 0){
         this.statistics.incrementCorrect();
-        this.answersStreak --;
+        this.statistics.decreaseStreak();
         this.resetTime();
       }
-      else this.milliseconds -= 1000;
+      else this.statistics.decreaseTimer();
     }, 1000);
   }
 
@@ -88,13 +86,13 @@ export class GameService{
   }
 
   public resetTime(){
-    this.milliseconds = this.defaultTimerMsc;
+    this.statistics.resetTimer();
   }
 
   public registerSuccess(){
-    this.totalAnswers ++;
-    this.answersStreak ++;
-    this.correctAnswersCount ++;
+    this.statistics.incrementAttempt();
+    this.statistics.incrementStreak();
+    this.statistics.incrementCorrect();
     if(this.isTimerEnabled){
       this.stopTimer();
       this.startTimer();
@@ -103,8 +101,8 @@ export class GameService{
 
   public registerFailure(){
     this.wordErrors += this._currentWord.getValue()?.word + ",";
-    this.totalAnswers ++;
-    this.answersStreak = 0;
+    this.statistics.incrementAttempt();
+    this.statistics.resetStreak();
   }
 
   public getConjugation(){

@@ -1,3 +1,6 @@
+import {Injectable} from "@angular/core";
+
+@Injectable({"providedIn": 'root'})
 export class GameStats{
   // stats
   private correctAnswersCount = 0;
@@ -12,6 +15,7 @@ export class GameStats{
     this.millisecondsLeft = 0;
     this.answersStreak = 0;
     this.totalAnswers = 0;
+    this.millisecondsLeft = 10000;
   }
 
   incrementAttempt(){
@@ -22,8 +26,16 @@ export class GameStats{
     this.correctAnswersCount ++;
   }
 
+  resetStreak(){
+    this.answersStreak = 0;
+  }
+
   incrementStreak(){
     this.answersStreak++;
+  }
+
+  decreaseStreak(){
+    this.answersStreak--;
   }
 
   getAttempts(): number{
@@ -40,5 +52,13 @@ export class GameStats{
 
   getTimerSecondsLeft(): number{
     return this.millisecondsLeft / 1000;
+  }
+
+  resetTimer(){
+    this.millisecondsLeft = 10000;
+  }
+
+  decreaseTimer(){
+    this.millisecondsLeft -= 1000;
   }
 }
