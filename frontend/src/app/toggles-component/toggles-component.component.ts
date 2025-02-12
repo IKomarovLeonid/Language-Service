@@ -14,7 +14,6 @@ export class TogglesComponentComponent {
   isTimerEnabled = false;
   isConjugation = false;
   isLanguageReversed = false;
-  isRandom = false;
 
   constructor(private gameService: GameService) {
   }
@@ -58,9 +57,5 @@ export class TogglesComponentComponent {
     else{
       this.gameService.setTimer(false);
     }
-  }
-
-  onRandomGame(){
-    alert('implement')
   }
 }
