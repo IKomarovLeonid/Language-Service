@@ -134,6 +134,7 @@ export class GameService{
         // word -> one of translations from word.translations
         if(!this._isLanguageReversed.value){
           let filtered = word.value?.translations?.filter(w => lowerTranslation === w.toLowerCase());
+          console.log(filtered);
           if(filtered && filtered.length > 0){
             this.registerSuccess();
             return true;
@@ -143,7 +144,7 @@ export class GameService{
         }
         // word.word === translations
         else {
-          if(word.value?.word === lowerTranslation){
+          if(word.value?.word?.toLowerCase() === userAnswer){
             this.registerSuccess();
             return true;
           }

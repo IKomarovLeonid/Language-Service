@@ -1,38 +1,38 @@
 ﻿[verbs]
 
-agradecer;благодарить
-aparecer;появляться
-comer;есть,обедать
-conocer;знать,иметь знания,знакомить
-conseguir;добиваться,достигать
-construir;создавать
-defender;защищать
-deletrear;разгадывать,расшифровывать
-despedirse;прощаться,увольняться
-despertarse;просыпаться
-destruir;разрушать
-dividir;делить,разделять
-dormir;засыпать
-emprezar;начинать
-fregar;мыть,чистить
-huir;убегать
-leer;читать
-morir;умирать
-multiplicar;умножать
-nacer;рождаться
-presentar;поздороваться,представиться
-recordar;помнить,вспоминать
-regar;поливать,орошать
-saber;знать
-seguir;следовать
-servir;служить
-sonar;звонить
-traducir;переводить
-vencer;побеждать
-vestir;одеваться
-volar;летать
-voler;становиться
-volver;возвращаться
+agradecer;благодарить;agradezco, agradeces, agradece, agradecemos, agradecéis, agradecen
+aparecer;появляться;aparezco, apareces, aparece, aparecemos, aparecéis, aparecen
+comer;есть,обедать;como, comes, come, comemos, coméis, comen
+conocer;знать,иметь знания,знакомить;conozco, conoces, conoce, conocemos, conocéis, conocen
+conseguir;добиваться,достигать;consigo, consigues, consigue, conseguimos, conseguís, consiguen
+construir;создавать;construyo, construyes, construye, construimos, construís, construyen
+defender;защищать;defiendo, defiendes, defiende, defendemos, defendéis, defienden
+deletrear;разгадывать,расшифровывать;deletreo, deletreas, deletrea, deletreamos, deletreáis, deletrean
+despedirse;прощаться,увольняться;me despido, te despides, se despide, nos despedimos, os despedís, se despiden
+despertarse;просыпаться;me despierto, te despiertas, se despierta, nos despertamos, os despertáis, se despiertan
+destruir;разрушать;destruyo, destruyes, destruye, destruimos, destruís, destruyen
+dividir;делить,разделять;divido, divides, divide, dividimos, dividís, dividen
+dormir;засыпать;duermo, duermes, duerme, dormimos, dormís, duermen
+empezar;начинать;empiezo, empiezas, empieza, empezamos, empezáis, empiezan
+fregar;мыть,чистить;friego, friegas, friega, fregamos, fregáis, friegan
+huir;убегать;huyo, huyes, huye, huimos, huís, huyen
+leer;читать;leo, lees, lee, leemos, leéis, leen
+morir;умирать;muero, mueres, muere, morimos, morís, mueren
+multiplicar;умножать;multiplico, multiplicas, multiplica, multiplicamos, multiplicáis, multiplican
+nacer;рождаться;nazco, naces, nace, nacemos, nacéis, nacen
+presentar;поздороваться,представиться;presento, presentas, presenta, presentamos, presentáis, presentan
+recordar;помнить,вспоминать;recuerdo, recuerdas, recuerda, recordamos, recordáis, recuerdan
+regar;поливать,орошать;riego, riegas, riega, regamos, regáis, riegan
+saber;знать;sé, sabes, sabe, sabemos, sabéis, saben
+seguir;следовать;sigo, sigues, sigue, seguimos, seguís, siguen
+servir;служить;sirvo, sirves, sirve, servimos, servís, sirven
+sonar;звонить;sueno, suenas, suena, sonamos, sonáis, suenan
+traducir;переводить;traduzco, traduces, traduce, traducimos, traducís, traducen
+vencer;побеждать;venzo, vences, vence, vencemos, vencéis, vencen
+vestir;одеваться;visto, vistes, viste, vestimos, vestís, visten
+volar;летать;vuelo, vuelas, vuela, volamos, voláis, vuelan
+voler;становиться;vuelvo, vuelves, vuelve, volvemos, volvéis, vuelven
+volver;возвращаться;vuelvo, vuelves, vuelve, volvemos, volvéis, vuelven
 
 [nouns]
 
