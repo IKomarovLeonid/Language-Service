@@ -1,11 +1,12 @@
 <div class="quiz-container">
   <label class="quiz-label">Total words: <span class="bold">{{showTotalCount()}}</span></label>
   <br><br>
-  <label class="quiz-label">Attempts: <span class="bold">{{showTotalAnswers()}}</span>
+  <label class="quiz-label">Attempts: <span>{{showTotalAnswers()}}</span>
     | correct: <span class="correct-answer">{{showCorrectAnswers()}}</span>
     | streak: <span [ngClass]="{ 'negative-counter': showCurrentStreak() < 0, 'positive-counter': showCurrentStreak() > 0 }">
       {{showCurrentStreak()}}
     </span>
+    | accuracy: <span>{{getAccuracy().toFixed(2)}} %</span>
   </label>
   <br><br>
   <app-word-info-component></app-word-info-component>

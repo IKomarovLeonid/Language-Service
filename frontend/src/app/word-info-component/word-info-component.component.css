@@ -1,13 +1,13 @@
 .quiz-label {
   font-weight: bold;
   color: #333;
-
 }
 
 .word-label {
   font-weight: bold;
   color: red;
-  text-decoration: underline;
+  font-size: 30px;
+
 }
 
 .attribute-word-tag {
@@ -26,12 +26,12 @@
 .word-timer {
   font-weight: bold;
   color: black;
+  font-size: 30px;
 }
 
 .word-container {
   overflow-y: auto;
   overflow-x: hidden;
-  padding: 0.5em;
   display: inline-flex;
   flex-wrap: wrap;
   align-content: flex-start;

@@ -15,6 +15,8 @@ export class AppComponent implements OnDestroy{
   userTranslation: string | undefined;
   word: WordModel | null | undefined;
   private dataSubscription: Subscription;
+  private accuracies: { [key: string]: { correct: number, wrong: number } } = {
+  };
 
   // for user
   userShowMessage: string | undefined;
@@ -32,6 +34,7 @@ export class AppComponent implements OnDestroy{
   makeAnswer(){
     let result = this.gameService.validateAnswer(this.userTranslation!!);
     let word = this.word;
+    this.registerAccuracy(result, word?.word!!);
     if(result) {
       this.userShowMessage = undefined;
       this.gameService.setAnyWord();
@@ -82,4 +85,23 @@ export class AppComponent implements OnDestroy{
       return this.gameService.getConjugation();
   }
 
+  private registerAccuracy(isSuccess: boolean, word: string){
+      if(!this.accuracies[word]){
+        this.accuracies[word] = {correct: isSuccess ? 1 : 0, wrong: isSuccess ? 0 : 1};
+      } else {
+        if(isSuccess) this.accuracies[word].correct ++;
+        else this.accuracies[word].wrong++;
+      }
+  }
+
+  public getAccuracy(){
+      if(this.word){
+        let word = this.word.word!!;
+        if(this.accuracies[word]){
+          let accuracy = this.accuracies[word];
+          return accuracy.correct / (accuracy.wrong + accuracy.correct) * 100;
+        }
+      }
+      return 0;
+  }
 }
