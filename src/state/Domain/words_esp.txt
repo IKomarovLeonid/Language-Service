@@ -39,6 +39,46 @@ volver;возвращаться;vuelvo, vuelves, vuelve, volvemos, volvéis, vue
 camarero;официант
 dependiente;продавец,служащий
 enfermero;санитар,фельдшер
+gimnasio;спортзал
+sala del deporte;спортзал
+peluquria;парикмахерская
+farmacia;аптека
+garaje;гараж
+parada;остановка
+estación;станция
+aparcamiento;парковка
+ectacionamente;парковка
+parque;парк
+tienda;магазин
+chalé;частный дом
+piso;квартира
+salon-comedor;столовая
+nevera;холодильник
+microondas;микроволновка
+сalefacción central;центральное отопление
+ascensor;лифт
+hervidor eléctrico;чайник
+pava eléctrica;чайник
+aire accondicionado;кондиционер
+lavadora;стиральная машина
+lavavajillas;посудомойка
+piscina;бассейн
+jardín;сад
+la mano;рука
+la foto;фото,фотография
+la radio;радио
+la moto;мотоцикл
+el sofá;диван
+la fuente;источник
+ruido;шум
+
+[adjectives]
+
+amueblar;мебилированный
+moderno;современный
+tranquilo;спокойный
+antiguo;старинный
+ruidoso;шумный
 
 [adverb]
 
@@ -48,4 +88,28 @@ algunos;несколько
 
 Llegar tarde;опаздывать
 
+[prepositions]
 
+encima de;над,сверху
+debajo de;под,снизу
+al lado de;сбоку
+dentro de;внутри
+а la izquierda de;слева
+a la derecha de;справа
+entre;между
+delante de;впереди
+detrás de;сзади
+en fondo;вглубине
+en primer plano;на первом этаже
+en el centro de;в центре
+cerca de;близко к
+lejos de;далеко от
+
+
+
+[grammatica]
+
+Mi apartamento está en el centro de la ciudad;мой дом находится в центре города
+Aquí hay un supermercado y una peluquería;здесь находится супермаркет и парикмахерская
+Aquí hay cuatro farmacias;здесь четыре аптеки
+En mi barrio hay muchos/pocos restaurantes;в моем районе много/мало ресторанов
