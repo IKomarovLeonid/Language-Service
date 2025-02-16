@@ -40,7 +40,7 @@ export class AppComponent implements OnDestroy{
       this.gameService.setAnyWord();
     }
     else{
-      this.userShowMessage = `Error. Correct translation of '${word?.word}' -> '${word?.translations}'`;
+      this.userShowMessage = `Correct translation of '${word?.word}' -> '${word?.translations}'`;
     }
     this.userTranslation = undefined;
   }
