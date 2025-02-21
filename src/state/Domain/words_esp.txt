@@ -71,6 +71,9 @@ la moto;мотоцикл
 el sofá;диван
 la fuente;источник
 ruido;шум
+pelis;фильмы
+pasillo;корридор
+
 
 [adjectives]
 
@@ -83,10 +86,54 @@ ruidoso;шумный
 [adverb]
 
 algunos;несколько
+entonces;тогда
+además;кроме того
+mietras tanto;тем временем
+mietras;пока,в то время как
+también;также
+tampoco;также не
+por ejemplo;например
+enfrente;напротив
+
+
 
 [phrases]
 
 Llegar tarde;опаздывать
+en mi opinión;по моему мнению
+segun mi opinión;согласно моему мнению
+para mi;для меня
+estoy convencido de qué;я убежден в том что
+la verdad es que;правда в том что
+lo cierto es que;верно то что
+y encima;превыше всего,важнее всего
+y para colmo;и в довершении всего
+y lo que faltaba;и то чего не хватало
+en resumen;резюмируя
+en conclusión;в завершении
+al final;в конце концов
+Por un lado;с одной стороны
+Por otro lado;с другой стороны
+Por una parte;с одной стороны
+Por otra parte;с другой стороны
+Primeramente;во-первых
+segundamente;во-вторых
+En primer lugar;на первом месте
+Y por último;и последний
+Yo suscribo vuestra propuesta;я уважаю ваше мнение
+Yo lo veo como tú;я согласен с тобой
+Yo no lo veo como tú;я не согласен с тобой
+Yo no suscribo vuestra propuesta;я не поддерживаю ваше мнение
+Estoy en contra de;я против
+Para ir a…tienes que coger…;чтобы добраться туда нужно выбрать
+tardar;занять время
+creo que;думаю что
+pues;ну
+vale;ок
+Está enseguida de mi puerta;находится рядом с моей дверью
+Estar listo;быть готовым
+ahora mismo;сейчас же
+
 
 [prepositions]
 
