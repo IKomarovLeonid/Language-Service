@@ -17,6 +17,7 @@ empezar;начинать;empiezo, empiezas, empieza, empezamos, empezáis, empie
 fregar;мыть,чистить;friego, friegas, friega, fregamos, fregáis, friegan
 huir;убегать;huyo, huyes, huye, huimos, huís, huyen
 leer;читать;leo, lees, lee, leemos, leéis, leen
+localizar;указать,определить;localizo,localizas,localiza,localizamos,localizais,localizan
 morir;умирать;muero, mueres, muere, morimos, morís, mueren
 multiplicar;умножать;multiplico, multiplicas, multiplica, multiplicamos, multiplicáis, multiplican
 nacer;рождаться;nazco, naces, nace, nacemos, nacéis, nacen
@@ -73,6 +74,8 @@ la fuente;источник
 ruido;шум
 pelis;фильмы
 pasillo;корридор
+lugares de interes;область интересов
+lugar;область
 
 
 [adjectives]
@@ -94,7 +97,6 @@ también;также
 tampoco;также не
 por ejemplo;например
 enfrente;напротив
-
 
 
 [phrases]
@@ -134,7 +136,6 @@ Está enseguida de mi puerta;находится рядом с моей двер�
 Estar listo;быть готовым
 ahora mismo;сейчас же
 
-
 [prepositions]
 
 encima de;над,сверху
@@ -153,10 +154,46 @@ cerca de;близко к
 lejos de;далеко от
 
 
+[marcadores]
 
-[grammatica]
+Preterito perfecto;hoy,por la manana,este,nunca,ya,todavia no,hace poco
+Futuro simple;hoy,manana,el proximo,que viena,despues,luego,pasado manana,algun dia,dentro de,pronto
+Presente;hoy,ahora,a menudo,a veces,todos los dias,cada dia,siempre
+Preterito indefinido;ayer,anoche,anteayer,pasado,aquel,aquella,hace...dias,ese,muchas veces,hace poco,hace mucho,varias veces
+Imperfecto;context
 
-Mi apartamento está en el centro de la ciudad;мой дом находится в центре города
-Aquí hay un supermercado y una peluquería;здесь находится супермаркет и парикмахерская
-Aquí hay cuatro farmacias;здесь четыре аптеки
-En mi barrio hay muchos/pocos restaurantes;в моем районе много/мало ресторанов
+[pronombres]
+
+nadie;никто
+nada;ничего
+ninguno;никакой
+ninguno de;никто из,ни один из
+nadie de;никто из
+me;мне
+te;тебе
+le;ему,ей,вам
+les;им,вам
+este;этот
+ese;тот
+aquel;тот
+que;который
+el que;тот
+cual;тот,та,те
+donde;где
+cuyo;чей
+cuya;чья
+cuyos;чьи
+cuanto;столько
+cuantos;сколько
+todo;все
+poco;мало
+bastante;достаточно
+tan;так,столько
+cada;каждый
+algo;что-то
+alguno;какой-то
+alguien;кто-то
+mucho;много
+demasiado;слишко
+varios;несколько
+otro;другой
