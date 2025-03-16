@@ -197,3 +197,31 @@ mucho;много
 demasiado;слишко
 varios;несколько
 otro;другой
+
+[focus]
+
+Lugares de interés;достопримечательности
+coche;машина
+bienestar;хорошее состояние,благополучие
+naturaleza;природа
+tranquilidad;спокойствие
+llave;ключ
+mirador;смотровая
+ducha;душ
+Parque infantil;детская площадка
+Zona de acampada;место для палаток,лагерь
+destino;назначение
+existencia;наличие,существование
+inexistencia;отсутствие
+describir;описывать
+preferir;предпочитать
+preferencias;предпочтения
+posibilidad;возможность
+plátano;банан
+aunque;хотя
+Maleta;чемодан
+responder;отвечать
+girar;поворачивать
+lo mejor;лучшее
+lo peor;худшее
+Manzana;перекресток,яблоко
