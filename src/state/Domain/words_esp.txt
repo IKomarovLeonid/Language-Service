@@ -2,18 +2,24 @@
 
 agradecer;благодарить;agradezco, agradeces, agradece, agradecemos, agradecéis, agradecen
 aparecer;появляться;aparezco, apareces, aparece, aparecemos, aparecéis, aparecen
+aprender;учить
+alojarse;размещаться
 comer;есть,обедать;como, comes, come, comemos, coméis, comen
 conocer;знать,иметь знания,знакомить;conozco, conoces, conoce, conocemos, conocéis, conocen
 conseguir;добиваться,достигать;consigo, consigues, consigue, conseguimos, conseguís, consiguen
 construir;создавать;construyo, construyes, construye, construimos, construís, construyen
+conectar;соединять
 defender;защищать;defiendo, defiendes, defiende, defendemos, defendéis, defienden
 deletrear;разгадывать,расшифровывать;deletreo, deletreas, deletrea, deletreamos, deletreáis, deletrean
 despedirse;прощаться,увольняться;me despido, te despides, se despide, nos despedimos, os despedís, se despiden
 despertarse;просыпаться;me despierto, te despiertas, se despierta, nos despertamos, os despertáis, se despiertan
 destruir;разрушать;destruyo, destruyes, destruye, destruimos, destruís, destruyen
 dividir;делить,разделять;divido, divides, divide, dividimos, dividís, dividen
+divertirse;развлекаться
 dormir;засыпать;duermo, duermes, duerme, dormimos, dormís, duermen
 empezar;начинать;empiezo, empiezas, empieza, empezamos, empezáis, empiezan
+escuchar;слушать
+oir;слышать
 fregar;мыть,чистить;friego, friegas, friega, fregamos, fregáis, friegan
 huir;убегать;huyo, huyes, huye, huimos, huís, huyen
 leer;читать;leo, lees, lee, leemos, leéis, leen
@@ -22,6 +28,7 @@ morir;умирать;muero, mueres, muere, morimos, morís, mueren
 multiplicar;умножать;multiplico, multiplicas, multiplica, multiplicamos, multiplicáis, multiplican
 nacer;рождаться;nazco, naces, nace, nacemos, nacéis, nacen
 presentar;поздороваться,представиться;presento, presentas, presenta, presentamos, presentáis, presentan
+preferir;предпочитать
 recordar;помнить,вспоминать;recuerdo, recuerdas, recuerda, recordamos, recordáis, recuerdan
 regar;поливать,орошать;riego, riegas, riega, regamos, regáis, riegan
 saber;знать;sé, sabes, sabe, sabemos, sabéis, saben
@@ -34,6 +41,7 @@ vestir;одеваться;visto, vistes, viste, vestimos, vestís, visten
 volar;летать;vuelo, vuelas, vuela, volamos, voláis, vuelan
 voler;становиться;vuelvo, vuelves, vuelve, volvemos, volvéis, vuelven
 volver;возвращаться;vuelvo, vuelves, vuelve, volvemos, volvéis, vuelven
+trasladarse;перемещаться
 
 [nouns]
 
@@ -76,6 +84,24 @@ pelis;фильмы
 pasillo;корридор
 lugares de interes;область интересов
 lugar;область
+mariachis;мексиканские певцы
+frijol;фасоль
+albergue;общежитие
+furgoneta;вагончик
+vaqueros;джинсы
+jersey;свитер
+falda;юбка
+blusa;блузка
+jaquete;пиджак,жакет
+abrigo;пальто
+chaleco;жилетка
+la bolsa;сумка
+el bolsillo;сумочка
+
+[family]
+
+sobrino;племянник
+
 
 
 [adjectives]
@@ -85,6 +111,12 @@ moderno;современный
 tranquilo;спокойный
 antiguo;старинный
 ruidoso;шумный
+cotidiana;повседневная
+feo;некрасивый
+torpe;глупый
+timido;застенчивый
+vago;ленивый
+util;полезный
 
 [adverb]
 
@@ -214,7 +246,6 @@ destino;назначение
 existencia;наличие,существование
 inexistencia;отсутствие
 describir;описывать
-preferir;предпочитать
 preferencias;предпочтения
 posibilidad;возможность
 plátano;банан
@@ -225,3 +256,11 @@ girar;поворачивать
 lo mejor;лучшее
 lo peor;худшее
 Manzana;перекресток,яблоко
+
+[direction]
+
+norte;север
+sur;юг
+este;запад
+oeste;восток
+los puntos cardinales;стороны света
