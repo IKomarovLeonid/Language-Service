@@ -16,6 +16,7 @@ namespace Domain.Configuration
             builder.Property(t => t.Word).HasColumnName("word");
             builder.Property(t => t.Attributes).HasColumnName("attributes");
             builder.Property(t => t.Translation).IsRequired().HasColumnName("translation");
+            builder.Property(t => t.WordRating).IsRequired().HasColumnName("word_rating");
             builder.Property(t => t.Conjugation).HasColumnName("conjugation");
             builder.Property(t => t.LanguageType).HasColumnName("language_type").HasConversion(new EnumToStringConverter<WordLanguageType>());
             builder.Property(t => t.CreatedTime).IsRequired().HasColumnName("created_utc");

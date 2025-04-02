@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Business.Commands;
@@ -30,6 +31,7 @@ namespace Business.Handlers
                 Id = dto.Id,
                 Translations = dto.Translation.Split(","),
                 Word = dto.Word,
+                WordRating = dto.WordRating,
                 Attributes = dto.Attributes,
                 LanguageType = dto.LanguageType,
                 Conjugation = dto.Conjugation,

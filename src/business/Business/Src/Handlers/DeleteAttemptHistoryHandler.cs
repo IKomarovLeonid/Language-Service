@@ -12,9 +12,9 @@ namespace Business.Src.Handlers
 {
     internal class DeleteAttemptHistoryHandler : IRequestHandler<DeleteAttemptHistoryCommand, StateResult>
     {
-        private readonly IRepository<AttemptHistoryDto> _histories;
+        private readonly IRepository<GameAttemptDto> _histories;
 
-        public DeleteAttemptHistoryHandler(IRepository<AttemptHistoryDto> histories)
+        public DeleteAttemptHistoryHandler(IRepository<GameAttemptDto> histories)
         {
             _histories = histories;
         }

@@ -16,9 +16,9 @@ namespace Business.Src.Handlers
 {
     internal class GetAttemptsHistoryHandler : IRequestHandler<GetAttemptsHistoryCommand, SelectResult<AttemptHistoryModel>>
     {
-        private readonly IRepository<AttemptHistoryDto> _histories;
+        private readonly IRepository<GameAttemptDto> _histories;
 
-        public GetAttemptsHistoryHandler(IRepository<AttemptHistoryDto> histories)
+        public GetAttemptsHistoryHandler(IRepository<GameAttemptDto> histories)
         {
             _histories = histories;
         }
@@ -33,13 +33,6 @@ namespace Business.Src.Handlers
                 var model = new AttemptHistoryModel()
                 {
                     Id = dto.Id,
-                    AttemptsTotal = dto.TotalAttempts,
-                    CorrectAttempts = dto.CorrectAttempts,
-                    ErrorsTotal = dto.TotalAttempts - dto.CorrectAttempts,
-                    SuccessRate = dto.TotalAttempts == 0 ? 0 :
-                    (double) dto.CorrectAttempts * 100 / dto.TotalAttempts,
-                    WordErrors = dto.WordsErrors,
-                    AttemptAttributes = dto.AttemptAttributes,
                     CreatedTime = dto.CreatedTime,
                     UpdatedTime = dto.UpdatedTime
                 };

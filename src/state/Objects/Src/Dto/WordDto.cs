@@ -15,6 +15,8 @@ namespace Objects.Dto
 
         public string Conjugation { get; set; }
 
+        public double WordRating { get; set; }
+
         public WordLanguageType LanguageType { get; set; }
 
         public DateTime CreatedTime { get; set; }

@@ -12,6 +12,14 @@ namespace Objects.Models
 
         public string Conjugation { get; set; }
 
+        public double WordRating { get; set; }
+
+        public ulong TotalAttempts { get; set; }
+
+        public ulong ErrorAttempts { get; set; }
+
+        public double SuccessRate { get; set; }
+
         public string[] Translations { get; set; }
 
         public WordLanguageType LanguageType { get; set; }

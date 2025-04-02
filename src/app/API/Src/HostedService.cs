@@ -5,10 +5,12 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Domain;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Objects;
 using Objects.Dto;
+using Objects.Src.Dto;
 
 namespace API
 {
@@ -52,6 +54,8 @@ namespace API
 
             PrintDuplicates(spanish);
             PrintDuplicates(english);
+
+            CreateAdmin(ctx);
 
             await ctx.SaveChangesAsync();
 
@@ -107,6 +111,7 @@ namespace API
                             CreatedTime = DateTime.UtcNow,
                             UpdatedTime = DateTime.UtcNow,
                             Word = word,
+                            WordRating = 1600,
                             LanguageType = type,
                             Attributes = attributes,
                             Translation = translation,
@@ -159,6 +164,28 @@ namespace API
             {
                 Console.WriteLine($"Duplicate Word: {duplicate.Word}");
             }
+        }
+
+        private void CreateAdmin(ApplicationContext ctx)
+        {
+            if (ctx.Users.Count() > 0) return;
+
+            var userResult = ctx.Users.Add(new UserDto()
+            {
+                IsAdmin = true,
+                UserName = "Admin",
+                Email = "admin@gmail.com"
+            });
+
+            var statResult = ctx.UserStatistics.Add(new UserStatisticsDto()
+            {
+                UserId = userResult.Entity.Id,
+                TotalAttempts = 0,
+                ErrorAttempts = 0,
+                UserRating = 1600,
+            });
+
+            Console.WriteLine($"Creating admin...success");
         }
     }
 }

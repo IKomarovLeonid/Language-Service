@@ -1,7 +1,9 @@
 ﻿using System.Reflection;
 using Domain.Configuration;
+using Domain.Src.Configuration;
 using Microsoft.EntityFrameworkCore;
 using Objects.Dto;
+using Objects.Src.Dto;
 using Objects.Src.Models;
 
 namespace Domain
@@ -26,13 +28,19 @@ namespace Domain
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new WordsDbConfiguration());
-            modelBuilder.ApplyConfiguration(new AttemptHistoryDbConfiguration());
+            modelBuilder.ApplyConfiguration(new GameAttemptDbConfiguration());
+            modelBuilder.ApplyConfiguration(new UserStatisticsDbConfiguration());
+            modelBuilder.ApplyConfiguration(new UsersDbConfiguration());
 
             base.OnModelCreating(modelBuilder);
         }
 
         public DbSet<WordDto> Words { get; set; }
 
-        public DbSet<AttemptHistoryDto> AttemptHistories { get; set; }
+        public DbSet<GameAttemptDto> GameAttempts { get; set; }
+
+        public DbSet<UserDto> Users { get; set; }
+
+        public DbSet<UserStatisticsDto> UserStatistics { get; set; }
     }
 }

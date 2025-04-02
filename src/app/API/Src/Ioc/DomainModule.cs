@@ -14,7 +14,7 @@ namespace API.Src.Ioc
                 .AsImplementedInterfaces()
                 .SingleInstance();
 
-            builder.RegisterType<Repository<AttemptHistoryDto>>()
+            builder.RegisterType<Repository<GameAttemptDto>>()
                 .AsImplementedInterfaces()
                 .SingleInstance();
         }

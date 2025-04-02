@@ -10,25 +10,18 @@ namespace Business.Handlers
 {
     internal class CreateAttemptHistoryHandler : IRequestHandler<CreateAttemptHistoryCommand, StateResult>
     {
-        private readonly IRepository<AttemptHistoryDto> _histories;
+        private readonly IRepository<GameAttemptDto> _histories;
 
-        public CreateAttemptHistoryHandler(IRepository<AttemptHistoryDto> histories)
+        public CreateAttemptHistoryHandler(IRepository<GameAttemptDto> histories)
         {
             _histories = histories;
         }
 
         public async Task<StateResult> Handle(CreateAttemptHistoryCommand command, CancellationToken cancellationToken)
         {
-            var dto = new AttemptHistoryDto()
-            {
-                TotalAttempts = command.TotalAttempts,
-                CorrectAttempts = command.CorrectAttempts,
-                WordsErrors = command.WordErrors,
-                AttemptAttributes = command.AttemptAttributes
-            };
-            var entity = await _histories.AddAsync(dto);
+            
 
-            return StateResult.Success(entity.Id);
+            return StateResult.Success(1);
         }
     }
 }
