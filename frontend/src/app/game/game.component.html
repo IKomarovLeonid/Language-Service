@@ -1,0 +1,94 @@
+<div class="translation-container">
+  <div class="word-display">
+    <h2>Translate the word: </h2>
+    <p>{{ word?.word }}</p>
+
+  </div>
+
+  <div class="feedback-message">
+    <p>{{ feedback }}</p>
+  </div>
+
+  <div class="input-section">
+    <input
+      type="text"
+      [(ngModel)]="userInput"
+      placeholder="Enter your translation"
+      (keyup.enter)="checkAnswer()"
+    />
+  </div>
+
+  <!-- Counters Section -->
+  <div class="counters">
+    <div class="counter-block">
+      <h3>Current Progress</h3>
+      <p>Attempts: {{ attempts }}</p>
+      <p>Correct: {{ correctCount }}</p>
+      <p>Success Rate: {{ successRate | number: '1.0-0' }}%</p>
+    </div>
+
+    <div class="counter-block">
+      <h3>Word statistics</h3>
+      <p>Total Attempts: {{ totalAttempts }}</p>
+      <p>Average Success Rate: {{ averageSuccessRate | number: '1.0-0' }}%</p>
+      <p>Word rating: 1900</p>
+    </div>
+
+    <div class="counter-block">
+      <h3>User statistics</h3>
+      <p>Words Translated: {{ wordsTranslated }}</p>
+      <p>Highest Streak: {{ highestStreak }}</p>
+      <p>User rating: 2000</p>
+    </div>
+  </div>
+
+  <!-- Game Settings Section -->
+  <div class="game-settings">
+    <div class="checkbox-group">
+      <label>
+        <input type="checkbox" [(ngModel)]="enableHints" />
+        Enable Hints
+      </label>
+      <label>
+        <input type="checkbox" [(ngModel)]="enableTimer" />
+        Enable Timer
+      </label>
+      <label>
+        <input type="checkbox" [(ngModel)]="playSounds" />
+        Play Sounds
+      </label>
+      <label>
+        <input type="checkbox" [(ngModel)]="showTranslations" />
+        Show Translations After Incorrect Answer
+      </label>
+    </div>
+  </div>
+
+  <!-- Filters Section -->
+  <div class="filters-section">
+    <div class="filters-container">
+      <div *ngIf="allowedFilters.size === 0" class="no-filters">
+        No filters available.
+      </div>
+      <div *ngFor="let filter of allowedFilters" class="filter-item">
+        <button
+          class="filter-btn"
+          [ngClass]="{'selected': selectedFilters.has(filter)}"
+          (click)="toggleFilterSelection(filter)"
+        >
+          {{ filter }}
+        </button>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- User Action Buttons Section -->
+  <div class="user-actions">
+    <div class="buttons-container">
+      <button (click)="finishGame()" class="main-btn">Finish Game</button>
+      <!-- You can add other action buttons here if necessary -->
+    </div>
+  </div>
+
+</div>
