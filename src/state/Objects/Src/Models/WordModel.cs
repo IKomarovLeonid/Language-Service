@@ -14,9 +14,7 @@ namespace Objects.Models
 
         public double WordRating { get; set; }
 
-        public ulong TotalAttempts { get; set; }
-
-        public ulong ErrorAttempts { get; set; }
+        public double TotalAttempts { get; set; }
 
         public double SuccessRate { get; set; }
 

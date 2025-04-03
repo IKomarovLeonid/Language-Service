@@ -23,5 +23,13 @@ namespace API.Controllers
 
             return PageViewModel<WordModel>.New(response.Data);
         }
+
+        [HttpGet("statistics")]
+        public async Task<ActionResult<PageViewModel<WordStatisticsModel>>> GetWordStatisticsAsync(ulong? userId)
+        {
+            var response = await _mediator.Send(new GetWordStatisticsCommand() { UserId = userId });
+
+            return PageViewModel<WordStatisticsModel>.New(response.Data);
+        }
     }
 }

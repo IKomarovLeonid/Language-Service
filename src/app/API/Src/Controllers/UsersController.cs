@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 namespace API.Src.Controllers
 {
     [ApiController, Route("api/users")]
-    class UsersController : ControllerBase
+    public class UsersController : ControllerBase
     {
         private readonly IMediator _mediator;
 
@@ -33,11 +33,11 @@ namespace API.Src.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<UserModel>> GetUserAsync(ulong id)
+        public async Task<ActionResult<ICollection<UserModel>>> GetUsersAsync(ulong id)
         {
-            var response = await _mediator.Send(new GetWordsCommand(""));
+            var response = await _mediator.Send(new GetUserCommand(id));
 
-            return new ActionResult<UserModel>(new UserModel());
+            return new ActionResult<ICollection<UserModel>>(response.Data);
         }
     }
 }

@@ -8,7 +8,8 @@ namespace Business.Commands
     {
         public readonly string FilterBy;
 
-        public GetWordsCommand(string filterBy) {
+        public GetWordsCommand(string filterBy)
+        {
             FilterBy = filterBy;
         }
     }

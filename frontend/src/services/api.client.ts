@@ -1,18 +1,21 @@
 import {Injectable} from "@angular/core";
 import {
-  CreateAttemptHistoryRequestModel,
-  HistoryClient,
+  CreateGameResultRequestModel,
+  GameClient,
+  UsersClient,
   WordsClient,
 } from "../shared/main.api";
 
 @Injectable({"providedIn": 'root'})
 export class ApiClient{
   words: WordsClient;
-  history: HistoryClient;
+  users: UsersClient;
+  games: GameClient;
 
   constructor(){
     this.words = new WordsClient();
-    this.history = new HistoryClient();
+    this.users = new UsersClient();
+    this.games = new GameClient();
   }
 
   async getWords(){
@@ -25,38 +28,34 @@ export class ApiClient{
     }
   }
 
-  async getHistory(){
+  async getGames(userId: number){
     try{
-      return await this.history.getAttempts();
+      return await this.games.getGames(userId);
     }
     catch{
-      alert('Api error getting history');
+      alert('Api error getting user');
       return undefined;
     }
   }
 
-  async createAttempt(totalAttempts: number, correctAnswers: number, errors: string){
+  async getStatistics(userId: number){
     try{
-      let request = new CreateAttemptHistoryRequestModel();
-      request.correctAttempts = correctAnswers;
-      request.totalAttempts = totalAttempts;
-      request.userId = 1;
-      request.wordErrors = errors;
-      this.history.createAttemptHistory(request);
+      return await this.words.getWordStatistics(userId);
     }
     catch{
-      alert('Api error creating history');
+      alert('Api error getting statistics');
       return undefined;
     }
   }
 
-  async deleteHistory(id: number){
+  async createGameResult(request: CreateGameResultRequestModel){
     try{
-      return await this.history.deleteAttemptHistory(id);
+      return await this.games.createGameResult(request);
     }
     catch{
-      alert('Api error removing history');
+      alert('Api error creation game');
       return undefined;
     }
   }
+
 }

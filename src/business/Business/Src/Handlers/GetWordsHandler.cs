@@ -15,12 +15,10 @@ namespace Business.Handlers
     internal class GetWordsHandler : IRequestHandler<GetWordsCommand, SelectResult<WordModel>>
     {
         private readonly IRepository<WordDto> _repository;
-        private readonly IRepository<WordStatisticsDto> _statistics;
 
-        public GetWordsHandler(IRepository<WordDto> repository, IRepository<WordStatisticsDto> wordStatistics)
+        public GetWordsHandler(IRepository<WordDto> repository)
         {
             _repository = repository;
-            _statistics = wordStatistics;
         }
 
         public async Task<SelectResult<WordModel>> Handle(GetWordsCommand request, CancellationToken cancellationToken)
