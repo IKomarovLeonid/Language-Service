@@ -9,5 +9,8 @@ namespace API.Src.Requests
     public class CreateGameResultRequestModel
     {
         public ulong UserId { get; set; } 
+
+        public WordGameResultModel[] Results { get; set; }
+
     }
 }

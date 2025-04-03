@@ -15,8 +15,8 @@ namespace Domain.Migrations
                         .Annotation("Sqlite:Autoincrement", true),
                     user_id = table.Column<ulong>(nullable: false),
                     rating_change = table.Column<double>(nullable: false),
-                    answers = table.Column<string>(nullable: true),
-                    error_answers = table.Column<string>(nullable: true),
+                    correct_answers = table.Column<ulong>(nullable: false),
+                    total_answers = table.Column<ulong>(nullable: false),
                     created_utc = table.Column<DateTime>(nullable: false),
                     updated_utc = table.Column<DateTime>(nullable: false)
                 },
@@ -80,6 +80,24 @@ namespace Domain.Migrations
                 {
                     table.PrimaryKey("PK_Words", x => x.id);
                 });
+
+            migrationBuilder.CreateTable(
+                name: "WordStatistics",
+                columns: table => new
+                {
+                    id = table.Column<ulong>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    user_id = table.Column<ulong>(nullable: false),
+                    word_id = table.Column<ulong>(nullable: false),
+                    correct_answers = table.Column<ulong>(nullable: false),
+                    total_answers = table.Column<ulong>(nullable: false),
+                    created_utc = table.Column<DateTime>(nullable: false),
+                    updated_utc = table.Column<DateTime>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_WordStatistics", x => x.id);
+                });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -95,6 +113,9 @@ namespace Domain.Migrations
 
             migrationBuilder.DropTable(
                 name: "Words");
+
+            migrationBuilder.DropTable(
+                name: "WordStatistics");
         }
     }
 }

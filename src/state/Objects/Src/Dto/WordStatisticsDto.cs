@@ -1,17 +1,20 @@
 ﻿using System;
-using Objects.Src;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace Objects.Dto
+namespace Objects.Src.Dto
 {
-    public class GameAttemptDto : IDto
+    public class WordStatisticsDto : IDto
     {
         public ulong Id { get; set; }
 
         public ulong UserId { get; set; }
 
-        public double UserRatingChange { get; set; }
+        public ulong WordId { get; set; }
 
-        public ulong CorrectAnswersCount { get; set; }
+        public ulong CorrectAnswersTotal { get; set; }
 
         public ulong TotalAnswersCount { get; set; }
 

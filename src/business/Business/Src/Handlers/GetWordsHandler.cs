@@ -8,16 +8,19 @@ using Domain.Src;
 using MediatR;
 using Objects.Dto;
 using Objects.Models;
+using Objects.Src.Dto;
 
 namespace Business.Handlers
 {
     internal class GetWordsHandler : IRequestHandler<GetWordsCommand, SelectResult<WordModel>>
     {
         private readonly IRepository<WordDto> _repository;
+        private readonly IRepository<WordStatisticsDto> _statistics;
 
-        public GetWordsHandler(IRepository<WordDto> repository)
+        public GetWordsHandler(IRepository<WordDto> repository, IRepository<WordStatisticsDto> wordStatistics)
         {
             _repository = repository;
+            _statistics = wordStatistics;
         }
 
         public async Task<SelectResult<WordModel>> Handle(GetWordsCommand request, CancellationToken cancellationToken)

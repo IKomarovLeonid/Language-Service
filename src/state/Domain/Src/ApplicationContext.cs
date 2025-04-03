@@ -31,6 +31,7 @@ namespace Domain
             modelBuilder.ApplyConfiguration(new GameAttemptDbConfiguration());
             modelBuilder.ApplyConfiguration(new UserStatisticsDbConfiguration());
             modelBuilder.ApplyConfiguration(new UsersDbConfiguration());
+            modelBuilder.ApplyConfiguration(new WordStatisticsDbConfiguration());
 
             base.OnModelCreating(modelBuilder);
         }
@@ -42,5 +43,7 @@ namespace Domain
         public DbSet<UserDto> Users { get; set; }
 
         public DbSet<UserStatisticsDto> UserStatistics { get; set; }
+
+        public DbSet<WordStatisticsDto> WordStatistics { get; set; }
     }
 }

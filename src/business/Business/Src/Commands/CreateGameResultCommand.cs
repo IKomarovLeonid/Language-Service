@@ -1,4 +1,5 @@
-﻿using Business.Src.Objects;
+﻿using API.Src.Requests;
+using Business.Src.Objects;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -11,5 +12,7 @@ namespace Business.Src.Commands
     public class CreateGameResultCommand : IRequest<StateResult>
     {
         public ulong UserId { get; set; }
+
+        public WordGameResultModel[] Results { get; set; }
     }
 }

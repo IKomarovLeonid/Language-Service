@@ -23,13 +23,17 @@ namespace Domain.Migrations
                         .HasColumnName("id")
                         .HasColumnType("INTEGER");
 
+                    b.Property<ulong>("CorrectAnswersCount")
+                        .HasColumnName("correct_answers")
+                        .HasColumnType("INTEGER");
+
                     b.Property<DateTime>("CreatedTime")
                         .HasColumnName("created_utc")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("ErrorAnswersIds")
-                        .HasColumnName("error_answers")
-                        .HasColumnType("TEXT");
+                    b.Property<ulong>("TotalAnswersCount")
+                        .HasColumnName("total_answers")
+                        .HasColumnType("INTEGER");
 
                     b.Property<DateTime>("UpdatedTime")
                         .HasColumnName("updated_utc")
@@ -42,10 +46,6 @@ namespace Domain.Migrations
                     b.Property<double>("UserRatingChange")
                         .HasColumnName("rating_change")
                         .HasColumnType("REAL");
-
-                    b.Property<string>("WordAnswersIds")
-                        .HasColumnName("answers")
-                        .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
@@ -170,6 +170,42 @@ namespace Domain.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("UserStatistics");
+                });
+
+            modelBuilder.Entity("Objects.Src.Dto.WordStatisticsDto", b =>
+                {
+                    b.Property<ulong>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("id")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<ulong>("CorrectAnswersTotal")
+                        .HasColumnName("correct_answers")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("CreatedTime")
+                        .HasColumnName("created_utc")
+                        .HasColumnType("TEXT");
+
+                    b.Property<ulong>("TotalAnswersCount")
+                        .HasColumnName("total_answers")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("UpdatedTime")
+                        .HasColumnName("updated_utc")
+                        .HasColumnType("TEXT");
+
+                    b.Property<ulong>("UserId")
+                        .HasColumnName("user_id")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<ulong>("WordId")
+                        .HasColumnName("word_id")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("WordStatistics");
                 });
 #pragma warning restore 612, 618
         }

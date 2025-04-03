@@ -23,5 +23,13 @@ namespace Objects.Src.Dto
         public DateTime CreatedTime { get; set; }
 
         public DateTime UpdatedTime { get; set; }
+
+        public static UserStatisticsDto BuildForNewUser(ulong userId) => new()
+        {
+            UserId = userId,
+            TotalAttempts = 0,
+            ErrorAttempts = 0,
+            UserRating = 1600
+        };
     }
 }

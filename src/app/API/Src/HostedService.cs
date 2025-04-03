@@ -168,7 +168,7 @@ namespace API
 
         private void CreateAdmin(ApplicationContext ctx)
         {
-            if (ctx.Users.Count() > 0) return;
+            if (ctx.Users.Any()) return;
 
             var userResult = ctx.Users.Add(new UserDto()
             {
@@ -177,13 +177,7 @@ namespace API
                 Email = "admin@gmail.com"
             });
 
-            var statResult = ctx.UserStatistics.Add(new UserStatisticsDto()
-            {
-                UserId = userResult.Entity.Id,
-                TotalAttempts = 0,
-                ErrorAttempts = 0,
-                UserRating = 1600,
-            });
+            var statResult = ctx.UserStatistics.Add(UserStatisticsDto.BuildForNewUser(userResult.Entity.Id));
 
             Console.WriteLine($"Creating admin...success");
         }
