@@ -14,5 +14,7 @@ namespace Business.Src.Commands
         public ulong UserId { get; set; }
 
         public WordGameResultModel[] Results { get; set; }
+
+        public ulong MaxStreak { get; set; }
     }
 }

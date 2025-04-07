@@ -33,6 +33,16 @@ export class ApiClient{
       return await this.games.getGames(userId);
     }
     catch{
+      alert('Api error getting games');
+      return undefined;
+    }
+  }
+
+  async getUser(userId: number){
+    try{
+      return await this.users.getUsers(userId);
+    }
+    catch{
       alert('Api error getting user');
       return undefined;
     }

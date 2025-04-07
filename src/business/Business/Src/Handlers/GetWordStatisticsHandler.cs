@@ -43,7 +43,7 @@ namespace Business.Src.Handlers
                     WordId = dto.WordId,
                     CorrectAnswersTotal = dto.CorrectAnswersTotal,
                     TotalAnswersCount = dto.TotalAnswersCount,
-                    SuccessRate = dto.TotalAnswersCount == 0 ? 0 : ((double) dto.CorrectAnswersTotal / (double) dto.TotalAnswersCount) * 100,
+                    SuccessRate = dto.GetSuccessRate(),
                     UpdatedTime = dto.UpdatedTime
                 }).ToList();
                 return SelectResult<WordStatisticsModel>.Fetched(data);
@@ -57,7 +57,7 @@ namespace Business.Src.Handlers
                 WordId = dto.WordId,
                 CorrectAnswersTotal = dto.CorrectAnswersTotal,
                 TotalAnswersCount = dto.TotalAnswersCount,
-                SuccessRate = dto.TotalAnswersCount == 0 ? 0 : (double)(dto.CorrectAnswersTotal / (double)dto.TotalAnswersCount) * 100,
+                SuccessRate = dto.GetSuccessRate(),
                 UpdatedTime = dto.UpdatedTime
             }).ToList();
             return SelectResult<WordStatisticsModel>.Fetched(dataAll);

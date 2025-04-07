@@ -22,23 +22,30 @@
   <div class="counters">
     <div class="counter-block">
       <h3>Current Progress</h3>
-      <p>Attempts: {{ attempts }}</p>
-      <p>Correct: {{ correctCount }}</p>
+      <p>Attempts: {{ attempts }} / Correct: {{ correctCount }}</p>
       <p>Success Rate: {{ successRate | number: '1.0-0' }}%</p>
+      <p>Current answers streak: {{ maxStreak }}</p>
+    </div>
+
+    <div class="counter-block">
+      <h3>User statistics overall</h3>
+      <p>Times played: {{ getTotalUserGamesCount() }}</p>
+      <p>All time accuracy: {{ getAllTimeUserRate() | number: '1.0-0'}}%</p>
+      <p>All time max streak: {{ getAllTimeMaxStreak() }}</p>
     </div>
 
     <div class="counter-block">
       <h3>Word statistics</h3>
-      <p>Total Attempts: {{ totalAttempts }}</p>
-      <p>Average Success Rate: {{ averageSuccessRate | number: '1.0-0' }}%</p>
-      <p>Word rating: 1900</p>
+      <p>Total Attempts: {{ this.currentStats?.totalAnswersCount ?? 0}}</p>
+      <p>Average Success Rate: {{ this.currentStats?.successRate ?? 0 | number: '1.0-0' }}%</p>
+      <p>Last time: {{ currentStats?.updatedTime | date: 'EEE MMM dd yyyy'}}</p>
     </div>
 
     <div class="counter-block">
-      <h3>User statistics</h3>
-      <p>Words Translated: {{ wordsTranslated }}</p>
-      <p>Highest Streak: {{ highestStreak }}</p>
-      <p>User rating: 2000</p>
+      <h3>Words overview</h3>
+      <p>Total words count: {{ getTotalWordsCount() }}</p>
+      <p>Filtered words count: {{ getFilteredWordsCount() }}</p>
+      <p>Some data</p>
     </div>
   </div>
 
@@ -46,8 +53,8 @@
   <div class="game-settings">
     <div class="checkbox-group">
       <label>
-        <input type="checkbox" [(ngModel)]="enableHints" />
-        Enable Hints
+        <input type="checkbox" [(ngModel)]="isRepetitionsAllowed" (click)="setRepetitionsToggle()" />
+        Allow repetitions
       </label>
       <label>
         <input type="checkbox" [(ngModel)]="enableTimer" />

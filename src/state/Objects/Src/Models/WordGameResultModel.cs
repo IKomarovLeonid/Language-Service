@@ -12,8 +12,6 @@ namespace API.Src.Requests
 
         public ulong CorrectCount { get; set; }
 
-        public ulong WrongCount { get; set; }
-
-        public ulong TotalCount() => this.CorrectCount + this.WrongCount;
+        public ulong TotalCount { get; set; }
     }
 }

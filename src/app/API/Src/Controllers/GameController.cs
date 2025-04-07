@@ -28,7 +28,8 @@ namespace API.Src.Controllers
             var response = await _mediator.Send(new CreateGameResultCommand()
             {
                 UserId = request.UserId,
-                Results = request.Results
+                Results = request.Results,
+                MaxStreak = request.MaxStreak
             });
 
             return response.IsSuccess ? Ok() : BadRequest(response);

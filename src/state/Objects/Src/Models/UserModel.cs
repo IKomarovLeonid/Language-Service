@@ -18,7 +18,13 @@ namespace Objects.Src.Models
 
         public double UserRating { get; set; }
 
-        public double SuccessPercent { get; set; }
+        public double AllTimeSuccessRate { get; set; }
+
+        public ulong TotalAttempts { get; set; }
+
+        public ulong MaxStreak { get; set; }
+
+        public DateTime LastGame { get; set; }
 
         public DateTime CreatedTime { get; set; }
 

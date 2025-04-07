@@ -31,6 +31,10 @@ namespace Domain.Migrations
                         .HasColumnName("created_utc")
                         .HasColumnType("TEXT");
 
+                    b.Property<ulong>("MaxStreak")
+                        .HasColumnName("max_streak")
+                        .HasColumnType("INTEGER");
+
                     b.Property<ulong>("TotalAnswersCount")
                         .HasColumnName("total_answers")
                         .HasColumnType("INTEGER");

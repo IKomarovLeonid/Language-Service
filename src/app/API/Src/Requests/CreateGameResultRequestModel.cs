@@ -12,5 +12,7 @@ namespace API.Src.Requests
 
         public WordGameResultModel[] Results { get; set; }
 
+        public ulong MaxStreak { get; set; }
+
     }
 }

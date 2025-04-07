@@ -17,6 +17,7 @@ namespace Domain.Migrations
                     rating_change = table.Column<double>(nullable: false),
                     correct_answers = table.Column<ulong>(nullable: false),
                     total_answers = table.Column<ulong>(nullable: false),
+                    max_streak = table.Column<ulong>(nullable: false),
                     created_utc = table.Column<DateTime>(nullable: false),
                     updated_utc = table.Column<DateTime>(nullable: false)
                 },

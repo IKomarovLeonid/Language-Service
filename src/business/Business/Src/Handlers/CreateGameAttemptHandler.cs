@@ -37,20 +37,20 @@ namespace Business.Handlers
             var statistics = await _statistics.GetAllAsync(s => s.UserId == command.UserId);
             foreach(var stats in command.Results)
             {
-                totalCount += stats.TotalCount();
+                totalCount += stats.TotalCount;
                 correctCount += stats.CorrectCount;
 
                 var existedDto = statistics.FirstOrDefault(s => s.WordId == stats.WordId);
                 if (existedDto == null) await _statistics.AddAsync(new WordStatisticsDto()
                 {
                     CorrectAnswersTotal = stats.CorrectCount,
-                    TotalAnswersCount = stats.CorrectCount + stats.WrongCount,
+                    TotalAnswersCount = stats.TotalCount,
                     UserId = command.UserId,
                     WordId = stats.WordId,
                 });
                 else
                 {
-                    existedDto.TotalAnswersCount += stats.TotalCount();
+                    existedDto.TotalAnswersCount += stats.TotalCount;
                     existedDto.CorrectAnswersTotal += stats.CorrectCount;
                     await _statistics.UpdateAsync(existedDto);
                 }
@@ -64,6 +64,7 @@ namespace Business.Handlers
                 UserRatingChange = 10,
                 TotalAnswersCount = totalCount,
                 CorrectAnswersCount = correctCount,
+                MaxStreak = command.MaxStreak
             });
 
             return StateResult.Success(result.Id);

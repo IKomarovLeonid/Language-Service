@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Domain.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20250403004204_Initialize_Db")]
+    [Migration("20250407205028_Initialize_Db")]
     partial class Initialize_Db
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -32,6 +32,10 @@ namespace Domain.Migrations
                     b.Property<DateTime>("CreatedTime")
                         .HasColumnName("created_utc")
                         .HasColumnType("TEXT");
+
+                    b.Property<ulong>("MaxStreak")
+                        .HasColumnName("max_streak")
+                        .HasColumnType("INTEGER");
 
                     b.Property<ulong>("TotalAnswersCount")
                         .HasColumnName("total_answers")

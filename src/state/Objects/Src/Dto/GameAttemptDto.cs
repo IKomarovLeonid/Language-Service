@@ -15,8 +15,12 @@ namespace Objects.Dto
 
         public ulong TotalAnswersCount { get; set; }
 
+        public ulong MaxStreak { get; set; }
+
         public DateTime CreatedTime { get; set; }
 
         public DateTime UpdatedTime { get; set; }
+
+        public double GetSuccessRate() => this.TotalAnswersCount > 0 ? (double)(this.CorrectAnswersCount / (double)this.TotalAnswersCount) * 100 : 0;
     }
 }

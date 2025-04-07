@@ -526,6 +526,7 @@ export interface IWordStatisticsModel {
 export class CreateGameResultRequestModel implements ICreateGameResultRequestModel {
   userId?: number;
   results?: WordGameResultModel[] | undefined;
+  maxStreak?: number;
 
   constructor(data?: ICreateGameResultRequestModel) {
     if (data) {
@@ -544,6 +545,7 @@ export class CreateGameResultRequestModel implements ICreateGameResultRequestMod
         for (let item of _data["results"])
           this.results!.push(WordGameResultModel.fromJS(item));
       }
+      this.maxStreak = _data["maxStreak"];
     }
   }
 
@@ -562,6 +564,7 @@ export class CreateGameResultRequestModel implements ICreateGameResultRequestMod
       for (let item of this.results)
         data["results"].push(item.toJSON());
     }
+    data["maxStreak"] = this.maxStreak;
     return data;
   }
 }
@@ -569,12 +572,13 @@ export class CreateGameResultRequestModel implements ICreateGameResultRequestMod
 export interface ICreateGameResultRequestModel {
   userId?: number;
   results?: WordGameResultModel[] | undefined;
+  maxStreak?: number;
 }
 
 export class WordGameResultModel implements IWordGameResultModel {
   wordId?: number;
   correctCount?: number;
-  wrongCount?: number;
+  totalCount?: number;
 
   constructor(data?: IWordGameResultModel) {
     if (data) {
@@ -589,7 +593,7 @@ export class WordGameResultModel implements IWordGameResultModel {
     if (_data) {
       this.wordId = _data["wordId"];
       this.correctCount = _data["correctCount"];
-      this.wrongCount = _data["wrongCount"];
+      this.totalCount = _data["totalCount"];
     }
   }
 
@@ -604,7 +608,7 @@ export class WordGameResultModel implements IWordGameResultModel {
     data = typeof data === 'object' ? data : {};
     data["wordId"] = this.wordId;
     data["correctCount"] = this.correctCount;
-    data["wrongCount"] = this.wrongCount;
+    data["totalCount"] = this.totalCount;
     return data;
   }
 }
@@ -612,7 +616,7 @@ export class WordGameResultModel implements IWordGameResultModel {
 export interface IWordGameResultModel {
   wordId?: number;
   correctCount?: number;
-  wrongCount?: number;
+  totalCount?: number;
 }
 
 export class PageViewModelOfGameAttemptModel implements IPageViewModelOfGameAttemptModel {
@@ -759,7 +763,10 @@ export class UserModel implements IUserModel {
   email?: string | undefined;
   userName?: string | undefined;
   userRating?: number;
-  successPercent?: number;
+  allTimeSuccessRate?: number;
+  totalAttempts?: number;
+  maxStreak?: number;
+  lastGame?: Date;
   createdTime?: Date;
   updatedTime?: Date;
 
@@ -779,7 +786,10 @@ export class UserModel implements IUserModel {
       this.email = _data["email"];
       this.userName = _data["userName"];
       this.userRating = _data["userRating"];
-      this.successPercent = _data["successPercent"];
+      this.allTimeSuccessRate = _data["allTimeSuccessRate"];
+      this.totalAttempts = _data["totalAttempts"];
+      this.maxStreak = _data["maxStreak"];
+      this.lastGame = _data["lastGame"] ? new Date(_data["lastGame"].toString()) : <any>undefined;
       this.createdTime = _data["createdTime"] ? new Date(_data["createdTime"].toString()) : <any>undefined;
       this.updatedTime = _data["updatedTime"] ? new Date(_data["updatedTime"].toString()) : <any>undefined;
     }
@@ -799,7 +809,10 @@ export class UserModel implements IUserModel {
     data["email"] = this.email;
     data["userName"] = this.userName;
     data["userRating"] = this.userRating;
-    data["successPercent"] = this.successPercent;
+    data["allTimeSuccessRate"] = this.allTimeSuccessRate;
+    data["totalAttempts"] = this.totalAttempts;
+    data["maxStreak"] = this.maxStreak;
+    data["lastGame"] = this.lastGame ? this.lastGame.toISOString() : <any>undefined;
     data["createdTime"] = this.createdTime ? this.createdTime.toISOString() : <any>undefined;
     data["updatedTime"] = this.updatedTime ? this.updatedTime.toISOString() : <any>undefined;
     return data;
@@ -812,7 +825,10 @@ export interface IUserModel {
   email?: string | undefined;
   userName?: string | undefined;
   userRating?: number;
-  successPercent?: number;
+  allTimeSuccessRate?: number;
+  totalAttempts?: number;
+  maxStreak?: number;
+  lastGame?: Date;
   createdTime?: Date;
   updatedTime?: Date;
 }
