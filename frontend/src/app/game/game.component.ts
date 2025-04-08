@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {ApiClient} from "../../services/api.client";
 import {
   CreateGameResultRequestModel, GameAttemptModel, UserModel,
@@ -54,6 +54,7 @@ export class GameComponent implements OnInit {
     let answer = this.userInput.toLowerCase();
     let filtered = this.word!!.translations?.filter(w => answer === w.toLowerCase());
     if(filtered && filtered.length > 0){
+      console.log(this.word);
       this.saveAttemptData(true, this.word?.id!!);
       this.feedback = 'Correct!';
       this.correctCount++;
@@ -77,7 +78,7 @@ export class GameComponent implements OnInit {
         existingStats.totalCount += 1;
       }
     } else {
-      let correctCount = 0;
+      let correctCount = isCorrect ? 1 : 0;
       let totalCount = 1;
       this.gameProgressData.set(wordId, { correctCount, totalCount });
     }
@@ -87,7 +88,7 @@ export class GameComponent implements OnInit {
     return this.attempts === 0 ? 0 : (this.correctCount / this.attempts) * 100;
   }
 
-  finishGame() {
+  async finishGame() {
     if(this.gameProgressData.size === 0) return;
     let request = new CreateGameResultRequestModel();
     const results: WordGameResultModel[] = [];
@@ -101,11 +102,12 @@ export class GameComponent implements OnInit {
     request.results = results;
     request.userId = 1;
     request.maxStreak = this.maxStreak;
-    this.api.createGameResult(request);
+    await this.api.createGameResult(request);
     this.resetGame();
     this.gameProgressData = new Map();
-    this.loadStatistics();
-    this.loadUserProfile(this.userId);
+    await this.loadStatistics();
+    this.setAnyWord();
+    await this.loadUserProfile(this.userId);
   }
 
   resetGame() {
@@ -189,7 +191,7 @@ export class GameComponent implements OnInit {
       } else {
         this.selectedFilters.add(filter);
       }
-    this.filterWords(Array.from(this.selectedFilters), WordLanguageType.SpanishRussian);
+      this.filterWords(Array.from(this.selectedFilters), WordLanguageType.SpanishRussian);
       this.setAnyWord();
   }
 
@@ -202,6 +204,7 @@ export class GameComponent implements OnInit {
       return;
     }
     this.currentStats = stats[0];
+    console.log(this.currentStats);
   }
 
   private async loadStatistics(){
