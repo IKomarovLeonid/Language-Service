@@ -1,4 +1,4 @@
-﻿[verbs]
+﻿[Verbs]
 
 agradecer;благодарить
 aparecer;появляться
@@ -43,7 +43,7 @@ voler;становиться
 volver;возвращаться
 trasladarse;перемещаться
 
-[nouns]
+[Nouns]
 
 camarero;официант
 dependiente;продавец,служащий
@@ -99,12 +99,12 @@ chaleco;жилетка
 la bolsa;сумка
 el bolsillo;сумочка
 
-[family]
+[Family]
 
 sobrino;племянник
 
 
-[adjectives]
+[Adjectives]
 
 amueblar;мебилированный
 moderno;современный
@@ -118,7 +118,7 @@ timido;застенчивый
 vago;ленивый
 util;полезный
 
-[adverb]
+[Adverb]
 
 algunos;несколько
 entonces;тогда
@@ -131,7 +131,7 @@ por ejemplo;например
 enfrente;напротив
 
 
-[phrases]
+[Phrases]
 
 Llegar tarde;опаздывать
 en mi opinión;по моему мнению
@@ -168,7 +168,7 @@ Está enseguida de mi puerta;находится рядом с моей двер�
 Estar listo;быть готовым
 ahora mismo;сейчас же
 
-[prepositions]
+[Prepositions]
 
 encima de;над,сверху
 debajo de;под,снизу
@@ -186,15 +186,7 @@ cerca de;близко к
 lejos de;далеко от
 
 
-[marcadores]
-
-Preterito perfecto;hoy,por la manana,este,nunca,ya,todavia no,hace poco
-Futuro simple;hoy,manana,el proximo,que viena,despues,luego,pasado manana,algun dia,dentro de,pronto
-Presente;hoy,ahora,a menudo,a veces,todos los dias,cada dia,siempre
-Preterito indefinido;ayer,anoche,anteayer,pasado,aquel,aquella,hace...dias,ese,muchas veces,hace poco,hace mucho,varias veces
-Imperfecto;context
-
-[pronombres]
+[Pronombres]
 
 nadie;никто
 nada;ничего
@@ -214,7 +206,7 @@ algo;что-то
 alguno;какой-то
 alguien;кто-то
 
-[focus]
+[Focus]
 
 coche;машина
 bienestar;хорошее состояние,благополучие
@@ -240,7 +232,7 @@ lo mejor;лучшее
 lo peor;худшее
 Manzana;перекресток,яблоко
 
-[direction]
+[Direction]
 
 norte;север
 sur;юг
