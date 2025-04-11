@@ -26,7 +26,7 @@ leer;читать
 localizar;указать,определить
 morir;умирать
 multiplicar;умножать
-nacer;рождаться
+nacer;рождать
 presentar;поздороваться,представиться
 preferir;предпочитать
 recordar;помнить,вспоминать
@@ -77,6 +77,7 @@ la mano;рука
 la foto;фото,фотография
 la radio;радио
 la moto;мотоцикл
+lugares de interés;достопримечательности
 el sofá;диван
 la fuente;источник
 ruido;шум
@@ -103,7 +104,6 @@ el bolsillo;сумочка
 sobrino;племянник
 
 
-
 [adjectives]
 
 amueblar;мебилированный
@@ -123,8 +123,8 @@ util;полезный
 algunos;несколько
 entonces;тогда
 además;кроме того
-mietras tanto;тем временем
-mietras;пока,в то время как
+mientras tanto;тем временем
+mientras;пока,в то время как
 también;также
 tampoco;также не
 por ejemplo;например
@@ -208,31 +208,14 @@ les;им,вам
 este;этот
 ese;тот
 aquel;тот
-que;который
 el que;тот
 cual;тот,та,те
-donde;где
-cuyo;чей
-cuya;чья
-cuyos;чьи
-cuanto;столько
-cuantos;сколько
-todo;все
-poco;мало
-bastante;достаточно
-tan;так,столько
-cada;каждый
 algo;что-то
 alguno;какой-то
 alguien;кто-то
-mucho;много
-demasiado;слишко
-varios;несколько
-otro;другой
 
 [focus]
 
-Lugares de interés;достопримечательности
 coche;машина
 bienestar;хорошее состояние,благополучие
 naturaleza;природа
@@ -264,3 +247,41 @@ sur;юг
 este;запад
 oeste;восток
 los puntos cardinales;стороны света
+
+[Finanzas]
+
+Billetes;банкноты
+Dinero;деньги
+Una plata;деньги
+Pelas;деньги,бабло
+Monedas;монеты
+Duro;деньги,нехватка денег,ни копейки
+Efectivo;наличные
+Cheque;чек
+precio;цена
+Cajero;банкомат
+Tarjeta de crédito;кредитная карта
+Tarjeta de débito;дебетовая карта
+Datáfono;картридер,терминал для чтения карты
+Préstamo;кредит
+Hipoteca;ипотека
+Cambio de dinero;обмен валюты
+Caja fuerte;сейф
+El saldo;остаток на счету,остаток
+el número confidencial;пин,пин-код,конфиденциальный номер
+entregar;выдавать
+inversiones;вклад
+¿Otra cantidad?;другая сумма?
+Pasta gansa;огромные деньги,деньжища,гора денег
+Talegada;огромные деньги,деньжища,целое состояние
+Prohibitivo;нереальная цена,запредельная цена,астрономическая,баснословная
+Estar por las nubes;заоблачная цена
+Costar un riñon;стоит почку,целое состояние
+Económico;экономичный,недорогой
+Estar por los suelos;ниже некуда,ниже плинтуса
+Tirado;очень дёшево,даром
+Una ganga;даром,почти даром
+Un chollo;повезло,везение
+Una baratija;дешёвка
+Compra;покупка
+Comprar;покупать

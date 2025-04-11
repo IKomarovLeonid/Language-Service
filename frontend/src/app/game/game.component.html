@@ -2,7 +2,6 @@
   <div class="word-display">
     <h2>Translate the word: </h2>
     <p>{{ word?.word }}</p>
-
   </div>
 
   <div class="feedback-message">
@@ -12,10 +11,24 @@
   <div class="input-section">
     <input
       type="text"
+      *ngIf="!hardMode"
       [(ngModel)]="userInput"
       placeholder="Enter your translation"
       (keyup.enter)="checkAnswer()"
     />
+    <div class="answers-section" *ngIf="hardMode">
+      <div class="answers-container">
+        <div *ngFor="let answer of possibleAnswers" class="answer-item">
+          <button
+            class="answer-btn"
+            [ngClass]="{'selected': selectedFilters.has(answer)}"
+            (click)="checkPossibleAnswer(answer)"
+          >
+            {{ answer }}
+          </button>
+        </div>
+      </div>
+    </div>
   </div>
 
   <!-- Counters Section -->
@@ -57,16 +70,8 @@
         Allow repetitions
       </label>
       <label>
-        <input type="checkbox" [(ngModel)]="enableTimer" />
-        Enable Timer
-      </label>
-      <label>
-        <input type="checkbox" [(ngModel)]="playSounds" />
-        Play Sounds
-      </label>
-      <label>
-        <input type="checkbox" [(ngModel)]="showTranslations" />
-        Show Translations After Incorrect Answer
+        <input type="checkbox" [(ngModel)]="hardMode" (click)="switchMode()" />
+        Quiz mode
       </label>
     </div>
   </div>

@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ApiClient} from "../../services/api.client";
 import {
   CreateGameResultRequestModel, GameAttemptModel, UserModel,
@@ -25,6 +25,7 @@ export class GameComponent implements OnInit {
   enableTimer: boolean = false;
   playSounds: boolean = true;
   showTranslations: boolean = true;
+  hardMode: boolean = false;
 
   // words
   private words: WordModel[] = [];
@@ -42,9 +43,10 @@ export class GameComponent implements OnInit {
   // filters
   allowedFilters: Set<string> = new Set<string>();
   selectedFilters: Set<string> = new Set<string>();
+  // soft mode
+  possibleAnswers: Set<string> = new Set<string>();
   // data
   private gameProgressData: Map<number, { correctCount: number, totalCount: number }> = new Map();
-  private recordedIndex = 0;
 
   constructor(private api: ApiClient) { }
 
@@ -54,7 +56,6 @@ export class GameComponent implements OnInit {
     let answer = this.userInput.toLowerCase();
     let filtered = this.word!!.translations?.filter(w => answer === w.toLowerCase());
     if(filtered && filtered.length > 0){
-      console.log(this.word);
       this.saveAttemptData(true, this.word?.id!!);
       this.feedback = 'Correct!';
       this.correctCount++;
@@ -164,25 +165,30 @@ export class GameComponent implements OnInit {
   }
 
   setAnyWord(){
-    console.log(this.recordedIndex);
     if(this.filteredWords.length == 0) {
       this.word = undefined;
       return;
     }
-    if(this.isRepetitionsAllowed){
-      const randomIndex = Math.floor(Math.random() * this.getFilteredWordsCount());
-      this.word = this.filteredWords[randomIndex];
-    }
-    else {
-      if(this.recordedIndex < this.getFilteredWordsCount() - 1){
-        let newIndex = this.recordedIndex + 1;
-        this.word = this.filteredWords[newIndex];
-      } else {
-        this.recordedIndex = 0;
-        this.word = this.filteredWords[this.recordedIndex];
-      }
-    }
+    const randomIndex = Math.floor(Math.random() * this.getFilteredWordsCount());
+    this.word = this.filteredWords[randomIndex];
     this.setWordStatistics();
+    if(this.hardMode){
+      this.possibleAnswers.clear();
+      if(this.word.translations){
+        this.possibleAnswers.add(this.word.translations[0]);
+      }
+      // fill allowed answers;
+      // @ts-ignore
+      let wordsFiltered = this.filteredWords.filter(w => w.id != this.word?.id && w.attributes?.includes(this.word?.attributes?.split(",")[0]));
+      if(wordsFiltered.length > 7){
+        let indexes = this.getThreeRandomIndexes(wordsFiltered);
+        for(let i = 0; i < indexes.length; i++){
+          // @ts-ignore
+          this.possibleAnswers.add(wordsFiltered[indexes[i]].translations[0]);
+        }
+      }
+      this.possibleAnswers = this.shuffleSet(this.possibleAnswers);
+    }
   }
 
   toggleFilterSelection(filter: string) {
@@ -253,6 +259,53 @@ export class GameComponent implements OnInit {
 
   public setRepetitionsToggle(){
     this.isRepetitionsAllowed = !this.isRepetitionsAllowed;
+  }
+
+  public checkPossibleAnswer(answer: string){
+    this.resetMessage();
+    this.attempts++;
+    let filtered = this.word!!.translations?.filter(w => answer === w.toLowerCase());
+    if(filtered && filtered.length > 0){
+      this.saveAttemptData(true, this.word?.id!!);
+      this.feedback = 'Correct!';
+      this.correctCount++;
+      this.maxStreak ++;
+      this.setAnyWord();
+    }else {
+      this.saveAttemptData(false, this.word?.id!!);
+      this.maxStreak = 0;
+      this.feedback = 'Incorrect, try again! Correct is: ' + this.word?.translations?.join(',') + "";
+    }
+    this.resetUserInput();
+  }
+
+  private shuffleSet(inputSet: Set<string>): Set<string> {
+    const array = Array.from(inputSet);
+
+    // Fisher-Yates Shuffle
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+
+    return new Set(array);
+  }
+
+  getThreeRandomIndexes<T>(array: T[]): number[] {
+    const indexes = Array.from(array.keys()); // [0, 1, 2, ..., array.length - 1]
+
+    // Shuffle using Fisher-Yates
+    for (let i = indexes.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [indexes[i], indexes[j]] = [indexes[j], indexes[i]];
+    }
+
+    return indexes.slice(0, 5);
+  }
+
+  public switchMode(){
+    this.hardMode = !this.hardMode;
+    this.setAnyWord();
   }
 
 }

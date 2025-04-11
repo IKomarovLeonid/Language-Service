@@ -39,7 +39,7 @@ namespace Business.Src.Handlers
                 var model = new GameAttemptModel()
                 {
                     Id = dto.Id,
-                    UserId = dto.Id,
+                    UserId = dto.UserId,
                     ErrorAnswers = dto.TotalAnswersCount - dto.CorrectAnswersCount,
                     TotalAnswers = dto.TotalAnswersCount,
                     UserRatingChange = dto.UserRatingChange,
