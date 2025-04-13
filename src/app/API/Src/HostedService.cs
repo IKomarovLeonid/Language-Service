@@ -1,14 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using ClosedXML.Excel;
-using DocumentFormat.OpenXml.Spreadsheet;
 using Domain;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Newtonsoft.Json;
@@ -16,8 +13,6 @@ using Objects;
 using Objects.Dto;
 using Objects.Src.Dto;
 using Objects.Src.Models;
-using OfficeOpenXml;
-using LicenseContext = OfficeOpenXml.LicenseContext;
 
 namespace API
 {
@@ -119,7 +114,6 @@ namespace API
 
                         var word = data[0];
                         var translation = data[1];
-                        var conjugation = data.Length > 2 ? data[2] : null;
 
                         words.Add(new WordDto()
                         {
@@ -129,8 +123,7 @@ namespace API
                             WordRating = 1600,
                             LanguageType = type,
                             Attributes = attributes,
-                            Translation = translation,
-                            Conjugation = conjugation,
+                            Translation = translation.ToLowerInvariant(),
                         });
                     }
                 }
@@ -229,7 +222,7 @@ namespace API
                     {
                         if (cell.Value.TryGetText(out var traduccion))
                         {
-                            verb.Translation = traduccion;
+                            verb.Translation = traduccion.ToLowerInvariant();
                         }
                         else
                         {

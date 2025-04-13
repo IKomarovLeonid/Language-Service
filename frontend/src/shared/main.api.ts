@@ -330,7 +330,7 @@ export class WordModel implements IWordModel {
   id?: number;
   attributes?: string | undefined;
   word?: string | undefined;
-  conjugation?: string | undefined;
+  conjugation?: WordConjugationModel | undefined;
   wordRating?: number;
   totalAttempts?: number;
   successRate?: number;
@@ -353,7 +353,7 @@ export class WordModel implements IWordModel {
       this.id = _data["id"];
       this.attributes = _data["attributes"];
       this.word = _data["word"];
-      this.conjugation = _data["conjugation"];
+      this.conjugation = _data["conjugation"] ? WordConjugationModel.fromJS(_data["conjugation"]) : <any>undefined;
       this.wordRating = _data["wordRating"];
       this.totalAttempts = _data["totalAttempts"];
       this.successRate = _data["successRate"];
@@ -380,7 +380,7 @@ export class WordModel implements IWordModel {
     data["id"] = this.id;
     data["attributes"] = this.attributes;
     data["word"] = this.word;
-    data["conjugation"] = this.conjugation;
+    data["conjugation"] = this.conjugation ? this.conjugation.toJSON() : <any>undefined;
     data["wordRating"] = this.wordRating;
     data["totalAttempts"] = this.totalAttempts;
     data["successRate"] = this.successRate;
@@ -400,7 +400,7 @@ export interface IWordModel {
   id?: number;
   attributes?: string | undefined;
   word?: string | undefined;
-  conjugation?: string | undefined;
+  conjugation?: WordConjugationModel | undefined;
   wordRating?: number;
   totalAttempts?: number;
   successRate?: number;
@@ -408,6 +408,86 @@ export interface IWordModel {
   languageType?: WordLanguageType;
   createdTime?: Date;
   updatedTime?: Date;
+}
+
+export class WordConjugationModel implements IWordConjugationModel {
+  presente?: string[] | undefined;
+  preteritoPerfecto?: string[] | undefined;
+  futuroSimple?: string[] | undefined;
+  preteritoPerfectoIndefinido?: string[] | undefined;
+
+  constructor(data?: IWordConjugationModel) {
+    if (data) {
+      for (var property in data) {
+        if (data.hasOwnProperty(property))
+          (<any>this)[property] = (<any>data)[property];
+      }
+    }
+  }
+
+  init(_data?: any) {
+    if (_data) {
+      if (Array.isArray(_data["presente"])) {
+        this.presente = [] as any;
+        for (let item of _data["presente"])
+          this.presente!.push(item);
+      }
+      if (Array.isArray(_data["preteritoPerfecto"])) {
+        this.preteritoPerfecto = [] as any;
+        for (let item of _data["preteritoPerfecto"])
+          this.preteritoPerfecto!.push(item);
+      }
+      if (Array.isArray(_data["futuroSimple"])) {
+        this.futuroSimple = [] as any;
+        for (let item of _data["futuroSimple"])
+          this.futuroSimple!.push(item);
+      }
+      if (Array.isArray(_data["preteritoPerfectoIndefinido"])) {
+        this.preteritoPerfectoIndefinido = [] as any;
+        for (let item of _data["preteritoPerfectoIndefinido"])
+          this.preteritoPerfectoIndefinido!.push(item);
+      }
+    }
+  }
+
+  static fromJS(data: any): WordConjugationModel {
+    data = typeof data === 'object' ? data : {};
+    let result = new WordConjugationModel();
+    result.init(data);
+    return result;
+  }
+
+  toJSON(data?: any) {
+    data = typeof data === 'object' ? data : {};
+    if (Array.isArray(this.presente)) {
+      data["presente"] = [];
+      for (let item of this.presente)
+        data["presente"].push(item);
+    }
+    if (Array.isArray(this.preteritoPerfecto)) {
+      data["preteritoPerfecto"] = [];
+      for (let item of this.preteritoPerfecto)
+        data["preteritoPerfecto"].push(item);
+    }
+    if (Array.isArray(this.futuroSimple)) {
+      data["futuroSimple"] = [];
+      for (let item of this.futuroSimple)
+        data["futuroSimple"].push(item);
+    }
+    if (Array.isArray(this.preteritoPerfectoIndefinido)) {
+      data["preteritoPerfectoIndefinido"] = [];
+      for (let item of this.preteritoPerfectoIndefinido)
+        data["preteritoPerfectoIndefinido"].push(item);
+    }
+    return data;
+  }
+}
+
+export interface IWordConjugationModel {
+  presente?: string[] | undefined;
+  preteritoPerfecto?: string[] | undefined;
+  futuroSimple?: string[] | undefined;
+  preteritoPerfectoIndefinido?: string[] | undefined;
 }
 
 export enum WordLanguageType {
@@ -728,6 +808,8 @@ export interface IGameAttemptModel {
 }
 
 export class RegisterUserRequestModel implements IRegisterUserRequestModel {
+  userName?: string | undefined;
+  email?: string | undefined;
 
   constructor(data?: IRegisterUserRequestModel) {
     if (data) {
@@ -739,6 +821,10 @@ export class RegisterUserRequestModel implements IRegisterUserRequestModel {
   }
 
   init(_data?: any) {
+    if (_data) {
+      this.userName = _data["userName"];
+      this.email = _data["email"];
+    }
   }
 
   static fromJS(data: any): RegisterUserRequestModel {
@@ -750,11 +836,15 @@ export class RegisterUserRequestModel implements IRegisterUserRequestModel {
 
   toJSON(data?: any) {
     data = typeof data === 'object' ? data : {};
+    data["userName"] = this.userName;
+    data["email"] = this.email;
     return data;
   }
 }
 
 export interface IRegisterUserRequestModel {
+  userName?: string | undefined;
+  email?: string | undefined;
 }
 
 export class UserModel implements IUserModel {

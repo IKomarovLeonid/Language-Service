@@ -1,7 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {ApiClient} from "../../services/api.client";
 import {
-  CreateGameResultRequestModel, GameAttemptModel, UserModel,
+  CreateGameResultRequestModel,
+  GameAttemptModel,
+  UserModel,
   WordGameResultModel,
   WordLanguageType,
   WordModel,
@@ -23,6 +25,7 @@ export class GameComponent implements OnInit {
   // Game settings
   isRepetitionsAllowed: boolean = true;
   hardMode: boolean = false;
+  conjunction: boolean = false;
 
   // last index repetitions
   lastIndex = 0;
@@ -321,4 +324,7 @@ export class GameComponent implements OnInit {
     this.setAnyWord();
   }
 
+  public setTrainVerbs(){
+
+  }
 }
