@@ -21,11 +21,11 @@ export class GameComponent implements OnInit {
   maxStreak: number = 0;
 
   // Game settings
-  isRepetitionsAllowed: boolean = false;
-  enableTimer: boolean = false;
-  playSounds: boolean = true;
-  showTranslations: boolean = true;
+  isRepetitionsAllowed: boolean = true;
   hardMode: boolean = false;
+
+  // last index repetitions
+  lastIndex = 0;
 
   // words
   private words: WordModel[] = [];
@@ -101,7 +101,7 @@ export class GameComponent implements OnInit {
       results.push(result);
     });
     request.results = results;
-    request.userId = 1;
+    request.userId = this.userId;
     request.maxStreak = this.maxStreak;
     await this.api.createGameResult(request);
     this.resetGame();
@@ -167,10 +167,22 @@ export class GameComponent implements OnInit {
   setAnyWord(){
     if(this.filteredWords.length == 0) {
       this.word = undefined;
+      this.possibleAnswers.clear();
       return;
     }
-    const randomIndex = Math.floor(Math.random() * this.getFilteredWordsCount());
-    this.word = this.filteredWords[randomIndex];
+    let index;
+    if(this.isRepetitionsAllowed){
+      index = Math.floor(Math.random() * this.getFilteredWordsCount());
+    } else{
+      let len = this.getFilteredWordsCount();
+      if(this.lastIndex >= len){
+        this.lastIndex = 0;
+      }
+      index = this.lastIndex;
+      this.lastIndex ++;
+    }
+
+    this.word = this.filteredWords[index];
     this.setWordStatistics();
     if(this.hardMode){
       this.possibleAnswers.clear();
@@ -230,8 +242,8 @@ export class GameComponent implements OnInit {
   }
 
   private async loadUserProfile(userId: number){
-    await this.api.users.getUsers(userId).then(model => {
-      this.user = model.find(u => u.id === userId);
+    await this.api.getUser(userId).then(model => {
+      this.user = model!!.find(u => u.id === userId);
     }).catch(error => {
       alert("Failed to retrieve user");
     });
@@ -259,6 +271,7 @@ export class GameComponent implements OnInit {
 
   public setRepetitionsToggle(){
     this.isRepetitionsAllowed = !this.isRepetitionsAllowed;
+    this.setAnyWord();
   }
 
   public checkPossibleAnswer(answer: string){

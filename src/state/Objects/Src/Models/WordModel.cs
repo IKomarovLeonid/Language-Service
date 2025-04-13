@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Objects.Src.Models;
+using System;
 
 namespace Objects.Models
 {
@@ -10,7 +11,7 @@ namespace Objects.Models
 
         public string Word { get; set; }
 
-        public string Conjugation { get; set; }
+        public WordConjugationModel Conjugation { get; set; }
 
         public double WordRating { get; set; }
 

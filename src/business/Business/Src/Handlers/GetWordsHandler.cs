@@ -6,9 +6,11 @@ using Business.Commands;
 using Business.Src.Objects;
 using Domain.Src;
 using MediatR;
+using Newtonsoft.Json;
 using Objects.Dto;
 using Objects.Models;
 using Objects.Src.Dto;
+using Objects.Src.Models;
 
 namespace Business.Handlers
 {
@@ -35,7 +37,7 @@ namespace Business.Handlers
                 WordRating = dto.WordRating,
                 Attributes = dto.Attributes,
                 LanguageType = dto.LanguageType,
-                Conjugation = dto.Conjugation,
+                Conjugation = dto.HasConjugation() ? JsonConvert.DeserializeObject<WordConjugationModel>(dto.Conjugation): null,
                 CreatedTime = dto.CreatedTime,
                 UpdatedTime = dto.UpdatedTime,
             }).ToList());

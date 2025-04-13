@@ -4,12 +4,22 @@
     <TargetFramework>net6.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="verbos.xlsx" />
+  </ItemGroup>
+
 	<ItemGroup>
 		<PackageReference Include="Microsoft.Data.Sqlite" Version="3.1.17" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.23" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.1.23" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.23" />
 		<PackageReference Include="System.Reactive" Version="6.0.1" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Page Include="verbos.xlsx">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Page>
 	</ItemGroup>
 
   <ItemGroup>
@@ -24,6 +34,9 @@
     <None Update="words_esp.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+	  <None Update="verbos.xlsx">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
   </ItemGroup>
 
 </Project>

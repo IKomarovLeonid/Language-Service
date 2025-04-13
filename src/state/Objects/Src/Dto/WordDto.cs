@@ -22,5 +22,7 @@ namespace Objects.Dto
         public DateTime CreatedTime { get; set; }
 
         public DateTime UpdatedTime { get; set; }
+
+        public bool HasConjugation() => this.Conjugation != null;
     }
 }

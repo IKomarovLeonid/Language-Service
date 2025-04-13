@@ -1,49 +1,4 @@
-﻿[Verbs]
-
-agradecer;благодарить
-aparecer;появляться
-aprender;учить
-alojarse;размещаться
-comer;есть,обедать
-conocer;знать,иметь знания,знакомить
-conseguir;добиваться,достигать
-construir;создавать
-conectar;соединять
-defender;защищать
-deletrear;разгадывать,расшифровывать
-despedirse;прощаться,увольняться
-despertarse;просыпаться
-destruir;разрушать
-dividir;делить,разделять
-divertirse;развлекаться
-dormir;засыпать
-empezar;начинать
-escuchar;слушать
-oir;слышать
-fregar;мыть,чистить
-huir;убегать
-leer;читать
-localizar;указать,определить
-morir;умирать
-multiplicar;умножать
-nacer;рождать
-presentar;поздороваться,представиться
-preferir;предпочитать
-recordar;помнить,вспоминать
-regar;поливать,орошать
-saber;знать
-seguir;следовать
-servir;служить
-sonar;звонить
-traducir;переводить
-vencer;побеждать
-vestir;одеваться
-volar;летать
-voler;становиться
-volver;возвращаться
-trasladarse;перемещаться
-
-[Nouns]
+﻿[Nouns]
 
 camarero;официант
 dependiente;продавец,служащий
@@ -99,24 +54,152 @@ chaleco;жилетка
 la bolsa;сумка
 el bolsillo;сумочка
 
-[Family]
+[Familia]
 
 sobrino;племянник
+abuela;бабушка
+abuelo;дедушка
+hijo;ребёнок
+madre;мама
+padre;папа
+los padres;родители
+tio;дядя
+tia;тётя
+bisabuela;прабабушка
+bisabuelo;прадедушка
+primo;двоюродный брат
+prima;двоюродная сестра
+novio;парень
+novia;девушка
+marido;муж
+esposo;муж
+marida;жена
+esposa;жена
+los gemelos;близняшки
+los niños;дети
+los hijos;дети
+suegro;тесть,свёкор
+suerga;тёща,свекровь
+nuera;сноха
+el nieto;внук
+madrastra;мачеха
+hijastro;пасынок
+descendiente;потомок
+el nacimiento;рождение
+el embarazo;беременность
+la maternidad;материнство
+la paternidad;отцовство
+la boda;свадьба
+el matrimonio;брак
 
 
-[Adjectives]
+[Adjetivos]
 
 amueblar;мебилированный
 moderno;современный
-tranquilo;спокойный
-antiguo;старинный
 ruidoso;шумный
 cotidiana;повседневная
-feo;некрасивый
 torpe;глупый
 timido;застенчивый
 vago;ленивый
-util;полезный
+util;полезный	
+aburrido;скучный
+agradable;приятный
+alegre;весёлый
+alto;высокий
+amargo;горький
+ancho;широкий
+antiguo;старый
+azul;синий
+barato;дешёвый
+bajo;низкий
+bello;красивый,чудесный
+blanco;белый
+blando;слабый,мягкий
+bonito;милый,красивый
+bueno;хороший
+caliente;горячий
+capaz;способный,умелый
+caro;дорогой
+colorido;яркий,красочный,цветной
+cómodo;удобный
+conocido;знакомый,известный
+contento;довольный,радостный
+corto;короткий
+cuadrado;квадратный
+débil;слабый
+delgado;худой,стройный
+desagradable;неприятный
+descolorido;бесцветный
+desconocido;незнакомый,неизвестный
+descontento;недовольный
+diferente;другой,разный
+difícil;сложный
+divertido;забавный,весёлый
+dulce;сладкий
+educado;воспитанный
+enfadado;злой,разгневанный
+enfermo;больной
+egoísta;эгоистичный
+estrecho;узкий
+fácil;лёгкий
+falso;ложный
+famoso;знаменитый
+feliz;счастливый
+feo;уродливый
+fresco;свежий
+frío;холодный
+fuerte;сильный
+gordo;толстый
+grande;большой
+guapo;красивый
+hermoso;прекрасный
+húmedo;влажный,мокрый
+imposible;невозможный
+incómodo;неудобный
+interesante;интересный
+inútil;бесполезный, ненужный
+jóven;молодой
+largo;длинный
+lento;медленный
+limpio;чистый
+listo;умный
+lleno;полный
+maleducado;невоспитанный
+malo;плохой
+mejor;лучшee
+la mejor parte;лучшая часть
+mojado;мокрый
+muerto;мёртвый
+negro;чёрный
+nervioso;нервный
+nuevo;новый
+pobre;бедный
+popular;популярный
+pequeño;маленький
+perfecto;идеальный
+picante;острый,пряный
+principal;главный,основной
+rápido;быстрый
+raro;странный,редкий
+redondo;круглый
+rico;вкусный,богатый
+rojo;красный
+sano;здоровый
+seco;сухой
+soltero;холостой
+soso;невкусный
+sucio;грязный
+tímido;застенчивый,робкий
+tonto;глупый
+tranquilo;спокойный
+triste;грустный
+útil;полезный,удобный
+vacío;пустой
+verdadero;истинный,верный
+verde;зелёный
+viejo;старый
+vivo;живой
 
 [Adverb]
 
@@ -247,7 +330,7 @@ Dinero;деньги
 Una plata;деньги
 Pelas;деньги,бабло
 Monedas;монеты
-Duro;деньги,нехватка денег,ни копейки
+Duro;деньги,нехватка денег,ни копейки,тяжёлый,суровый
 Efectivo;наличные
 Cheque;чек
 precio;цена
@@ -277,3 +360,48 @@ Un chollo;повезло,везение
 Una baratija;дешёвка
 Compra;покупка
 Comprar;покупать
+
+[End]
+
+[Verbos]
+
+agradecer;благодарить
+aparecer;появляться
+aprender;учить
+alojarse;размещаться
+comer;есть,обедать
+conocer;знать,иметь знания,знакомить
+conseguir;добиваться,достигать
+construir;создавать
+conectar;соединять
+defender;защищать
+deletrear;разгадывать,расшифровывать
+despedirse;прощаться,увольняться
+despertarse;просыпаться
+destruir;разрушать
+dividir;делить,разделять
+divertirse;развлекаться
+dormir;засыпать
+empezar;начинать
+escuchar;слушать
+oir;слышать
+fregar;мыть,чистить
+huir;убегать
+localizar;указать,определить
+morir;умирать
+multiplicar;умножать
+nacer;рождать
+presentar;поздороваться,представиться
+preferir;предпочитать
+recordar;помнить,вспоминать
+regar;поливать,орошать
+seguir;следовать
+servir;служить
+sonar;звонить
+traducir;переводить
+vencer;побеждать
+vestir;одеваться
+volar;летать
+voler;становиться
+volver;возвращаться
+trasladarse;перемещаться

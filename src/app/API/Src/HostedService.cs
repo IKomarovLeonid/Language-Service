@@ -1,16 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using ClosedXML.Excel;
+using DocumentFormat.OpenXml.Spreadsheet;
 using Domain;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Newtonsoft.Json;
 using Objects;
 using Objects.Dto;
 using Objects.Src.Dto;
+using Objects.Src.Models;
+using OfficeOpenXml;
+using LicenseContext = OfficeOpenXml.LicenseContext;
 
 namespace API
 {
@@ -69,6 +76,8 @@ namespace API
             var categories = new Dictionary<string, List<string>>();
             string currentCategory = null;
 
+            LoadVerbos(words);
+
             try
             {
                 using (StreamReader sr = new StreamReader(fileName))
@@ -86,16 +95,22 @@ namespace API
                         {
                             attributes = line.Substring(1, line.IndexOf("]") - 1);
                             currentCategory = line.Trim();
+                            if (attributes == "End")
+                            {
+                                Console.WriteLine("Catch end");
+                                break;
+                            }
                             continue;
                         }
                         if (currentCategory != null)
                         {
-                            if (categories.ContainsKey(currentCategory)) {
+                            if (categories.ContainsKey(currentCategory))
+                            {
                                 categories[currentCategory].Add(line);
                             }
                             else
                             {
-                                 categories.Add(currentCategory, new List<string>() { line });
+                                categories.Add(currentCategory, new List<string>() { line });
                             }
                         }
 
@@ -150,7 +165,7 @@ namespace API
                 Console.WriteLine($"Failed for words from source {fileName} because of {ex.Message}");
                 return words;
             }
-            
+
         }
 
         private void PrintDuplicates(IEnumerable<WordDto> words)
@@ -180,6 +195,118 @@ namespace API
             var statResult = ctx.UserStatistics.Add(UserStatisticsDto.BuildForNewUser(userResult.Entity.Id));
 
             Console.WriteLine($"Creating admin...success");
+        }
+
+        private void LoadVerbos(List<WordDto> words)
+        {
+            var filePath = "verbos.xlsx";
+
+            using var workbook = new XLWorkbook(filePath);
+            var worksheet = workbook.Worksheet(1); // First sheet
+
+            foreach (var row in worksheet.RangeUsed().Rows())
+            {
+                if (row.RowNumber() <= 1) continue;
+                Console.WriteLine("Row: " + row.RowNumber());
+
+                var verb = new WordDto();
+                var conjuaction = new WordConjugationModel();
+
+                foreach (var cell in row.Cells())
+                {
+                    if (cell.Address.ColumnLetter == "A")
+                    {
+                        if (cell.Value.TryGetText(out var verbName))
+                        {
+                            verb.Word = verbName;
+                        }
+                        else
+                        {
+                            throw new Exception($"Unexpected verb value name at: {cell.Address}");
+                        }
+                    }
+                    if (cell.Address.ColumnLetter == "B")
+                    {
+                        if (cell.Value.TryGetText(out var traduccion))
+                        {
+                            verb.Translation = traduccion;
+                        }
+                        else
+                        {
+                            throw new Exception($"Unexpected verb traduccion name at: {cell.Address}");
+                        }
+                    }
+
+                    if (cell.Address.ColumnLetter == "C")
+                    {
+                        if (cell.Value.TryGetText(out var presente))
+                        {
+                            var items = presente.Split(",");
+                            if (items.Length != 6) throw new Exception($"Unexpected size of presente at: {cell.Address}");
+                            conjuaction.Presente = items.Select(v => v.Trim()).ToArray();
+                        }
+                        else
+                        {
+                            throw new Exception($"Unexpected verb presente time at: {cell.Address}");
+                        }
+                    }
+
+                    if (cell.Address.ColumnLetter == "D")
+                    {
+                        if (cell.Value.TryGetText(out var preteritoPerfecto))
+                        {
+                            var items = preteritoPerfecto.Split(",");
+                            if (items.Length != 6) throw new Exception($"Unexpected size of pretetiro perfecto at: {cell.Address}");
+                            conjuaction.PreteritoPerfecto = items.Select(v => v.Trim()).ToArray();
+                        }
+                        else
+                        {
+                            throw new Exception($"Unexpected verb pretetiro perfecto at: {cell.Address}");
+                        }
+                    }
+
+                    if (cell.Address.ColumnLetter == "E")
+                    {
+                        if (cell.Value.TryGetText(out var futuro))
+                        {
+                            var items = futuro.Split(",");
+                            if (items.Length != 6) throw new Exception($"Unexpected size of futuro at: {cell.Address}");
+                            conjuaction.FuturoSimple = items.Select(v => v.Trim()).ToArray();
+                        }
+                        else
+                        {
+                            throw new Exception($"Unexpected verb futuro at: {cell.Address}");
+                        }
+                    }
+
+                    if (cell.Address.ColumnLetter == "F")
+                    {
+                        if (cell.Value.TryGetText(out var indefinido))
+                        {
+                            var items = indefinido.Split(",");
+                            if (items.Length != 6) throw new Exception($"Unexpected size of indefinido at: {cell.Address}");
+                            conjuaction.PreteritoPerfectoIndefinido = items.Select(v => v.Trim()).ToArray();
+                        }
+                        else
+                        {
+                            throw new Exception($"Unexpected verb indefinido at: {cell.Address}");
+                        }
+                    }
+
+                }
+
+                if (conjuaction.HasData()) verb.Conjugation = JsonConvert.SerializeObject(conjuaction);
+                verb.CreatedTime = DateTime.UtcNow;
+                verb.UpdatedTime = DateTime.UtcNow;
+                verb.Attributes = "Verbos,Conjuaction";
+                verb.LanguageType = WordLanguageType.SpanishRussian;
+                verb.WordRating = 1600;
+
+                Console.WriteLine($"Added verb: {verb.Word}");
+                words.Add(verb);
+
+            }
+
         }
     }
 }
