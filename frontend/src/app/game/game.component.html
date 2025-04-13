@@ -1,7 +1,7 @@
 <div class="translation-container">
   <div class="word-display">
     <h2>Translate the word: </h2>
-    <p>{{ word?.word }}</p>
+    <p>{{ getWordTitle() }}</p>
   </div>
 
   <div class="feedback-message">
@@ -72,6 +72,10 @@
       <label>
         <input type="checkbox" [(ngModel)]="hardMode" (click)="switchMode()" />
         Quiz mode
+      </label>
+      <label>
+        <input type="checkbox" [(ngModel)]="conjunction" (click)="setTrainVerbs()" />
+        Verbs conjunction
       </label>
     </div>
   </div>

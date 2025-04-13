@@ -43,6 +43,9 @@ export class GameComponent implements OnInit {
   private user: UserModel | undefined;
 
   word: WordModel | undefined;
+  conjunctionTitle: string | undefined;
+  conjunctionExpected: string | undefined;
+
   // filters
   allowedFilters: Set<string> = new Set<string>();
   selectedFilters: Set<string> = new Set<string>();
@@ -57,17 +60,31 @@ export class GameComponent implements OnInit {
     this.resetMessage();
     this.attempts++;
     let answer = this.userInput.toLowerCase();
-    let filtered = this.word!!.translations?.filter(w => answer === w.toLowerCase());
-    if(filtered && filtered.length > 0){
-      this.saveAttemptData(true, this.word?.id!!);
-      this.feedback = 'Correct!';
-      this.correctCount++;
-      this.maxStreak ++;
-      this.setAnyWord();
-    }else {
-      this.saveAttemptData(false, this.word?.id!!);
-      this.maxStreak = 0;
-      this.feedback = 'Incorrect, try again! Correct is: ' + this.word?.translations?.join(',') + "";
+    if(this.conjunction){
+      if(answer === this.conjunctionExpected){
+        this.saveAttemptData(true, this.word?.id!!);
+        this.feedback = 'Correct!';
+        this.correctCount++;
+        this.maxStreak ++;
+        this.setConjunctionWord();
+      } else {
+        this.saveAttemptData(false, this.word?.id!!);
+        this.maxStreak = 0;
+        this.feedback = 'Incorrect, try again! Correct is: ' + this.conjunctionExpected + "";
+      }
+    } else{
+      let filtered = this.word!!.translations?.filter(w => answer === w.toLowerCase());
+      if(filtered && filtered.length > 0){
+        this.saveAttemptData(true, this.word?.id!!);
+        this.feedback = 'Correct!';
+        this.correctCount++;
+        this.maxStreak ++;
+        this.setAnyWord();
+      }else {
+        this.saveAttemptData(false, this.word?.id!!);
+        this.maxStreak = 0;
+        this.feedback = 'Incorrect, try again! Correct is: ' + this.word?.translations?.join(',') + "";
+      }
     }
     this.resetUserInput();
   }
@@ -325,6 +342,67 @@ export class GameComponent implements OnInit {
   }
 
   public setTrainVerbs(){
-
+    if(!this.conjunction){
+      this.conjunction = true;
+      this.filteredWords = this.words.filter(w => w.conjugation);
+      this.setConjunctionWord();
+    } else {
+      this.conjunction = false;
+      this.filterWords(undefined, WordLanguageType.SpanishRussian);
+      this.selectedFilters.clear();
+      this.setAnyWord();
+    }
   }
+
+  public setConjunctionWord(){
+    if(this.filteredWords.length === 0) return;
+    let words = this.words.filter(w => w.conjugation != undefined);
+    if(words.length === 0) return;
+    let index = Math.floor(Math.random() * words.length);
+    this.word = words[index];
+    let timeIndex = Math.floor(Math.random() * 4);
+    let idx = Math.floor(Math.random() * 6);
+    if(!this.word!!.conjugation) return;
+    let conj = this.word!!.conjugation;
+    let arr;
+    let timeName;
+    let mesto;
+    if(timeIndex == 0){
+      timeName = 'Presente';
+      arr = conj.presente;
+    }
+    if(timeIndex == 1){
+      timeName = 'Futuro simple';
+      arr = conj.futuroSimple;
+    }
+    if(timeIndex == 2){
+      timeName = 'Preterito perfecto';
+      arr = conj.preteritoPerfecto;
+    }
+    if(timeIndex == 3){
+      timeName = 'Preterito indefinido';
+      arr = conj.preteritoPerfectoIndefinido;
+    }
+    if(arr){
+      if(idx == 0) mesto = 'yo';
+      if(idx == 1) mesto = 'tu';
+      if(idx == 2) mesto = 'el';
+      if(idx == 3) mesto = 'nosotros';
+      if(idx == 4) mesto = 'vosotros';
+      if(idx == 5) mesto = 'ellos';
+      this.conjunctionExpected = arr[idx];
+      this.conjunctionTitle = mesto + ' (' + this.word!!.word + ') -> ' + timeName;
+    }
+  }
+
+  public getWordTitle(){
+    if(!this.conjunction){
+      if(this.word) return this.word.word;
+      else return 'No word set';
+    } else {
+      return this.conjunctionTitle;
+    }
+  }
+
+
 }
