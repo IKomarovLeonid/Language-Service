@@ -24,5 +24,12 @@ namespace Objects.Dto
         public DateTime UpdatedTime { get; set; }
 
         public bool HasConjugation() => this.Conjugation != null;
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null) return false;
+            var data = (WordDto)obj;
+            return data.Word == this.Word;
+        }
     }
 }

@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -34,9 +34,7 @@
     <None Update="words_esp.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-	  <None Update="verbos.xlsx">
-		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </None>
+	 
   </ItemGroup>
 
 </Project>

@@ -76,7 +76,7 @@ namespace API
             var categories = new Dictionary<string, List<string>>();
             string currentCategory = null;
 
-            LoadVerbos(words);
+            if(type == WordLanguageType.SpanishRussian) LoadVerbos(words);
 
             try
             {
@@ -199,6 +199,7 @@ namespace API
 
         private void LoadVerbos(List<WordDto> words)
         {
+            var set = new HashSet<WordDto>();
             var filePath = "verbos.xlsx";
 
             using var workbook = new XLWorkbook(filePath);
@@ -207,7 +208,6 @@ namespace API
             foreach (var row in worksheet.RangeUsed().Rows())
             {
                 if (row.RowNumber() <= 1) continue;
-                Console.WriteLine("Row: " + row.RowNumber());
 
                 var verb = new WordDto();
                 var conjuaction = new WordConjugationModel();
@@ -306,6 +306,7 @@ namespace API
                 words.Add(verb);
 
             }
+
 
         }
     }
