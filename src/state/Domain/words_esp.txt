@@ -361,4 +361,22 @@ Una baratija;дешёвка
 Compra;покупка
 Comprar;покупать
 
+[Nuevos]
+
+Lejos de;Далеко от
+positivo;Позитивный, положительный
+negativo;Негативный, отрицательный
+Estar interesado en;Быть заинтересованным в 
+gafas;очки
+Es todo lo que quería decir;Это все, что я хотел сказать
+lavarse;мыться
+Tomar ducha;Принимать душ
+Estar seguro de;Быть уверенным в
+travieso;озорной
+reunirse;объединяться
+oración;Предложение, фраза ≠ ofrecer
+buscar;искать
+
+
+
 [End]
