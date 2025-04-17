@@ -376,17 +376,17 @@ export class GameComponent implements OnInit {
       arr = conj.futuroSimple;
     }
     if(timeIndex == 2){
-      timeName = 'Preterito perfecto';
+      timeName = 'Pretérito perfecto';
       arr = conj.preteritoPerfecto;
     }
     if(timeIndex == 3){
-      timeName = 'Preterito indefinido';
+      timeName = 'Pretérito indefinido';
       arr = conj.preteritoPerfectoIndefinido;
     }
     if(arr){
       if(idx == 0) mesto = 'yo';
-      if(idx == 1) mesto = 'tu';
-      if(idx == 2) mesto = 'el';
+      if(idx == 1) mesto = 'tú';
+      if(idx == 2) mesto = 'él';
       if(idx == 3) mesto = 'nosotros';
       if(idx == 4) mesto = 'vosotros';
       if(idx == 5) mesto = 'ellos';

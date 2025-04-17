@@ -70,7 +70,7 @@
         Allow repetitions
       </label>
       <label>
-        <input type="checkbox" [(ngModel)]="hardMode" (click)="switchMode()" />
+        <input type="checkbox" [(ngModel)]="hardMode" (click)="switchMode()"/>
         Quiz mode
       </label>
       <label>
@@ -81,7 +81,7 @@
   </div>
 
   <!-- Filters Section -->
-  <div class="filters-section">
+  <div class="filters-section" *ngIf="!conjunction">
     <div class="filters-container">
       <div *ngIf="allowedFilters.size === 0" class="no-filters">
         No filters available.

@@ -364,8 +364,8 @@ Comprar;покупать
 [Nuevos]
 
 Lejos de;Далеко от
-positivo;Позитивный, положительный
-negativo;Негативный, отрицательный
+positivo;Позитивный,положительный
+negativo;Негативный,отрицательный
 Estar interesado en;Быть заинтересованным в 
 gafas;очки
 Es todo lo que quería decir;Это все, что я хотел сказать
@@ -374,7 +374,7 @@ Tomar ducha;Принимать душ
 Estar seguro de;Быть уверенным в
 travieso;озорной
 reunirse;объединяться
-oración;Предложение, фраза ≠ ofrecer
+oración;Предложение
 buscar;искать
 
 

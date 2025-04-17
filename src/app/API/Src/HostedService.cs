@@ -295,11 +295,14 @@ namespace API
                 verb.LanguageType = WordLanguageType.SpanishRussian;
                 verb.WordRating = 1600;
 
-                Console.WriteLine($"Added verb: {verb.Word}");
+                if(words.Count(w => w.Word == verb.Word) > 0)
+                {
+                    Console.WriteLine($"DUBLICATE word: {verb.Word}");
+                }
+                else Console.WriteLine($"Added verb: {verb.Word}");
                 words.Add(verb);
 
             }
-
 
         }
     }
