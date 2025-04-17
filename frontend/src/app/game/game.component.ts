@@ -4,6 +4,7 @@ import {
   CreateGameResultRequestModel,
   GameAttemptModel,
   UserModel,
+  WordConjugationModel,
   WordGameResultModel,
   WordLanguageType,
   WordModel,
@@ -30,6 +31,9 @@ export class GameComponent implements OnInit {
   // last index repetitions
   lastIndex = 0;
 
+  // current language
+  currentLanguage: WordLanguageType = WordLanguageType.SpanishRussian;
+
   // words
   private words: WordModel[] = [];
   private filteredWords: WordModel[] = [];
@@ -49,6 +53,7 @@ export class GameComponent implements OnInit {
   // filters
   allowedFilters: Set<string> = new Set<string>();
   selectedFilters: Set<string> = new Set<string>();
+  readonly allowedTimes: Array<string> = ['Presente', 'Futuro simple', 'Pretérito perfecto', 'Pretérito indefinido'];
   // soft mode
   possibleAnswers: Set<string> = new Set<string>();
   // data
@@ -151,28 +156,35 @@ export class GameComponent implements OnInit {
   async ngOnInit(): Promise<void> {
     await this.api.getWords().then(model => {
       this.words = model?.items!!;
-      for (let i = 0; i < this.words.length; i++) {
-        let attribute = this.words[i].attributes;
-        if(attribute){
-          attribute.split(',').map(item => item.trim()).forEach(item => this.allowedFilters.add(item));
-        }
-      }
+      this.constructAllowedFilters();
     }).catch(error => {
       alert("Failed to retrieve words");
     });
     await this.loadUserProfile(this.userId);
     await this.loadStatistics();
     await this.loadUserGames(this.userId);
-    this.filterWords(Array.from(this.selectedFilters), WordLanguageType.SpanishRussian);
+    this.filterWords(Array.from(this.selectedFilters));
     this.setAnyWord();
   }
 
-  private filterWords(filters: string[]| undefined, language: WordLanguageType){
+  private constructAllowedFilters(){
+    if(!this.words) return;
+    this.allowedFilters.clear();
+    for (let i = 0; i < this.words.length; i++) {
+      if(this.words[i].languageType != this.currentLanguage) continue;
+      let attribute = this.words[i].attributes;
+      if(attribute){
+        attribute.split(',').map(item => item.trim()).forEach(item => this.allowedFilters.add(item));
+      }
+    }
+  }
+
+  private filterWords(filters: string[]| undefined){
     if(filters === undefined || filters.length < 1) {
-      this.filteredWords = this.words.filter(w => w.languageType === language);
+      this.filteredWords = this.words.filter(w => w.languageType === this.currentLanguage);
       return;
     }
-    let byLanguage = this.words.filter(w => w.languageType === language);
+    let byLanguage = this.words.filter(w => w.languageType === this.currentLanguage);
     this.filteredWords = byLanguage.filter(item => {
       if (!item.attributes) {
         return false;
@@ -184,53 +196,20 @@ export class GameComponent implements OnInit {
     });
   }
 
-  setAnyWord(){
-    if(this.filteredWords.length == 0) {
-      this.word = undefined;
-      this.possibleAnswers.clear();
-      return;
-    }
-    let index;
-    if(this.isRepetitionsAllowed){
-      index = Math.floor(Math.random() * this.getFilteredWordsCount());
-    } else{
-      let len = this.getFilteredWordsCount();
-      if(this.lastIndex >= len){
-        this.lastIndex = 0;
-      }
-      index = this.lastIndex;
-      this.lastIndex ++;
-    }
-
-    this.word = this.filteredWords[index];
-    this.setWordStatistics();
-    if(this.hardMode){
-      this.possibleAnswers.clear();
-      if(this.word.translations){
-        this.possibleAnswers.add(this.word.translations[0]);
-      }
-      // fill allowed answers;
-      // @ts-ignore
-      let wordsFiltered = this.filteredWords.filter(w => w.id != this.word?.id && w.attributes?.includes(this.word?.attributes?.split(",")[0]));
-      if(wordsFiltered.length > 7){
-        let indexes = this.getThreeRandomIndexes(wordsFiltered);
-        for(let i = 0; i < indexes.length; i++){
-          // @ts-ignore
-          this.possibleAnswers.add(wordsFiltered[indexes[i]].translations[0]);
-        }
-      }
-      this.possibleAnswers = this.shuffleSet(this.possibleAnswers);
-    }
-  }
-
   toggleFilterSelection(filter: string) {
       if (this.selectedFilters.has(filter)) {
         this.selectedFilters.delete(filter);
       } else {
         this.selectedFilters.add(filter);
       }
-      this.filterWords(Array.from(this.selectedFilters), WordLanguageType.SpanishRussian);
-      this.setAnyWord();
+      if(!this.conjunction){
+        this.filterWords(Array.from(this.selectedFilters));
+        this.setAnyWord();
+      } else{
+        this.setConjunctionWord();
+      }
+      this.resetMessage();
+      this.resetUserInput();
   }
 
   private setWordStatistics(){
@@ -345,44 +324,101 @@ export class GameComponent implements OnInit {
     if(!this.conjunction){
       this.conjunction = true;
       this.filteredWords = this.words.filter(w => w.conjugation);
+      this.allowedFilters.clear();
+      this.allowedTimes.forEach(item => this.allowedFilters.add(item));
+      this.selectedFilters.clear();
+      this.allowedTimes.forEach(item => this.selectedFilters.add(item));
       this.setConjunctionWord();
     } else {
       this.conjunction = false;
-      this.filterWords(undefined, WordLanguageType.SpanishRussian);
+      this.filterWords(undefined);
+      this.constructAllowedFilters();
       this.selectedFilters.clear();
       this.setAnyWord();
     }
   }
 
-  public setConjunctionWord(){
+  private getTimeNameByIdx(timeIndex: number){
+    return this.allowedTimes[timeIndex];
+  }
+
+  private getIdxByTimeName(name: string){
+    return this.allowedTimes.indexOf(name);
+  }
+
+  private mapConjuction(model: WordConjugationModel, timeIndex: number){
+    if(timeIndex == 0){
+      return model.presente;
+    }
+    if(timeIndex == 1){
+      return model.futuroSimple;
+    }
+    if(timeIndex == 2){
+      return model.preteritoPerfecto;
+    }
+    if(timeIndex == 3){
+      return model.preteritoPerfectoIndefinido;
+    }
+    return [];
+  }
+
+  setAnyWord(){
+    if(this.filteredWords.length == 0) {
+      this.word = undefined;
+      this.possibleAnswers.clear();
+      return;
+    }
+    let index;
+    if(this.isRepetitionsAllowed){
+      index = Math.floor(Math.random() * this.getFilteredWordsCount());
+    } else{
+      let len = this.getFilteredWordsCount();
+      if(this.lastIndex >= len){
+        this.lastIndex = 0;
+      }
+      index = this.lastIndex;
+      this.lastIndex ++;
+    }
+
+    this.word = this.filteredWords[index];
+    this.setWordStatistics();
+    if(this.hardMode){
+      this.possibleAnswers.clear();
+      if(this.word.translations){
+        this.possibleAnswers.add(this.word.translations[0]);
+      }
+      // fill allowed answers;
+      // @ts-ignore
+      let wordsFiltered = this.filteredWords.filter(w => w.id != this.word?.id && w.attributes?.includes(this.word?.attributes?.split(",")[0]));
+      if(wordsFiltered.length > 7){
+        let indexes = this.getThreeRandomIndexes(wordsFiltered);
+        for(let i = 0; i < indexes.length; i++){
+          // @ts-ignore
+          this.possibleAnswers.add(wordsFiltered[indexes[i]].translations[0]);
+        }
+      }
+      this.possibleAnswers = this.shuffleSet(this.possibleAnswers);
+    }
+  }
+
+  private setConjunctionWord(){
     if(this.filteredWords.length === 0) return;
+    if(this.selectedFilters.size === 0){
+      this.allowedFilters.forEach(filter => this.selectedFilters.add(filter));
+    }
     let words = this.words.filter(w => w.conjugation != undefined);
     if(words.length === 0) return;
     let index = Math.floor(Math.random() * words.length);
     this.word = words[index];
-    let timeIndex = Math.floor(Math.random() * 4);
+    let timeIndex = this.getAllowedTimeIndex();
+    console.log(timeIndex);
     let idx = Math.floor(Math.random() * 6);
     if(!this.word!!.conjugation) return;
     let conj = this.word!!.conjugation;
-    let arr;
-    let timeName;
+    let arr = this.mapConjuction(conj, timeIndex);
+    let timeName = this.getTimeNameByIdx(timeIndex);
     let mesto;
-    if(timeIndex == 0){
-      timeName = 'Presente';
-      arr = conj.presente;
-    }
-    if(timeIndex == 1){
-      timeName = 'Futuro simple';
-      arr = conj.futuroSimple;
-    }
-    if(timeIndex == 2){
-      timeName = 'Pretérito perfecto';
-      arr = conj.preteritoPerfecto;
-    }
-    if(timeIndex == 3){
-      timeName = 'Pretérito indefinido';
-      arr = conj.preteritoPerfectoIndefinido;
-    }
+
     if(arr){
       if(idx == 0) mesto = 'yo';
       if(idx == 1) mesto = 'tú';
@@ -392,6 +428,18 @@ export class GameComponent implements OnInit {
       if(idx == 5) mesto = 'ellos';
       this.conjunctionExpected = arr[idx];
       this.conjunctionTitle = mesto + ' (' + this.word!!.word + ') -> ' + timeName;
+    }
+  }
+
+  private getAllowedTimeIndex(){
+    if(this.selectedFilters.size === 0){
+      alert('no time selected');
+    }
+
+    while(true){
+      let timeIndex = Math.floor(Math.random() * 4);
+      let timeName = this.getTimeNameByIdx(timeIndex);
+      if(this.selectedFilters.has(timeName)) return timeIndex;
     }
   }
 
