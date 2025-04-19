@@ -75,7 +75,7 @@ export class GameComponent implements OnInit {
       } else {
         this.saveAttemptData(false, this.word?.id!!);
         this.maxStreak = 0;
-        this.feedback = 'Incorrect, try again! Correct is: ' + this.conjunctionExpected + "";
+        this.feedback = 'Incorrect, try again! Answer is: ' + this.conjunctionExpected + "";
       }
     } else{
       let filtered = this.word!!.translations?.filter(w => answer === w.toLowerCase());
@@ -286,7 +286,7 @@ export class GameComponent implements OnInit {
     }else {
       this.saveAttemptData(false, this.word?.id!!);
       this.maxStreak = 0;
-      this.feedback = 'Incorrect, try again! Correct is: ' + this.word?.translations?.join(',') + "";
+      this.feedback = 'Incorrect, try again! Answer is: ' + this.word?.translations?.join(',') + "";
     }
     this.resetUserInput();
   }

@@ -68,15 +68,12 @@
 .feedback-message {
   margin: 20px 0;
   font-size: 18px;
+  color: #dc3545;
 }
 
 .feedback-message p {
   font-weight: bold;
   color: #dc3545;
-}
-
-.feedback-message p:first-child {
-  color: #28a745;
 }
 
 .counters {
