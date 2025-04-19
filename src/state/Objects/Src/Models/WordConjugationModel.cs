@@ -10,6 +10,8 @@
 
         public string[] PreteritoPerfectoIndefinido { get; set; }
 
+        public string Gerundio { get; set; }
+
         public bool HasData() => this.PreteritoPerfectoIndefinido != null || this.FuturoSimple != null || this.PreteritoPerfecto != null || this.Presente != null;
 
     }

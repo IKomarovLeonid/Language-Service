@@ -286,6 +286,18 @@ namespace API
                         }
                     }
 
+                    if (cell.Address.ColumnLetter == "G")
+                    {
+                        if (cell.Value.TryGetText(out var gerundio))
+                        {
+                            conjuaction.Gerundio = gerundio.Trim();
+                        }
+                        else
+                        {
+                            conjuaction.Gerundio = null;
+                        }
+                    }
+
                 }
 
                 if (conjuaction.HasData()) verb.Conjugation = JsonConvert.SerializeObject(conjuaction);
