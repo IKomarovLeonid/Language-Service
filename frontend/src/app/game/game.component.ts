@@ -27,6 +27,7 @@ export class GameComponent implements OnInit {
   isRepetitionsAllowed: boolean = true;
   hardMode: boolean = false;
   conjunction: boolean = false;
+  reverseLanguage: boolean = false;
 
   // last index repetitions
   lastIndex = 0;
@@ -78,17 +79,30 @@ export class GameComponent implements OnInit {
         this.feedback = 'Incorrect, try again! Answer is: ' + this.conjunctionExpected + "";
       }
     } else{
-      let filtered = this.word!!.translations?.filter(w => answer === w.toLowerCase());
-      if(filtered && filtered.length > 0){
+      let isCorrect = false;
+      if(!this.reverseLanguage){
+        let filtered = this.word!!.translations?.filter(w => answer === w.toLowerCase());
+        if(filtered){
+          isCorrect = filtered.length > 0;
+        }
+      } else{
+        let expected = this.word?.word;
+        if(expected?.toLowerCase() === answer){
+          isCorrect = true;
+        } else isCorrect = false;
+      }
+      
+      if(isCorrect){
         this.saveAttemptData(true, this.word?.id!!);
         this.feedback = 'Correct!';
         this.correctCount++;
         this.maxStreak ++;
         this.setAnyWord();
-      }else {
+      } else{
         this.saveAttemptData(false, this.word?.id!!);
         this.maxStreak = 0;
-        this.feedback = 'Incorrect, try again! Correct is: ' + this.word?.translations?.join(',') + "";
+        this.feedback = !this.reverseLanguage ? 'Incorrect, try again! Answer is: ' + this.word?.translations?.join(',') + "" : 
+       'Incorrect, try again! Answer is: ' + this.word?.word + "";
       }
     }
     this.resetUserInput();
@@ -274,20 +288,35 @@ export class GameComponent implements OnInit {
   }
 
   public checkPossibleAnswer(answer: string){
+    let isCorrect = false;
+    console.log(this.reverseLanguage);
     this.resetMessage();
     this.attempts++;
-    let filtered = this.word!!.translations?.filter(w => answer === w.toLowerCase());
-    if(filtered && filtered.length > 0){
+    if(!this.reverseLanguage){
+       let filtered = this.word!!.translations?.filter(w => answer === w.toLowerCase());
+       if(!filtered) isCorrect = false;
+       else isCorrect = filtered.length > 0;
+    } else{
+      let expected = this.word?.word;
+      if(expected?.toLowerCase() === answer){
+        isCorrect = true;
+      } else isCorrect = false;
+    }
+    console.log("is reversed" + this.reverseLanguage + " is correct " + isCorrect);
+    // depends on result
+    if(isCorrect){
       this.saveAttemptData(true, this.word?.id!!);
       this.feedback = 'Correct!';
       this.correctCount++;
       this.maxStreak ++;
       this.setAnyWord();
-    }else {
+    } else{
       this.saveAttemptData(false, this.word?.id!!);
       this.maxStreak = 0;
-      this.feedback = 'Incorrect, try again! Answer is: ' + this.word?.translations?.join(',') + "";
+      this.feedback = !this.reverseLanguage ? 'Incorrect, try again! Answer is: ' + this.word?.translations?.join(',') + "" : 
+       'Incorrect, try again! Answer is: ' + this.word?.word + "";
     }
+    
     this.resetUserInput();
   }
 
@@ -445,12 +474,27 @@ export class GameComponent implements OnInit {
 
   public getWordTitle(){
     if(!this.conjunction){
-      if(this.word) return this.word.word;
+      if(this.word){
+        if(!this.reverseLanguage){
+           return this.word.word;
+        } else{
+          let translations = this.word.translations;
+          if(translations && translations.length > 0){
+            return translations[0];
+          } else {
+             return 'For word ' + this.word + " there are no translations avaliable";
+          }
+        }
+      }
       else return 'No word set';
     } else {
       return this.conjunctionTitle;
     }
   }
 
-
+  public onReverseLanguage(){
+    this.reverseLanguage = !this.reverseLanguage;
+    this.resetMessage();
+    this.setAnyWord();
+  }
 }

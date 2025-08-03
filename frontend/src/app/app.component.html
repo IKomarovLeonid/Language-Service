@@ -1,4 +1,4 @@
-<!-- Top Navbar (Horizontal) -->
+
 <div class="top-navbar">
   <a href="#">Home</a>
   <a href="#">About</a>
@@ -6,7 +6,6 @@
   <a href="#">Contact</a>
 </div>
 
-<!-- Vertical Menu on the Left -->
 <div class="sidebar">
   <a href="#" (click)="changeContent('game')">Game</a>
   <a href="#" (click)="changeContent('statistics')">Statistics</a>
@@ -15,8 +14,6 @@
   <a href="#">Log out</a>
 </div>
 
-<!-- Content area (Dynamic content area) -->
 <div class="content">
-  <!-- Dynamically load the current component -->
   <ng-container *ngComponentOutlet="currentComponent"></ng-container>
 </div>
