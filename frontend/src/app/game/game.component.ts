@@ -289,7 +289,6 @@ export class GameComponent implements OnInit {
 
   public checkPossibleAnswer(answer: string){
     let isCorrect = false;
-    console.log(this.reverseLanguage);
     this.resetMessage();
     this.attempts++;
     if(!this.reverseLanguage){
@@ -298,11 +297,11 @@ export class GameComponent implements OnInit {
        else isCorrect = filtered.length > 0;
     } else{
       let expected = this.word?.word;
-      if(expected?.toLowerCase() === answer){
+      console.log(expected?.toLowerCase() === answer.toLowerCase());
+      if(expected?.toLowerCase() === answer.toLowerCase()){
         isCorrect = true;
       } else isCorrect = false;
     }
-    console.log("is reversed" + this.reverseLanguage + " is correct " + isCorrect);
     // depends on result
     if(isCorrect){
       this.saveAttemptData(true, this.word?.id!!);
@@ -414,7 +413,8 @@ export class GameComponent implements OnInit {
     if(this.hardMode){
       this.possibleAnswers.clear();
       if(this.word.translations){
-        this.possibleAnswers.add(this.word.translations[0]);
+        if(!this.reverseLanguage) this.possibleAnswers.add(this.word.translations[0]);
+        else this.possibleAnswers.add(this.word.word!!);
       }
       // fill allowed answers;
       // @ts-ignore
@@ -423,7 +423,8 @@ export class GameComponent implements OnInit {
         let indexes = this.getThreeRandomIndexes(wordsFiltered);
         for(let i = 0; i < indexes.length; i++){
           // @ts-ignore
-          this.possibleAnswers.add(wordsFiltered[indexes[i]].translations[0]);
+          if(!this.reverseLanguage) this.possibleAnswers.add(wordsFiltered[indexes[i]].translations[0]);
+          else this.possibleAnswers.add(wordsFiltered[indexes[i]].word!!);
         }
       }
       this.possibleAnswers = this.shuffleSet(this.possibleAnswers);
