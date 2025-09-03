@@ -284,7 +284,6 @@ export class GameComponent implements OnInit {
 
   public setRepetitionsToggle(){
     this.isRepetitionsAllowed = !this.isRepetitionsAllowed;
-    this.setAnyWord();
   }
 
   public checkPossibleAnswer(answer: string){
@@ -344,6 +343,7 @@ export class GameComponent implements OnInit {
   }
 
   public switchMode(){
+    this.conjunction = false;
     this.hardMode = !this.hardMode;
     this.setAnyWord();
   }
@@ -351,6 +351,8 @@ export class GameComponent implements OnInit {
   public setTrainVerbs(){
     if(!this.conjunction){
       this.conjunction = true;
+      // on conjuction quiz is not allowed
+      this.hardMode = false;
       this.filteredWords = this.words.filter(w => w.conjugation);
       this.allowedFilters.clear();
       this.allowedTimes.forEach(item => this.allowedFilters.add(item));
