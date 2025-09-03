@@ -19,7 +19,7 @@ $currentDirectory = Get-Location
 $frontendDirectory = Join-Path -Path $currentDirectory -ChildPath "frontend"
 $solutionFileName = "Language-Service.sln"
 $dotnetBuildResultPath = "src\app\API\bin\Release\net6.0"
-$frontendBuildResultPath = "frontend\dist\language-Service"
+$frontendBuildResultPath = "frontend"
 $outputFrontendRootPath = "output\wwwroot"
 
 # solution path

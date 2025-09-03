@@ -17,9 +17,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Page Include="verbos.xlsx">
+	  <None Update="verbos.xlsx">
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </Page>
+	  </None>
 	</ItemGroup>
 
   <ItemGroup>
