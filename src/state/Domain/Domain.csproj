@@ -4,10 +4,6 @@
     <TargetFramework>net6.0</TargetFramework>
   </PropertyGroup>
 
-  <ItemGroup>
-    <None Remove="verbos.xlsx" />
-  </ItemGroup>
-
 	<ItemGroup>
 		<PackageReference Include="Microsoft.Data.Sqlite" Version="3.1.17" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.23" />

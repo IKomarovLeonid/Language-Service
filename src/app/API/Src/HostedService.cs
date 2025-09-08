@@ -195,6 +195,12 @@ namespace API
             var set = new HashSet<WordDto>();
             var filePath = "verbos.xlsx";
 
+            if (!File.Exists(filePath))
+            {
+                Console.WriteLine($"File with verbs {filePath} does not exists, skipping");
+                return;
+            }
+
             using var workbook = new XLWorkbook(filePath);
             var worksheet = workbook.Worksheet(1); // First sheet
 
